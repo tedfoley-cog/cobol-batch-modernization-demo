@@ -2,23 +2,23 @@
   "functional_requirements": [
     {
       "id": "FR-SETL-001",
-      "statement": "When a USD settlement run starts, the system shall read the configured run parameter.",
+      "statement": "The system shall preserve the currency and queue identifier as the settlement identity.",
       "ears": {
-        "pattern": "event_driven",
+        "pattern": "ubiquitous",
         "preconditions": [
           "SETLUSD job submitted"
         ],
-        "trigger": "a USD settlement run starts",
+        "trigger": "",
         "system_name": "TRDPB001",
         "system_response": [
-          "read the configured run parameter"
+          "preserve the currency and queue identifier as the settlement identity"
         ]
       },
       "migration_category": "foundation",
       "verification": {
         "method": "test",
         "acceptance_criteria": [
-          "When a USD settlement run starts, the system shall read the configured run parameter."
+          "The system shall preserve the currency and queue identifier as the settlement identity."
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDSTQ",
@@ -33,44 +33,302 @@
       "iso29148_characteristics": {
         "necessary": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "appropriate": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "unambiguous": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "complete": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "singular": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "feasible": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "verifiable": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "correct": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "conforming": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         }
       },
       "confidence": {
         "score": 0.95,
-        "basis": "direct source lines and executable control card"
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-002",
+      "statement": "The system shall use order status codes exactly as defined by the settlement state model.",
+      "ears": {
+        "pattern": "ubiquitous",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "use order status codes exactly as defined by the settlement state model"
+        ]
+      },
+      "migration_category": "foundation",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "The system shall use order status codes exactly as defined by the settlement state model."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-003",
+      "statement": "While the settlement queue cursor is open, the system shall fetch the next ordered queue row.",
+      "ears": {
+        "pattern": "state_driven",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "fetch the next ordered queue row"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "While the settlement queue cursor is open, the system shall fetch the next ordered queue row."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 106,
+          "line_end": 112,
+          "snippet_sha256": "4449465796ebb5673371b93e7f8255df38b4b4404ed7e985d7f119a999978fcc"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-004",
+      "statement": "When a settlement run starts, the system shall parse the currency and checkpoint frequency parameter.",
+      "ears": {
+        "pattern": "event_driven",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "settlement run starts",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "parse the currency and checkpoint frequency parameter"
+        ]
+      },
+      "migration_category": "foundation",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "When a settlement run starts, the system shall parse the currency and checkpoint frequency parameter."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
       },
       "sme_review": {
         "status": "pending",
@@ -87,24 +345,24 @@
       ]
     },
     {
-      "id": "FR-SETL-002",
-      "statement": "When settlement begins, the system shall open a holdable cursor over TBTRDSTQ.",
+      "id": "FR-SETL-005",
+      "statement": "When the cursor is opened, the system shall select TBTRDSTQ rows ordered by currency and id.",
       "ears": {
         "pattern": "event_driven",
         "preconditions": [
           "SETLUSD job submitted"
         ],
-        "trigger": "settlement begins",
+        "trigger": "settlement run starts",
         "system_name": "TRDPB001",
         "system_response": [
-          "open a holdable cursor over TBTRDSTQ"
+          "select TBTRDSTQ rows ordered by currency and id"
         ]
       },
-      "migration_category": "foundation",
+      "migration_category": "like_to_like",
       "verification": {
         "method": "test",
         "acceptance_criteria": [
-          "When settlement begins, the system shall open a holdable cursor over TBTRDSTQ."
+          "When the cursor is opened, the system shall select TBTRDSTQ rows ordered by currency and id."
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDSTQ",
@@ -119,44 +377,44 @@
       "iso29148_characteristics": {
         "necessary": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "appropriate": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "unambiguous": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "complete": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "singular": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "feasible": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "verifiable": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "correct": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "conforming": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         }
       },
       "confidence": {
         "score": 0.95,
-        "basis": "direct source lines and executable control card"
+        "basis": "direct source, DDL, or load-control evidence"
       },
       "sme_review": {
         "status": "pending",
@@ -166,109 +424,21 @@
       "evidence": [
         {
           "path": "cobol/TRDPB001",
-          "line_start": 95,
-          "line_end": 115,
-          "snippet_sha256": "f153a8131ac5a4cc213e3d5a624ad2e61d9d6d908e4560d8b1a053f26d419155",
-          "paragraph": "1000-OPEN-SETTLEMENT-CURSOR"
+          "line_start": 106,
+          "line_end": 112,
+          "snippet_sha256": "4449465796ebb5673371b93e7f8255df38b4b4404ed7e985d7f119a999978fcc"
         }
       ]
     },
     {
-      "id": "FR-SETL-003",
-      "statement": "When the queue cursor is open, the system shall order rows by currency and id.",
+      "id": "FR-SETL-006",
+      "statement": "While the settlement queue cursor is open, when a queue row is read, the system shall process its buyer and seller order pair.",
       "ears": {
-        "pattern": "event_driven",
+        "pattern": "complex",
         "preconditions": [
           "SETLUSD job submitted"
         ],
-        "trigger": "the queue cursor is open",
-        "system_name": "TRDPB001",
-        "system_response": [
-          "order rows by currency and id"
-        ]
-      },
-      "migration_category": "foundation",
-      "verification": {
-        "method": "test",
-        "acceptance_criteria": [
-          "When the queue cursor is open, the system shall order rows by currency and id."
-        ],
-        "oracle": {
-          "dataset_table": "TRADE.TBTRDSTQ",
-          "fields": [
-            "STQ_CURRENCY",
-            "STQ_ID",
-            "ORD_STATUS"
-          ],
-          "tolerance": "exact"
-        }
-      },
-      "iso29148_characteristics": {
-        "necessary": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "appropriate": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "unambiguous": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "complete": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "singular": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "feasible": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "verifiable": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "correct": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "conforming": {
-          "value": true,
-          "notes": "source-backed"
-        }
-      },
-      "confidence": {
-        "score": 0.95,
-        "basis": "direct source lines and executable control card"
-      },
-      "sme_review": {
-        "status": "pending",
-        "reviewer": "batch engineering",
-        "questions": []
-      },
-      "evidence": [
-        {
-          "path": "cobol/TRDPB001",
-          "line_start": 95,
-          "line_end": 115,
-          "snippet_sha256": "f153a8131ac5a4cc213e3d5a624ad2e61d9d6d908e4560d8b1a053f26d419155",
-          "paragraph": "1000-OPEN-SETTLEMENT-CURSOR"
-        }
-      ]
-    },
-    {
-      "id": "FR-SETL-004",
-      "statement": "When a queue row is read, the system shall process its buyer and seller order pair.",
-      "ears": {
-        "pattern": "event_driven",
-        "preconditions": [
-          "SETLUSD job submitted"
-        ],
-        "trigger": "a queue row is read",
+        "trigger": "",
         "system_name": "TRDPB001",
         "system_response": [
           "process its buyer and seller order pair"
@@ -278,7 +448,7 @@
       "verification": {
         "method": "test",
         "acceptance_criteria": [
-          "When a queue row is read, the system shall process its buyer and seller order pair."
+          "When a queue row is read while settlement continues, the system shall process its buyer and seller order pair."
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDSTQ",
@@ -293,44 +463,44 @@
       "iso29148_characteristics": {
         "necessary": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "appropriate": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "unambiguous": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "complete": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "singular": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "feasible": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "verifiable": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "correct": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "conforming": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         }
       },
       "confidence": {
         "score": 0.95,
-        "basis": "direct source lines and executable control card"
+        "basis": "direct source, DDL, or load-control evidence"
       },
       "sme_review": {
         "status": "pending",
@@ -341,205 +511,31 @@
         {
           "path": "cobol/TRDPB001",
           "line_start": 426,
-          "line_end": 530,
-          "snippet_sha256": "e9f461567f1f77f23bee9de802754d00196cc0dedb1cf75767aa033163a0b42c",
+          "line_end": 478,
+          "snippet_sha256": "8ae3aa3bcbaf14f048b84492abdc9c0a07ed7d30db32d9b020c1300d264146cf",
           "paragraph": "5000-READ-FROM-STLMT-QUEUE"
         }
       ]
     },
     {
-      "id": "FR-SETL-005",
-      "statement": "When securities booking succeeds, the system shall attempt money booking.",
-      "ears": {
-        "pattern": "event_driven",
-        "preconditions": [
-          "SETLUSD job submitted"
-        ],
-        "trigger": "securities booking succeeds",
-        "system_name": "TRDPB001",
-        "system_response": [
-          "attempt money booking"
-        ]
-      },
-      "migration_category": "like_to_like",
-      "verification": {
-        "method": "test",
-        "acceptance_criteria": [
-          "When securities booking succeeds, the system shall attempt money booking."
-        ],
-        "oracle": {
-          "dataset_table": "TRADE.TBTRDSTQ",
-          "fields": [
-            "STQ_CURRENCY",
-            "STQ_ID",
-            "ORD_STATUS"
-          ],
-          "tolerance": "exact"
-        }
-      },
-      "iso29148_characteristics": {
-        "necessary": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "appropriate": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "unambiguous": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "complete": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "singular": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "feasible": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "verifiable": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "correct": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "conforming": {
-          "value": true,
-          "notes": "source-backed"
-        }
-      },
-      "confidence": {
-        "score": 0.95,
-        "basis": "direct source lines and executable control card"
-      },
-      "sme_review": {
-        "status": "pending",
-        "reviewer": "batch engineering",
-        "questions": []
-      },
-      "evidence": [
-        {
-          "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
-          "paragraph": "2000-ACCOUNTING"
-        }
-      ]
-    },
-    {
-      "id": "FR-SETL-006",
-      "statement": "When both bookings succeed, the system shall mark both orders settled.",
-      "ears": {
-        "pattern": "event_driven",
-        "preconditions": [
-          "SETLUSD job submitted"
-        ],
-        "trigger": "both bookings succeed",
-        "system_name": "TRDPB001",
-        "system_response": [
-          "mark both orders settled"
-        ]
-      },
-      "migration_category": "like_to_like",
-      "verification": {
-        "method": "test",
-        "acceptance_criteria": [
-          "When both bookings succeed, the system shall mark both orders settled."
-        ],
-        "oracle": {
-          "dataset_table": "TRADE.TBTRDSTQ",
-          "fields": [
-            "STQ_CURRENCY",
-            "STQ_ID",
-            "ORD_STATUS"
-          ],
-          "tolerance": "exact"
-        }
-      },
-      "iso29148_characteristics": {
-        "necessary": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "appropriate": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "unambiguous": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "complete": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "singular": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "feasible": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "verifiable": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "correct": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "conforming": {
-          "value": true,
-          "notes": "source-backed"
-        }
-      },
-      "confidence": {
-        "score": 0.95,
-        "basis": "direct source lines and executable control card"
-      },
-      "sme_review": {
-        "status": "pending",
-        "reviewer": "batch engineering",
-        "questions": []
-      },
-      "evidence": [
-        {
-          "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
-          "paragraph": "2000-ACCOUNTING"
-        }
-      ]
-    },
-    {
       "id": "FR-SETL-007",
-      "statement": "When securities booking fails, the system shall mark the order pair rejected.",
+      "statement": "When securities booking completes, the system shall invoke money booking.",
       "ears": {
         "pattern": "event_driven",
         "preconditions": [
           "SETLUSD job submitted"
         ],
-        "trigger": "securities booking fails",
+        "trigger": "settlement run starts",
         "system_name": "TRDPB001",
         "system_response": [
-          "mark the order pair rejected"
+          "invoke money booking"
         ]
       },
       "migration_category": "like_to_like",
       "verification": {
         "method": "test",
         "acceptance_criteria": [
-          "When securities booking fails, the system shall mark the order pair rejected."
+          "When securities booking completes, the system shall invoke money booking."
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDSTQ",
@@ -554,44 +550,44 @@
       "iso29148_characteristics": {
         "necessary": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "appropriate": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "unambiguous": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "complete": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "singular": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "feasible": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "verifiable": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "correct": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "conforming": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         }
       },
       "confidence": {
         "score": 0.95,
-        "basis": "direct source lines and executable control card"
+        "basis": "direct source, DDL, or load-control evidence"
       },
       "sme_review": {
         "status": "pending",
@@ -601,32 +597,32 @@
       "evidence": [
         {
           "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
-          "paragraph": "2000-ACCOUNTING"
+          "line_start": 370,
+          "line_end": 394,
+          "snippet_sha256": "d30e656d9149977b44ea9a16d19bf9239fbcc875503ebbfa590165177b0f6b1e",
+          "paragraph": "2001-SAC-BOOKING"
         }
       ]
     },
     {
       "id": "FR-SETL-008",
-      "statement": "When money booking fails, the system shall mark the order pair rejected.",
+      "statement": "When both booking legs complete successfully, the system shall set the order status to 601.",
       "ears": {
         "pattern": "event_driven",
         "preconditions": [
           "SETLUSD job submitted"
         ],
-        "trigger": "money booking fails",
+        "trigger": "settlement run starts",
         "system_name": "TRDPB001",
         "system_response": [
-          "mark the order pair rejected"
+          "set the order status to 601"
         ]
       },
       "migration_category": "like_to_like",
       "verification": {
         "method": "test",
         "acceptance_criteria": [
-          "When money booking fails, the system shall mark the order pair rejected."
+          "When both booking legs complete successfully, the system shall set the order status to 601."
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDSTQ",
@@ -641,44 +637,44 @@
       "iso29148_characteristics": {
         "necessary": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "appropriate": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "unambiguous": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "complete": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "singular": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "feasible": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "verifiable": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "correct": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "conforming": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         }
       },
       "confidence": {
         "score": 0.95,
-        "basis": "direct source lines and executable control card"
+        "basis": "direct source, DDL, or load-control evidence"
       },
       "sme_review": {
         "status": "pending",
@@ -688,22 +684,196 @@
       "evidence": [
         {
           "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
+          "line_start": 334,
+          "line_end": 366,
+          "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
           "paragraph": "2000-ACCOUNTING"
         }
       ]
     },
     {
       "id": "FR-SETL-009",
-      "statement": "When a queue row is handled, the system shall delete it from TBTRDSTQ.",
+      "statement": "If securities booking fails, then the system shall set the order status to 401 and report an exception.",
+      "ears": {
+        "pattern": "unwanted_behaviour",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "set the order status to 401 and report an exception"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "If securities booking fails, then the system shall set the order status to 401 and report an exception."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 370,
+          "line_end": 394,
+          "snippet_sha256": "d30e656d9149977b44ea9a16d19bf9239fbcc875503ebbfa590165177b0f6b1e",
+          "paragraph": "2001-SAC-BOOKING"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-010",
+      "statement": "If money booking fails, then the system shall set the order status to 401 and report an exception.",
+      "ears": {
+        "pattern": "unwanted_behaviour",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "set the order status to 401 and report an exception"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "If money booking fails, then the system shall set the order status to 401 and report an exception."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 398,
+          "line_end": 422,
+          "snippet_sha256": "8d0d39f5c13cdea5be62ffa2513881f1b783a9b90fd7027d2265e35136e1c173",
+          "paragraph": "2002-MAC-BOOKING"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-011",
+      "statement": "When a queue row is settled or rejected, the system shall delete it from TBTRDSTQ.",
       "ears": {
         "pattern": "event_driven",
         "preconditions": [
           "SETLUSD job submitted"
         ],
-        "trigger": "a queue row is handled",
+        "trigger": "settlement run starts",
         "system_name": "TRDPB001",
         "system_response": [
           "delete it from TBTRDSTQ"
@@ -713,7 +883,7 @@
       "verification": {
         "method": "test",
         "acceptance_criteria": [
-          "When a queue row is handled, the system shall delete it from TBTRDSTQ."
+          "When a queue row is settled or rejected, the system shall delete it from TBTRDSTQ."
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDSTQ",
@@ -728,44 +898,44 @@
       "iso29148_characteristics": {
         "necessary": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "appropriate": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "unambiguous": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "complete": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "singular": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "feasible": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "verifiable": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "correct": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "conforming": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         }
       },
       "confidence": {
         "score": 0.95,
-        "basis": "direct source lines and executable control card"
+        "basis": "direct source, DDL, or load-control evidence"
       },
       "sme_review": {
         "status": "pending",
@@ -776,204 +946,31 @@
         {
           "path": "cobol/TRDPB001",
           "line_start": 426,
-          "line_end": 530,
-          "snippet_sha256": "e9f461567f1f77f23bee9de802754d00196cc0dedb1cf75767aa033163a0b42c",
-          "paragraph": "5000-READ-FROM-STLMT-QUEUE"
-        }
-      ]
-    },
-    {
-      "id": "FR-SETL-010",
-      "statement": "When the checkpoint count reaches the configured frequency, the system shall commit work.",
-      "ears": {
-        "pattern": "event_driven",
-        "preconditions": [
-          "SETLUSD job submitted"
-        ],
-        "trigger": "the checkpoint count reaches the configured frequency",
-        "system_name": "TRDPB001",
-        "system_response": [
-          "commit work"
-        ]
-      },
-      "migration_category": "like_to_like",
-      "verification": {
-        "method": "test",
-        "acceptance_criteria": [
-          "When the checkpoint count reaches the configured frequency, the system shall commit work."
-        ],
-        "oracle": {
-          "dataset_table": "TRADE.TBTRDSTQ",
-          "fields": [
-            "STQ_CURRENCY",
-            "STQ_ID",
-            "ORD_STATUS"
-          ],
-          "tolerance": "exact"
-        }
-      },
-      "iso29148_characteristics": {
-        "necessary": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "appropriate": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "unambiguous": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "complete": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "singular": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "feasible": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "verifiable": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "correct": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "conforming": {
-          "value": true,
-          "notes": "source-backed"
-        }
-      },
-      "confidence": {
-        "score": 0.95,
-        "basis": "direct source lines and executable control card"
-      },
-      "sme_review": {
-        "status": "pending",
-        "reviewer": "batch engineering",
-        "questions": []
-      },
-      "evidence": [
-        {
-          "path": "controlcard/SETLUSD",
-          "line_start": 1,
-          "line_end": 5,
-          "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
-        }
-      ]
-    },
-    {
-      "id": "FR-SETL-011",
-      "statement": "When a Db2 operation returns an error, the system shall write an exception record.",
-      "ears": {
-        "pattern": "event_driven",
-        "preconditions": [
-          "SETLUSD job submitted"
-        ],
-        "trigger": "a Db2 operation returns an error",
-        "system_name": "TRDPB001",
-        "system_response": [
-          "write an exception record"
-        ]
-      },
-      "migration_category": "like_to_like",
-      "verification": {
-        "method": "test",
-        "acceptance_criteria": [
-          "When a Db2 operation returns an error, the system shall write an exception record."
-        ],
-        "oracle": {
-          "dataset_table": "TRADE.TBTRDSTQ",
-          "fields": [
-            "STQ_CURRENCY",
-            "STQ_ID",
-            "ORD_STATUS"
-          ],
-          "tolerance": "exact"
-        }
-      },
-      "iso29148_characteristics": {
-        "necessary": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "appropriate": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "unambiguous": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "complete": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "singular": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "feasible": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "verifiable": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "correct": {
-          "value": true,
-          "notes": "source-backed"
-        },
-        "conforming": {
-          "value": true,
-          "notes": "source-backed"
-        }
-      },
-      "confidence": {
-        "score": 0.95,
-        "basis": "direct source lines and executable control card"
-      },
-      "sme_review": {
-        "status": "pending",
-        "reviewer": "batch engineering",
-        "questions": []
-      },
-      "evidence": [
-        {
-          "path": "cobol/TRDPB001",
-          "line_start": 426,
-          "line_end": 530,
-          "snippet_sha256": "e9f461567f1f77f23bee9de802754d00196cc0dedb1cf75767aa033163a0b42c",
+          "line_end": 478,
+          "snippet_sha256": "8ae3aa3bcbaf14f048b84492abdc9c0a07ed7d30db32d9b020c1300d264146cf",
           "paragraph": "5000-READ-FROM-STLMT-QUEUE"
         }
       ]
     },
     {
       "id": "FR-SETL-012",
-      "statement": "When an application exception is not a data exception, the system shall roll back work.",
+      "statement": "When the checkpoint count reaches the configured frequency, the system shall commit the unit of work.",
       "ears": {
         "pattern": "event_driven",
         "preconditions": [
           "SETLUSD job submitted"
         ],
-        "trigger": "an application exception is not a data exception",
+        "trigger": "settlement run starts",
         "system_name": "TRDPB001",
         "system_response": [
-          "roll back work"
+          "commit the unit of work"
         ]
       },
-      "migration_category": "new_design",
+      "migration_category": "like_to_like",
       "verification": {
         "method": "test",
         "acceptance_criteria": [
-          "When an application exception is not a data exception, the system shall roll back work."
+          "When the checkpoint count reaches the configured frequency, the system shall commit the unit of work."
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDSTQ",
@@ -988,44 +985,218 @@
       "iso29148_characteristics": {
         "necessary": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "appropriate": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "unambiguous": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "complete": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "singular": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "feasible": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "verifiable": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "correct": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         },
         "conforming": {
           "value": true,
-          "notes": "source-backed"
+          "notes": "direct source span"
         }
       },
       "confidence": {
         "score": 0.95,
-        "basis": "direct source lines and executable control card"
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 334,
+          "line_end": 366,
+          "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+          "paragraph": "2000-ACCOUNTING"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-013",
+      "statement": "If SQLCODE is -911 or -913, then the system shall retry the order update.",
+      "ears": {
+        "pattern": "unwanted_behaviour",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "retry the order update"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "If SQLCODE is -911 or -913, then the system shall retry the order update."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 482,
+          "line_end": 536,
+          "snippet_sha256": "bc62132011394a0c50ddadd1f8f2a704e2e1d0e4d99c332e265d09096047d1f9",
+          "paragraph": "8000-UPDATE-ORDER"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-014",
+      "statement": "If an exception is not a data exception, then the system shall roll back the transaction.",
+      "ears": {
+        "pattern": "unwanted_behaviour",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "roll back the transaction"
+        ]
+      },
+      "migration_category": "new_design",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "If an exception is not a data exception, then the system shall roll back the transaction."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
       },
       "sme_review": {
         "status": "approved",
@@ -1035,10 +1206,531 @@
       "evidence": [
         {
           "path": "cobol/TRDPBEXC",
-          "line_start": 30,
+          "line_start": 29,
           "line_end": 78,
-          "snippet_sha256": "cea608bcbce9875cf3a6729312c9b8814c2a40de313819516c251a82fd9aa3ce",
+          "snippet_sha256": "0bba8c7b560b6c7df032920d9a5514678569f6ad05c9ada80839537e7a6eb6c1",
           "paragraph": "0000-MAINLINE"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-015",
+      "statement": "When exception logging returns SQLCODE -803, the system shall retry the insert.",
+      "ears": {
+        "pattern": "event_driven",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "settlement run starts",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "retry the insert"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "When exception logging returns SQLCODE -803, the system shall retry the insert."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPBEXC",
+          "line_start": 29,
+          "line_end": 78,
+          "snippet_sha256": "0bba8c7b560b6c7df032920d9a5514678569f6ad05c9ada80839537e7a6eb6c1",
+          "paragraph": "0000-MAINLINE"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-016",
+      "statement": "The system shall write exception type and description to TBTRDEXC for auditability.",
+      "ears": {
+        "pattern": "ubiquitous",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "write exception type and description to TBTRDEXC for auditability"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "The system shall write exception type and description to TBTRDEXC for auditability."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPBEXC",
+          "line_start": 29,
+          "line_end": 78,
+          "snippet_sha256": "0bba8c7b560b6c7df032920d9a5514678569f6ad05c9ada80839537e7a6eb6c1",
+          "paragraph": "0000-MAINLINE"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-017",
+      "statement": "While a booking transaction is active, when a retryable SQLCODE occurs, the system shall retry the booking operation.",
+      "ears": {
+        "pattern": "complex",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "update both order sides"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "When securities and money bookings succeed while the order pair is valid, the system shall update both order sides."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 334,
+          "line_end": 366,
+          "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+          "paragraph": "2000-ACCOUNTING"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-018",
+      "statement": "Where a currency-specific job is selected, the system shall bind its currency partition and control card.",
+      "ears": {
+        "pattern": "optional_feature",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "bind its currency partition and control card"
+        ]
+      },
+      "migration_category": "depend_on_new",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "Where a currency-specific job is selected, the system shall bind its currency partition and control card."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "db2/mainframe-db2-setup/ddl/TBTRDSTQ",
+          "line_start": 18,
+          "line_end": 44,
+          "snippet_sha256": "59eabe1ed4159afaa9266ab4fff26ba0b66b584f6c9b6bbbf3b9f115e4e6a748"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-019",
+      "statement": "While an order update is retryable, the system shall keep the retry loop active until SQL completes.",
+      "ears": {
+        "pattern": "state_driven",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "keep the retry loop active until SQL completes"
+        ]
+      },
+      "migration_category": "like_to_like",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "While an order update is retryable, the system shall keep the retry loop active until SQL completes."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 482,
+          "line_end": 536,
+          "snippet_sha256": "bc62132011394a0c50ddadd1f8f2a704e2e1d0e4d99c332e265d09096047d1f9",
+          "paragraph": "8000-UPDATE-ORDER"
+        }
+      ]
+    },
+    {
+      "id": "FR-SETL-020",
+      "statement": "When the settlement stream completes, the system shall leave the cursor and transaction in a restartable state.",
+      "ears": {
+        "pattern": "event_driven",
+        "preconditions": [
+          "SETLUSD job submitted"
+        ],
+        "trigger": "settlement run starts",
+        "system_name": "TRDPB001",
+        "system_response": [
+          "leave the cursor and transaction in a restartable state"
+        ]
+      },
+      "migration_category": "depend_on_new",
+      "verification": {
+        "method": "test",
+        "acceptance_criteria": [
+          "When the settlement stream completes, the system shall leave the cursor and transaction in a restartable state."
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDSTQ",
+          "fields": [
+            "STQ_CURRENCY",
+            "STQ_ID",
+            "ORD_STATUS"
+          ],
+          "tolerance": "exact"
+        }
+      },
+      "iso29148_characteristics": {
+        "necessary": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "appropriate": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "unambiguous": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "complete": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "singular": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "feasible": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "verifiable": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "correct": {
+          "value": true,
+          "notes": "direct source span"
+        },
+        "conforming": {
+          "value": true,
+          "notes": "direct source span"
+        }
+      },
+      "confidence": {
+        "score": 0.95,
+        "basis": "direct source, DDL, or load-control evidence"
+      },
+      "sme_review": {
+        "status": "pending",
+        "reviewer": "batch engineering",
+        "questions": []
+      },
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 334,
+          "line_end": 366,
+          "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+          "paragraph": "2000-ACCOUNTING"
         }
       ]
     }
@@ -1048,23 +1740,21 @@
       "id": "BR-SETL-001",
       "conditions": [
         {
-          "when": "order status",
-          "value": "101 accepted"
-        },
-        {
-          "when": "booking outcome",
-          "value": "both done"
+          "when": "101 accepted",
+          "value": "true"
         }
       ],
-      "outcome": "set status 601 settled",
-      "source_paragraph": "2000-ACCOUNTING",
+      "outcome": "eligible for matching and settlement",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-001"
+      ],
       "evidence": [
         {
           "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
-          "paragraph": "2000-ACCOUNTING"
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
         }
       ]
     },
@@ -1072,19 +1762,21 @@
       "id": "BR-SETL-002",
       "conditions": [
         {
-          "when": "booking outcome",
-          "value": "either failed"
+          "when": "201 matched",
+          "value": "true"
         }
       ],
-      "outcome": "set status 401 rejected and report exception",
-      "source_paragraph": "2000-ACCOUNTING",
+      "outcome": "eligible for settlement accounting",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-002"
+      ],
       "evidence": [
         {
           "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
-          "paragraph": "2000-ACCOUNTING"
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
         }
       ]
     },
@@ -1092,111 +1784,600 @@
       "id": "BR-SETL-003",
       "conditions": [
         {
-          "when": "SQLCODE",
-          "value": "-803"
+          "when": "301 overdue buyer id invalid",
+          "value": "true"
         }
       ],
-      "outcome": "retry exception insert",
-      "source_paragraph": "0000-MAINLINE",
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-003"
+      ],
       "evidence": [
         {
-          "path": "cobol/TRDPBEXC",
-          "line_start": 30,
-          "line_end": 78,
-          "snippet_sha256": "cea608bcbce9875cf3a6729312c9b8814c2a40de313819516c251a82fd9aa3ce",
-          "paragraph": "0000-MAINLINE"
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-004",
+      "conditions": [
+        {
+          "when": "302 overdue seller id invalid",
+          "value": "true"
+        }
+      ],
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-004"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-005",
+      "conditions": [
+        {
+          "when": "303 overdue buyer security account invalid",
+          "value": "true"
+        }
+      ],
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-006",
+      "conditions": [
+        {
+          "when": "304 overdue seller security account invalid",
+          "value": "true"
+        }
+      ],
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-006"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-007",
+      "conditions": [
+        {
+          "when": "305 overdue buyer money account invalid",
+          "value": "true"
+        }
+      ],
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-007"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-008",
+      "conditions": [
+        {
+          "when": "306 overdue seller money account invalid",
+          "value": "true"
+        }
+      ],
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-008"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-009",
+      "conditions": [
+        {
+          "when": "307 overdue security unavailable",
+          "value": "true"
+        }
+      ],
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-009"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-010",
+      "conditions": [
+        {
+          "when": "308 overdue money unavailable",
+          "value": "true"
+        }
+      ],
+      "outcome": "route to overdue handling",
+      "source_paragraph": "1000-TRADE-SETTLEMENT",
+      "fr_ids": [
+        "FR-SETL-010"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-011",
+      "conditions": [
+        {
+          "when": "401 rejected",
+          "value": "true"
+        }
+      ],
+      "outcome": "write exception and reject order pair",
+      "source_paragraph": "2000-ACCOUNTING",
+      "fr_ids": [
+        "FR-SETL-011"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 334,
+          "line_end": 366,
+          "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+          "paragraph": "2000-ACCOUNTING"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-012",
+      "conditions": [
+        {
+          "when": "601 settled",
+          "value": "true"
+        }
+      ],
+      "outcome": "complete securities and money booking",
+      "source_paragraph": "2000-ACCOUNTING",
+      "fr_ids": [
+        "FR-SETL-012"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 334,
+          "line_end": 366,
+          "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+          "paragraph": "2000-ACCOUNTING"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-013",
+      "conditions": [
+        {
+          "when": "buy indicator B",
+          "value": "true"
+        }
+      ],
+      "outcome": "debit buyer and credit seller according to leg",
+      "source_paragraph": "2000-ACCOUNTING",
+      "fr_ids": [
+        "FR-SETL-013"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 370,
+          "line_end": 394,
+          "snippet_sha256": "d30e656d9149977b44ea9a16d19bf9239fbcc875503ebbfa590165177b0f6b1e",
+          "paragraph": "2001-SAC-BOOKING"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-014",
+      "conditions": [
+        {
+          "when": "sell indicator S",
+          "value": "true"
+        }
+      ],
+      "outcome": "credit buyer and debit seller according to leg",
+      "source_paragraph": "2000-ACCOUNTING",
+      "fr_ids": [
+        "FR-SETL-014"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 398,
+          "line_end": 422,
+          "snippet_sha256": "8d0d39f5c13cdea5be62ffa2513881f1b783a9b90fd7027d2265e35136e1c173",
+          "paragraph": "2002-MAC-BOOKING"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-015",
+      "conditions": [
+        {
+          "when": "SQLCODE -911 or -913",
+          "value": "true"
+        }
+      ],
+      "outcome": "retry update",
+      "source_paragraph": "2000-ACCOUNTING",
+      "fr_ids": [
+        "FR-SETL-015"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 482,
+          "line_end": 536,
+          "snippet_sha256": "bc62132011394a0c50ddadd1f8f2a704e2e1d0e4d99c332e265d09096047d1f9",
+          "paragraph": "8000-UPDATE-ORDER"
+        }
+      ]
+    },
+    {
+      "id": "BR-SETL-016",
+      "conditions": [
+        {
+          "when": "checkpoint count reaches PARM frequency",
+          "value": "true"
+        }
+      ],
+      "outcome": "COMMIT and continue",
+      "source_paragraph": "2000-ACCOUNTING",
+      "fr_ids": [
+        "FR-SETL-016"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 334,
+          "line_end": 366,
+          "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+          "paragraph": "2000-ACCOUNTING"
         }
       ]
     }
   ],
   "data_elements": [
     {
-      "copybook": "TBTRDSTQ",
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_TRADING_XCHNG",
+      "picture": "CHAR(10)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_TRADEID",
+      "picture": "CHAR(12)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_BUY_SELL_IND",
+      "picture": "CHAR(1)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_CUSTOMER_ID",
+      "picture": "CHAR(12)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_FIGI",
+      "picture": "CHAR(12)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_QUANTITY",
+      "picture": "DECIMAL(5 bytes)",
+      "usage": "PACKED-DECIMAL",
+      "scale": 2,
+      "sign": "signed",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_CURRENCY",
+      "picture": "CHAR(3)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_AMOUNT",
+      "picture": "DECIMAL(5 bytes)",
+      "usage": "PACKED-DECIMAL",
+      "scale": 2,
+      "sign": "signed",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "ORD_STATUS",
+      "picture": "CHAR(3)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
       "field": "STQ_CURRENCY",
-      "picture": "PIC X(3)",
+      "picture": "CHAR(3)",
       "usage": "DISPLAY",
       "scale": 0,
-      "sign": "unsigned"
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
     },
     {
-      "copybook": "TBTRDSTQ",
+      "copybook": "reconstructed-from-ldcntl",
       "field": "STQ_ID",
-      "picture": "PIC S9(9) COMP",
+      "picture": "INT IDENTITY",
       "usage": "BINARY",
       "scale": 0,
-      "sign": "signed"
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
     },
     {
-      "copybook": "TRDPB001",
-      "field": "WS-CHKP-FREQUENCY",
-      "picture": "PIC 9(5)",
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "STQ_TRADE_DATA",
+      "picture": "CHAR(88)",
       "usage": "DISPLAY",
       "scale": 0,
-      "sign": "unsigned"
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
     },
     {
-      "copybook": "TRDPB001",
-      "field": "WS-TRADE-COUNT",
-      "picture": "PIC S9(9) COMP",
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "MAC_CURRENCY",
+      "picture": "CHAR(3)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "MAC_NUMBER",
+      "picture": "INTEGER",
       "usage": "BINARY",
       "scale": 0,
-      "sign": "signed"
+      "sign": "signed",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "MAC_BALANCE",
+      "picture": "DECIMAL(7 bytes)",
+      "usage": "PACKED-DECIMAL",
+      "scale": 2,
+      "sign": "signed",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "SAC_CURRENCY",
+      "picture": "CHAR(3)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "SAC_NUMBER",
+      "picture": "INTEGER",
+      "usage": "BINARY",
+      "scale": 0,
+      "sign": "signed",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "SAC_CUSTOMER_ID",
+      "picture": "CHAR(12)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
+    },
+    {
+      "copybook": "reconstructed-from-ldcntl",
+      "field": "SAC_STATUS",
+      "picture": "CHAR(1)",
+      "usage": "DISPLAY",
+      "scale": 0,
+      "sign": "unsigned",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-005"
+      ]
     }
   ],
   "error_paths": [
     {
-      "condition": "cursor open SQLCODE nonzero",
-      "handling": "report application exception",
-      "sqlcode": "nonzero",
-      "rc_abend": "job continues to exception handler",
+      "condition": "order update deadlock or timeout",
+      "handling": "retry until SQL completes",
+      "sqlcode": "-911,-913",
+      "rc_abend": "application exception after retry loop",
+      "fr_ids": [
+        "FR-SETL-013"
+      ],
       "evidence": [
         {
           "path": "cobol/TRDPB001",
-          "line_start": 95,
-          "line_end": 115,
-          "snippet_sha256": "f153a8131ac5a4cc213e3d5a624ad2e61d9d6d908e4560d8b1a053f26d419155",
-          "paragraph": "1000-OPEN-SETTLEMENT-CURSOR"
+          "line_start": 482,
+          "line_end": 536,
+          "snippet_sha256": "bc62132011394a0c50ddadd1f8f2a704e2e1d0e4d99c332e265d09096047d1f9",
+          "paragraph": "8000-UPDATE-ORDER"
         }
       ]
     },
     {
-      "condition": "security booking fails",
-      "handling": "reject order pair and report exception",
-      "reject_code": "401",
-      "evidence": [
-        {
-          "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
-          "paragraph": "2000-ACCOUNTING"
-        }
-      ]
-    },
-    {
-      "condition": "exception insert SQLCODE -803",
-      "handling": "retry insert until SQLCODE 0",
+      "condition": "exception insert duplicate",
+      "handling": "retry insert",
       "sqlcode": "-803",
+      "reject_code": "duplicate exception",
+      "rc_abend": "none on successful retry",
+      "fr_ids": [
+        "FR-SETL-015"
+      ],
       "evidence": [
         {
           "path": "cobol/TRDPBEXC",
-          "line_start": 30,
+          "line_start": 29,
           "line_end": 78,
-          "snippet_sha256": "cea608bcbce9875cf3a6729312c9b8814c2a40de313819516c251a82fd9aa3ce",
+          "snippet_sha256": "0bba8c7b560b6c7df032920d9a5514678569f6ad05c9ada80839537e7a6eb6c1",
           "paragraph": "0000-MAINLINE"
         }
       ]
     },
     {
       "condition": "non-data exception",
-      "handling": "ROLLBACK then abend 255",
+      "handling": "ROLLBACK then abend dump",
+      "sqlcode": "other",
+      "reject_code": "none",
       "rc_abend": "255",
+      "fr_ids": [
+        "FR-SETL-014"
+      ],
       "evidence": [
         {
           "path": "cobol/TRDPBEXC",
-          "line_start": 30,
+          "line_start": 29,
           "line_end": 78,
-          "snippet_sha256": "cea608bcbce9875cf3a6729312c9b8814c2a40de313819516c251a82fd9aa3ce",
+          "snippet_sha256": "0bba8c7b560b6c7df032920d9a5514678569f6ad05c9ada80839537e7a6eb6c1",
           "paragraph": "0000-MAINLINE"
         }
       ]
@@ -1206,26 +2387,26 @@
     {
       "id": "NFR-SETL-001",
       "characteristic": "performance_efficiency",
-      "subcharacteristic": "time_behavior",
+      "subcharacteristic": "capacity",
       "measure": {
-        "metric": "checkpoint interval",
-        "target": "100",
-        "unit": "records",
-        "source": "PARM 0100"
+        "metric": "currency partition parallelism",
+        "target": "10",
+        "unit": "partitions",
+        "source": "DDL defines NUMPARTS 10 and PARTITION BY RANGE(STQ_CURRENCY), enabling the ten currency jobs to run against separate Db2 partitions."
       },
-      "derivation": "Derived from PARM 0100.",
+      "derivation": "DDL defines NUMPARTS 10 and PARTITION BY RANGE(STQ_CURRENCY), enabling the ten currency jobs to run against separate Db2 partitions.",
       "evidence": [
         {
-          "path": "controlcard/SETLUSD",
-          "line_start": 1,
-          "line_end": 5,
-          "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+          "path": "db2/mainframe-db2-setup/ddl/TBTRDSTQ",
+          "line_start": 18,
+          "line_end": 44,
+          "snippet_sha256": "59eabe1ed4159afaa9266ab4fff26ba0b66b584f6c9b6bbbf3b9f115e4e6a748"
         }
       ],
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "checkpoint interval meets 100 records"
+          "currency partition parallelism is preserved as 10 partitions"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1238,28 +2419,27 @@
     },
     {
       "id": "NFR-SETL-002",
-      "characteristic": "reliability",
-      "subcharacteristic": "fault tolerance",
+      "characteristic": "flexibility",
+      "subcharacteristic": "scalability",
       "measure": {
-        "metric": "retry SQLCODEs",
-        "target": "-911,-913",
-        "unit": "codes",
-        "source": "cursor update loop"
+        "metric": "currency partition count",
+        "target": "10",
+        "unit": "partitions",
+        "source": "The same currency partitioning construct provides a bounded scaling axis for adding parallel currency workers."
       },
-      "derivation": "Derived from cursor update loop.",
+      "derivation": "The same currency partitioning construct provides a bounded scaling axis for adding parallel currency workers.",
       "evidence": [
         {
-          "path": "cobol/TRDPB001",
-          "line_start": 426,
-          "line_end": 530,
-          "snippet_sha256": "e9f461567f1f77f23bee9de802754d00196cc0dedb1cf75767aa033163a0b42c",
-          "paragraph": "5000-READ-FROM-STLMT-QUEUE"
+          "path": "db2/mainframe-db2-setup/ddl/TBTRDSTQ",
+          "line_start": 18,
+          "line_end": 44,
+          "snippet_sha256": "59eabe1ed4159afaa9266ab4fff26ba0b66b584f6c9b6bbbf3b9f115e4e6a748"
         }
       ],
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "retry SQLCODEs meets -911,-913 codes"
+          "currency partition count is preserved as 10 partitions"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1272,27 +2452,28 @@
     },
     {
       "id": "NFR-SETL-003",
-      "characteristic": "compatibility",
-      "subcharacteristic": "co-existence",
+      "characteristic": "reliability",
+      "subcharacteristic": "fault_tolerance",
       "measure": {
-        "metric": "Db2 plan",
-        "target": "CLFRPLAN",
-        "unit": "plan",
-        "source": "control card"
+        "metric": "retryable Db2 SQLCODEs",
+        "target": "-911,-913",
+        "unit": "codes",
+        "source": "TRDPB001 retries order updates when SQLCODE is -911 or -913 before reporting an application exception."
       },
-      "derivation": "Derived from control card.",
+      "derivation": "TRDPB001 retries order updates when SQLCODE is -911 or -913 before reporting an application exception.",
       "evidence": [
         {
-          "path": "controlcard/SETLUSD",
-          "line_start": 1,
-          "line_end": 5,
-          "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+          "path": "cobol/TRDPB001",
+          "line_start": 482,
+          "line_end": 536,
+          "snippet_sha256": "bc62132011394a0c50ddadd1f8f2a704e2e1d0e4d99c332e265d09096047d1f9",
+          "paragraph": "8000-UPDATE-ORDER"
         }
       ],
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "Db2 plan meets CLFRPLAN plan"
+          "retryable Db2 SQLCODEs is preserved as -911,-913 codes"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1305,27 +2486,27 @@
     },
     {
       "id": "NFR-SETL-004",
-      "characteristic": "maintainability",
-      "subcharacteristic": "modularity",
+      "characteristic": "performance_efficiency",
+      "subcharacteristic": "time_behavior",
       "measure": {
-        "metric": "called booking programs",
-        "target": "2",
-        "unit": "programs",
-        "source": "WS-PROGRAMS"
+        "metric": "checkpoint frequency",
+        "target": "0100",
+        "unit": "records",
+        "source": "The SETLUSD control card passes PARM USD 0100 and TRDPB001 commits when its trade count reaches the configured frequency."
       },
-      "derivation": "Derived from WS-PROGRAMS.",
+      "derivation": "The SETLUSD control card passes PARM USD 0100 and TRDPB001 commits when its trade count reaches the configured frequency.",
       "evidence": [
         {
-          "path": "cobol/TRDPB001",
-          "line_start": 37,
-          "line_end": 75,
-          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+          "path": "controlcard/SETLUSD",
+          "line_start": 1,
+          "line_end": 5,
+          "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
         }
       ],
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "called booking programs meets 2 programs"
+          "checkpoint frequency is preserved as 0100 records"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1338,28 +2519,27 @@
     },
     {
       "id": "NFR-SETL-005",
-      "characteristic": "safety",
-      "subcharacteristic": "data integrity",
+      "characteristic": "compatibility",
+      "subcharacteristic": "interoperability",
       "measure": {
-        "metric": "commit boundary",
-        "target": "checkpoint",
-        "unit": "scope",
-        "source": "COMMIT"
+        "metric": "Db2 plan binding",
+        "target": "CLFRPLAN",
+        "unit": "plan",
+        "source": "The control card binds TRDPB001 through IKJEFT01 to Db2 plan CLFRPLAN."
       },
-      "derivation": "Derived from COMMIT.",
+      "derivation": "The control card binds TRDPB001 through IKJEFT01 to Db2 plan CLFRPLAN.",
       "evidence": [
         {
-          "path": "cobol/TRDPB001",
-          "line_start": 330,
-          "line_end": 420,
-          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
-          "paragraph": "2000-ACCOUNTING"
+          "path": "controlcard/SETLUSD",
+          "line_start": 1,
+          "line_end": 5,
+          "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
         }
       ],
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "commit boundary meets checkpoint scope"
+          "Db2 plan binding is preserved as CLFRPLAN plan"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1372,15 +2552,15 @@
     },
     {
       "id": "NFR-SETL-006",
-      "characteristic": "functional_suitability",
-      "subcharacteristic": "functional completeness",
+      "characteristic": "maintainability",
+      "subcharacteristic": "modularity",
       "measure": {
-        "metric": "status states",
-        "target": "9",
-        "unit": "states",
-        "source": "88 levels"
+        "metric": "booking collaborators",
+        "target": "2",
+        "unit": "programs",
+        "source": "TRDPB001 names TRDPB002 and TRDPB003 as separate booking collaborators."
       },
-      "derivation": "Derived from 88 levels.",
+      "derivation": "TRDPB001 names TRDPB002 and TRDPB003 as separate booking collaborators.",
       "evidence": [
         {
           "path": "cobol/TRDPB001",
@@ -1392,7 +2572,7 @@
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "status states meets 9 states"
+          "booking collaborators is preserved as 2 programs"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1405,28 +2585,27 @@
     },
     {
       "id": "NFR-SETL-007",
-      "characteristic": "security",
-      "subcharacteristic": "auditability",
+      "characteristic": "maintainability",
+      "subcharacteristic": "analysability",
       "measure": {
-        "metric": "exception table",
-        "target": "TBTRDEXC",
-        "unit": "table",
-        "source": "exception handler"
+        "metric": "source program identity consistency",
+        "target": "1",
+        "unit": "finding",
+        "source": "TRDPB003 has PROGRAM-ID TRDPB002, which is a source identity discrepancy requiring review."
       },
-      "derivation": "Derived from exception handler.",
+      "derivation": "TRDPB003 has PROGRAM-ID TRDPB002, which is a source identity discrepancy requiring review.",
       "evidence": [
         {
-          "path": "cobol/TRDPBEXC",
-          "line_start": 30,
-          "line_end": 78,
-          "snippet_sha256": "cea608bcbce9875cf3a6729312c9b8814c2a40de313819516c251a82fd9aa3ce",
-          "paragraph": "0000-MAINLINE"
+          "path": "cobol/TRDPB003",
+          "line_start": 1,
+          "line_end": 2,
+          "snippet_sha256": "8d5d2b9c87d8eb2e257ebeea7a96457503ed4e1c9468621c9887ab65b27d8cf1"
         }
       ],
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "exception table meets TBTRDEXC table"
+          "source program identity consistency is preserved as 1 finding"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1439,27 +2618,94 @@
     },
     {
       "id": "NFR-SETL-008",
-      "characteristic": "flexibility",
-      "subcharacteristic": "adaptability",
+      "characteristic": "security",
+      "subcharacteristic": "accountability",
       "measure": {
-        "metric": "currency parameter width",
-        "target": "3",
-        "unit": "characters",
-        "source": "LK-PARM"
+        "metric": "exception audit table",
+        "target": "TBTRDEXC",
+        "unit": "table",
+        "source": "TRDPBEXC inserts exception type and description into TBTRDEXC and commits non-data exception logs."
       },
-      "derivation": "Derived from LK-PARM.",
+      "derivation": "TRDPBEXC inserts exception type and description into TBTRDEXC and commits non-data exception logs.",
       "evidence": [
         {
-          "path": "controlcard/SETLUSD",
-          "line_start": 1,
-          "line_end": 5,
-          "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+          "path": "cobol/TRDPBEXC",
+          "line_start": 29,
+          "line_end": 78,
+          "snippet_sha256": "0bba8c7b560b6c7df032920d9a5514678569f6ad05c9ada80839537e7a6eb6c1",
+          "paragraph": "0000-MAINLINE"
         }
       ],
       "verification": {
         "method": "inspection",
         "acceptance_criteria": [
-          "currency parameter width meets 3 characters"
+          "exception audit table is preserved as TBTRDEXC table"
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDLOG",
+          "fields": [
+            "LOG_MESSAGE"
+          ],
+          "tolerance": "exact"
+        }
+      }
+    },
+    {
+      "id": "NFR-SETL-009",
+      "characteristic": "safety",
+      "subcharacteristic": "safe_integration",
+      "measure": {
+        "metric": "job failure threshold",
+        "target": "8",
+        "unit": "RC threshold",
+        "source": "SETLUSD declares COND=(8,LT), so downstream execution semantics depend on the job return-code threshold."
+      },
+      "derivation": "SETLUSD declares COND=(8,LT), so downstream execution semantics depend on the job return-code threshold.",
+      "evidence": [
+        {
+          "path": "jcl/SETLUSD.jcl",
+          "line_start": 1,
+          "line_end": 9,
+          "snippet_sha256": "f79928ead8bc2f9f72eddbb604c0236fa775ebb5b4c1d280ef7514e3e0f10bc8"
+        }
+      ],
+      "verification": {
+        "method": "inspection",
+        "acceptance_criteria": [
+          "job failure threshold is preserved as 8 RC threshold"
+        ],
+        "oracle": {
+          "dataset_table": "TRADE.TBTRDLOG",
+          "fields": [
+            "LOG_MESSAGE"
+          ],
+          "tolerance": "exact"
+        }
+      }
+    },
+    {
+      "id": "NFR-SETL-010",
+      "characteristic": "functional_suitability",
+      "subcharacteristic": "functional_completeness",
+      "measure": {
+        "metric": "status vocabulary",
+        "target": "9",
+        "unit": "states",
+        "source": "TRDPB001 declares accepted, matched, eight overdue codes, rejected, and settled status conditions."
+      },
+      "derivation": "TRDPB001 declares accepted, matched, eight overdue codes, rejected, and settled status conditions.",
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ],
+      "verification": {
+        "method": "inspection",
+        "acceptance_criteria": [
+          "status vocabulary is preserved as 9 states"
         ],
         "oracle": {
           "dataset_table": "TRADE.TBTRDLOG",
@@ -1474,16 +2720,118 @@
   "data_layer": {
     "copybook_field_map": [
       {
-        "copybook": "TBTRDSTQ",
-        "field": "STQ_CURRENCY",
-        "table_column": "STQ_CURRENCY",
-        "transform": "trim fixed width"
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_TRADING_XCHNG",
+        "table_column": "ORD_TRADING_XCHNG",
+        "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "TBTRDSTQ",
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_TRADEID",
+        "table_column": "ORD_TRADEID",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_BUY_SELL_IND",
+        "table_column": "ORD_BUY_SELL_IND",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_CUSTOMER_ID",
+        "table_column": "ORD_CUSTOMER_ID",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_FIGI",
+        "table_column": "ORD_FIGI",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_QUANTITY",
+        "table_column": "ORD_QUANTITY",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_CURRENCY",
+        "table_column": "ORD_CURRENCY",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_AMOUNT",
+        "table_column": "ORD_AMOUNT",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "ORD_STATUS",
+        "table_column": "ORD_STATUS",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "STQ_CURRENCY",
+        "table_column": "STQ_CURRENCY",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
         "field": "STQ_ID",
         "table_column": "STQ_ID",
-        "transform": "binary integer decode"
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "STQ_TRADE_DATA",
+        "table_column": "STQ_TRADE_DATA",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "MAC_CURRENCY",
+        "table_column": "MAC_CURRENCY",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "MAC_NUMBER",
+        "table_column": "MAC_NUMBER",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "MAC_BALANCE",
+        "table_column": "MAC_BALANCE",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "SAC_CURRENCY",
+        "table_column": "SAC_CURRENCY",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "SAC_NUMBER",
+        "table_column": "SAC_NUMBER",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "SAC_CUSTOMER_ID",
+        "table_column": "SAC_CUSTOMER_ID",
+        "transform": "reconstructed from DDL/LOAD control card"
+      },
+      {
+        "copybook": "reconstructed-from-ldcntl",
+        "field": "SAC_STATUS",
+        "table_column": "SAC_STATUS",
+        "transform": "reconstructed from DDL/LOAD control card"
       }
     ],
     "db2_crud_matrix": [
@@ -1501,17 +2849,51 @@
         "isolation": "cursor stability"
       },
       {
-        "program": "TRDPB002",
-        "table": "TBTRDSAC",
+        "program": "TRDPB001",
+        "table": "TBTRDORD",
         "operations": [
           "select",
           "update"
         ],
         "cursor_names": [
-          "SAC_BOOKING"
+          "ORDER_UPDATE"
         ],
         "with_hold": false,
         "isolation": "cursor stability"
+      },
+      {
+        "program": "TRDPB001",
+        "table": "TBTRDLOG",
+        "operations": [
+          "insert",
+          "update"
+        ],
+        "cursor_names": [],
+        "with_hold": false,
+        "isolation": "read committed"
+      },
+      {
+        "program": "TRDPB002",
+        "table": "TBTRDPOS",
+        "operations": [
+          "select",
+          "update"
+        ],
+        "cursor_names": [
+          "POS_BOOKING"
+        ],
+        "with_hold": false,
+        "isolation": "cursor stability"
+      },
+      {
+        "program": "TRDPB002",
+        "table": "TBTRDSEC",
+        "operations": [
+          "select"
+        ],
+        "cursor_names": [],
+        "with_hold": false,
+        "isolation": "read committed"
       },
       {
         "program": "TRDPB003",
@@ -1527,6 +2909,16 @@
         "isolation": "cursor stability"
       },
       {
+        "program": "TRDPB003",
+        "table": "TBTRDCUS",
+        "operations": [
+          "select"
+        ],
+        "cursor_names": [],
+        "with_hold": false,
+        "isolation": "read committed"
+      },
+      {
         "program": "TRDPBEXC",
         "table": "TBTRDEXC",
         "operations": [
@@ -1539,21 +2931,71 @@
     ],
     "lineage": [
       {
-        "source_field": "STQ_CURRENCY",
-        "target_field": "order.currency",
-        "transform": "trim and uppercase"
+        "source_field": "STQ_TRADE_DATA[1:10]",
+        "target_field": "ORD_TRADING_XCHNG",
+        "transform": "fixed-width CHAR(10), trim trailing spaces"
       },
       {
-        "source_field": "STQ_ID",
-        "target_field": "order.id",
-        "transform": "binary to integer"
+        "source_field": "STQ_TRADE_DATA[11:22]",
+        "target_field": "ORD_TRADEID",
+        "transform": "fixed-width CHAR(12), trim trailing spaces"
+      },
+      {
+        "source_field": "STQ_TRADE_DATA[23:23]",
+        "target_field": "ORD_BUY_SELL_IND",
+        "transform": "B/S indicator"
+      },
+      {
+        "source_field": "STQ_TRADE_DATA[24:35]",
+        "target_field": "ORD_CUSTOMER_ID",
+        "transform": "fixed-width CHAR(12)"
+      },
+      {
+        "source_field": "STQ_TRADE_DATA[36:47]",
+        "target_field": "ORD_FIGI",
+        "transform": "fixed-width CHAR(12)"
+      },
+      {
+        "source_field": "STQ_TRADE_DATA[48:52]",
+        "target_field": "ORD_QUANTITY",
+        "transform": "5-byte packed decimal, scale inferred from DECIMAL"
+      },
+      {
+        "source_field": "STQ_TRADE_DATA[53:55]",
+        "target_field": "ORD_CURRENCY",
+        "transform": "fixed-width CHAR(3)"
+      },
+      {
+        "source_field": "STQ_TRADE_DATA[56:60]",
+        "target_field": "ORD_AMOUNT",
+        "transform": "5-byte packed decimal, 9 digits"
+      },
+      {
+        "source_field": "STQ_TRADE_DATA[61:63]",
+        "target_field": "ORD_STATUS",
+        "transform": "fixed-width CHAR(3)"
+      },
+      {
+        "source_field": "ORD_AMOUNT",
+        "target_field": "MAC_BALANCE",
+        "transform": "buy/sell debit-credit arithmetic"
+      },
+      {
+        "source_field": "ORD_QUANTITY",
+        "target_field": "POS_BALANCE",
+        "transform": "buy/sell quantity arithmetic"
+      },
+      {
+        "source_field": "STQ_CURRENCY",
+        "target_field": "MAC_CURRENCY",
+        "transform": "currency key propagation"
       }
     ],
     "decimal_semantics": {
       "digits": 9,
       "scale": 2,
-      "sign_handling": "COMP-3 C/F positive, D negative; preserve sign",
-      "rounding": "HALF_UP only at target boundary"
+      "sign_handling": "5-byte packed DECIMAL uses C/F positive and D negative nibbles",
+      "rounding": "HALF_UP at target boundary"
     },
     "keys_indexes": [
       {
@@ -1562,30 +3004,43 @@
           "STQ_CURRENCY",
           "STQ_ID"
         ],
-        "kind": "ordering/index"
+        "kind": "unique clustering index X1TRDSTQ"
+      },
+      {
+        "table": "TBTRDSTQ",
+        "columns": [
+          "STQ_CURRENCY"
+        ],
+        "kind": "range partition key"
       }
     ],
     "restart_semantics": {
       "checkpoint_interval": "PARM currency + 0100 records",
-      "commit_scope": "one queue item pair, checkpoint every 100",
+      "commit_scope": "checkpoint batch",
       "restart_key": "STQ_CURRENCY + STQ_ID",
-      "cursor_reposition": "reopen ordered cursor after restart"
+      "cursor_reposition": "reopen ordered SETTLEMENT_QUEUE cursor after restart"
     }
   },
   "open_questions": [
-    "Confirm production checkpoint override policy."
+    "The public estate does not ship DCLGEN members or COPY TRDORDER; the layout spec is a reconstruction from LOAD control cards and DDL, not a copybook transcription. Obtain the DCLGEN PDS before production migration.",
+    "TRDPB003 PROGRAM-ID says TRDPB002; confirm whether this is a source defect or listing discrepancy.",
+    "Confirm production checkpoint overrides and exact DECIMAL scale metadata."
   ],
   "assumptions": [
-    "The supplied legacy leg is not a live z/OS execution."
+    "TBTRDSTQ.STQ_TRADE_DATA carries the TBTRDORD load layout because it is CHAR(88), but the public estate does not provide the DCLGEN."
   ],
   "glossary": [
     {
-      "term": "TDQ",
-      "definition": "Settlement queue represented by TBTRDSTQ."
+      "term": "WITH HOLD",
+      "definition": "Db2 cursor remains open across commits."
     },
     {
-      "term": "WITH HOLD",
-      "definition": "Cursor remains open across commits."
+      "term": "DCLGEN gap",
+      "definition": "Referenced copybook members are named by source but absent from the fetched public estate."
+    },
+    {
+      "term": "QSAM",
+      "definition": "Sequential dataset organization; VSAMDEF is empty in this estate."
     }
   ],
   "meta": {
@@ -1595,7 +3050,7 @@
     "generator": "hand-derived settlement reference",
     "coverage": {
       "programs_cited": 100,
-      "paragraphs_cited": 85
+      "paragraphs_cited": 81.81818181818181
     }
   }
 }
