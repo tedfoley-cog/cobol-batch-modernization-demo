@@ -25,7 +25,7 @@
   }
   function stepDrawer(stream, job, step) {
     const dd = (step.dd_datasets || []).map((dataset) => `<tr><td>${esc(dataset.ddname)}</td><td>${esc(dataset.dsn)}</td><td>${esc(dataset.disp)}</td><td>${esc(dataset.type)}</td></tr>`).join("");
-    const programs = stream.programs.filter((program) => program.name === step.exec.name || program.name === "TRDPB001");
+    const programs = stream.programs;
     drawer(`<h2>JCL step ${esc(step.name)}</h2><dl><dt>EXEC</dt><dd>${esc(step.exec.kind)} ${esc(step.exec.name)}${step.exec.parm ? ` · PARM(${esc(step.exec.parm)})` : ""}</dd><dt>Db2 plan</dt><dd>${esc(step.exec.db2_plan || "—")}</dd><dt>Control card member</dt><dd>${esc(step.exec.control_card_member || "—")}</dd></dl><h3>DD datasets</h3><table><thead><tr><th>DD</th><th>DSN</th><th>DISP</th><th>Type</th></tr></thead><tbody>${dd || "<tr><td colspan=4>None declared</td></tr>"}</tbody></table><h3>Called programs</h3><ul>${programs.flatMap((program) => program.called_programs || []).map((name) => `<li>${esc(name)}</li>`).join("") || "<li>None declared</li>"}</ul>`);
   }
   function renderStreams() {
