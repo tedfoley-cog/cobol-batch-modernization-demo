@@ -33,7 +33,7 @@ Why this estate:
 | Criterion | Evidence in the estate |
 |---|---|
 | Batch only, no front-end | 22 JCL jobs + 1 PROC (`TRDPROC`), invoked via `IKJEFT01` with a Db2 plan; no BMS maps, no CICS screens |
-| Real z/OS shape | Sequence-numbered source (cols 73–80 with change levels), `EXEC SQL INCLUDE` DCLGENs, `//STEPLIB DD DSN=DSNC10.…SDSNLOAD`, control cards in a `CARD` PDS, `DCB`/`VSAMDEF` metadata |
+| Real z/OS shape | Sequence-numbered source (cols 73–80 with change levels), `EXEC SQL INCLUDE` DCLGENs, `//STEPLIB DD DSN=DSNC10.…SDSNLOAD`, control cards in a `CARD` PDS, DCB dataset attributes, and an empty `VSAMDEF` |
 | Non-trivial logic chain | Order acceptance/validation/matching (`TRDPB000`, 1 376 lines) → settlement (`TRDPB001`) → securities book-keeping (`TRDPB002`) → money book-keeping (`TRDPB003`) → summary/statistics (`TRDPB004`, `TRDPB006`) → exception handling (`TRDPBEXC`); 9 order-status states with 8 distinct overdue reason codes |
 | Tricky data layer | 10 Db2 tables with DDL + LOAD control cards, DCLGEN copybooks, `DECLARE … CURSOR WITH HOLD`, checkpoint frequency passed as a run parameter (`PARM('USD 0100')`), commit/restart logic, `USAGE POINTER` task lists, `COMP`/`COMP-3` money fields across 10 currencies |
 | Verifiable off-mainframe | Upstream ships `db2/portable-db2-h2/Trade-db.mv.db` plus `SMALL` load datasets, so target-side runs and comparisons are executable without z/OS |
@@ -175,6 +175,9 @@ install Chromium, run the full `tests/ui/` suite headlessly. Both run on every p
 
 - **Estate availability at demo time.** Mitigated by a pinned commit, an inventory check after
   fetch, and caching the clone in the Devin blueprint so the live session starts warm.
+- **Missing DCLGEN members.** The source names DCLGEN and copybook members, but the public estate
+  ships neither those members nor `COPY TRDORDER`. The reference layout is reconstructed from DDL
+  and LOAD control cards; production migration must obtain the DCLGEN PDS.
 - **Legacy-side execution.** The upstream programs contain embedded Db2 SQL and cannot be compiled
   with GnuCOBOL as-is, so the "legacy execution" leg of the three-way comparison is fed by captured
   run output rather than a live z/OS run. The harness treats it as a supplied input and states its
