@@ -2,7 +2,7 @@
 
 | Framework step | Artifact | Schema | Gate |
 |---|---|---|---|
-| Module/stream analysis | `stream-inventory.json` | stream inventory | schema, evidence, paragraph containment |
+| Module/stream analysis | `stream-inventory.json`, generated DCLGEN members | stream inventory, requirements | schema, evidence provenance, paragraph containment |
 | Functional requirements and migration planning | `requirements.json`, `migration-plan.json` | requirements, migration plan | EARS, ISO 25010, profile, dangling references |
 | Phased migration | migration chunks and target design mappings | migration plan | category, dependency, sign-off, FR traceability |
 | Testing and deployment | `parity-report.json`, generated review UI | parity report | three-leg normalization, parity verdict, UI journeys |
@@ -17,7 +17,7 @@
 | Discovery ask | Where it lives |
 |---|---|
 | Code comprehension | `tools/fetch_estate.py`, stream inventory, evidence drawer |
-| Source-to-target mapping | requirements data layer and migration plan target design |
+| Source-to-target mapping | requirements data layer, generated DCLGEN field map, and migration plan target design |
 | FR/NFR documentation | `artifacts/reference-example/requirements.json` |
 | Migration planning | `artifacts/reference-example/migration-plan.json` |
 | Code migration | live Devin skill, acceptance stream sequence |

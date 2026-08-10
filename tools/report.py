@@ -16,7 +16,7 @@ def load_json(path: Path) -> dict[str, Any]:
 def evidence_snippets(all_evidence: list[dict[str, Any]]) -> dict[str, list[dict[str, Any]]]:
     snippets: dict[str, list[dict[str, Any]]] = {}
     for evidence in all_evidence:
-        source = ROOT / "legacy" / evidence["path"]
+        source = ROOT / evidence["path"] if evidence["path"].startswith("artifacts/generated/") else ROOT / "legacy" / evidence["path"]
         if not source.is_file():
             continue
         lines = source.read_text(errors="replace").splitlines()

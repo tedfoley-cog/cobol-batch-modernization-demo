@@ -45,9 +45,12 @@ Apache-2.0 licensed and pinned to `d1450ca062445a6e70f2a2638af6ba286ca8fecc`. It
 
 ## What Devin does live
 
-Devin fetches the pinned estate, decomposes the acceptance/matching stream, derives artifacts with
-line-level evidence, runs the validator feedback loop, plans a migration, migrates one program,
-executes the parity harness, rebuilds the review UI, and click-tests the UI in its own browser.
+Devin fetches the pinned estate, decomposes the acceptance/matching stream, regenerates
+DCLGEN-shaped members from the shipped catalog DDL, derives artifacts with line-level evidence,
+runs the validator feedback loop, plans a migration, migrates one program, executes the parity
+harness, rebuilds the review UI, and click-tests the UI in its own browser. Generated DCLGEN
+members are derived layouts, not transcribed customer PDS members; production migration confirms
+them against the customer's DCLGEN PDS and scale metadata.
 The UI is a generated evidence viewer, not a business application.
 
 ## How the live demo is triggered and run
@@ -55,8 +58,8 @@ The UI is a generated evidence viewer, not a business application.
 The presenter starts a Devin session with a modernization prompt naming the acceptance/matching
 stream (`ACCP<CUR>` → `TRDPROC` → `TRDPB000`). Devin is the runtime: it executes the deterministic
 commands and displays the generated review UI through Devin's browser/Desktop tab. For local
-development only, the equivalent commands are `make fetch`, `make validate`, `make parity`,
-`make report`, `make test`, and `make serve`.
+development only, the equivalent commands are `make fetch`, `make dclgen`, `make validate`,
+`make parity`, `make report`, `make test`, and `make serve`.
 
 ## Repo layout
 
@@ -65,7 +68,7 @@ development only, the equivalent commands are `make fetch`, `make validate`, `ma
 * `artifacts/reference-example/` — hand-derived settlement gold artifacts
 * `artifacts/generated/` — live-session output location
 * `harness/fixtures/` — committed three-leg parity inputs
-* `tools/` — fetch, validation, normalization, parity, and report generation
+* `tools/` — fetch, DCLGEN generation, validation, normalization, parity, and report generation
 * `docs/` — implementation plan, framework mapping, and flowchart
 * `tests/` — Python and Playwright verification
 

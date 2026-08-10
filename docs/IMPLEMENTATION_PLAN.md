@@ -175,9 +175,9 @@ install Chromium, run the full `tests/ui/` suite headlessly. Both run on every p
 
 - **Estate availability at demo time.** Mitigated by a pinned commit, an inventory check after
   fetch, and caching the clone in the Devin blueprint so the live session starts warm.
-- **Missing DCLGEN members.** The source names DCLGEN and copybook members, but the public estate
-  ships neither those members nor `COPY TRDORDER`. The reference layout is reconstructed from DDL
-  and LOAD control cards; production migration must obtain the DCLGEN PDS.
+- **DCLGEN provenance.** `tools/dclgen.py` regenerates DCLGEN-shaped members from the shipped
+  catalog DDL because the public estate's DCLGEN PDS has no members. Confirm generated members
+  against the customer's DCLGEN PDS and production scale metadata before migration.
 - **Legacy-side execution.** The upstream programs contain embedded Db2 SQL and cannot be compiled
   with GnuCOBOL as-is, so the "legacy execution" leg of the three-way comparison is fed by captured
   run output rather than a live z/OS run. The harness treats it as a supplied input and states its

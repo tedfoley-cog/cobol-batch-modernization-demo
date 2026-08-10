@@ -55,6 +55,7 @@ def test_golden_path_and_packed_amount(page: Page, site_url: str):
     page.get_by_role("button", name="Close").click()
     page.get_by_role("button", name="Data Layer").click()
     expect(page.locator("body")).to_contain_text("TBTRDSTQ")
+    expect(page.locator("body")).to_contain_text("generated from DDL")
     page.get_by_role("button", name="Parity").click()
     expect(page.locator("body")).to_contain_text("123.45")
     expect(page.locator("body")).to_contain_text("601")

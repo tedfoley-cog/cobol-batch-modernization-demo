@@ -33,6 +33,7 @@ tr.clickable { cursor:pointer; } tr.clickable:hover { background:#f0f8ff; }
 .snippet .cited-line { background:#174e70; color:#fff; }
 .snippet .context-line { color:#a9bac9; }
 .schema-json { max-height:420px; overflow:auto; white-space:pre; background:#f4f7fa; padding:14px; border:1px solid var(--line); }
+.badge { display:inline-block; background:#e7f5ec; color:#176b35; border:1px solid #8bc79d; border-radius:999px; padding:3px 9px; font-size:.75em; vertical-align:middle; }
 .close { float:right; border:0; background:transparent; font-size:1.5rem; cursor:pointer; }
 .form-grid { display:grid; gap:10px; max-width:700px; } .form-grid label { display:grid; gap:4px; font-weight:600; } .form-grid input,.form-grid select,.form-grid textarea { padding:8px; border:1px solid #9fb3c4; border-radius:6px; }
 .error { color:#b91c1c; margin:8px 0; } .success { color:var(--green); margin:8px 0; }
