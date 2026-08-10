@@ -1,7 +1,7 @@
 # COBOL Batch Modernization Demo
 
 ```mermaid
-%%{init: {'flowchart': {'htmlLabels': false}}}%%
+%%{init: {'flowchart': {'htmlLabels': false, 'subGraphTitleMargin': {'top': 20, 'bottom': 20}}}}%%
 flowchart TB
   subgraph Comprehension
     direction LR
