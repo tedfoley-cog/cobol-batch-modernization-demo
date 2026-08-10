@@ -107,7 +107,7 @@
   "verdict": "pass",
   "run_metadata": {
     "run_id": "reference-settlement-001",
-    "timestamp": "2026-08-10T19:55:11.293180+00:00",
+    "timestamp": "2026-08-10T19:57:29.675879+00:00",
     "environment": "portable H2 / supplied legacy fixture"
   },
   "fr_ids": [

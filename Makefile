@@ -14,10 +14,10 @@ install:
 validate: dclgen
 	$(PYTHON) tools/validate.py
 
-report:
+report: dclgen
 	$(PYTHON) tools/report.py
 
-parity:
+parity: dclgen
 	$(PYTHON) tools/parity.py harness/fixtures artifacts/reference-example/layout-spec.json artifacts/reference-example/parity-report.json
 
 test:

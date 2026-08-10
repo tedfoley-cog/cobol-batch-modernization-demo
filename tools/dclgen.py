@@ -69,6 +69,10 @@ def _decimal_picture(precision: int, scale: int) -> str:
     return f"S9({precision - scale})V9({scale}) COMP-3"
 
 
+def _catalog_type(sql_type: str) -> str:
+    return re.sub(r"^INT(?=\b)", "INTEGER", sql_type)
+
+
 def cobol_items(column: Column) -> list[str]:
     match = re.fullmatch(r"([A-Z]+)(?:\((\d+)(?:,(\d+))?\))?", column.sql_type)
     if not match:
@@ -105,6 +109,22 @@ def cobol_items(column: Column) -> list[str]:
     return items
 
 
+def _aligned_host_items(columns: list[Column]) -> list[str]:
+    raw = [item for column in columns for item in cobol_items(column)]
+    names = []
+    for item in raw:
+        match = re.match(r"^(10|49) ([A-Z0-9-]+) PIC ", item)
+        if match:
+            names.append(match.group(2))
+    width = max(names, key=len, default="")
+    return [
+        re.sub(r"^(10|49) ([A-Z0-9-]+) PIC ", lambda match: (
+            f"{match.group(1)} {match.group(2):<{len(width) + 2}}PIC "
+        ), item)
+        for item in raw
+    ]
+
+
 def fixed_line(sequence: int, content: str = "") -> str:
     if len(content) > 65:
         raise ValueError(f"DCLGEN content exceeds area B: {content}")
@@ -121,12 +141,15 @@ def render_member(table: str, columns: list[Column]) -> str:
         f"          DECLARE TRADE.{table} TABLE",
         "          (",
     ]
+    type_column = max((len(column.name) for column in columns), default=0) + 4
     for index, column in enumerate(columns):
         suffix = "," if index < len(columns) - 1 else ""
-        lines.append(f"             {column.name} {column.sql_type}{' NOT NULL' if not column.nullable else ''}{suffix}")
+        lines.append(
+            f"             {column.name:<{type_column}}{_catalog_type(column.sql_type)}"
+            f"{' NOT NULL' if not column.nullable else ''}{suffix}"
+        )
     lines.extend(["          )", "       END-EXEC.", f"       01 DCL{table}."])
-    for column in columns:
-        lines.extend(f"          {item}" for item in cobol_items(column))
+    lines.extend(f"          {item}" for item in _aligned_host_items(columns))
     return "\n".join(fixed_line((index + 1) * 100, line) for index, line in enumerate(lines)) + "\n"
 
 
