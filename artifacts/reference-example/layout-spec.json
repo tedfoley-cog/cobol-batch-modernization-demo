@@ -5,7 +5,8 @@
     "end": 10,
     "type": "char",
     "encoding": "cp037",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:20",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_TRADEID",
@@ -13,7 +14,8 @@
     "end": 22,
     "type": "char",
     "encoding": "cp037",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:21",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_BUY_SELL_IND",
@@ -21,7 +23,8 @@
     "end": 23,
     "type": "char",
     "encoding": "cp037",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:22",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_CUSTOMER_ID",
@@ -29,7 +32,8 @@
     "end": 35,
     "type": "char",
     "encoding": "cp037",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:23",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_FIGI",
@@ -37,7 +41,8 @@
     "end": 47,
     "type": "char",
     "encoding": "cp037",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:24",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_QUANTITY",
@@ -47,7 +52,8 @@
     "digits": 9,
     "scale": 2,
     "sign": "trailing_nibble",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:25",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_CURRENCY",
@@ -55,7 +61,8 @@
     "end": 55,
     "type": "char",
     "encoding": "cp037",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:26",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_AMOUNT",
@@ -65,7 +72,8 @@
     "digits": 9,
     "scale": 2,
     "sign": "trailing_nibble",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:27",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "ORD_STATUS",
@@ -73,7 +81,8 @@
     "end": 63,
     "type": "char",
     "encoding": "cp037",
-    "source": "ldcntl/TBTRDORD"
+    "source": "artifacts/generated/dclgen/DCLTBTRDORD:28",
+    "cross_check_source": "ldcntl/TBTRDORD"
   },
   {
     "name": "TRADE_DATE",
@@ -81,6 +90,7 @@
     "end": 71,
     "type": "date",
     "format": "YYYYMMDD",
-    "source": "layout reconstruction; not defined in shipped l/d control"
+    "source": "layout reconstruction; not defined in shipped l/d control",
+    "finding": "No generated DCLGEN column exists; date is a harness normalization field, not a shipped Db2 column."
   }
 ]

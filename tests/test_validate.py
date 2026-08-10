@@ -70,3 +70,15 @@ def test_bad_chunk_id_is_rejected_by_profile():
     import re
 
     assert not re.match(profile["id_patterns"]["chunk"], "bad-chunk")
+
+
+def test_generated_evidence_requires_provenance_marker():
+    evidence = {
+        "path": "artifacts/generated/dclgen/DCLTBTRDSTQ",
+        "line_start": 1,
+        "line_end": 1,
+        "snippet_sha256": "0" * 64,
+    }
+    ok, message = evidence_gate([evidence])
+    assert not ok
+    assert "missing provenance" in message

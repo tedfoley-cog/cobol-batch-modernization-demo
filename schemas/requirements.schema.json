@@ -99,7 +99,7 @@
       "properties": {
         "path": {
           "type": "string",
-          "description": "Path under legacy/.",
+          "description": "Path under legacy/ or artifacts/generated/.",
           "examples": [
             "cobol/TRDPB001"
           ]
@@ -126,6 +126,13 @@
           "type": "string",
           "pattern": "^[0-9a-f]{64}$",
           "description": "Hash of exact source lines."
+        },
+        "provenance": {
+          "type": "string",
+          "enum": [
+            "generated"
+          ],
+          "description": "Required when path points under artifacts/generated/."
         }
       },
       "additionalProperties": false
@@ -472,7 +479,8 @@
         "usage",
         "scale",
         "sign",
-        "fr_ids"
+        "fr_ids",
+        "evidence"
       ],
       "properties": {
         "copybook": {
@@ -500,6 +508,13 @@
           },
           "minItems": 1,
           "description": "Functional requirements justified by this claim."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
         }
       },
       "additionalProperties": false

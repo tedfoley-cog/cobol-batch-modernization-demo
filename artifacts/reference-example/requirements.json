@@ -2097,7 +2097,7 @@
   ],
   "data_elements": [
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_TRADING_XCHNG",
       "picture": "CHAR(10)",
       "usage": "DISPLAY",
@@ -2106,10 +2106,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 20,
+          "line_end": 20,
+          "snippet_sha256": "1887f611fbb67549f243f97e4c50962b766aead02680ec1d8a690820bdafb399",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_TRADEID",
       "picture": "CHAR(12)",
       "usage": "DISPLAY",
@@ -2118,10 +2128,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 21,
+          "line_end": 21,
+          "snippet_sha256": "750374e0e5c51d58b57d21ef344da7493c9e08e2acd9afe0fc2d50bc51caeb12",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_BUY_SELL_IND",
       "picture": "CHAR(1)",
       "usage": "DISPLAY",
@@ -2130,10 +2150,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 22,
+          "line_end": 22,
+          "snippet_sha256": "3368609d48744da46f221891ce5859a7d804354ad716e32137d99c93851171f5",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_CUSTOMER_ID",
       "picture": "CHAR(12)",
       "usage": "DISPLAY",
@@ -2142,10 +2172,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 23,
+          "line_end": 23,
+          "snippet_sha256": "90ac1c8fe48460ebe1968eeafb5f3c9afae0282bf6b302a7b8b75a52d99d2d2d",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_FIGI",
       "picture": "CHAR(12)",
       "usage": "DISPLAY",
@@ -2154,10 +2194,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 24,
+          "line_end": 24,
+          "snippet_sha256": "1cada9a22fa95a25f300b14be8655d0b25630e3e7b87fe298a7cce6c69aa92d5",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_QUANTITY",
       "picture": "DECIMAL(5 bytes)",
       "usage": "PACKED-DECIMAL",
@@ -2166,10 +2216,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 25,
+          "line_end": 25,
+          "snippet_sha256": "bff784e1c44adc2155fdfacdd127086232cec69526ff15057bedc34e33399053",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_CURRENCY",
       "picture": "CHAR(3)",
       "usage": "DISPLAY",
@@ -2178,10 +2238,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 26,
+          "line_end": 26,
+          "snippet_sha256": "ddb87c88006223e33252b111603a384c766722b9005c8c12f89caab0416ec07c",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_AMOUNT",
       "picture": "DECIMAL(5 bytes)",
       "usage": "PACKED-DECIMAL",
@@ -2190,10 +2260,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 27,
+          "line_end": 27,
+          "snippet_sha256": "133e9d739f47e600f014a195abae9c691c4ce565bfea5ece62a378d43130a753",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
       "field": "ORD_STATUS",
       "picture": "CHAR(3)",
       "usage": "DISPLAY",
@@ -2202,10 +2282,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDORD",
+          "member": "DCLTBTRDORD",
+          "line_start": 28,
+          "line_end": 28,
+          "snippet_sha256": "e07634cbb98ff2457f70cce1e802842aeeb070cc435c3e737183761706aef837",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDSTQ",
       "field": "STQ_CURRENCY",
       "picture": "CHAR(3)",
       "usage": "DISPLAY",
@@ -2214,10 +2304,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDSTQ",
+          "member": "DCLTBTRDSTQ",
+          "line_start": 14,
+          "line_end": 14,
+          "snippet_sha256": "5377ceb86616aa26d0120b51063e727513f6f8909fb93f96e6e975fd234c127e",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDSTQ",
       "field": "STQ_ID",
       "picture": "INT IDENTITY",
       "usage": "BINARY",
@@ -2226,10 +2326,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDSTQ",
+          "member": "DCLTBTRDSTQ",
+          "line_start": 15,
+          "line_end": 15,
+          "snippet_sha256": "1d488406509e68a548d6f155ed13ae1bb39b302b3ac5e9497ea521af81086b91",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDSTQ",
       "field": "STQ_TRADE_DATA",
       "picture": "CHAR(88)",
       "usage": "DISPLAY",
@@ -2238,10 +2348,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDSTQ",
+          "member": "DCLTBTRDSTQ",
+          "line_start": 16,
+          "line_end": 16,
+          "snippet_sha256": "32851ccba473176f8fdcccff992dd843083a0405a0ea3b851a9c2d8362c62ce2",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDMAC",
       "field": "MAC_CURRENCY",
       "picture": "CHAR(3)",
       "usage": "DISPLAY",
@@ -2250,10 +2370,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDMAC",
+          "member": "DCLTBTRDMAC",
+          "line_start": 16,
+          "line_end": 16,
+          "snippet_sha256": "b9d122cf62b8a49c9260bb31cbafe9bce47e527bda8c101eecdb89c25476857c",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDMAC",
       "field": "MAC_NUMBER",
       "picture": "INTEGER",
       "usage": "BINARY",
@@ -2262,10 +2392,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDMAC",
+          "member": "DCLTBTRDMAC",
+          "line_start": 17,
+          "line_end": 17,
+          "snippet_sha256": "2fa2289f98ac5f3fd8c76ee9d8b927024d1389b716696baea4f9daef42cfb0b8",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDMAC",
       "field": "MAC_BALANCE",
       "picture": "DECIMAL(7 bytes)",
       "usage": "PACKED-DECIMAL",
@@ -2274,10 +2414,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDMAC",
+          "member": "DCLTBTRDMAC",
+          "line_start": 19,
+          "line_end": 19,
+          "snippet_sha256": "4d8ce3c7f09e4bc16367a758d81df289c3f60e8db7934cc72f7a33753b6312fe",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
       "field": "SAC_CURRENCY",
       "picture": "CHAR(3)",
       "usage": "DISPLAY",
@@ -2286,10 +2436,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDSAC",
+          "member": "DCLTBTRDSAC",
+          "line_start": 15,
+          "line_end": 15,
+          "snippet_sha256": "6d575199188b79a4b8228a5cddcb87f4e4557ef636b779f452a861f5debb2ca8",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
       "field": "SAC_NUMBER",
       "picture": "INTEGER",
       "usage": "BINARY",
@@ -2298,10 +2458,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDSAC",
+          "member": "DCLTBTRDSAC",
+          "line_start": 16,
+          "line_end": 16,
+          "snippet_sha256": "3a7ff283ba3cb4b732110fee5bd37b3dea24464c19dcb5834351c0e5952c817b",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
       "field": "SAC_CUSTOMER_ID",
       "picture": "CHAR(12)",
       "usage": "DISPLAY",
@@ -2310,10 +2480,20 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDSAC",
+          "member": "DCLTBTRDSAC",
+          "line_start": 17,
+          "line_end": 17,
+          "snippet_sha256": "cfaeee74f21635800ef5d116a1b7990b3ed6d3bdf29becc78bc198b82560bc67",
+          "provenance": "generated"
+        }
       ]
     },
     {
-      "copybook": "reconstructed-from-ldcntl",
+      "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
       "field": "SAC_STATUS",
       "picture": "CHAR(1)",
       "usage": "DISPLAY",
@@ -2322,6 +2502,16 @@
       "fr_ids": [
         "FR-SETL-001",
         "FR-SETL-005"
+      ],
+      "evidence": [
+        {
+          "path": "artifacts/generated/dclgen/DCLTBTRDSAC",
+          "member": "DCLTBTRDSAC",
+          "line_start": 18,
+          "line_end": 18,
+          "snippet_sha256": "705d9507b3cf33d586cb1847f6095add0ea59a38b02b27d1f8bfc7381b863ad6",
+          "provenance": "generated"
+        }
       ]
     }
   ],
@@ -2720,115 +2910,115 @@
   "data_layer": {
     "copybook_field_map": [
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_TRADING_XCHNG",
         "table_column": "ORD_TRADING_XCHNG",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_TRADEID",
         "table_column": "ORD_TRADEID",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_BUY_SELL_IND",
         "table_column": "ORD_BUY_SELL_IND",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_CUSTOMER_ID",
         "table_column": "ORD_CUSTOMER_ID",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_FIGI",
         "table_column": "ORD_FIGI",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_QUANTITY",
         "table_column": "ORD_QUANTITY",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_CURRENCY",
         "table_column": "ORD_CURRENCY",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_AMOUNT",
         "table_column": "ORD_AMOUNT",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDORD",
         "field": "ORD_STATUS",
         "table_column": "ORD_STATUS",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDSTQ",
         "field": "STQ_CURRENCY",
         "table_column": "STQ_CURRENCY",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDSTQ",
         "field": "STQ_ID",
         "table_column": "STQ_ID",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDSTQ",
         "field": "STQ_TRADE_DATA",
         "table_column": "STQ_TRADE_DATA",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDMAC",
         "field": "MAC_CURRENCY",
         "table_column": "MAC_CURRENCY",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDMAC",
         "field": "MAC_NUMBER",
         "table_column": "MAC_NUMBER",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDMAC",
         "field": "MAC_BALANCE",
         "table_column": "MAC_BALANCE",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
         "field": "SAC_CURRENCY",
         "table_column": "SAC_CURRENCY",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
         "field": "SAC_NUMBER",
         "table_column": "SAC_NUMBER",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
         "field": "SAC_CUSTOMER_ID",
         "table_column": "SAC_CUSTOMER_ID",
         "transform": "reconstructed from DDL/LOAD control card"
       },
       {
-        "copybook": "reconstructed-from-ldcntl",
+        "copybook": "artifacts/generated/dclgen/DCLTBTRDSAC",
         "field": "SAC_STATUS",
         "table_column": "SAC_STATUS",
         "transform": "reconstructed from DDL/LOAD control card"
@@ -3022,12 +3212,12 @@
     }
   },
   "open_questions": [
-    "The public estate does not ship DCLGEN members or COPY TRDORDER; the layout spec is a reconstruction from LOAD control cards and DDL, not a copybook transcription. Obtain the DCLGEN PDS before production migration.",
+    "DCLGEN members were regenerated from catalog DDL by tools/dclgen.py; confirm them against the customer DCLGEN PDS and production scale metadata before migration.",
     "TRDPB003 PROGRAM-ID says TRDPB002; confirm whether this is a source defect or listing discrepancy.",
     "Confirm production checkpoint overrides and exact DECIMAL scale metadata."
   ],
   "assumptions": [
-    "TBTRDSTQ.STQ_TRADE_DATA carries the TBTRDORD load layout because it is CHAR(88), but the public estate does not provide the DCLGEN."
+    "TBTRDSTQ.STQ_TRADE_DATA carries the TBTRDORD load layout because it is CHAR(88), but the generated DCLGEN member is derived from the shipped catalog DDL."
   ],
   "glossary": [
     {
@@ -3036,7 +3226,7 @@
     },
     {
       "term": "DCLGEN gap",
-      "definition": "Referenced copybook members are named by source but absent from the fetched public estate."
+      "definition": "DCLGEN members are generated from the shipped catalog DDL by tools/dclgen.py; customer PDS and production scale confirmation remain required."
     },
     {
       "term": "QSAM",
@@ -3047,7 +3237,7 @@
     "schema_version": "2020-12",
     "profile": "oem-batch",
     "estate_pin": "d1450ca062445a6e70f2a2638af6ba286ca8fecc",
-    "generator": "hand-derived settlement reference",
+    "generator": "hand-derived settlement reference with tools/dclgen.py-generated layouts",
     "coverage": {
       "programs_cited": 100,
       "paragraphs_cited": 81.81818181818181

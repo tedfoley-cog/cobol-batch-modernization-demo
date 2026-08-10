@@ -56,7 +56,13 @@ def paragraph_headers(path: Path) -> list[tuple[int, str]]:
 def evidence_gate(objects: list[dict[str, Any]]) -> tuple[bool, str]:
     errors = []
     for obj in objects:
-        path = ROOT / "legacy" / obj["path"]
+        if obj["path"].startswith("artifacts/generated/"):
+            if obj.get("provenance") != "generated":
+                errors.append(f"generated citation missing provenance {obj['path']}")
+                continue
+            path = ROOT / obj["path"]
+        else:
+            path = ROOT / "legacy" / obj["path"]
         if not path.is_file():
             errors.append(f"missing {obj['path']}")
             continue
