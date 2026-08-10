@@ -1,21 +1,249 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/cobol/parity-report.schema.json",
+  "$id": "https://tedfoley-cog.github.io/cobol-batch-modernization-demo/schemas/parity-report.json",
   "title": "Three-leg parity report",
   "description": "Normalized comparison of semantic expectation, legacy output, and target output.",
-  "type": "object", "required": ["subject", "legs", "normalization_rules_applied", "comparisons", "control_totals", "record_counts", "verdict", "run_metadata", "fr_ids"],
+  "type": "object",
+  "required": [
+    "subject",
+    "legs",
+    "normalization_rules_applied",
+    "comparisons",
+    "control_totals",
+    "record_counts",
+    "verdict",
+    "run_metadata",
+    "fr_ids"
+  ],
   "properties": {
-    "subject": {"type": "object", "required": ["program", "stream"], "properties": {"program": {"type": "string", "description": "Program under comparison."}, "stream": {"type": "string", "description": "Stream under comparison."}}, "additionalProperties": false},
-    "legs": {"type": "object", "required": ["expected_semantic", "legacy_execution", "target_execution"], "properties": {
-      "expected_semantic": {"$ref": "#/$defs/leg"}, "legacy_execution": {"allOf": [{"$ref": "#/$defs/leg"}, {"type": "object", "required": ["provenance"], "properties": {"provenance": {"type": "object", "required": ["kind", "source"], "properties": {"kind": {"type": "string", "enum": ["captured_run", "supplied", "live_zos"]}, "source": {"type": "string"}}, "additionalProperties": false}}}]}, "target_execution": {"$ref": "#/$defs/leg"}
-    }, "additionalProperties": false},
-    "normalization_rules_applied": {"type": "array", "items": {"type": "string"}},
-    "comparisons": {"type": "array", "items": {"type": "object", "required": ["field", "values", "verdict", "tolerance"], "properties": {"field": {"type": "string"}, "values": {"type": "object", "required": ["expected_semantic", "legacy_execution", "target_execution"], "properties": {"expected_semantic": {}, "legacy_execution": {}, "target_execution": {}}, "additionalProperties": false}, "verdict": {"type": "string", "enum": ["pass", "fail", "not_applicable"]}, "tolerance": {"type": "string"}}, "additionalProperties": false}},
-    "control_totals": {"type": "object", "required": ["expected", "legacy", "target"], "properties": {"expected": {"type": "string"}, "legacy": {"type": "string"}, "target": {"type": "string"}}, "additionalProperties": false},
-    "record_counts": {"type": "object", "required": ["expected", "legacy", "target"], "properties": {"expected": {"type": "integer"}, "legacy": {"type": "integer"}, "target": {"type": "integer"}}, "additionalProperties": false},
-    "verdict": {"type": "string", "enum": ["pass", "fail", "not_applicable"]},
-    "run_metadata": {"type": "object", "required": ["run_id", "timestamp", "environment"], "properties": {"run_id": {"type": "string"}, "timestamp": {"type": "string"}, "environment": {"type": "string"}}, "additionalProperties": false},
-    "fr_ids": {"type": "array", "items": {"type": "string"}, "minItems": 1}
+    "subject": {
+      "type": "object",
+      "required": [
+        "program",
+        "stream"
+      ],
+      "properties": {
+        "program": {
+          "type": "string",
+          "description": "Program under comparison."
+        },
+        "stream": {
+          "type": "string",
+          "description": "Stream under comparison."
+        }
+      },
+      "additionalProperties": false
+    },
+    "legs": {
+      "type": "object",
+      "required": [
+        "expected_semantic",
+        "legacy_execution",
+        "target_execution"
+      ],
+      "properties": {
+        "expected_semantic": {
+          "$ref": "#/$defs/leg"
+        },
+        "legacy_execution": {
+          "allOf": [
+            {
+              "$ref": "#/$defs/leg"
+            },
+            {
+              "type": "object",
+              "required": [
+                "provenance"
+              ],
+              "properties": {
+                "provenance": {
+                  "type": "object",
+                  "required": [
+                    "kind",
+                    "source"
+                  ],
+                  "properties": {
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "captured_run",
+                        "supplied",
+                        "live_zos"
+                      ]
+                    },
+                    "source": {
+                      "type": "string"
+                    }
+                  },
+                  "additionalProperties": false
+                }
+              }
+            }
+          ]
+        },
+        "target_execution": {
+          "$ref": "#/$defs/leg"
+        }
+      },
+      "additionalProperties": false
+    },
+    "normalization_rules_applied": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "comparisons": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "field",
+          "values",
+          "verdict",
+          "tolerance"
+        ],
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "values": {
+            "type": "object",
+            "required": [
+              "expected_semantic",
+              "legacy_execution",
+              "target_execution"
+            ],
+            "properties": {
+              "expected_semantic": {},
+              "legacy_execution": {},
+              "target_execution": {}
+            },
+            "additionalProperties": false
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "pass",
+              "fail",
+              "not_applicable"
+            ]
+          },
+          "tolerance": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "control_totals": {
+      "type": "object",
+      "required": [
+        "expected",
+        "legacy",
+        "target"
+      ],
+      "properties": {
+        "expected": {
+          "type": "string"
+        },
+        "legacy": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "record_counts": {
+      "type": "object",
+      "required": [
+        "expected",
+        "legacy",
+        "target"
+      ],
+      "properties": {
+        "expected": {
+          "type": "integer"
+        },
+        "legacy": {
+          "type": "integer"
+        },
+        "target": {
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "pass",
+        "fail",
+        "not_applicable"
+      ]
+    },
+    "run_metadata": {
+      "type": "object",
+      "required": [
+        "run_id",
+        "timestamp",
+        "environment"
+      ],
+      "properties": {
+        "run_id": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "fr_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    }
   },
-  "$defs": {"leg": {"type": "object", "required": ["records", "provenance"], "properties": {"records": {"type": "array", "items": {"type": "object"}}, "provenance": {"type": "object", "required": ["kind", "source"], "properties": {"kind": {"type": "string"}, "source": {"type": "string"}}, "additionalProperties": false}}, "additionalProperties": false}}
+  "$defs": {
+    "leg": {
+      "type": "object",
+      "required": [
+        "records",
+        "provenance"
+      ],
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "provenance": {
+          "type": "object",
+          "required": [
+            "kind",
+            "source"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string"
+            },
+            "source": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  }
 }

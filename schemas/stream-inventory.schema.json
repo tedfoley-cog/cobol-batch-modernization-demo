@@ -1,105 +1,459 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/cobol/stream-inventory.schema.json",
+  "$id": "https://tedfoley-cog.github.io/cobol-batch-modernization-demo/schemas/stream-inventory.json",
   "title": "Batch stream inventory",
   "description": "Auditable inventory of JCL chains, programs, datasets, and Db2 access.",
   "type": "object",
-  "required": ["domain", "modules", "job_dependencies", "evidence", "meta"],
+  "required": [
+    "domain",
+    "modules",
+    "job_dependencies",
+    "evidence",
+    "meta"
+  ],
   "properties": {
-    "domain": {"type": "string", "description": "Business domain.", "examples": ["trade settlement"]},
-    "modules": {"type": "array", "items": {"$ref": "#/$defs/module"}, "minItems": 1},
-    "job_dependencies": {"type": "array", "items": {"$ref": "#/$defs/dependency"}},
-    "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}, "minItems": 1},
-    "meta": {"$ref": "#/$defs/meta"}
+    "domain": {
+      "type": "string",
+      "description": "Business domain.",
+      "examples": [
+        "trade settlement"
+      ]
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/module"
+      },
+      "minItems": 1
+    },
+    "job_dependencies": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dependency"
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/evidence"
+      },
+      "minItems": 1
+    },
+    "meta": {
+      "$ref": "#/$defs/meta"
+    }
   },
   "$defs": {
     "evidence": {
-      "type": "object", "description": "Line-level proof for an inventory claim.",
-      "required": ["path", "line_start", "line_end", "snippet_sha256"],
+      "type": "object",
+      "description": "Line-level proof for an inventory claim.",
+      "required": [
+        "path",
+        "line_start",
+        "line_end",
+        "snippet_sha256"
+      ],
       "properties": {
-        "path": {"type": "string", "description": "Path relative to legacy/.", "examples": ["cobol/TRDPB001"]},
-        "member": {"type": "string", "description": "PDS member name.", "examples": ["TRDPB001"]},
-        "line_start": {"type": "integer", "minimum": 1, "description": "First physical line."},
-        "line_end": {"type": "integer", "minimum": 1, "description": "Last physical line."},
-        "paragraph": {"type": "string", "description": "COBOL paragraph, if applicable."},
-        "snippet_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$", "description": "SHA-256 of exact line span."}
+        "path": {
+          "type": "string",
+          "description": "Path relative to legacy/.",
+          "examples": [
+            "cobol/TRDPB001"
+          ]
+        },
+        "member": {
+          "type": "string",
+          "description": "PDS member name.",
+          "examples": [
+            "TRDPB001"
+          ]
+        },
+        "line_start": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "First physical line."
+        },
+        "line_end": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Last physical line."
+        },
+        "paragraph": {
+          "type": "string",
+          "description": "COBOL paragraph, if applicable."
+        },
+        "snippet_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$",
+          "description": "SHA-256 of exact line span."
+        }
       },
       "additionalProperties": false
     },
     "module": {
-      "type": "object", "required": ["name", "streams", "evidence"],
+      "type": "object",
+      "required": [
+        "name",
+        "streams",
+        "evidence"
+      ],
       "properties": {
-        "name": {"type": "string", "description": "Logical module.", "examples": ["settlement"]},
-        "streams": {"type": "array", "items": {"$ref": "#/$defs/stream"}, "minItems": 1},
-        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}, "minItems": 1}
-      }, "additionalProperties": false
+        "name": {
+          "type": "string",
+          "description": "Logical module.",
+          "examples": [
+            "settlement"
+          ]
+        },
+        "streams": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stream"
+          },
+          "minItems": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
     },
     "stream": {
-      "type": "object", "required": ["id", "description", "jobs", "evidence"],
+      "type": "object",
+      "required": [
+        "id",
+        "description",
+        "jobs",
+        "evidence",
+        "programs"
+      ],
       "properties": {
-        "id": {"type": "string", "description": "Stable stream id.", "examples": ["SETLUSD"]},
-        "description": {"type": "string", "description": "What the stream accomplishes."},
-        "jobs": {"type": "array", "items": {"$ref": "#/$defs/job"}, "minItems": 1},
-        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}, "minItems": 1}
-      }, "additionalProperties": false
+        "id": {
+          "type": "string",
+          "description": "Stable stream id.",
+          "examples": [
+            "SETLUSD"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "What the stream accomplishes."
+        },
+        "jobs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/job"
+          },
+          "minItems": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        },
+        "programs": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": [
+              "name",
+              "entry_parm_layout",
+              "called_programs",
+              "paragraphs_of_interest",
+              "evidence"
+            ],
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "entry_parm_layout": {
+                "type": "string"
+              },
+              "called_programs": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "paragraphs_of_interest": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "evidence": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/evidence"
+                },
+                "minItems": 1
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
     },
     "job": {
-      "type": "object", "required": ["name", "jcl_path", "cond", "class", "steps", "evidence"],
+      "type": "object",
+      "required": [
+        "name",
+        "jcl_path",
+        "cond",
+        "class",
+        "steps",
+        "evidence"
+      ],
       "properties": {
-        "name": {"type": "string", "description": "JCL job name.", "examples": ["SETLUSD"]},
-        "jcl_path": {"type": "string", "description": "Path under legacy/."},
-        "cond": {"type": "string", "description": "Job-level COND expression.", "examples": ["(8,LT)"]},
-        "class": {"type": "string", "description": "Execution class.", "examples": ["D"]},
-        "steps": {"type": "array", "items": {"$ref": "#/$defs/step"}, "minItems": 1},
-        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}, "minItems": 1}
-      }, "additionalProperties": false
+        "name": {
+          "type": "string",
+          "description": "JCL job name.",
+          "examples": [
+            "SETLUSD"
+          ]
+        },
+        "jcl_path": {
+          "type": "string",
+          "description": "Path under legacy/."
+        },
+        "cond": {
+          "type": "string",
+          "description": "Job-level COND expression.",
+          "examples": [
+            "(8,LT)"
+          ]
+        },
+        "class": {
+          "type": "string",
+          "description": "Execution class.",
+          "examples": [
+            "D"
+          ]
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/step"
+          },
+          "minItems": 1
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
     },
     "step": {
-      "type": "object", "required": ["name", "exec", "dd_datasets", "evidence"],
+      "type": "object",
+      "required": [
+        "name",
+        "exec",
+        "dd_datasets",
+        "evidence"
+      ],
       "properties": {
-        "name": {"type": "string", "description": "JCL step name.", "examples": ["STEP01"]},
-        "exec": {"type": "object", "required": ["kind", "name"], "properties": {
-          "kind": {"type": "string", "enum": ["PGM", "PROC", "UTILITY"], "description": "Execution form."},
-          "name": {"type": "string", "description": "Program, procedure, or utility name."},
-          "db2_plan": {"type": "string", "description": "Db2 plan invoked by IKJEFT01."},
-          "parm": {"type": "string", "description": "Resolved run parameter."},
-          "control_card_member": {"type": "string", "description": "CARD PDS member."}
-        }, "additionalProperties": false},
-        "dd_datasets": {"type": "array", "items": {"$ref": "#/$defs/dd"}},
-        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}, "minItems": 1}
-      }, "additionalProperties": false
+        "name": {
+          "type": "string",
+          "description": "JCL step name.",
+          "examples": [
+            "STEP01"
+          ]
+        },
+        "exec": {
+          "type": "object",
+          "required": [
+            "kind",
+            "name"
+          ],
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "PGM",
+                "PROC",
+                "UTILITY"
+              ],
+              "description": "Execution form."
+            },
+            "name": {
+              "type": "string",
+              "description": "Program, procedure, or utility name."
+            },
+            "db2_plan": {
+              "type": "string",
+              "description": "Db2 plan invoked by IKJEFT01."
+            },
+            "parm": {
+              "type": "string",
+              "description": "Resolved run parameter."
+            },
+            "control_card_member": {
+              "type": "string",
+              "description": "CARD PDS member."
+            }
+          },
+          "additionalProperties": false
+        },
+        "dd_datasets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/dd"
+          }
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
     },
     "dd": {
-      "type": "object", "required": ["ddname", "dsn", "disp", "type"],
+      "type": "object",
+      "required": [
+        "ddname",
+        "dsn",
+        "disp",
+        "type"
+      ],
       "properties": {
-        "ddname": {"type": "string", "description": "DD name.", "examples": ["SYSTSIN"]},
-        "dsn": {"type": "string", "description": "Dataset name or SYSOUT marker."},
-        "disp": {"type": "string", "description": "Disposition, e.g. SHR."},
-        "dcb": {"type": "string", "description": "DCB metadata member, if any."},
-        "type": {"type": "string", "enum": ["QSAM", "VSAM", "GDG", "SYSOUT"], "description": "Dataset organization."}
-      }, "additionalProperties": false
+        "ddname": {
+          "type": "string",
+          "description": "DD name.",
+          "examples": [
+            "SYSTSIN"
+          ]
+        },
+        "dsn": {
+          "type": "string",
+          "description": "Dataset name or SYSOUT marker."
+        },
+        "disp": {
+          "type": "string",
+          "description": "Disposition, e.g. SHR."
+        },
+        "dcb": {
+          "type": "string",
+          "description": "DCB metadata member, if any."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "QSAM",
+            "VSAM",
+            "GDG",
+            "SYSOUT"
+          ],
+          "description": "Dataset organization."
+        }
+      },
+      "additionalProperties": false
     },
     "dependency": {
-      "type": "object", "required": ["predecessor", "successor", "reason", "evidence"],
+      "type": "object",
+      "required": [
+        "predecessor",
+        "successor",
+        "reason",
+        "evidence"
+      ],
       "properties": {
-        "predecessor": {"type": "string", "description": "Upstream job.", "examples": ["ACCPUSD"]},
-        "successor": {"type": "string", "description": "Downstream job.", "examples": ["SETLUSD"]},
-        "reason": {"type": "string", "description": "Why order matters."},
-        "evidence": {"type": "array", "items": {"$ref": "#/$defs/evidence"}, "minItems": 1}
-      }, "additionalProperties": false
+        "predecessor": {
+          "type": "string",
+          "description": "Upstream job.",
+          "examples": [
+            "ACCPUSD"
+          ]
+        },
+        "successor": {
+          "type": "string",
+          "description": "Downstream job.",
+          "examples": [
+            "SETLUSD"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "description": "Why order matters."
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evidence"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
     },
     "meta": {
-      "type": "object", "required": ["schema_version", "profile", "estate_pin", "generator", "coverage"],
+      "type": "object",
+      "required": [
+        "schema_version",
+        "profile",
+        "estate_pin",
+        "generator",
+        "coverage"
+      ],
       "properties": {
-        "schema_version": {"type": "string", "description": "Schema release.", "examples": ["2020-12"]},
-        "profile": {"type": "string", "description": "Profile name.", "examples": ["oem-batch"]},
-        "estate_pin": {"type": "string", "description": "Upstream commit."},
-        "generator": {"type": "string", "description": "Producing tool or agent."},
-        "coverage": {"type": "object", "required": ["programs_cited", "paragraphs_cited"], "properties": {
-          "programs_cited": {"type": "number", "minimum": 0, "maximum": 100},
-          "paragraphs_cited": {"type": "number", "minimum": 0, "maximum": 100}
-        }, "additionalProperties": false}
-      }, "additionalProperties": false
+        "schema_version": {
+          "type": "string",
+          "description": "Schema release.",
+          "examples": [
+            "2020-12"
+          ]
+        },
+        "profile": {
+          "type": "string",
+          "description": "Profile name.",
+          "examples": [
+            "oem-batch"
+          ]
+        },
+        "estate_pin": {
+          "type": "string",
+          "description": "Upstream commit."
+        },
+        "generator": {
+          "type": "string",
+          "description": "Producing tool or agent."
+        },
+        "coverage": {
+          "type": "object",
+          "required": [
+            "programs_cited",
+            "paragraphs_cited"
+          ],
+          "properties": {
+            "programs_cited": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            },
+            "paragraphs_cited": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 100
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   }
 }

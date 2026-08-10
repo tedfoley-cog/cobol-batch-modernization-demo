@@ -7,15 +7,14 @@
         {
           "path": "cobol/TRDPB001",
           "line_start": 1,
-          "line_end": 12,
-          "snippet_sha256": "c4d375eefc4af365566f6684adf1dac747b8d3a67075192430cf0da6faaad010",
-          "paragraph": "IDENTIFICATION DIVISION"
+          "line_end": 2,
+          "snippet_sha256": "db1fb576e2432c3d598fb4ec673b6109e60c497799155c2ded8a49b511462015"
         }
       ],
       "streams": [
         {
           "id": "SETLUSD",
-          "description": "USD settlement stream processes the settlement queue and books securities and money.",
+          "description": "USD settlement reads the ordered settlement queue and books securities and money.",
           "evidence": [
             {
               "path": "jcl/SETLUSD.jcl",
@@ -28,6 +27,336 @@
               "line_start": 1,
               "line_end": 5,
               "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 2,
+              "line_end": 2,
+              "snippet_sha256": "7c630db4111899e24d73f8c6244b3fb79869d848234ca05013639a3dd8b9551d"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 39,
+              "line_end": 39,
+              "snippet_sha256": "7b1d70006a13c42e12430b897b8045febc055ab32801bc2e353eb3156153f71e"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 43,
+              "line_end": 43,
+              "snippet_sha256": "90b74a39fd76fe166d3ff9dec7637e49c106a7c669b4414741354d12d49d3862"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 128,
+              "line_end": 128,
+              "snippet_sha256": "ea4a2c2fc07a0a59004aa600fc75ce16eb59e5c5fcc6ede3bac59cf82d1f3fc3"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 304,
+              "line_end": 304,
+              "snippet_sha256": "6b7627ee216238549d8e0bdfd8b6a3281ab8f3573a711bb4749f7f6ad52f9910"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 309,
+              "line_end": 309,
+              "snippet_sha256": "5dfd733c7a58c4fe7a73a328d69e794d3eaacd06dabb5b0eb867693f6ce4ba2a"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 332,
+              "line_end": 332,
+              "snippet_sha256": "698f9116681e79bd9c8bfe5193029bec2eef54d94991c2b609d9f8434a342a15"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 334,
+              "line_end": 334,
+              "snippet_sha256": "483926be93f9d5dda6de40aa8c98381d7178ccbf7d45750e71850028fbddd7b1"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 364,
+              "line_end": 364,
+              "snippet_sha256": "67767758ff471052596154b7f0fa8729de1b408f3218805f1b2b769cebcf21a7"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 368,
+              "line_end": 368,
+              "snippet_sha256": "e80bc81f9cdf2bd64b3d50a25a7c7e4355df83778e9488ae4a7e0362e9f7b778"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 370,
+              "line_end": 370,
+              "snippet_sha256": "256e7e8c2a1088eeaf7af9db098627438d5070441dcfd8bf3f5708f092ff45a3"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 392,
+              "line_end": 392,
+              "snippet_sha256": "cb51e67883f1d007b63e4f1ae733cbbbb37ad284226a918ac9d756851ca22023"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 396,
+              "line_end": 396,
+              "snippet_sha256": "3459563736e53ae3d8dedfc7566f04274b2c50437ba3c8f3c0e9c16b903f8a69"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 398,
+              "line_end": 398,
+              "snippet_sha256": "4e1e984c5416665bba66a617abf9da5ae89897b2ef8c1284b3486e88d9725fa6"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 420,
+              "line_end": 420,
+              "snippet_sha256": "a05cb71d682f9b791f5a4c7b81507d2a8ed31d583565e7554fc3ebda7d357387"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 424,
+              "line_end": 424,
+              "snippet_sha256": "b9a688a71e8bf87748ef1a3c5055dec90db1bf05120cec854c1df7108d6aa7b7"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 426,
+              "line_end": 426,
+              "snippet_sha256": "1da6be61cc50487756938528c6dc9c4f2c08a27f83581857d201553c313b7782"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 480,
+              "line_end": 480,
+              "snippet_sha256": "f37e5d8b2bbd28e77e24bea16aa80665a66b4ac5a25626c100c9e8641f24a13f"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 482,
+              "line_end": 482,
+              "snippet_sha256": "af0f31a781b9c5a255442bcb7ac0bf38c46710bb787757f8812797f7448b67e2"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 538,
+              "line_end": 538,
+              "snippet_sha256": "52e7f65cecebed5ce6c4c1f596394124fec6a9ef8a26eaf7cc891f371128f941"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 543,
+              "line_end": 543,
+              "snippet_sha256": "72f23962fd9b5787a538c93102bda3e8f2359005150daccac8090655b76b6cc3"
+            },
+            {
+              "path": "cobol/TRDPB001",
+              "line_start": 547,
+              "line_end": 547,
+              "snippet_sha256": "b40b9a7b1fd6744e8d6a0616fe1644ac376208ffb8e57778ddb605c155ad3092"
+            },
+            {
+              "path": "cobol/TRDPB002",
+              "line_start": 2,
+              "line_end": 2,
+              "snippet_sha256": "b987d23c3dfed8fcea24bfc1d33bb34f3b4e23c4e85b24a8b453aee297187ecf"
+            },
+            {
+              "path": "cobol/TRDPB002",
+              "line_start": 52,
+              "line_end": 52,
+              "snippet_sha256": "dca0d86ea4ead2f886e1c68fe400fa36c13113254255311b9ead487e841d6feb"
+            },
+            {
+              "path": "cobol/TRDPB002",
+              "line_start": 72,
+              "line_end": 72,
+              "snippet_sha256": "d1eb451e570cae2f80b11dc27717fd37aaadfb1028a314d243649c03ca90793e"
+            },
+            {
+              "path": "cobol/TRDPB002",
+              "line_start": 170,
+              "line_end": 170,
+              "snippet_sha256": "ce61434f1149d471d87d1372a3782af0f4cefc8fbe7b9489ff6de7367e257c1a"
+            },
+            {
+              "path": "cobol/TRDPB002",
+              "line_start": 176,
+              "line_end": 176,
+              "snippet_sha256": "3af97461b56379320e45921eb4de2f49267633eb4239950b31ae4ab098d810de"
+            },
+            {
+              "path": "cobol/TRDPB003",
+              "line_start": 2,
+              "line_end": 2,
+              "snippet_sha256": "2a8b31245096fbce5f3c686f022bbfe2cb86c9aa1479dfe20fcc45972259b691"
+            },
+            {
+              "path": "cobol/TRDPB003",
+              "line_start": 51,
+              "line_end": 51,
+              "snippet_sha256": "ea5703a5f35166ecb0fae18c0e36bd60ae9a095e9e2bce2d30579bcb6aa9ac6e"
+            },
+            {
+              "path": "cobol/TRDPB003",
+              "line_start": 71,
+              "line_end": 71,
+              "snippet_sha256": "6ff4bbf52397cb22a2b315b32748497ae14c9d0cef4a8baca5f7c3ec40c3f517"
+            },
+            {
+              "path": "cobol/TRDPB003",
+              "line_start": 156,
+              "line_end": 156,
+              "snippet_sha256": "12ddde2efb907dfeb619dbd62fac19420614cc67facd223ea9c8ce5e8b0da30f"
+            },
+            {
+              "path": "cobol/TRDPB003",
+              "line_start": 160,
+              "line_end": 160,
+              "snippet_sha256": "54e829cdf40cbc39ae661aebea8efb8d2c29136c662ab847a79b54e106085965"
+            },
+            {
+              "path": "cobol/TRDPBEXC",
+              "line_start": 2,
+              "line_end": 2,
+              "snippet_sha256": "a16c3eae8af0872ade28c22b106733a26a15c28ed58c1ea8dd57ef8b6839c214"
+            },
+            {
+              "path": "cobol/TRDPBEXC",
+              "line_start": 29,
+              "line_end": 29,
+              "snippet_sha256": "dca0d86ea4ead2f886e1c68fe400fa36c13113254255311b9ead487e841d6feb"
+            },
+            {
+              "path": "cobol/TRDPBEXC",
+              "line_start": 96,
+              "line_end": 96,
+              "snippet_sha256": "edd7be281a652c2f4d074e6a784b7f059e698e8cbb0997055c2b4bd6ad9f0e67"
+            },
+            {
+              "path": "cobol/TRDPBEXC",
+              "line_start": 105,
+              "line_end": 105,
+              "snippet_sha256": "e8e6f3e0087947ae89eefbbd79c3f61ebc669c683c75d6b56f503ab5d6ca03d5"
+            }
+          ],
+          "programs": [
+            {
+              "name": "TRDPB001",
+              "entry_parm_layout": "LK-PARM: currency plus checkpoint frequency",
+              "called_programs": [
+                "TRDPB002",
+                "TRDPB003",
+                "TRDPBEXC"
+              ],
+              "paragraphs_of_interest": [
+                "0000-MAINLINE",
+                "1000-TRADE-SETTLEMENT",
+                "2000-ACCOUNTING",
+                "2001-SAC-BOOKING",
+                "2002-MAC-BOOKING",
+                "5000-READ-FROM-STLMT-QUEUE",
+                "8000-UPDATE-ORDER"
+              ],
+              "evidence": [
+                {
+                  "path": "cobol/TRDPB001",
+                  "line_start": 1,
+                  "line_end": 2,
+                  "snippet_sha256": "db1fb576e2432c3d598fb4ec673b6109e60c497799155c2ded8a49b511462015"
+                },
+                {
+                  "path": "cobol/TRDPB001",
+                  "line_start": 334,
+                  "line_end": 366,
+                  "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+                  "paragraph": "2000-ACCOUNTING"
+                },
+                {
+                  "path": "cobol/TRDPB001",
+                  "line_start": 426,
+                  "line_end": 478,
+                  "snippet_sha256": "8ae3aa3bcbaf14f048b84492abdc9c0a07ed7d30db32d9b020c1300d264146cf",
+                  "paragraph": "5000-READ-FROM-STLMT-QUEUE"
+                },
+                {
+                  "path": "cobol/TRDPB001",
+                  "line_start": 482,
+                  "line_end": 536,
+                  "snippet_sha256": "bc62132011394a0c50ddadd1f8f2a704e2e1d0e4d99c332e265d09096047d1f9",
+                  "paragraph": "8000-UPDATE-ORDER"
+                }
+              ]
+            },
+            {
+              "name": "TRDPB002",
+              "entry_parm_layout": "trade order linkage record",
+              "called_programs": [
+                "TRDPBEXC"
+              ],
+              "paragraphs_of_interest": [
+                "0000-MAINLINE"
+              ],
+              "evidence": [
+                {
+                  "path": "cobol/TRDPB002",
+                  "line_start": 1,
+                  "line_end": 2,
+                  "snippet_sha256": "1f641bdd7357c7d16e1e62b110ef86dc6dee9c18eb03bb48e49969797873b6b0"
+                },
+                {
+                  "path": "cobol/TRDPB002",
+                  "line_start": 110,
+                  "line_end": 137,
+                  "snippet_sha256": "be25856469f551c0035e04a961637436227e1c199638cd05540915d8a2a30c69"
+                }
+              ]
+            },
+            {
+              "name": "TRDPB003",
+              "entry_parm_layout": "trade order linkage record",
+              "called_programs": [
+                "TRDPBEXC"
+              ],
+              "paragraphs_of_interest": [
+                "0000-MAINLINE"
+              ],
+              "evidence": [
+                {
+                  "path": "cobol/TRDPB003",
+                  "line_start": 1,
+                  "line_end": 2,
+                  "snippet_sha256": "8d5d2b9c87d8eb2e257ebeea7a96457503ed4e1c9468621c9887ab65b27d8cf1"
+                },
+                {
+                  "path": "cobol/TRDPB003",
+                  "line_start": 101,
+                  "line_end": 125,
+                  "snippet_sha256": "86ca60e8abb9fd793f231c2857b79678bb4617be3ae7a6f52dd347a0fc7a5cff"
+                }
+              ]
+            },
+            {
+              "name": "TRDPBEXC",
+              "entry_parm_layout": "EXCEPTION-RECORD-LEN and EXCEPTION-RECORD",
+              "called_programs": [],
+              "paragraphs_of_interest": [
+                "0000-MAINLINE"
+              ],
+              "evidence": [
+                {
+                  "path": "cobol/TRDPBEXC",
+                  "line_start": 29,
+                  "line_end": 78,
+                  "snippet_sha256": "0bba8c7b560b6c7df032920d9a5514678569f6ad05c9ada80839537e7a6eb6c1",
+                  "paragraph": "0000-MAINLINE"
+                }
+              ]
             }
           ],
           "jobs": [
@@ -144,16 +473,40 @@
     {
       "path": "cobol/TRDPB001",
       "line_start": 1,
-      "line_end": 12,
-      "snippet_sha256": "c4d375eefc4af365566f6684adf1dac747b8d3a67075192430cf0da6faaad010",
-      "paragraph": "IDENTIFICATION DIVISION"
+      "line_end": 2,
+      "snippet_sha256": "db1fb576e2432c3d598fb4ec673b6109e60c497799155c2ded8a49b511462015"
     },
     {
       "path": "cobol/TRDPB001",
-      "line_start": 95,
-      "line_end": 115,
-      "snippet_sha256": "f153a8131ac5a4cc213e3d5a624ad2e61d9d6d908e4560d8b1a053f26d419155",
-      "paragraph": "1000-OPEN-SETTLEMENT-CURSOR"
+      "line_start": 106,
+      "line_end": 112,
+      "snippet_sha256": "4449465796ebb5673371b93e7f8255df38b4b4404ed7e985d7f119a999978fcc"
+    },
+    {
+      "path": "cobol/TRDPB001",
+      "line_start": 334,
+      "line_end": 366,
+      "snippet_sha256": "0df488a0de25bbc1fe47aade207669adee7ce0d51dfb668391379e958cad887b",
+      "paragraph": "2000-ACCOUNTING"
+    },
+    {
+      "path": "cobol/TRDPB001",
+      "line_start": 426,
+      "line_end": 478,
+      "snippet_sha256": "8ae3aa3bcbaf14f048b84492abdc9c0a07ed7d30db32d9b020c1300d264146cf",
+      "paragraph": "5000-READ-FROM-STLMT-QUEUE"
+    },
+    {
+      "path": "db2/mainframe-db2-setup/ddl/TBTRDSTQ",
+      "line_start": 18,
+      "line_end": 44,
+      "snippet_sha256": "59eabe1ed4159afaa9266ab4fff26ba0b66b584f6c9b6bbbf3b9f115e4e6a748"
+    },
+    {
+      "path": "db2/mainframe-db2-setup/ldcntl/TBTRDORD",
+      "line_start": 4,
+      "line_end": 21,
+      "snippet_sha256": "effc1a0ce35f3b85411b45831d0fb62afc69533507e42bff7e53d55bca5fa176"
     }
   ],
   "meta": {
@@ -163,7 +516,7 @@
     "generator": "hand-derived settlement reference",
     "coverage": {
       "programs_cited": 100,
-      "paragraphs_cited": 85
+      "paragraphs_cited": 81.81818181818181
     }
   }
 }

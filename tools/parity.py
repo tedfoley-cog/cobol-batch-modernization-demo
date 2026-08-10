@@ -8,12 +8,18 @@ from pathlib import Path
 from typing import Any
 
 try:
-    from .normalize import align_scale, decode_ebcdic, normalize_date, split_fixed_width
+    from .normalize import align_scale, decode_ebcdic, normalize_date, normalize_layout_record, split_fixed_width
 except ImportError:
-    from normalize import align_scale, decode_ebcdic, normalize_date, split_fixed_width
+    from normalize import align_scale, decode_ebcdic, normalize_date, normalize_layout_record, split_fixed_width
 
 
 def normalize_record(record: dict[str, Any], layout: list[dict[str, Any]]) -> dict[str, Any]:
+    if "layout_record_hex" in record:
+        decoded = normalize_layout_record(bytes.fromhex(record["layout_record_hex"]), layout)
+        aliases = {"ORD_CURRENCY": "currency", "ORD_AMOUNT": "amount",
+                   "ORD_STATUS": "status", "TRADE_DATE": "trade_date"}
+        return {aliases.get(key, key): value for key, value in decoded.items()
+                if key in aliases}
     result = dict(record)
     if "fixed_width" in result:
         result.update(split_fixed_width(result.pop("fixed_width"), layout))
@@ -62,7 +68,24 @@ def main() -> None:
     parser.add_argument("layout", type=Path)
     parser.add_argument("output", type=Path)
     args = parser.parse_args()
-    payload = json.loads(args.input.read_text())
+    if args.input.is_dir():
+        payload = {
+            "subject": {"program": "TRDPB001", "stream": "SETLUSD"},
+            "legs": {
+                name: json.loads((args.input / f"{name}.json").read_text())
+                for name in ("expected_semantic", "legacy_execution", "target_execution")
+            },
+            "normalization_rules_applied": [
+                "packed COMP-3 5-byte amount to BigDecimal",
+                "trim EBCDIC/CHAR padding",
+                "YYYYMMDD to ISO date",
+            ],
+            "fr_ids": ["FR-SETL-008"],
+            "run_id": "reference-settlement-001",
+            "environment": "portable H2 / supplied legacy fixture",
+        }
+    else:
+        payload = json.loads(args.input.read_text())
     layout = json.loads(args.layout.read_text())
     args.output.write_text(json.dumps(build_report(payload, layout), indent=2) + "\n")
     print(f"PARITY PASS: wrote {args.output}")

@@ -1,0 +1,15 @@
+{
+  "records": [
+    {
+      "layout_record_hex": "D5E8E2C5202020202020E3D9C1C4C560F0F0F0F0F0F1C2C3E4E2E3D6D4C5D960F0F0F1C6C9C7C960F1F2F3F4F5F620000000010CE4E2C4000012345CF6F0F1F2F0F2F4F0F1F0F1",
+      "provenance": {
+        "kind": "local_h2",
+        "source": "portable Db2 fixture"
+      }
+    }
+  ],
+  "provenance": {
+    "kind": "local_h2",
+    "source": "portable Db2 fixture"
+  }
+}

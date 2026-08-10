@@ -15,6 +15,17 @@ def test_comp3_positive_and_negative():
     assert unpack_comp3(bytes.fromhex("12345d"), 5, 2) == Decimal("-123.45")
 
 
+def test_comp3_rejects_invalid_digits_and_sign():
+    import pytest
+
+    with pytest.raises(ValueError):
+        unpack_comp3(bytes.fromhex("12345c"), 6, 2)
+    with pytest.raises(ValueError):
+        unpack_comp3(bytes.fromhex("12345e"), 5, 2)
+    with pytest.raises(ValueError):
+        unpack_comp3(bytes.fromhex("12a45c"), 5, 2)
+
+
 def test_zoned_overpunch_and_ebcdic():
     assert decode_zoned("123{".encode("cp037")) == Decimal(1230)
     assert decode_zoned("123}".encode("cp037")) == Decimal(-1230)

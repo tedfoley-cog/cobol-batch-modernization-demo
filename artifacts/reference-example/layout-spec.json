@@ -1,5 +1,86 @@
 [
-  {"name": "currency", "start": 1, "end": 3, "encoding": "cp037", "source": "TBTRDSTQ.STQ_CURRENCY"},
-  {"name": "queue_id", "start": 4, "end": 12, "encoding": "cp037", "source": "TBTRDSTQ.STQ_ID"},
-  {"name": "status", "start": 13, "end": 15, "encoding": "cp037", "source": "TRDPB001.ORD_STATUS"}
+  {
+    "name": "ORD_TRADING_XCHNG",
+    "start": 1,
+    "end": 10,
+    "type": "char",
+    "encoding": "cp037",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_TRADEID",
+    "start": 11,
+    "end": 22,
+    "type": "char",
+    "encoding": "cp037",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_BUY_SELL_IND",
+    "start": 23,
+    "end": 23,
+    "type": "char",
+    "encoding": "cp037",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_CUSTOMER_ID",
+    "start": 24,
+    "end": 35,
+    "type": "char",
+    "encoding": "cp037",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_FIGI",
+    "start": 36,
+    "end": 47,
+    "type": "char",
+    "encoding": "cp037",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_QUANTITY",
+    "start": 48,
+    "end": 52,
+    "type": "packed",
+    "digits": 9,
+    "scale": 2,
+    "sign": "trailing_nibble",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_CURRENCY",
+    "start": 53,
+    "end": 55,
+    "type": "char",
+    "encoding": "cp037",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_AMOUNT",
+    "start": 56,
+    "end": 60,
+    "type": "packed",
+    "digits": 9,
+    "scale": 2,
+    "sign": "trailing_nibble",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "ORD_STATUS",
+    "start": 61,
+    "end": 63,
+    "type": "char",
+    "encoding": "cp037",
+    "source": "ldcntl/TBTRDORD"
+  },
+  {
+    "name": "TRADE_DATE",
+    "start": 64,
+    "end": 71,
+    "type": "date",
+    "format": "YYYYMMDD",
+    "source": "layout reconstruction; not defined in shipped l/d control"
+  }
 ]

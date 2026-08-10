@@ -1,0 +1,14 @@
+{
+  "records": [
+    {
+      "status": "601",
+      "currency": "USD",
+      "amount": "123.45",
+      "trade_date": "2024-01-01"
+    }
+  ],
+  "provenance": {
+    "kind": "semantic_model",
+    "source": "FR-SETL-008"
+  }
+}

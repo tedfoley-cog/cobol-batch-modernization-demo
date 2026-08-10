@@ -9,33 +9,36 @@
         {
           "status": "601",
           "currency": "USD",
-          "booking": "complete"
+          "amount": "123.45",
+          "trade_date": "2024-01-01"
         }
       ],
       "provenance": {
         "kind": "semantic_model",
-        "source": "FR-SETL-006"
+        "source": "FR-SETL-008"
       }
     },
     "legacy_execution": {
       "records": [
         {
-          "status": "601",
           "currency": "USD",
-          "booking": "complete"
+          "amount": "123.45",
+          "status": "601",
+          "trade_date": "2024-01-01"
         }
       ],
       "provenance": {
         "kind": "supplied",
-        "source": "artifacts/reference-example supplied settlement fixture"
+        "source": "One-line supplied fixture; no z/OS execution is shipped."
       }
     },
     "target_execution": {
       "records": [
         {
-          "status": "601",
           "currency": "USD",
-          "booking": "complete"
+          "amount": "123.45",
+          "status": "601",
+          "trade_date": "2024-01-01"
         }
       ],
       "provenance": {
@@ -45,17 +48,17 @@
     }
   },
   "normalization_rules_applied": [
-    "fixed-width record split from layout spec",
-    "decimal scale alignment HALF_UP",
-    "date format normalization"
+    "packed COMP-3 5-byte amount to BigDecimal",
+    "trim EBCDIC/CHAR padding",
+    "YYYYMMDD to ISO date"
   ],
   "comparisons": [
     {
-      "field": "status",
+      "field": "amount",
       "values": {
-        "expected_semantic": "601",
-        "legacy_execution": "601",
-        "target_execution": "601"
+        "expected_semantic": "123.45",
+        "legacy_execution": "123.45",
+        "target_execution": "123.45"
       },
       "verdict": "pass",
       "tolerance": "exact"
@@ -69,12 +72,32 @@
       },
       "verdict": "pass",
       "tolerance": "exact"
+    },
+    {
+      "field": "status",
+      "values": {
+        "expected_semantic": "601",
+        "legacy_execution": "601",
+        "target_execution": "601"
+      },
+      "verdict": "pass",
+      "tolerance": "exact"
+    },
+    {
+      "field": "trade_date",
+      "values": {
+        "expected_semantic": "2024-01-01",
+        "legacy_execution": "2024-01-01",
+        "target_execution": "2024-01-01"
+      },
+      "verdict": "pass",
+      "tolerance": "exact"
     }
   ],
   "control_totals": {
-    "expected": "1",
-    "legacy": "1",
-    "target": "1"
+    "expected": "n/a",
+    "legacy": "n/a",
+    "target": "n/a"
   },
   "record_counts": {
     "expected": 1,
@@ -84,10 +107,10 @@
   "verdict": "pass",
   "run_metadata": {
     "run_id": "reference-settlement-001",
-    "timestamp": "2025-01-01T00:00:00Z",
+    "timestamp": "2026-08-10T18:38:38.452362+00:00",
     "environment": "portable H2 / supplied legacy fixture"
   },
   "fr_ids": [
-    "FR-SETL-006"
+    "FR-SETL-008"
   ]
 }

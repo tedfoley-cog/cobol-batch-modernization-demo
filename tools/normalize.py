@@ -7,9 +7,16 @@ from typing import Any
 
 def unpack_comp3(data: bytes, digits: int, scale: int = 0) -> Decimal:
     """Decode packed decimal bytes (last nibble is C/F positive, D negative)."""
+    if digits < 1 or len(data) * 2 - 1 < digits:
+        raise ValueError("digits must fit in packed-decimal payload")
     nibbles = "".join(f"{byte:02x}" for byte in data)
     sign_nibble, body = nibbles[-1], nibbles[:-1]
+    if sign_nibble.lower() not in {"c", "d", "f"}:
+        raise ValueError(f"invalid packed-decimal sign nibble: {sign_nibble}")
+    if any(nibble not in "0123456789" for nibble in body):
+        raise ValueError("invalid packed-decimal digit nibble")
     sign = -1 if sign_nibble.lower() == "d" else 1
+    body = body[-digits:]
     value = int(body)
     return sign * Decimal(value).scaleb(-scale)
 
@@ -31,6 +38,26 @@ def split_fixed_width(record: str | bytes, layout: list[dict[str, Any]]) -> dict
     if isinstance(record, bytes):
         record = record.decode("cp037")
     return {field["name"]: record[field["start"] - 1: field["end"]] for field in layout}
+
+
+def normalize_layout_record(record: bytes | str, layout: list[dict[str, Any]]) -> dict[str, Any]:
+    """Decode a layout-spec record using each field's declared representation."""
+    raw = record if isinstance(record, bytes) else record.encode("cp037")
+    result: dict[str, Any] = {}
+    for field in layout:
+        value = raw[field["start"] - 1:field["end"]]
+        kind = field["type"]
+        if kind == "char":
+            result[field["name"]] = value.decode(field.get("encoding", "cp037")).rstrip()
+        elif kind == "packed":
+            result[field["name"]] = str(unpack_comp3(value, field["digits"], field.get("scale", 0)))
+        elif kind == "zoned":
+            result[field["name"]] = str(decode_zoned(value, field.get("scale", 0)))
+        elif kind == "date":
+            result[field["name"]] = normalize_date(value.decode(field.get("encoding", "cp037")).strip())
+        else:
+            raise ValueError(f"unsupported layout field type: {kind}")
+    return result
 
 
 def decode_ebcdic(data: bytes) -> str:
