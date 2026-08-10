@@ -1,0 +1,93 @@
+{
+  "subject": {
+    "program": "TRDPB001",
+    "stream": "SETLUSD"
+  },
+  "legs": {
+    "expected_semantic": {
+      "records": [
+        {
+          "status": "601",
+          "currency": "USD",
+          "booking": "complete"
+        }
+      ],
+      "provenance": {
+        "kind": "semantic_model",
+        "source": "FR-SETL-006"
+      }
+    },
+    "legacy_execution": {
+      "records": [
+        {
+          "status": "601",
+          "currency": "USD",
+          "booking": "complete"
+        }
+      ],
+      "provenance": {
+        "kind": "supplied",
+        "source": "artifacts/reference-example supplied settlement fixture"
+      }
+    },
+    "target_execution": {
+      "records": [
+        {
+          "status": "601",
+          "currency": "USD",
+          "booking": "complete"
+        }
+      ],
+      "provenance": {
+        "kind": "local_h2",
+        "source": "portable Db2 fixture"
+      }
+    }
+  },
+  "normalization_rules_applied": [
+    "fixed-width record split from layout spec",
+    "decimal scale alignment HALF_UP",
+    "date format normalization"
+  ],
+  "comparisons": [
+    {
+      "field": "status",
+      "values": {
+        "expected_semantic": "601",
+        "legacy_execution": "601",
+        "target_execution": "601"
+      },
+      "verdict": "pass",
+      "tolerance": "exact"
+    },
+    {
+      "field": "currency",
+      "values": {
+        "expected_semantic": "USD",
+        "legacy_execution": "USD",
+        "target_execution": "USD"
+      },
+      "verdict": "pass",
+      "tolerance": "exact"
+    }
+  ],
+  "control_totals": {
+    "expected": "1",
+    "legacy": "1",
+    "target": "1"
+  },
+  "record_counts": {
+    "expected": 1,
+    "legacy": 1,
+    "target": 1
+  },
+  "verdict": "pass",
+  "run_metadata": {
+    "run_id": "reference-settlement-001",
+    "timestamp": "2025-01-01T00:00:00Z",
+    "environment": "portable H2 / supplied legacy fixture"
+  },
+  "fr_ids": [
+    "FR-SETL-006"
+  ]
+}

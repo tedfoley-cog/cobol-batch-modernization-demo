@@ -1,0 +1,5 @@
+[
+  {"name": "currency", "start": 1, "end": 3, "encoding": "cp037", "source": "TBTRDSTQ.STQ_CURRENCY"},
+  {"name": "queue_id", "start": 4, "end": 12, "encoding": "cp037", "source": "TBTRDSTQ.STQ_ID"},
+  {"name": "status", "start": 13, "end": 15, "encoding": "cp037", "source": "TRDPB001.ORD_STATUS"}
+]

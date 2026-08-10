@@ -1,0 +1,169 @@
+{
+  "domain": "trade settlement",
+  "modules": [
+    {
+      "name": "settlement",
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 1,
+          "line_end": 12,
+          "snippet_sha256": "c4d375eefc4af365566f6684adf1dac747b8d3a67075192430cf0da6faaad010",
+          "paragraph": "IDENTIFICATION DIVISION"
+        }
+      ],
+      "streams": [
+        {
+          "id": "SETLUSD",
+          "description": "USD settlement stream processes the settlement queue and books securities and money.",
+          "evidence": [
+            {
+              "path": "jcl/SETLUSD.jcl",
+              "line_start": 1,
+              "line_end": 9,
+              "snippet_sha256": "f79928ead8bc2f9f72eddbb604c0236fa775ebb5b4c1d280ef7514e3e0f10bc8"
+            },
+            {
+              "path": "controlcard/SETLUSD",
+              "line_start": 1,
+              "line_end": 5,
+              "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+            }
+          ],
+          "jobs": [
+            {
+              "name": "SETLUSD",
+              "jcl_path": "jcl/SETLUSD.jcl",
+              "cond": "(8,LT)",
+              "class": "D",
+              "evidence": [
+                {
+                  "path": "jcl/SETLUSD.jcl",
+                  "line_start": 1,
+                  "line_end": 9,
+                  "snippet_sha256": "f79928ead8bc2f9f72eddbb604c0236fa775ebb5b4c1d280ef7514e3e0f10bc8"
+                }
+              ],
+              "steps": [
+                {
+                  "name": "SETLUSD",
+                  "exec": {
+                    "kind": "PROC",
+                    "name": "TRDPROC",
+                    "parm": "SETLUSD"
+                  },
+                  "dd_datasets": [],
+                  "evidence": [
+                    {
+                      "path": "jcl/SETLUSD.jcl",
+                      "line_start": 1,
+                      "line_end": 9,
+                      "snippet_sha256": "f79928ead8bc2f9f72eddbb604c0236fa775ebb5b4c1d280ef7514e3e0f10bc8"
+                    }
+                  ]
+                },
+                {
+                  "name": "STEP01",
+                  "exec": {
+                    "kind": "PGM",
+                    "name": "IKJEFT01",
+                    "db2_plan": "CLFRPLAN",
+                    "parm": "USD 0100",
+                    "control_card_member": "SETLUSD"
+                  },
+                  "dd_datasets": [
+                    {
+                      "ddname": "SYSTSIN",
+                      "dsn": "CLOUDFRM.TRADING.BATCHDB2.CARD(SETLUSD)",
+                      "disp": "SHR",
+                      "type": "QSAM"
+                    },
+                    {
+                      "ddname": "SYSOUT",
+                      "dsn": "*",
+                      "disp": "NEW",
+                      "type": "SYSOUT"
+                    }
+                  ],
+                  "evidence": [
+                    {
+                      "path": "proc/TRDPROC.proc",
+                      "line_start": 1,
+                      "line_end": 11,
+                      "snippet_sha256": "efd3159cf686a058a930f4cd787464512db6355785565ef7cc246f148d5821d0"
+                    },
+                    {
+                      "path": "controlcard/SETLUSD",
+                      "line_start": 1,
+                      "line_end": 5,
+                      "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "job_dependencies": [
+    {
+      "predecessor": "ACCPUSD",
+      "successor": "SETLUSD",
+      "reason": "accepted orders precede settlement processing",
+      "evidence": [
+        {
+          "path": "jcl/SETLUSD.jcl",
+          "line_start": 1,
+          "line_end": 9,
+          "snippet_sha256": "f79928ead8bc2f9f72eddbb604c0236fa775ebb5b4c1d280ef7514e3e0f10bc8"
+        }
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "path": "jcl/SETLUSD.jcl",
+      "line_start": 1,
+      "line_end": 9,
+      "snippet_sha256": "f79928ead8bc2f9f72eddbb604c0236fa775ebb5b4c1d280ef7514e3e0f10bc8"
+    },
+    {
+      "path": "proc/TRDPROC.proc",
+      "line_start": 1,
+      "line_end": 11,
+      "snippet_sha256": "efd3159cf686a058a930f4cd787464512db6355785565ef7cc246f148d5821d0"
+    },
+    {
+      "path": "controlcard/SETLUSD",
+      "line_start": 1,
+      "line_end": 5,
+      "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+    },
+    {
+      "path": "cobol/TRDPB001",
+      "line_start": 1,
+      "line_end": 12,
+      "snippet_sha256": "c4d375eefc4af365566f6684adf1dac747b8d3a67075192430cf0da6faaad010",
+      "paragraph": "IDENTIFICATION DIVISION"
+    },
+    {
+      "path": "cobol/TRDPB001",
+      "line_start": 95,
+      "line_end": 115,
+      "snippet_sha256": "f153a8131ac5a4cc213e3d5a624ad2e61d9d6d908e4560d8b1a053f26d419155",
+      "paragraph": "1000-OPEN-SETTLEMENT-CURSOR"
+    }
+  ],
+  "meta": {
+    "schema_version": "2020-12",
+    "profile": "oem-batch",
+    "estate_pin": "d1450ca062445a6e70f2a2638af6ba286ca8fecc",
+    "generator": "hand-derived settlement reference",
+    "coverage": {
+      "programs_cited": 100,
+      "paragraphs_cited": 85
+    }
+  }
+}

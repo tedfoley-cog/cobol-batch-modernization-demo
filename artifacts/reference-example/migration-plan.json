@@ -1,0 +1,264 @@
+{
+  "chunks": [
+    {
+      "id": "CH-SETL-01",
+      "name": "Capture Db2 and copybook contracts",
+      "category": "foundation",
+      "sequence_within_category": 1,
+      "cross_category_dependencies": [],
+      "cutover_wave": "wave-1",
+      "fr_ids": [
+        "FR-SETL-001",
+        "FR-SETL-002"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 95,
+          "line_end": 115,
+          "snippet_sha256": "f153a8131ac5a4cc213e3d5a624ad2e61d9d6d908e4560d8b1a053f26d419155",
+          "paragraph": "1000-OPEN-SETTLEMENT-CURSOR"
+        }
+      ],
+      "target_design": [
+        {
+          "cobol_construct": "cursor WITH HOLD",
+          "target_idiom": "JdbcCursorItemReader + chunk commit"
+        }
+      ],
+      "risks": [
+        "Status transition or restart-key drift"
+      ],
+      "verification_plan": {
+        "method": "test",
+        "acceptance_criteria": [
+          "All linked FRs pass evidence-backed parity"
+        ]
+      },
+      "sign_off": {
+        "status": "pending",
+        "owner": "migration lead",
+        "notes": "SME review required before cutover"
+      }
+    },
+    {
+      "id": "CH-SETL-02",
+      "name": "Implement fixed-width and decimal adapters",
+      "category": "foundation",
+      "sequence_within_category": 2,
+      "cross_category_dependencies": [
+        "CH-SETL-01"
+      ],
+      "cutover_wave": "wave-1",
+      "fr_ids": [
+        "FR-SETL-003"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 37,
+          "line_end": 75,
+          "snippet_sha256": "c658ea25f78c2be9d68d81e7265c425ddb69ff22c76d51fb390d877df3279f7d"
+        }
+      ],
+      "target_design": [
+        {
+          "cobol_construct": "COBOL paragraph",
+          "target_idiom": "Spring Batch step with explicit transaction boundary"
+        }
+      ],
+      "risks": [
+        "Status transition or restart-key drift"
+      ],
+      "verification_plan": {
+        "method": "test",
+        "acceptance_criteria": [
+          "All linked FRs pass evidence-backed parity"
+        ]
+      },
+      "sign_off": {
+        "status": "pending",
+        "owner": "migration lead",
+        "notes": "SME review required before cutover"
+      }
+    },
+    {
+      "id": "CH-SETL-03",
+      "name": "Migrate settlement reader",
+      "category": "like_to_like",
+      "sequence_within_category": 3,
+      "cross_category_dependencies": [
+        "CH-SETL-02"
+      ],
+      "cutover_wave": "wave-1",
+      "fr_ids": [
+        "FR-SETL-004",
+        "FR-SETL-009"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 426,
+          "line_end": 530,
+          "snippet_sha256": "e9f461567f1f77f23bee9de802754d00196cc0dedb1cf75767aa033163a0b42c",
+          "paragraph": "5000-READ-FROM-STLMT-QUEUE"
+        }
+      ],
+      "target_design": [
+        {
+          "cobol_construct": "COBOL paragraph",
+          "target_idiom": "Spring Batch step with explicit transaction boundary"
+        }
+      ],
+      "risks": [
+        "Status transition or restart-key drift"
+      ],
+      "verification_plan": {
+        "method": "test",
+        "acceptance_criteria": [
+          "All linked FRs pass evidence-backed parity"
+        ]
+      },
+      "sign_off": {
+        "status": "pending",
+        "owner": "migration lead",
+        "notes": "SME review required before cutover"
+      }
+    },
+    {
+      "id": "CH-SETL-04",
+      "name": "Migrate booking orchestration",
+      "category": "like_to_like",
+      "sequence_within_category": 4,
+      "cross_category_dependencies": [
+        "CH-SETL-03"
+      ],
+      "cutover_wave": "wave-1",
+      "fr_ids": [
+        "FR-SETL-005",
+        "FR-SETL-006",
+        "FR-SETL-007",
+        "FR-SETL-008"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPB001",
+          "line_start": 330,
+          "line_end": 420,
+          "snippet_sha256": "40f935cd2b90f5d4c46b9678e7c150ebb09b906e08bc8e505bd032830585373d",
+          "paragraph": "2000-ACCOUNTING"
+        }
+      ],
+      "target_design": [
+        {
+          "cobol_construct": "COBOL paragraph",
+          "target_idiom": "Spring Batch step with explicit transaction boundary"
+        }
+      ],
+      "risks": [
+        "Status transition or restart-key drift"
+      ],
+      "verification_plan": {
+        "method": "test",
+        "acceptance_criteria": [
+          "All linked FRs pass evidence-backed parity"
+        ]
+      },
+      "sign_off": {
+        "status": "pending",
+        "owner": "migration lead",
+        "notes": "SME review required before cutover"
+      }
+    },
+    {
+      "id": "CH-SETL-05",
+      "name": "Introduce exception/audit boundary",
+      "category": "new_design",
+      "sequence_within_category": 5,
+      "cross_category_dependencies": [
+        "CH-SETL-04"
+      ],
+      "cutover_wave": "wave-2",
+      "fr_ids": [
+        "FR-SETL-011",
+        "FR-SETL-012"
+      ],
+      "evidence": [
+        {
+          "path": "cobol/TRDPBEXC",
+          "line_start": 30,
+          "line_end": 78,
+          "snippet_sha256": "cea608bcbce9875cf3a6729312c9b8814c2a40de313819516c251a82fd9aa3ce",
+          "paragraph": "0000-MAINLINE"
+        }
+      ],
+      "target_design": [
+        {
+          "cobol_construct": "COBOL paragraph",
+          "target_idiom": "Spring Batch step with explicit transaction boundary"
+        }
+      ],
+      "risks": [
+        "Status transition or restart-key drift"
+      ],
+      "verification_plan": {
+        "method": "test",
+        "acceptance_criteria": [
+          "All linked FRs pass evidence-backed parity"
+        ]
+      },
+      "sign_off": {
+        "status": "pending",
+        "owner": "migration lead",
+        "notes": "SME review required before cutover"
+      }
+    },
+    {
+      "id": "CH-SETL-06",
+      "name": "Run parity and cutover",
+      "category": "depend_on_new",
+      "sequence_within_category": 6,
+      "cross_category_dependencies": [
+        "CH-SETL-05"
+      ],
+      "cutover_wave": "wave-2",
+      "fr_ids": [
+        "FR-SETL-010"
+      ],
+      "evidence": [
+        {
+          "path": "controlcard/SETLUSD",
+          "line_start": 1,
+          "line_end": 5,
+          "snippet_sha256": "cb7d9ff4469a24d6c0c45499291beba7a4c77b73ba0a98e20a0c4fd1c1efc1e0"
+        }
+      ],
+      "target_design": [
+        {
+          "cobol_construct": "COBOL paragraph",
+          "target_idiom": "Spring Batch step with explicit transaction boundary"
+        }
+      ],
+      "risks": [
+        "Status transition or restart-key drift"
+      ],
+      "verification_plan": {
+        "method": "test",
+        "acceptance_criteria": [
+          "All linked FRs pass evidence-backed parity"
+        ]
+      },
+      "sign_off": {
+        "status": "pending",
+        "owner": "migration lead",
+        "notes": "SME review required before cutover"
+      }
+    }
+  ],
+  "meta": {
+    "schema_version": "2020-12",
+    "profile": "oem-batch",
+    "estate_pin": "d1450ca062445a6e70f2a2638af6ba286ca8fecc",
+    "generator": "hand-derived settlement reference"
+  }
+}
