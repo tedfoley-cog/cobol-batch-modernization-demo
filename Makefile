@@ -1,14 +1,17 @@
 PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
 
-.PHONY: fetch install validate report parity test test-ui serve
+.PHONY: fetch install dclgen validate report parity test test-ui serve
 
 fetch:
 	$(PYTHON) tools/fetch_estate.py
 
+dclgen: fetch
+	$(PYTHON) tools/dclgen.py
+
 install:
 	$(PYTHON) -m pip install -e ".[dev]"
 
-validate: fetch
+validate: dclgen
 	$(PYTHON) tools/validate.py
 
 report:
