@@ -2,8 +2,9 @@
 
 ```mermaid
 %%{init: {'flowchart': {'htmlLabels': false}}}%%
-flowchart LR
+flowchart TB
   subgraph Comprehension
+    direction LR
     T[Trigger Prompt]
     F[Fetch Estate]
     P[Parse JCL]
@@ -13,12 +14,14 @@ flowchart LR
     V[Validate]
   end
   subgraph ForwardEngineering[Forward Engineering]
+    direction LR
     M[Migration Plan]
     S[SME Review]
     C[Migrate Program]
     H[Parity]
   end
   subgraph Review
+    direction LR
     U[Review UI]
     X[Devin Click-Test]
   end

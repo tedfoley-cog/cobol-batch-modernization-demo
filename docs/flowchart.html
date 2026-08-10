@@ -12,14 +12,15 @@
     footer{margin-top:18px;color:#536579;font-size:.9rem}
   </style>
   <script src="assets/mermaid-10.9.1.min.js"></script>
-  <script>window.addEventListener("DOMContentLoaded",()=>{mermaid.initialize({startOnLoad:true,securityLevel:"loose",theme:"base",themeVariables:{primaryColor:"#e4f1fb",lineColor:"#536579",fontSize:"22px"},flowchart:{htmlLabels:false}});});</script>
+  <script>window.addEventListener("DOMContentLoaded",()=>{mermaid.initialize({startOnLoad:true,securityLevel:"loose",theme:"base",themeVariables:{primaryColor:"#e4f1fb",lineColor:"#536579",fontSize:"30px"},flowchart:{htmlLabels:false}});});</script>
 </head>
 <body><main>
   <h1>COBOL Batch Modernization Demo Flow</h1>
   <div class="diagram"><pre class="mermaid">
 %%{init: {'flowchart': {'htmlLabels': false}}}%%
-flowchart LR
+flowchart TB
   subgraph Comprehension
+    direction LR
     T[Trigger Prompt]
     F[Fetch Pinned Estate]
     P[Parse JCL Chain]
@@ -29,12 +30,14 @@ flowchart LR
     V[Validate Artifacts]
   end
   subgraph ForwardEngineering[Forward Engineering]
+    direction LR
     M[Migration Plan]
     S[SME Review Gate]
     C[Migrate One Program]
     H[Parity Harness]
   end
   subgraph Review
+    direction LR
     U[Build Review UI]
     X[Devin Click-Tests UI]
   end

@@ -19,6 +19,8 @@ main { max-width:1400px; margin:auto; padding:28px 5vw 60px; }
 table { width:100%; border-collapse:collapse; background:#fff; }
 th,td { text-align:left; vertical-align:top; padding:10px; border-bottom:1px solid var(--line); }
 th { background:#edf4f8; position:sticky; top:0; }
+#req-table th:nth-child(2), #req-table td:nth-child(2) { white-space:nowrap; }
+#req-table th:nth-child(6), #req-table td:nth-child(6) { width:100%; }
 tr.clickable { cursor:pointer; } tr.clickable:hover { background:#f0f8ff; }
 .toolbar { display:flex; flex-wrap:wrap; gap:10px; margin-bottom:14px; }
 .toolbar input,.toolbar select { border:1px solid #9fb3c4; border-radius:6px; padding:8px; background:#fff; }
