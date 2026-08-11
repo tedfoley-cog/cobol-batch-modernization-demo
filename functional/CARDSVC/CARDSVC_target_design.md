@@ -10,14 +10,14 @@ repository. Drift from this document is a wave defect.
 | Language / runtime | Java 21 (LTS) |
 | Framework | Spring Boot 3.x |
 | Batch runtime | Spring Batch 5.x — one Spring Batch `Job` per scheduler job (`CBCRD01J`..`CBCRD10J`, including the forked legs `CBCRD05AJ`/`CBCRD05BJ`), one `Step` per JCL step that runs application code |
-| Persistence | Spring Data JPA (Hibernate) over PostgreSQL; explicit `@Transactional` boundaries; chunk-oriented steps commit per chunk mirroring each program's own COBOL commit/checkpoint interval, resolved per job in its FR doc (e.g. CBCRD04's `CHECKPOINTS EVERY 1000 RECORDS` → `chunk(1000)`; other jobs use their own thresholds) |
+| Persistence | Spring Data JPA (Hibernate) over PostgreSQL; explicit `@Transactional` boundaries; chunk-oriented steps commit per chunk mirroring each program's own COBOL commit/checkpoint behavior, resolved per job in its FR doc — where the interval is operator-tunable (e.g. CBCRD04 reads `CC-COMMIT-FREQ` from the cycle control record, falling back to its own constant when zero, `app/cardsvc/cbl/CBCRD04.cbl:334-335`) the chunk size is bound to the `cycle_control` row, not hardcoded |
 | Data target | PostgreSQL 16. Db2 DDL in `db2/ddl/` translated to Flyway migrations. VSAM clusters become tables — KSDS (CYCLCTL, CARDXREF, ...) keyed on the cluster key, and the AUTHLOG ESDS (append-only, entry-sequenced per `app/jcl/vsam/DEFCARD.jcl:32`) as an append-only table with a synthetic sequence; QSAM/GDG work datasets become filesystem files (Spring Batch `FlatFileItemReader/Writer`) or tables where the plan says so |
 | DTO / mapping | Java `record` DTOs at job/step boundaries; MapStruct for entity↔DTO mapping |
-| Error handling | Estate return-code convention preserved: each job exits 0 / 4 / 8 / 12 via `ExitCodeGenerator`; `CBCRD91`-style error logging becomes a shared `ErrorReporter` component |
+| Error handling | Estate return-code convention preserved: each job exits 0 / 4 / 8 / 12 via `ExitCodeGenerator`; the batch error handler `CBCRD91` (called by every job but ABSENT from the repo — no `CBCRD91.cbl` exists) becomes a shared `ErrorReporter` component whose contract is derived from the callers' `ERROR-AREA` usage and the online `CACRD91.cbl` severity semantics; the absence is flagged as an absent-module item in the stream analysis |
 | Logging | SLF4J + Logback, structured key=value messages carrying cycle date and job name |
 | Testing | JUnit 5, AssertJ, Testcontainers (PostgreSQL) for integration tests; Spring Batch `JobLauncherTestUtils` for job-level tests |
 | Build / CI | Maven, GitHub Actions (`cardsvc-ci.yml`): build, unit + integration tests |
-| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` and `cycleId` as required job parameters, mirroring the JCL `PARM='&CYCDATE,&CYCID'` (`app/jcl/cardsvc/CBCRD01J.jcl:29-33`) |
+| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` required for every job plus per-job parameters mirroring each JCL `PARM` exactly, resolved in the job's FR doc — e.g. CBCRD01 `cycleId` (`PARM='&CYCDATE,&CYCID'`), CBCRD02 `tolerancePct` (`&TOLER`), CBCRD04 `restart=Y|N` (safety-critical cold/warm switch), CBCRD06 `waitLimit` (`WAIT=030`), CBCRD09 cycleDate only |
 
 ## Layout and conventions
 
