@@ -16,13 +16,13 @@ Each requirement is stated business trigger → job-visible result, cited at `fi
 ### Cycle entry and control
 
 **CARDNITE-FR-001 — Nightly cycle opens only after online close.**
-When the CICS card region has closed (condition `CICS-CARD-CLOSED`), the nightly cycle starts with CBCRD01J; the cycle is ordered daily at 17:30 and must complete before online open at 06:00 (`sched/CARDNITE.sched:17-27,43,397-400`).
+When the CICS card region has closed (condition `CICS-CARD-CLOSED`), the nightly cycle starts with CBCRD01J; the cycle is ordered every day except Sunday (`CALENDAR=ALLDAY`, `NOT-CALENDAR=WEEKSUN`) at 17:30 and must complete before online open at 06:00 (`sched/CARDNITE.sched:17-27,43,397-400`).
 *Acceptance criteria:*
 - The first job does not start while the online region is open.
 - A cycle-control record for cycle type CARDNITE and the cycle date is created/opened with counters zeroed (`app/cardsvc/cbl/CBCRD01.cbl:305-312`).
 
 **CARDNITE-FR-002 — A failed cycle is held, never skipped or cancelled.**
-When any job in the chain ends NOTOK, the cycle is placed in `CARDNITE-HELD` and stops; the remaining jobs do not run and the cycle is resumed by operators, not re-ordered (`sched/CARDNITE.sched:403-408`).
+When any job in the chain ends NOTOK, the cycle is placed in `CARDNITE-HELD` and stops; the remaining jobs do not run and the cycle is resumed by operators, not re-ordered (`sched/CARDNITE.sched:403-408`). Exception: a CBCRD09J (backup) failure still posts its successor so the close can run — see CARDNITE-FR-018 (`sched/CARDNITE.sched:350-357`).
 *Acceptance criteria:*
 - After a mid-chain failure, no downstream job runs until the failure is resolved.
 - The cycle-control record retains status and restart position (`app/cpy/CVCTRL01Y.cpy:6-34`).
@@ -33,7 +33,7 @@ When any job in the chain ends NOTOK, the cycle is placed in `CARDNITE-HELD` and
 When the cycle opens, every record on the authorization log (VSAM ESDS AUTHLOG) is extracted to the day's extract generation (AUTHEXTR GDG, FB 300) with cycle date/id stamped on each record (`app/jcl/cardsvc/CBCRD01J.jcl:32-43`, `app/cardsvc/cbl/CBCRD01.cbl:48`, layout `app/cardsvc/cpy/CVAXTR01Y.cpy:13-20`).
 *Acceptance criteria:*
 - Extract record count equals AUTHLOG record count minus explicitly skipped records; skips surface as RC 4 (`CBCRD01J.jcl:15-19`).
-- Zero records selected surfaces as RC 8 and notifies operations, but does not hold the cycle (`sched/CARDNITE.sched:75-87` — EMPTY outcome posts the successor).
+- Zero records selected surfaces as RC 8, which the scheduler maps to NOTOK for CBCRD01J — operations are notified, `CARDNITE-HELD` is set and the cycle stops (`app/jcl/cardsvc/CBCRD01J.jcl:18`, `sched/CARDNITE.sched:47-53`).
 
 **CARDNITE-FR-004 — Extracted authorizations are edited and rejects split out under a duty-manager tolerance.**
 When the extract is processed, each record is validated (auth-type overlay decode + range checks) and written to the clean file or the reject file with a reason code R001–R010; the job ends RC 4 when rejects are within the PARM tolerance (standing 02 percent) and RC 8 — cycle held — when over it (`app/jcl/cardsvc/CBCRD02J.jcl:8-25,34-50`, `app/cardsvc/cbl/CBCRD02.cbl:240-241`, reason codes `app/cardsvc/cpy/CVRJCT01Y.cpy:13-22`, `docs/runbook-cardnite.md:76-77`).
@@ -66,21 +66,21 @@ When posting fails mid-run and is restarted with `RESTART=Y`, processing resumes
 ### Fee and interest branches (CBCRD05AJ ∥ CBCRD05BJ)
 
 **CARDNITE-FR-008 — Cycle fees are assessed per the fee schedule, once per cycle.**
-When posting completes, each account is evaluated for annual, late, over-limit, cash-advance and foreign-transaction fees against `CARDSVC.FEE_SCHEDULE`; each assessed fee inserts a `CARDSVC.TRANSACTION` and updates `CARDSVC.ACCOUNT`. Re-running the branch first deletes that cycle date's fee rows so fees are never charged twice (`app/jcl/cardsvc/CBCRD05AJ.jcl:28-31,36-55`, `app/cardsvc/cbl/CBCRD05A.cbl:243-262,601,647`; handlers `CBFEE01/02/03`, rates and caps entirely on FEEPARM control cards, `app/cardsvc/cbl/CBFEE01.cbl:15,43`).
+When posting completes, each account is evaluated for annual, late, over-limit, cash-advance and foreign-transaction fees against `CARDSVC.FEE_SCHEDULE`; each assessed fee inserts a `CARDSVC.TRANSACTION` and updates `CARDSVC.ACCOUNT` (`app/jcl/cardsvc/CBCRD05AJ.jcl:36-55`, `app/cardsvc/cbl/CBCRD05A.cbl:243-262,601,647`; handlers `CBFEE01/02/03`, rates and caps entirely on FEEPARM control cards, `app/cardsvc/cbl/CBFEE01.cbl:15,43`).
 *Acceptance criteria:*
 - Fee amounts, thresholds, caps and waiver rules come from FEEPARM cards / FEE_SCHEDULE, never from code.
-- A fee type with no resolvable handler ends the branch RC 8 and the join holds (CARDNITE-FR-010).
-- Same-cycle re-run yields identical fee totals.
+- A fee type with no resolvable handler is treated as a declined fee: nothing is posted, the branch continues and ends RC 4 with flag 'A' — the join proceeds (`app/cardsvc/cbl/CBCRD90.cbl:115-120`, `CBCRD05A.cbl:522-530,728-732`). The JCL comment claiming RC 8/flag 'F' is a divergence — see §5.3 item 8.
+- Re-run safety: the JCL restart comment claims the program deletes the cycle's fee rows before assessing (`CBCRD05AJ.jcl:28-31`), but no DELETE exists in CBCRD05A — see §5.3 item 9. The migration must provide same-cycle idempotency and treat the legacy re-run claim as unverified.
 
 **CARDNITE-FR-009 — Interest accrues on average daily balance at the account's APRs, and rewards accrue, once per cycle.**
-In parallel with fees, interest is accrued per account on ADB at the account APR with cash advances at the cash APR, using the Finance/Audit-agreed rounding convention from control cards (`ROUNDING=HALFUP`, change-record controlled); rewards are accrued to `CARDSVC.REWARDS`. Re-run deletes that cycle date's interest rows first (`app/jcl/cardsvc/CBCRD05BJ.jcl:5-18,27-30,53-59`, `app/cardsvc/cbl/CBCRD05B.cbl:251,487-488,544,676,723,798-852`).
+In parallel with fees, interest is accrued per account on ADB at the account APR with cash advances at the cash APR, using the Finance/Audit-agreed rounding convention from control cards (`ROUNDING=HALFUP`, change-record controlled); rewards are accrued to `CARDSVC.REWARDS` (`app/jcl/cardsvc/CBCRD05BJ.jcl:5-18,53-59`, `app/cardsvc/cbl/CBCRD05B.cbl:251,487-488,544,676,723,798-852`).
 *Acceptance criteria:*
 - Accounts with no APR on file are skipped and counted (RC 4), not defaulted.
 - An unsupported rounding value or control-card error stops the branch (RC 8, flag posted failed) — no accrual under an unagreed convention (`CBCRD05BJ.jcl:20-25`).
-- Same-cycle re-run does not double-charge interest.
+- Re-run safety: the JCL restart comment claims prior interest rows are deleted first (`CBCRD05BJ.jcl:27-30`), but no DELETE exists in CBCRD05B — see §5.3 item 9. The migration must provide same-cycle idempotency; the legacy claim is unverified.
 
 **CARDNITE-FR-010 — Exposure refresh runs only after both branches have completed successfully.**
-When the fee and interest branches finish, each posts a completion flag on the cycle-control record ('A'/'B' complete, 'F' failed); the exposure job verifies both flags itself (it does not trust the scheduler), waits up to the PARM poll limit (standing WAIT=030 minutes), and stops the cycle if a branch is incomplete or failed (`app/cardsvc/cbl/CBCRD05A.cbl:710-747`, `CBCRD05B.cbl:943-977`, `CBCRD06W.cbl:28-33,137-141,179-180,205-243`, `app/jcl/cardsvc/CBCRD06J.jcl:10-14,27-29`).
+When the fee and interest branches finish, each posts a completion flag on the cycle-control record ('A'/'B' complete, 'F' failed); the exposure job verifies both flags itself (it does not trust the scheduler), waits up to the PARM poll limit (JCL standing value WAIT=030; the program header claims the standard schedule passes WAIT=000 — the JCL is authoritative, see §5.3 item 10), and stops the cycle if a branch is incomplete or failed (`app/cardsvc/cbl/CBCRD05A.cbl:710-747`, `CBCRD05B.cbl:943-977`, `CBCRD06W.cbl:28-33,137-141,179-180,205-243`, `app/jcl/cardsvc/CBCRD06J.jcl:10-14,27-29`).
 *Acceptance criteria:*
 - Exposure refresh never runs on a cycle where either branch failed or did not complete.
 - A late branch within the wait limit is tolerated; past the limit the cycle stops (branch-specific abend).
@@ -176,6 +176,7 @@ Report layouts (all SYSOUT FBA 133: reject listing, bypass listing, FEEAUDIT, IN
 - **FORCEOPEN**: exists only in scheduler operator note 4 (`sched/CARDNITE.sched:416-419`); CBCRD10 parses only the 8-byte cycle date (`app/cardsvc/cbl/CBCRD10.cbl:325-331`). Not a requirement; the CBCRD10 per-program FR doc must resolve implemented-or-dropped.
 - CBCRD06W abend labels U0602/U0603: JCL/runbook only; the program raises U0601/U0610/U0611/U0612 (`CBCRD06W.cbl:28-33`).
 - Scheduler ABEND-COND codes U4001–U4010: match nothing in the source (analysis §8.2).
+- **CBCRD06B U0605 (route unresolvable) is unreachable**: on a not-found route CBCRD90 sets only `LK-RETURN-CD` = 8 and exits before `3000-DISPATCH` (`app/cardsvc/cbl/CBCRD90.cbl:115-121`), while `RQ-RC` is written only inside `3000-DISPATCH` (`CBCRD90.cbl:307`) or as 0012 on table error (`CBCRD90.cbl:146-149`); CBCRD06B's check tests `RQ-RC-NOT-FOUND OR RQ-RC-TABLE-ERROR` (`CBCRD06B.cbl:367-374`), so a missing XMOD route leaves `RQ-RC` at zero and U0605 never fires. The table-unavailable case is equally dead: CBCRD90 exits with `LK-RETURN-CD` = 12 before the `ROUTE-REQUEST` copy-back (`CBCRD90.cbl:108-113,126`), so `RQ-RC-TABLE-ERROR` is never visible to the caller either (there it folds in as RC 12 → fatal, but via U0606, not U0605). The actual outcome: CBCRD06B folds the dispatcher RC into the risk area (`CBCRD06B.cbl:383-388` takes the higher of the two), so `CV-RISK-RC` becomes 8 and `2400-HANDLE-PARTY-RC` sends every party to manual review with an unpopulated risk area — review file + exception listing, step RC 8 (`CBCRD06B.cbl:394-421`). A latent defect to resolve (not replicate) in the migration.
 
 ---
 
@@ -242,6 +243,9 @@ Authoritative dataset table (DSN, LRECL, producer → consumer) is analysis §4.
 5. **CBCRD06B step gate**: program header says STEP040 gate "IF RC <= 4" (`CBCRD06B.cbl:24-25`); the JCL's authoritative gate is `IF RC <= 8` (`CBCRD06J.jcl:138`) so accepted parties proceed on a manual-review RC 8.
 6. **Runbook U0632 vs source U0606** for the crossing-fatal abend (`docs/runbook-cardnite.md:103,148` vs `CBCRD06B.cbl:43`).
 7. Scheduler ABEND-COND U4001–U4010 codes match nothing in the source (analysis §8.2).
+8. **CBCRD05A unroutable fee type**: the JCL comment says RC 8 / flag 'F' / join held (`CBCRD05AJ.jcl:21-26`), but the source treats a dispatcher 'ROUTE NOT FOUND' (RC 8, `CBCRD90.cbl:115-120`) as a declined fee — warning only, step RC 4, flag 'A', join proceeds (`CBCRD05A.cbl:522-530,728-732`); only handler RC 12 abends (U0505, `CBCRD05A.cbl:531-536`). Consequence: RC 8 is unreachable in CBCRD05A, and a missing fee handler load module is indistinguishable from a legitimately declined fee — fees silently go unassessed while the branch posts 'A' and the join proceeds. Same latent-defect class as the U0605 item in §3.3; the migration should resolve (not replicate) it.
+9. **CBCRD05A/05B re-run deletion**: the JCL restart comments claim each branch deletes its cycle-date rows before starting (`CBCRD05AJ.jcl:28-31`, `CBCRD05BJ.jcl:27-30`), but neither program contains a DELETE — legacy same-cycle re-run safety is unverified; the migration must implement idempotency explicitly (FR-008/FR-009).
+10. **CBCRD06W standing WAIT**: the JCL passes `WAIT=030` (`CBCRD06J.jcl:51`); the program header claims the standard schedule passes `WAIT=000` (single check, no wait) (`CBCRD06W.cbl:22-24`) — JCL authoritative.
 
 ### 5.4 User abends by job
 Source-derived abend inventory per program is in analysis §3 (U0101–U1003); the runbook table (`docs/runbook-cardnite.md:91-112`) is the operator view, with the divergences above.
@@ -256,13 +260,13 @@ Covering test and verification case columns to be filled by the migration waves.
 |---|---|---|---|
 | CARDNITE-FR-001 | `sched/CARDNITE.sched:17-27,43`; `CBCRD01.cbl:305-312` | _(wave)_ | region closed → cycle opens; record initialized |
 | CARDNITE-FR-002 | `sched/CARDNITE.sched:403-408` | _(wave)_ | mid-chain NOTOK → downstream held |
-| CARDNITE-FR-003 | `CBCRD01J.jcl:32-43`; `CBCRD01.cbl:48` | _(wave)_ | extract count reconciles; empty log → RC 8 notify |
+| CARDNITE-FR-003 | `CBCRD01J.jcl:32-43`; `CBCRD01.cbl:48` | _(wave)_ | extract count reconciles; empty log → RC 8, cycle held |
 | CARDNITE-FR-004 | `CBCRD02J.jcl:8-25`; `CVRJCT01Y.cpy:13-22` | _(wave)_ | tolerance boundary RC 4/8; reason codes |
 | CARDNITE-FR-005 | `CBCRD03J.jcl:37-90`; `CBCRD03.cbl:389` | _(wave)_ | sequence order; defaulting; RC 4 count |
 | CARDNITE-FR-006 | `CBCRD04J.jcl:41-54`; `CBCRD04.cbl:730,850` | _(wave)_ | post-once; bypass accounting |
 | CARDNITE-FR-007 | `CBCRD04.cbl:334-348,901-925` | _(wave)_ | kill/restart equivalence; bad key U0404 |
-| CARDNITE-FR-008 | `CBCRD05AJ.jcl:28-55`; `CBCRD05A.cbl:601,647` | _(wave)_ | fee idempotency; card-driven rates |
-| CARDNITE-FR-009 | `CBCRD05BJ.jcl:27-30,53-59`; `CBCRD05B.cbl:676-852` | _(wave)_ | ADB/APR math, HALFUP; re-run no double charge |
+| CARDNITE-FR-008 | `CBCRD05AJ.jcl:28-55`; `CBCRD05A.cbl:601,647` | _(wave)_ | fee idempotency (new — legacy unverified, §5.3 item 9); card-driven rates; unroutable fee → RC 4 declined |
+| CARDNITE-FR-009 | `CBCRD05BJ.jcl:27-30,53-59`; `CBCRD05B.cbl:676-852` | _(wave)_ | ADB/APR math, HALFUP; re-run idempotency (new — legacy unverified, §5.3 item 9) |
 | CARDNITE-FR-010 | `CBCRD05A.cbl:710-747`; `CBCRD05B.cbl:943-977`; `CBCRD06W.cbl:179-243` | _(wave)_ | late/failed branch gating |
 | CARDNITE-FR-011 | `CBCRD06A.cbl:150-155`; `CBCRD06X.cbl:44-52` | _(wave)_ | uniqueness; population match |
 | CARDNITE-FR-012 | `CBCRD06B.cbl:16-25,394-429` | _(wave)_ | outcome routing per RC |
