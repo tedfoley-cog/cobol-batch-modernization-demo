@@ -46,6 +46,9 @@ public class EstateExitCodeMapper implements ExitCodeGenerator, ApplicationListe
         int rc = 0;
         for (JobExecution execution : executions) {
             if (execution.getStatus() != BatchStatus.COMPLETED) {
+                log.error("RC=12: job '{}' ended with status {} (exit status '{}')",
+                        execution.getJobInstance().getJobName(), execution.getStatus(),
+                        execution.getExitStatus().getExitCode());
                 return 12;
             }
             Integer mapped = parseRc(execution.getExitStatus());
