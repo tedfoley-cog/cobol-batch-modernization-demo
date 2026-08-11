@@ -9,9 +9,9 @@ repository. Drift from this document is a wave defect.
 |---|---|
 | Language / runtime | Java 21 (LTS) |
 | Framework | Spring Boot 3.x |
-| Batch runtime | Spring Batch 5.x — one Spring Batch `Job` per scheduler job (`CBCRDnnJ`), one `Step` per JCL step that runs application code |
-| Persistence | Spring Data JPA (Hibernate) over PostgreSQL; explicit `@Transactional` boundaries; chunk-oriented steps commit per chunk mirroring the COBOL checkpoint interval (`CHECKPOINTS EVERY 1000 RECORDS` → `chunk(1000)`) |
-| Data target | PostgreSQL 16. Db2 DDL in `db2/ddl/` translated to Flyway migrations. VSAM KSDS clusters (CYCLCTL, CARDXREF, AUTHLOG) become tables; QSAM/GDG work datasets become filesystem files (Spring Batch `FlatFileItemReader/Writer`) or tables where the plan says so |
+| Batch runtime | Spring Batch 5.x — one Spring Batch `Job` per scheduler job (`CBCRD01J`..`CBCRD10J`, including the forked legs `CBCRD05AJ`/`CBCRD05BJ`), one `Step` per JCL step that runs application code |
+| Persistence | Spring Data JPA (Hibernate) over PostgreSQL; explicit `@Transactional` boundaries; chunk-oriented steps commit per chunk mirroring each program's own COBOL commit/checkpoint interval, resolved per job in its FR doc (e.g. CBCRD04's `CHECKPOINTS EVERY 1000 RECORDS` → `chunk(1000)`; other jobs use their own thresholds) |
+| Data target | PostgreSQL 16. Db2 DDL in `db2/ddl/` translated to Flyway migrations. VSAM clusters become tables — KSDS (CYCLCTL, CARDXREF, ...) keyed on the cluster key, and the AUTHLOG ESDS (append-only, entry-sequenced per `app/jcl/vsam/DEFCARD.jcl:32`) as an append-only table with a synthetic sequence; QSAM/GDG work datasets become filesystem files (Spring Batch `FlatFileItemReader/Writer`) or tables where the plan says so |
 | DTO / mapping | Java `record` DTOs at job/step boundaries; MapStruct for entity↔DTO mapping |
 | Error handling | Estate return-code convention preserved: each job exits 0 / 4 / 8 / 12 via `ExitCodeGenerator`; `CBCRD91`-style error logging becomes a shared `ErrorReporter` component |
 | Logging | SLF4J + Logback, structured key=value messages carrying cycle date and job name |
@@ -26,7 +26,7 @@ backend/
   pom.xml
   src/main/java/com/cardsvc/
     common/            shared components (cycle control, routing, error reporter)
-    jobs/cbcrdNN/      one package per migrated job: JobConfig, steps, processors
+    jobs/cbcrd01..cbcrd10, cbcrd05a, cbcrd05b   one package per migrated job
     domain/            JPA entities per CARDSVC table
     repository/        Spring Data repositories
   src/main/resources/db/migration/   Flyway migrations
@@ -36,8 +36,10 @@ backend/
 - Package-per-job, discovered by convention (`@Configuration` per job) — no shared
   hand-edited registry, so waves never conflict by construction.
 - The `PGM_ROUTE` dispatch table (CBCRD90) maps to a `ProgramRouter` component that
-  resolves handler beans by `(routeType, routeKey)` from the migrated `pgm_route`
-  table, preserving EFF_DATE/EXP_DATE filtering and fallback semantics.
+  resolves handler beans from the migrated `pgm_route` table by `(routeType,
+  routeKey)` filtered on `ACTIVE_FLG` and the EFF_DATE/EXP_DATE window, ordered
+  by `SEQ_NBR` (pipelines like FRAU return an ordered handler list), preserving
+  fallback semantics via `FALLBACK_PGM`.
 - Restartability: the cycle control record (`CYCLCTL`) becomes a `cycle_control`
   table; checkpointed jobs resume from `cc_last_key`, matching operator note 3 in
   `sched/CARDNITE.sched`.
