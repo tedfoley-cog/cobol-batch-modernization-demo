@@ -59,7 +59,7 @@ backend/
   failures map to 12, never to a reserved business RC. Where scheduler and
   program disagree on an RC's meaning (e.g. CBCRD02 RC 4 is `EMPTY` in
   `sched/CARDNITE.sched` but "rejects within tolerance" in
-  `app/cardsvc/cbl/CBCRD02.cbl:26-27`), the FR doc must reconcile the
+  `app/cardsvc/cbl/CBCRD02.cbl:25-28`), the FR doc must reconcile the
   divergence explicitly before migration.
 - Restartability: the cycle control record (`CYCLCTL`) becomes a `cycle_control`
   table; checkpointed jobs resume from `cc_last_key`, matching operator note 3 in
