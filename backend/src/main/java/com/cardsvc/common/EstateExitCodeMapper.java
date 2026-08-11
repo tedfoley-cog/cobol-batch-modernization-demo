@@ -32,6 +32,11 @@ public class EstateExitCodeMapper implements ExitCodeGenerator, ApplicationListe
 
     @Override
     public int getExitCode() {
+        if (executions.isEmpty()) {
+            // A launch that ran no job is a failure, like a JCL step whose
+            // program never executed.
+            return 12;
+        }
         int rc = 0;
         for (JobExecution execution : executions) {
             if (execution.getStatus() != BatchStatus.COMPLETED) {
