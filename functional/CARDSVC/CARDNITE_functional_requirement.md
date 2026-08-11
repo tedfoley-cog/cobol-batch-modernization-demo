@@ -24,7 +24,7 @@ When the CICS card region has closed (condition `CICS-CARD-CLOSED`), the nightly
 **CARDNITE-FR-002 — A failed cycle is held, never skipped or cancelled.**
 When any job in the chain ends NOTOK, the cycle is placed in `CARDNITE-HELD` and stops; the remaining jobs do not run and the cycle is resumed by operators, not re-ordered (`sched/CARDNITE.sched:403-408`). Exception: a CBCRD09J (backup) failure still posts its successor so the close can run — see CARDNITE-FR-018 (`sched/CARDNITE.sched:350-357`).
 *Acceptance criteria:*
-- After a mid-chain failure, no downstream job runs until the failure is resolved.
+- After a mid-chain failure, no downstream job runs until the failure is resolved — except a CBCRD09J (backup) failure, which still posts its successor (see CARDNITE-FR-018).
 - The cycle-control record retains status and restart position (`app/cpy/CVCTRL01Y.cpy:6-34`).
 
 ### Authorization intake (CBCRD01J → CBCRD03J)
