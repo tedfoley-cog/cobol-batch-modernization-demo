@@ -1,0 +1,4 @@
+# EBCDIC sample datasets - packed decimal and zoned overpunch fields.
+# Any line ending or encoding conversion corrupts them.
+*.ebc    binary
+*.vb     binary

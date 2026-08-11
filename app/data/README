@@ -1,0 +1,275 @@
+======================================================================
+APP/DATA - SAMPLE DATASETS
+======================================================================
+Small test extracts for the card estate.  Two kinds of file:
+
+  *.ebc  *.vb   mainframe files, EBCDIC cp037, binary.  Do not open these
+                in a text editor and do not let git or a file transfer
+                translate them.
+  *.csv         ASCII companions for the DB2 seed tables.
+
+Everything here is synthetic.  Card numbers are built on the standard test
+BINs (400000, 411111, 510510, 555555, 601100) and carry valid mod-10 check
+digits so they exercise the validation, but they are not issuable and no
+real cardholder, merchant or sanctioned entity appears anywhere in these
+files.
+
+Regenerate the lot with:
+
+    cd app/data
+    python3 mkdata.py
+
+The generator holds the data as literal tables and writes the same bytes
+every time, so a regenerated file is byte for byte identical to the one in
+the repository.  Nothing here is random and nothing here is derived from
+production.
+
+----------------------------------------------------------------------
+1.  WHY THE BINARY FILES ARE BINARY
+----------------------------------------------------------------------
+The .ebc and .vb files are the point of this directory.  They carry the
+three things that a naive conversion destroys:
+
+  cp037 encoding    Every character byte is EBCDIC.  'A' is X'C1', a blank
+                    is X'40', the digit 0 is X'F0'.
+
+  packed decimal    COMP-3 fields hold two digits per byte with the sign in
+                    the low nibble of the last byte.  84.19 in a
+                    S9(11)V99 COMP-3 field is X'00000000841 9C'.  Those
+                    bytes are not characters in any code page and a
+                    translating transfer corrupts them silently.
+
+  zoned overpunch   Signed DISPLAY fields carry the sign as the zone of the
+                    last byte.  +841.9 ends X'C9', which translates to the
+                    letter I; -841.9 ends X'D9', which is R.  A file that
+                    has been through an ASCII conversion looks almost
+                    right, which is worse than looking wrong.
+
+Transfer them BINARY.  If you are moving them to z/OS:
+
+    quote site rdw            (for the .vb files only)
+    binary
+    put txnpost.vb 'CARD.TEST.TXNPOST'
+
+.gitattributes in the repository root should keep git from touching them.
+If a diff on one of these ever shows text, something has translated it.
+
+----------------------------------------------------------------------
+2.  FILE INVENTORY
+----------------------------------------------------------------------
+
+  file            recs   RECFM  LRECL      layout        records
+  --------------  -----  -----  ---------  ------------  ---------------
+  cardmast.ebc      22   FB       179      CVCARD01Y     card master
+  acctmast.ebc      18   FB       169      CVACCT01Y     account master
+  authextr.ebc      20   FB       179      CVAUTH01Y     auth extract
+  glpost.ebc        24   FB       182      GL interface  GL postings
+  txnpost.vb        31   VB    233-497     CVTRAN01Y     posted txns
+  stmtarch.vb       15   VB   284-24204    CVSTMT01Y     statement archive
+  --------------  -----  -----  ---------  ------------  ---------------
+  accounts.csv      18                                   CARDSVC.ACCOUNT
+  cards.csv         22                                   CARDSVC.CARD
+  limits.csv        20                                   CARDSVC.CARD_LIMIT
+  merchants.csv     20                                   CARDSVC.MERCHANT
+  fee_schedule.csv  20                                   CARDSVC.FEE_SCHEDULE
+  fraud_rules.csv   12                                   CARDSVC.FRAUD_RULE
+  customers.csv     19                                   PARTYRSK.CUSTOMER
+  parties.csv       12                                   PARTYRSK party view
+  kyc.csv           14                                   PARTYRSK.PARTY_KYC
+  sanctions.csv     18                                   PARTYRSK.PARTY_SANCTION
+
+The VB files carry a four byte RDW on every record - two bytes of length
+including the RDW itself, then two bytes of zero.  There is no BDW; the
+records are unblocked as they sit here.  The LRECL column above is the
+record length without the RDW, which is what the copybook describes.
+
+----------------------------------------------------------------------
+3.  THE BINARY FILES IN DETAIL
+----------------------------------------------------------------------
+
+3.1  cardmast.ebc - CVCARD01Y, FB 179
+-------------------------------------
+One record per card, ascending on CARD-NUM as the file is written.
+
+CARD-ACTIVATION-DT is the six digit legacy date.  It has to be windowed
+against WS-CENTURY-PIVOT in CVCONSTY: a YY of 50 or more is 19YY, below 50
+is 20YY.  Card 4000000000002081 carries 981105, which windows to 1998 -
+read it as 2098 and the card is not yet issued.  Every other activation
+date in the file is in the 2000s, so a program that gets the windowing
+wrong looks correct on twenty one of the twenty two records.
+
+3.2  acctmast.ebc - CVACCT01Y, FB 169
+-------------------------------------
+One record per account.  Six COMP-3 balance fields in ACCT-BALANCES and a
+seventh in ACCT-DELQ-AMT.  Account 40000000118 is written off with a
+delinquency bucket of 6 and its whole balance in ACCT-DELQ-AMT; account
+40000000113 is suspended at bucket 4.  The rest are current.
+
+3.3  authextr.ebc - CVAUTH01Y, FB 179
+-------------------------------------
+Twenty authorizations, all on 2024-07-12.  This is the file to test the
+variant handling against.
+
+The 60 byte AUTH-DETAIL area is redefined three ways and the three variants
+are different lengths:
+
+    AUTH-TYPE 'P'  AUTH-PURCHASE   60 bytes, fills the area
+    AUTH-TYPE 'C'  AUTH-CASH-ADV   36 bytes, 24 bytes of tail left over
+    AUTH-TYPE 'R'  AUTH-REFUND     39 bytes, 21 bytes of tail left over
+
+The generator writes the variants into a single 60 byte buffer and never
+clears it between records, which is what the program that produced the real
+extract does - the area is WORKING-STORAGE and only the variant fields are
+moved into it.  So the tail of every short record holds the tail of
+whatever record was written before it.  Record 3 is a cash advance and its
+last 24 bytes are the end of the purchase in record 2.
+
+Those bytes are not padding and they are not blanks.  Any code that reads
+past the end of the variant it is handling reads the previous record.  The
+file is ordered so that all three variants follow each of the others at
+least once.
+
+Sequence numbers 1 to 20 in AUTH-SEQ-NUM, in the order the records appear.
+Fourteen approvals, three declines, two referrals and one reversal.
+
+3.4  glpost.ebc - FB 182
+------------------------
+The interface file to the general ledger, laid out to match
+CARDSVC.GL_POSTING.  There is no copybook for this one in app/cpy - the GL
+owns the layout and it has not changed since the eighties:
+
+    offset  len  field
+         1   12  GL batch id
+        13    9  GL sequence number, zoned unsigned
+        22    8  posting date CCYYMMDD
+        30    8  value date CCYYMMDD
+        38   10  GL account
+        48    6  cost centre
+        54    1  debit/credit indicator
+        55   15  amount, SIGNED ZONED, two implied decimals
+        70    3  currency
+        73   16  source transaction id
+        89   11  source account id
+       100   40  narrative
+       140    8  cycle id
+       148    1  reversal flag
+       149    8  posted by
+       157   26  posting timestamp
+
+The amount at offset 55 is the signed zoned field.  Credits are negative
+and their last byte carries a D zone.  Debits and credits in this extract
+do not balance to zero on their own - the contra entries are on the
+settlement side and are not part of this file.
+
+3.5  txnpost.vb - CVTRAN01Y, VB 233-497
+---------------------------------------
+Thirty one posted transactions.  TXN-LEG is an OCCURS 1 TO 12 DEPENDING ON
+TXN-LEG-CNT, and TXN-TRAILER follows the table, so the trailer is at a
+different offset in every record with a different leg count.  A program
+that addresses the trailer at a fixed offset reads leg data instead and
+does not abend.
+
+Leg counts present: 1 (eleven records), 2 (nine), 3 (five), 4 (two), and one
+record each at 5, 6, 8 and 12.  TXN0000000000031 is the twelve leg record -
+the maximum the ODO allows, 497 bytes, and the one to size a buffer against.
+
+Every record is 209 bytes plus 24 bytes per leg.
+
+3.6  stmtarch.vb - CVSTMT01Y, VB 284-24204
+------------------------------------------
+Fifteen statements for the July 2024 cycles.  STMT-LINE is an OCCURS 1 TO
+300 DEPENDING ON STMT-LINE-CNT with the trailer after it, same shape of
+problem as the transaction file but three orders of magnitude wider: the
+shortest record is 284 bytes and the longest, the 300 line statement for
+account 40000000117, is 24204.
+
+Line counts run 1, 3, 4, 6, 8, 9, 12, 14, 17, 22, 26, 31, 47, 118 and 300.
+Anything that reads this file needs a 24K record area; a 4K one handles
+fourteen of the fifteen records.
+
+Every record is 204 bytes plus 80 bytes per statement line.
+
+----------------------------------------------------------------------
+4.  THE CSV COMPANIONS
+----------------------------------------------------------------------
+Plain ASCII, comma separated, one header row, LF line endings, no quoting
+beyond what the values force.  Dates are ISO CCYY-MM-DD and empty where the
+column is null; the one exception is CARDS.ACTIVATION_YYMMDD, which is the
+six digit legacy value as it is actually stored.
+
+They are the same data as the binary files, so a row in accounts.csv
+reconciles against the matching record in acctmast.ebc, and every card in
+cards.csv appears in cardmast.ebc.  Referential integrity holds across the
+set: every account points at a real customer and party, every card at a
+real account, every KYC row at a real party.
+
+For a DB2 LOAD you will want DELIMITED format with CHARDEL '"' and COLDEL
+',', and the CCSID conversion doing ASCII to EBCDIC on the way in.  The
+column order in each file matches the column order in db2/ddl.
+
+----------------------------------------------------------------------
+5.  THE AWKWARD CASES
+----------------------------------------------------------------------
+These are in the data on purpose.  They are the cases the estate really
+carries, and anything that reads this data has to survive them.
+
+  a party holding several customer numbers
+      PTY00000004 has four rows in customers.csv - 400000104, 400000105,
+      400000106 and 400000119 - across three product segments, one of them
+      dormant.  Party is the identity; the customer number is not.  Code
+      that assumes one customer per party silently processes a quarter of
+      this party's relationships.
+
+  a name that disagrees between the card and the customer
+      Card 4111110000001078 is embossed ROBERT D MCALLISTER.  Its customer
+      record, 400000107, has the surname as MACALLISTER, and so does the
+      party record.  Both spellings are in use; neither is a data error
+      anyone is going to fix.  A join on name finds nothing.
+
+  a merchant with no route entry
+      MRC000000000019 PIONEER SQUARE POPUP MARKET has SETTLE_ROUTE_CD
+      blank.  Authorization 17 and transaction TXN0000000000017 are against
+      it, so the settlement lookup for that transaction finds nothing.
+
+  a six digit date that windows to the previous century
+      Card 4000000000002081, activation 981105.  See 3.1.
+
+  the maximum leg count
+      TXN0000000000031, twelve legs.  See 3.5.
+
+  a sanctions near miss
+      Customer 400000104 is MERRIWEATHER, JONATHAN ROSS, date of birth
+      1957-02-11.  OFAC entry SDN0000000000412 is MERIWEATHER, JONATHON,
+      same date of birth.  One R, one vowel, and the dates of birth agree,
+      which is what makes it a referral rather than a discard.  Its party
+      PTY00000004 correspondingly has an open event driven KYC review at
+      sequence 2 with status PN.
+
+      There are three other deliberate near misses of decreasing quality:
+      SZABO, ILDIKO against customer SZABO, ILONA KATALIN (same date of
+      birth, different given name); VANDERBEEK, PETER J against
+      VANDERBECK, PIETER JAN; and DELACROIX, SIMON against
+      DELACROIX-BENNETT, SIMONE.  PETROVA, YELENA on the EU list is an
+      exact name and date of birth match against customer 400000111, and
+      NAKAMURA, HIROSHI is on the internal list, matching the customer
+      whose card is blocked and whose account is suspended.
+
+Other things worth knowing about the set: card 5105100000001058 is blocked
+for fraud with two failed PIN tries, card 5105100000001165 is reported lost
+with three, account 40000000106 is closed with a card that expired in 2000,
+and card 4000000000001190 has never been activated so its activation and
+last used dates are zero rather than blank.
+
+----------------------------------------------------------------------
+6.  THE GENERATOR
+----------------------------------------------------------------------
+mkdata.py, Python 3, standard library only.  It writes the files listed in
+section 2 into its own directory and overwrites what is there.
+
+The record layouts in it were transcribed by hand from the copybooks named
+in section 3.  It does not read the COBOL source, so a copybook change does
+not reach it: if a layout moves, the transcription in the generator has to
+be changed to match, and there is nothing that will warn you.  The field
+encoders (alnum, zoned, zoned_signed, comp3) are at the top of the file and
+are the only place the encoding rules live.
+======================================================================

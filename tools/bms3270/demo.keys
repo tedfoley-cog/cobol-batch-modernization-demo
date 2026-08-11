@@ -1,0 +1,94 @@
+# A walk through transaction CA00 that reaches every map.
+# @FIELD=value sets a field, a bare word is an AID key.
+
+# --- option 1, account inquiry
+@MNOPT=1
+@MNACCT=40000000101
+ENTER
+ENTER
+PF3
+
+# --- option 2, card list, then select a card into card detail
+@MNOPT=2
+@MNACCT=40000000101
+ENTER
+ENTER
+@CLSEL1=S
+ENTER
+PF3
+
+# --- option 4, authorization request and its response
+@MNOPT=4
+@MNCARD=4000000000001018
+ENTER
+@AUAMT=250.00
+@AUTYPE=P
+@AUMRCH=NORTHLAKE GROCERY
+@AUMCC=5411
+ENTER
+PF3
+
+# --- option 5, card maintenance and its confirm screen
+@MNOPT=5
+@MNCARD=4000000000001018
+ENTER
+@M11ACTN=B
+@M11BRSN=LS
+ENTER
+@M11BCNF=Y
+ENTER
+PF3
+
+# --- option 6, credit limit change, PF5 asks the other module
+@MNOPT=6
+@MNCARD=4000000000001018
+ENTER
+@M12NLIM=40000.00
+ENTER
+PF5
+PF3
+
+# --- option 7, dispute browse and dispute entry
+@MNOPT=7
+@MNACCT=40000000101
+ENTER
+@M13SEL2=S
+ENTER
+@M13BRSN=13.1
+@M13BNAR=GOODS NEVER ARRIVED
+ENTER
+PF3
+
+# --- option 8, online payment
+@MNOPT=8
+@MNACCT=40000000101
+ENTER
+@M14PAMT=500.00
+ENTER
+PF3
+
+# --- option 9, customer / KYC inquiry
+@MNOPT=9
+@MNCARD=4000000000001018
+ENTER
+@M15CUST=400000101
+ENTER
+PF3
+
+# --- option 10, reason codes and the merchant lookup behind PF5
+@MNOPT=10
+ENTER
+@M16CAT=DISP
+ENTER
+PF5
+PF3
+
+# --- a route that resolves to a program with no load module
+@MNOPT=3
+@MNCARD=9999999999999999
+ENTER
+PF3
+
+# --- exit
+@MNOPT=X
+ENTER

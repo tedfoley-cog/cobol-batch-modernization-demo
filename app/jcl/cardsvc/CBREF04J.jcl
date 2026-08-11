@@ -1,0 +1,117 @@
+//CBREF04J JOB (CARD,REFR),'REBUILD PGMROUT',CLASS=C,MSGCLASS=X,
+//             REGION=0M,TIME=(15,00),NOTIFY=&SYSUID
+//*
+//* ------------------------------------------------------------------
+//* CARDREF STEP 4 OF 5 - REBUILD VSAM PGMROUT FROM CARDSVC.PGM_ROUTE
+//*
+//* PGMROUT IS THE COPY THE DISPATCHERS READ WHEN DB2 IS NOT
+//* AVAILABLE TO THEM.  ONLY ROWS WITH ACTIVE_FLG = Y WHOSE
+//* EFFECTIVE PERIOD SPANS THE RUN DATE ARE UNLOADED, SO THE
+//* FALLBACK COPY IS A SNAPSHOT AS AT THE REBUILD AND NOT A HISTORY.
+//*
+//* THE RUN DATE IS PASSED ON THE PARM WITH THE FUNCTION.  IT IS NOT
+//* DEFAULTED TO THE SYSTEM DATE ON PURPOSE - A REBUILD AFTER
+//* MIDNIGHT MUST STILL PICK UP THE GENERATION THAT WAS EFFECTIVE
+//* FOR THE CYCLE BEING PROCESSED.
+//*
+//* AN ABEND U931 HERE LEAVES THE ESTATE WITH NO FALLBACK ROUTE
+//* COPY.  THE ONLINE REGIONS KEEP RUNNING ON THE DB2 TABLE, SO THIS
+//* IS NOT AN OUTAGE, BUT IT MUST BE CLEARED BEFORE THE NEXT DB2
+//* MAINTENANCE WINDOW.
+//* ------------------------------------------------------------------
+//*
+//JOBLIB   DD DSN=CARD.PROD.LOADLIB,DISP=SHR
+//         DD DSN=DSN.V12R1.SDSNLOAD,DISP=SHR
+//*
+//* ------------------------------------------------------------------
+//* STEP 1 - UNLOAD THE EFFECTIVE ROUTES
+//* ------------------------------------------------------------------
+//UNLDROUT EXEC PGM=IKJEFT01,DYNAMNBR=40
+//STEPLIB  DD DSN=CARD.PROD.LOADLIB,DISP=SHR
+//         DD DSN=DSN.V12R1.SDSNLOAD,DISP=SHR
+//ROUTUNL  DD DSN=&&ROUTUNL,DISP=(NEW,PASS),
+//            UNIT=SYSDA,SPACE=(TRK,(15,5),RLSE),
+//            DCB=(RECFM=FB,LRECL=97,BLKSIZE=27936)
+//ROUTCTL  DD DSN=CARD.PROD.REF.ROUTCTL,
+//            DISP=(NEW,CATLG,DELETE),
+//            UNIT=SYSDA,SPACE=(TRK,(1,1),RLSE),
+//            DCB=(RECFM=FB,LRECL=80,BLKSIZE=27920)
+//SYSTSPRT DD SYSOUT=*
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//SYSUDUMP DD SYSOUT=D
+//SYSTSIN  DD *
+  DSN SYSTEM(DB2P)
+  RUN  PROGRAM(CBREF04) PLAN(CARDREFP) -
+       LIB('CARD.PROD.LOADLIB') PARMS('UNLOAD,20250201')
+  END
+/*
+//*
+//* ------------------------------------------------------------------
+//* STEP 2 - SORT INTO ROUTE KEY ORDER.  THE UNLOAD IS ALREADY IN
+//* CURSOR ORDER BUT THE REPRO INTO A KSDS WILL NOT TOLERATE EVEN
+//* ONE OUT OF SEQUENCE RECORD, AND THE CURSOR ORDER IS COLLATED BY
+//* DB2 WHILE THE CLUSTER IS COLLATED BY THE VSAM KEY.
+//* ------------------------------------------------------------------
+//         IF (UNLDROUT.RC = 0) THEN
+//SORTROUT EXEC PGM=SORT,REGION=64M
+//SORTIN   DD DSN=&&ROUTUNL,DISP=(OLD,DELETE)
+//SORTOUT  DD DSN=&&ROUTSRT,DISP=(NEW,PASS),
+//            UNIT=SYSDA,SPACE=(TRK,(15,5),RLSE),
+//            DCB=(RECFM=FB,LRECL=97,BLKSIZE=27936)
+//SORTWK01 DD UNIT=SYSDA,SPACE=(CYL,(5,2))
+//SYSOUT   DD SYSOUT=*
+//SYSIN    DD *
+  SORT FIELDS=(1,16,CH,A)
+  OPTION EQUALS
+/*
+//*
+//* ------------------------------------------------------------------
+//* STEP 3 - DELETE, DEFINE AND RELOAD
+//* ------------------------------------------------------------------
+//BLDROUT  EXEC PGM=IDCAMS,COND=(0,NE,SORTROUT)
+//SYSPRINT DD SYSOUT=*
+//ROUTIN   DD DSN=&&ROUTSRT,DISP=(OLD,PASS)
+//SYSIN    DD *
+ DELETE CARD.PROD.PGMROUT CLUSTER PURGE
+ SET MAXCC = 0
+ DEFINE CLUSTER                          -
+        (NAME(CARD.PROD.PGMROUT)         -
+         INDEXED                         -
+         KEYS(16 0)                      -
+         RECORDSIZE(97 97)               -
+         TRACKS(15 5)                    -
+         SHAREOPTIONS(2 3)               -
+         FREESPACE(20 10)                -
+         VOLUMES(CARD01))                -
+        DATA                             -
+        (NAME(CARD.PROD.PGMROUT.DATA)    -
+         CISZ(4096))                     -
+        INDEX                            -
+        (NAME(CARD.PROD.PGMROUT.INDEX)   -
+         CISZ(1024))
+ REPRO INFILE(ROUTIN)                    -
+       OUTDATASET(CARD.PROD.PGMROUT)
+/*
+//*
+//* ------------------------------------------------------------------
+//* STEP 4 - VERIFY THE REBUILT CLUSTER
+//* ------------------------------------------------------------------
+//VERFROUT EXEC PGM=IKJEFT01,DYNAMNBR=40,COND=(0,NE,BLDROUT)
+//STEPLIB  DD DSN=CARD.PROD.LOADLIB,DISP=SHR
+//         DD DSN=DSN.V12R1.SDSNLOAD,DISP=SHR
+//PGMROUT  DD DSN=CARD.PROD.PGMROUT,DISP=SHR
+//ROUTCTL  DD DSN=CARD.PROD.REF.ROUTCTL,DISP=SHR
+//SYSTSPRT DD SYSOUT=*
+//SYSPRINT DD SYSOUT=*
+//SYSOUT   DD SYSOUT=*
+//SYSUDUMP DD SYSOUT=D
+//SYSTSIN  DD *
+  DSN SYSTEM(DB2P)
+  RUN  PROGRAM(CBREF04) PLAN(CARDREFP) -
+       LIB('CARD.PROD.LOADLIB') PARMS('VERIFY,20250201')
+  END
+/*
+//         ELSE
+//NOBUILD  EXEC PGM=IEFBR14
+//         ENDIF
