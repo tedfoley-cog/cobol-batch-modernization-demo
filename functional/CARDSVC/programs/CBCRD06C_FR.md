@@ -11,13 +11,13 @@ Gated `IF STEP030.RC <= 8` (`app/jcl/cardsvc/CBCRD06J.jcl:132-143`) — runs eve
 
 - In: `PARTYACC(0)` FB 150 CVPWRK01Y; CYCLCTL (`CBCRD06J.jcl:146-149`; SELECTs `app/cardsvc/cbl/CBCRD06C.cbl:47-55`).
 - Out: band report BANDRPT SYSOUT FBA 133.
-- Db2: `ACCOUNT`+`CARD`+`CARD_LIMIT` join cursor (`CBCRD06C.cbl:222-224`); positioned UPDATE `CARDSVC.CARD_LIMIT` risk band / exposure (`CBCRD06C.cbl:442-452`).
+- Db2: `ACCOUNT`+`CARD`+`CARD_LIMIT` join cursor (`CBCRD06C.cbl:222-224`); positioned UPDATE `CARDSVC.CARD_LIMIT` setting `RISK_BAND`, `LAST_REVIEW_DATE` and `AVAIL_AMT` (`CBCRD06C.cbl:433-459`).
 
 ## 3. Requirements owned
 
-**CBCRD06C-FR-001 — Accepted outcomes only.** Applies only records whose `PW-RC` is accepted (0/4); review/fatal records are never applied (`CBCRD06C.cbl` per analysis §3; CARDNITE-FR-015).
+**CBCRD06C-FR-001 — Accepted outcomes only.** Only accepted outcomes are ever applied — an **upstream invariant owned by CBCRD06B**: reviewed/fatal parties are never written to PARTYACC, and CBCRD06C itself has no `PW-RC` test — it applies every record it reads (`CBCRD06C.cbl:9-10,321-369`; CARDNITE-FR-015).
 
-**CBCRD06C-FR-002 — Limit update.** For each accepted party, `CARD_LIMIT.risk band` and exposure are updated from the returned outcome; band changes are reported on BANDRPT.
+**CBCRD06C-FR-002 — Limit update with band-X suppression.** For each accepted party, the positioned update always sets `RISK_BAND` and `LAST_REVIEW_DATE`; `AVAIL_AMT` is recomputed as `LIMIT_AMT - USED_AMT` **except** when the new band is 'X', where `AVAIL_AMT` is forced to zero (suppression counted) so the online authorisation path stops approving — `LIMIT_AMT` itself is deliberately untouched (`CBCRD06C.cbl:433-459`, CRD5810 header note). Band changes are reported on BANDRPT.
 
 ## 4. Target mechanism
 
@@ -26,7 +26,7 @@ Chunk step: `FlatFileItemReader` PARTYACC → JPA positioned-update equivalent o
 ## 5. Error / edge behavior and RC mapping
 
 - RC 0 applied / 4 warnings; abends U0602 file, U0608 SQL (`CBCRD06C.cbl:344,429-466`).
-- A PARTYACC record with PW-RC 8/12 (should not occur) is a data error — rejected with a warning, not silently applied.
+- A PARTYACC record with PW-RC 8/12 (should not occur — upstream invariant, FR-001) is a data error — rejected with a warning, not silently applied. **Target-only defensive addition:** legacy has no such check and would apply the record.
 - Empty PARTYACC (all parties reviewed) is a valid RC 0 no-op.
 
 ## 6. Hard-stop boundary
@@ -35,6 +35,7 @@ None — consumes outcomes; never calls the risk seam.
 
 ## 7. Acceptance criteria
 
-- Accepted records update band/exposure exactly once; reviewed parties' limits are untouched.
+- Accepted records update `RISK_BAND`/`LAST_REVIEW_DATE`/`AVAIL_AMT` exactly once; reviewed parties' limits are untouched.
+- A party moved to band 'X' gets `AVAIL_AMT = 0` with `LIMIT_AMT` unchanged and counts as a suppression; any other band recomputes `AVAIL_AMT = LIMIT_AMT - USED_AMT`.
 - BANDRPT lists each band change with before/after.
 - Re-run after mid-run failure does not double-apply (checkpoint parity).

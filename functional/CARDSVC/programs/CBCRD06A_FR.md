@@ -9,17 +9,17 @@ Runs after the join guard, gated `IF STEP005.RC = 0` (`app/jcl/cardsvc/CBCRD06J.
 
 ## 2. Field-level inputs / outputs
 
-- Db2 in: cursor over `CARDSVC.ACCOUNT` with a `CARDSVC.TRANSACTION` existence subquery — only parties with cycle activity are listed (`app/cardsvc/cbl/CBCRD06A.cbl:150-155`); `CARD_LIMIT`+`CARD` join for exposure fields (`CBCRD06A.cbl:328-329`).
+- Db2 in: WRKCSR — LEFT OUTER JOIN of `CARDSVC.ACCOUNT` to the cycle's `CARDSVC.TRANSACTION` aggregate, selecting an account when **any** of three arms holds: cycle transaction activity, `DELQ_BUCKET > 0` (delinquent even with no movement — CRD5502), or closed with a non-zero balance (`ACCT_STATUS='C' AND CURR_BAL <> 0` — CRD8330) (`app/cardsvc/cbl/CBCRD06A.cbl:140-165`, header `CBCRD06A.cbl:13-15,39-41`); `CARD_LIMIT`+`CARD` join for exposure fields (`CBCRD06A.cbl:328-329`).
 - File out: `CARD.PROD.PARTYWK(+1)` FB **LRECL 150** (`CBCRD06J.jcl:70-74`), layout PARTY-WORK-REC (CVPWRK01Y): key PW-PARTY-ID(11)+PW-ACCT-ID(11), COMP-3 balances, PW-OUTCOME block left for CBCRD06B (`app/cardsvc/cpy/CVPWRK01Y.cpy:7-34`).
 - CYCLCTL read.
 
 ## 3. Requirements owned
 
-**CBCRD06A-FR-001 — Complete work list.** Every party owning an account with transaction activity in the cycle appears on the work list with current balances/exposure fields populated; parties without activity are excluded (CARDNITE-FR-011).
+**CBCRD06A-FR-001 — Complete work list.** Every party owning an account that (a) has transaction activity in the cycle, or (b) carries a delinquency bucket even with no movement (CRD5502), or (c) is closed with a non-zero balance (CRD8330) appears on the work list with current balances/exposure fields populated; accounts matching none of the three arms are excluded (`CBCRD06A.cbl:159-162`; CARDNITE-FR-011).
 
 ## 4. Target mechanism
 
-Chunk step: repository cursor (account + transaction-existence predicate) → `FlatFileItemWriter` PARTYWK per D5 (staging table alternative only if Phase 4 E2E shows file handoffs hurt — plan D5).
+Chunk step: repository cursor reproducing the three-arm WRKCSR predicate (activity OR delinquent OR closed-with-balance) → `FlatFileItemWriter` PARTYWK per D5 (staging table alternative only if Phase 4 E2E shows file handoffs hurt — plan D5).
 
 ## 5. Error / edge behavior and RC mapping
 
@@ -33,7 +33,7 @@ None.
 
 ## 7. Acceptance criteria
 
-- Given seeded accounts with/without cycle transactions, the work list contains exactly the active ones, with COMP-3-scale-faithful `BigDecimal` balances.
+- Given seeded accounts covering all four cases (cycle activity; delinquent-no-movement; closed-with-balance; none of the three), the work list contains exactly the first three, with COMP-3-scale-faithful `BigDecimal` balances.
 - Empty work list exits 4 with the warning message.
 - Outcome block is written empty/initial.
 - Record length/layout is byte-compatible CVPWRK01Y FB 150.

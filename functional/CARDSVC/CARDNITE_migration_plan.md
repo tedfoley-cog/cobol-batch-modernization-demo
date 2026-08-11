@@ -46,7 +46,7 @@ Wave order, contents and gating in §2. Each wave: per-program FR docs written f
 ### Phase 5 — hardening + sign-off
 - Traceability matrix (FR doc §6) completed: every CARDNITE-FR row has covering test + verification case; gaps are defects.
 - Operational hardening: structured logging with cycle date/job name, runbook-equivalent operator messages, restart-count guard (`CC-RESTART-CNT` ≤ 3), documented cold-rerun procedure replacing CBCRD99J.
-- Divergence closure: every item in FR §5.3 (all fifteen: CBCRD02 RC4/EMPTY, CBCRD08 RC8/OUTOFBAL, FORCEOPEN, U0602/U0603, ≤4-vs-≤8 gate, U0632/U0606, scheduler U4001–U4010, CBCRD05A unroutable-fee RC, missing 05A/05B re-run DELETE, WAIT=030 vs WAIT=000, CBCRD05B control-card failure, JCL/runbook abend labels absent from source, CBCRD06B unresolvable risk route, FEEPARM card dataset with no supplying DD, unreachable RC 8 in CBCRD01/03/04/07/08) carries an explicit reconciliation decision in the owning program's FR doc.
+- Divergence closure: every item in FR §5.3 (all sixteen: CBCRD02 RC4/EMPTY, CBCRD08 RC8/OUTOFBAL, FORCEOPEN, U0602/U0603, ≤4-vs-≤8 gate, U0632/U0606, scheduler U4001–U4010, CBCRD05A unroutable-fee RC, missing 05A/05B re-run DELETE, WAIT=030 vs WAIT=000, CBCRD05B control-card failure, JCL/runbook abend labels absent from source, CBCRD06B unresolvable risk route, FEEPARM card dataset with no supplying DD, unreachable RC 8 in CBCRD01/03/04/07/08, CBCRD08 same-date re-run double-roll) carries an explicit reconciliation decision in the owning program's FR doc.
 - Business sign-off against the FR acceptance criteria (§6 gate).
 
 ---

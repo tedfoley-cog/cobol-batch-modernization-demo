@@ -15,13 +15,13 @@ Gated `IF RC <= 4` after STEP010 (`app/jcl/cardsvc/CBCRD06J.jcl:77-90`). PARM: c
 
 ## 3. Requirements owned
 
-**CBCRD06X-FR-001 — One summarised record per party.** PARTYSRT carries exactly one record per party: the input is sorted on (SR-PARTY-ID, SR-ACCT-ID) but the output procedure breaks on `PW-PARTY-ID` alone, **summing** `PW-POSTED-AMT`, `PW-TXN-CNT`, `PW-CURR-BAL`, `PW-CREDIT-LIMIT` and `PW-EXPOSURE-AMT` across the party's accounts into one group record (`2300-ACCUMULATE`, `CBCRD06X.cbl:178-245`) — so CBCRD06B dispatches the risk crossing once per party with the party's **total** exposure (CARDNITE-FR-011).
+**CBCRD06X-FR-001 — One summarised record per party.** PARTYSRT carries exactly one record per party: the input is sorted on (SR-PARTY-ID, SR-ACCT-ID) but the output procedure breaks on `PW-PARTY-ID` alone, **summing** `PW-POSTED-AMT`, `PW-TXN-CNT`, `PW-CURR-BAL`, `PW-CREDIT-LIMIT` and `PW-EXPOSURE-AMT` across the party's accounts into one group record (`2300-ACCUMULATE`, `CBCRD06X.cbl:178-245`) — so CBCRD06B dispatches the risk crossing once per party with the party's **total** exposure (CARDNITE-FR-011). The group record starts as a copy of the group's **first record in sort order** (`2200-START-GROUP`, `CBCRD06X.cbl:221-228`), so the lowest account number in the group is kept as the representative account — deliberately, "so CBCRD06C has something to update against" (`CBCRD06X.cbl:11-13`) — and the first record's other non-summed fields carry forward with it.
 
 **CBCRD06X-FR-002 — Worst risk band carried forward.** The group record carries the worst risk band across the party's accounts, precedence X > C > B > A with unknown bands ranking lowest (`2500-RANK-BAND`, `CBCRD06X.cbl:265-283`); per the 2006 maintenance note, "worst band in the group carried forward instead of the first one read".
 
 ## 4. Target mechanism
 
-Sort by (partyId, acctId), then a per-party aggregation (group-by partyId): sum the five money/count fields, carry the worst band per the X > C > B > A precedence — not a distinct/keep-first step.
+Sort by (partyId, acctId), then a per-party aggregation (group-by partyId): sum the five money/count fields, carry the worst band per the X > C > B > A precedence, and keep the group's lowest account id (first record in sort order) as the representative key plus its non-summed fields — not a distinct/keep-first step for the amounts, but deterministic keep-first for the representative account.
 
 ## 5. Error / edge behavior and RC mapping
 
@@ -34,7 +34,7 @@ None.
 
 ## 7. Acceptance criteria
 
-- Exactly one output record per partyId, in party order.
+- Exactly one output record per partyId, in party order; the record's acctId is the party's lowest account number and its non-summed fields come from that first record (deterministic representative for CBCRD06C).
 - Multi-account party: posted amount, txn count, current balance, credit limit and exposure are the sums across its accounts; risk band is the worst by X > C > B > A (unknown ranks below A).
 - Empty input ⇒ RC 4 warning, empty output.
 - Byte-compatible FB 150 CVPWRK01Y records, outcome block untouched.

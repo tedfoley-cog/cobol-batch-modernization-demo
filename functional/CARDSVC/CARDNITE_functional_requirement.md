@@ -87,10 +87,11 @@ When the fee and interest branches finish, each posts a completion flag on the c
 
 ### Exposure and risk refresh (CBCRD06J)
 
-**CARDNITE-FR-011 — Every party with cycle activity is selected exactly once for risk recalculation.**
-When both branches are complete, a party work list is built from accounts with cycle activity (`CARDSVC.ACCOUNT` with a `CARDSVC.TRANSACTION` existence test), then sorted and **summarised per party** — one record per party with amounts/exposure summed across its accounts and the worst risk band (X > C > B > A) carried forward (`app/jcl/cardsvc/CBCRD06J.jcl:62-90`, `app/cardsvc/cbl/CBCRD06A.cbl:150-155`, `CBCRD06X.cbl:44-52,178-283`; layout `app/cardsvc/cpy/CVPWRK01Y.cpy:7-12`).
+**CARDNITE-FR-011 — Every risk-relevant party is selected exactly once for risk recalculation.**
+When both branches are complete, a party work list is built from accounts meeting any of three arms: cycle transaction activity, a delinquency bucket even with no movement (CRD5502), or closed with a non-zero balance (CRD8330) (`CBCRD06A.cbl:140-165`, header `CBCRD06A.cbl:13-15,39-42`), then sorted and **summarised per party** — one record per party with amounts/exposure summed across its accounts and the worst risk band (X > C > B > A) carried forward (`app/jcl/cardsvc/CBCRD06J.jcl:62-90`, `app/cardsvc/cbl/CBCRD06A.cbl:150-155`, `CBCRD06X.cbl:44-52,178-283`; layout `app/cardsvc/cpy/CVPWRK01Y.cpy:7-12`).
 *Acceptance criteria:*
-- No duplicate party ids on the sorted work list; a multi-account party's record carries the summed amounts and worst band (CBCRD06X_FR).
+- No duplicate party ids on the sorted work list; a multi-account party's record carries the summed amounts, the worst band, and the lowest account number as representative key (CBCRD06X_FR).
+- Delinquent-no-movement and closed-with-balance accounts are selected; accounts matching none of the three arms are not.
 - Work-list records carry party/account keys and COMP-3 balances per CVPWRK01Y (LRECL 150).
 
 **CARDNITE-FR-012 — Each party's exposure is recalculated by the external risk service and the outcome is captured per party.** *(caller contract — see FR-013)*
@@ -113,9 +114,10 @@ When a party returns RC 8 (sanctions/KYC serious condition), it is written to th
 - Reviewed parties stay excluded until Financial Crime releases them; re-running the dispatch step alone must not clear the RC 8 (`docs/runbook-cardnite.md:150-159`).
 
 **CARDNITE-FR-015 — Accepted risk outcomes update card limits.**
-When the accepted file exists, each accepted party's risk band and exposure are applied to `CARDSVC.CARD_LIMIT` via positioned update, and a band-movement report is produced (`app/cardsvc/cbl/CBCRD06C.cbl:222-224,442-452`, `app/jcl/cardsvc/CBCRD06J.jcl:139-149`).
+When the accepted file exists, each accepted party's positioned update sets `RISK_BAND`, `LAST_REVIEW_DATE` and `AVAIL_AMT` on `CARDSVC.CARD_LIMIT` — band 'X' forces `AVAIL_AMT = 0` (suppression) while other bands recompute `LIMIT_AMT - USED_AMT` (CRD5810) — and a band-movement report is produced (`app/cardsvc/cbl/CBCRD06C.cbl:222-224,433-459`, `app/jcl/cardsvc/CBCRD06J.jcl:139-149`).
 *Acceptance criteria:*
-- Only records with accepted per-party RC (0/4) are applied.
+- Only accepted parties are applied — an upstream invariant: reviewed parties never reach the accepted file (CBCRD06C has no PW-RC test; CBCRD06C_FR §3).
+- Band-'X' parties get `AVAIL_AMT = 0` with `LIMIT_AMT` untouched.
 - Applied count equals accepted-file record count minus explicitly skipped records.
 
 ### Downstream financials (CBCRD07J, CBCRD08J)
@@ -128,9 +130,9 @@ When posting data exists, every unposted transaction (`GL_POSTED_FLG = 'N'`) is 
 - Re-run only picks up transactions still flagged unposted (idempotent).
 
 **CARDNITE-FR-017 — Delinquency rolls forward at most one bucket per cycle and feeds collections.**
-When the ledger feed completes, each account's delinquency bucket is rolled forward at most one bucket per cycle, driven by payment due date and shortfall (not the previous bucket alone, so a same-date re-run cannot double-roll); `DELQ_AMT` is recomputed, accounts at bucket ≥ 3 are written to the collections feed (LRECL 100), and bucket-6 charge-off candidates surface as RC 4 (`app/jcl/cardsvc/CBCRD08J.jcl:5-29,34-58`, `app/cardsvc/cbl/CBCRD08.cbl:273,291,550`, `docs/runbook-cardnite.md:85-86`).
+When the ledger feed completes, each account's delinquency bucket is rolled forward at most one bucket per execution, driven by payment due date and shortfall; the source has **no per-cycle guard** — a same-date re-run double-rolls (§5.3 item 16; the target adds an explicit idempotency guard); `DELQ_AMT` is recomputed, accounts at bucket ≥ 3 are written to the collections feed (LRECL 100), and bucket-6 charge-off candidates surface as RC 4 (`app/jcl/cardsvc/CBCRD08J.jcl:5-29,34-58`, `app/cardsvc/cbl/CBCRD08.cbl:273,291,550`, `docs/runbook-cardnite.md:85-86`).
 *Acceptance criteria:*
-- No account moves more than one bucket in one cycle; same-date re-run is a no-op on buckets.
+- No account moves more than one bucket in one cycle; same-date re-run is a no-op on buckets (per-cycle guard — target rule, §5.3 item 16; legacy double-rolls).
 - The collections feed contains exactly the bucket ≥ 3 population; the feed is not transmitted when the job fails (transmission job released only on RC ≤ 4).
 - Grace days come from the SYSIN card (collections policy CP-07), not code.
 - Legacy 6-digit dates are windowed with the century pivot (`app/cpy/CVCONSTY.cpy:9-12`).
@@ -251,6 +253,7 @@ Authoritative dataset table (DSN, LRECL, producer → consumer) is analysis §4.
 13. **APPROVED TARGET DIVERGENCE — CBCRD06B unresolvable risk route**: legacy behavior (via the unreachable-U0605 defect, §3.3) sends **every** party to manual review with an unpopulated risk area and ends step RC 8 when the XMOD/RSKRECAL route is missing or the route table is unavailable. The target treats an unresolvable risk route as a configuration failure that stops the step fatally (exit 12, U0605-equivalent) instead of flooding manual review — a deliberate, approved correction of the latent defect (plan Phase 5 divergence closure; CBCRD06B_FR §5).
 14. **FEEPARM card dataset has no supplying DD**: all three fee handlers read FEEPARM control cards for rates/thresholds/caps/waiver rules (`CBFEE01.cbl:43-57`, `CBFEE02.cbl:41-56`, `CBFEE03.cbl:49-58`), but no JCL in the estate allocates a FEEPARM DD — CBCRD05AJ (the only dispatching job) allocates only STEPLIB/CYCLCTL/FEEAUDIT (`CBCRD05AJ.jcl:36-55`). The parameter source is an absent artifact (analysis §8); the migration's fee parameter table/config (plan wave 2) becomes the authoritative source, with initial values to be confirmed with the business at wave-2 sign-off.
 15. **Unreachable RC 8 in CBCRD01/03/04/07/08**: the JCL comment blocks assign RC 8 meanings ("no records selected", "default card missing", "too many bypasses", "no transactions", "no accounts / grace card rejected"), but none of these programs ever sets 0008 — each moves only `WS-RC-WARNING` (0004) for its warning condition and routes fatal conditions through the abend path (RC 12) (`CBCRD01.cbl:24,449-453`, `CBCRD03.cbl:28-30,493-495`, `CBCRD04.cbl:966-970`, `CBCRD07.cbl:560-566`, `CBCRD08.cbl:520-537`). Same class as item 8 (CBCRD05A) and item 2 (CBCRD08's OUTOFBAL label). Consequence for CBCRD01: an empty AUTHLOG ends RC 4 and the chain **proceeds** — the cycle is not held (contra the JCL comment `CBCRD01J.jcl:18`); FR-003's empty-log criterion is corrected accordingly. Resolution: source RC behavior governs at parity in every owning program FR doc; whether any of these conditions *should* stop the cycle is an explicit business sign-off question, not silent target behavior.
+16. **CBCRD08 same-date re-run double-rolls**: the JCL restart comment claims a second run on the same cycle date does not double roll (`CBCRD08J.jcl:23-29`), but the source has no per-cycle guard — the DELQCSR predicate re-selects already-rolled accounts and the roll arm unconditionally adds +1 (`CBCRD08.cbl:275-303,495-540`). Same class as item 9 (05A/05B re-run safety unverified). Resolution: the target adds an explicit per-cycle idempotency guard as a deliberate improvement (CBCRD08_FR §5).
 
 ### 5.4 User abends by job
 Source-derived abend inventory per program is in analysis §3 (U0101–U1003); the runbook table (`docs/runbook-cardnite.md:91-112`) is the operator view, with the divergences above.
