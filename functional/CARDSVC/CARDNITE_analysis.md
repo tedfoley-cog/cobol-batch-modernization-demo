@@ -4,7 +4,7 @@ Analysis of the CARDNITE nightly cycle (CARDSVC module) for migration planning.
 Analysis only — no functional requirements, no target design decisions.
 
 * Stream: **CARDNITE** nightly authorization settlement and posting cycle. Process type: **BATCH**.
-* Entry point: scheduler table `CARDNITE` (`sched/CARDNITE.sched:17-27`), ordered daily at 17:30, gated on `CICS-CARD-CLOSED` (`sched/CARDNITE.sched:43`), must complete before online open at 06:00 (`sched/CARDNITE.sched:397-400`).
+* Entry point: scheduler table `CARDNITE` (`sched/CARDNITE.sched:17-27`), ordered every day except Sunday (`CALENDAR=ALLDAY`, `NOT-CALENDAR=WEEKSUN`) at 17:30, gated on `CICS-CARD-CLOSED` (`sched/CARDNITE.sched:43`), must complete before online open at 06:00 (`sched/CARDNITE.sched:397-400`).
 * Job chain: CBCRD01J → CBCRD02J → CBCRD03J → CBCRD04J → fork {CBCRD05AJ ∥ CBCRD05BJ} → join CBCRD06J → CBCRD07J → CBCRD08J → CBCRD09J → CBCRD10J.
 * HARD STOP: the XMOD/RSKRECAL dispatch from CBCRD06B via CBCRD90 into PRBRSK1 (PARTYRSK module) is a boundary crossing. Its contract is documented in §7; PARTYRSK internals are out of scope.
 
@@ -144,17 +144,17 @@ PARM convention: the cycle date is set by `SET CYCDATE=` and reaches every progr
 * Inputs: CYCLCTL (`app/jcl/cardsvc/CBCRD05AJ.jcl:50`); output audit trail `CARD.PROD.FEEAUDIT(+1)` LRECL 133 (`CBCRD05AJ.jcl:51-55`), printed when RC≤8 (`CBCRD05AJ.jcl:62-67`).
 * PARM: cycle date only (`CBCRD05AJ.jcl:47`).
 * Db2: cursors on `CARDSVC.ACCOUNT`/`CARDSVC.TRANSACTION` and `CARDSVC.FEE_SCHEDULE` (`CBCRD05A.cbl:243-262`), `CARDSVC.CARD_LIMIT`+`CARDSVC.CARD` join (`CBCRD05A.cbl:394-395`), INSERT `CARDSVC.TRANSACTION` / UPDATE `CARDSVC.ACCOUNT` (`CBCRD05A.cbl:601,647`).
-* Dispatch: for each applicable fee type, fills `FEE-WORK-AREA` (`FR-CALLER-ID` 'CBCRD05A', `CBCRD05A.cbl:138,455`) and calls CBCRD90 with route FEEC (`CBCRD05A.cbl:495-508`); unresolvable route → U0505 (`CBCRD05A.cbl:535`).
-* Restart: deletes its own fee rows for the cycle date before it starts, so re-run is clean (`CBCRD05AJ.jcl:28-31`). Commits every `WS-COMMIT-FREQUENCY` (`CBCRD05A.cbl:378`).
+* Dispatch: for each applicable fee type, fills `FEE-WORK-AREA` (`FR-CALLER-ID` 'CBCRD05A', `CBCRD05A.cbl:138,455`) and calls CBCRD90 with route FEEC (`CBCRD05A.cbl:495-508`); a dispatcher 'ROUTE NOT FOUND' (RC 8, `CBCRD90.cbl:115-120`) is handled as a declined fee — warning RC 4 only (`CBCRD05A.cbl:522-530`); U0505 is raised only for a fatal handler RC (`CBCRD05A.cbl:531-536`).
+* Restart: the JCL comment claims the program deletes its own fee rows for the cycle date before starting (`CBCRD05AJ.jcl:28-31`), but no DELETE exists in CBCRD05A — a JCL-vs-source divergence, see §8. Commits every `WS-COMMIT-FREQUENCY` (`CBCRD05A.cbl:378`).
 * Completion flag: posts `CC-FILLER(1:1)` 'A'/'F' + cycle id at `(3:8)` as its last act (`CBCRD05A.cbl:710-747`).
-* RC: 0 all assessed / 4 skips or handler warning / 8 fee type not routable (flag posted F, join held) / 12 U0502 no flag posted (`CBCRD05AJ.jcl:21-26`). U0501 CYCLCTL unusable (`CBCRD05A.cbl:33`), U0503 SQL (`CBCRD05A.cbl:332` etc.).
+* RC: 0 all assessed / 4 skips, handler warning, or unroutable/declined fee / 12 U0502 no flag posted (`CBCRD05AJ.jcl:21-26`); the JCL's "8 fee type not routable (flag F)" is a JCL-vs-source divergence — the source ends RC 4 with flag 'A' (`CBCRD05A.cbl:522-530,728-732`), see §8. U0501 CYCLCTL unusable (`CBCRD05A.cbl:33`), U0503 SQL (`CBCRD05A.cbl:332` etc.).
 
 ### CBCRD05B — interest and rewards branch (CBCRD05BJ)
 * Inputs: CYCLCTL (`app/jcl/cardsvc/CBCRD05BJ.jcl:43`); report `INTRPT` SYSOUT FBA 133 (`CBCRD05BJ.jcl:44-45`).
 * PARM: cycle date only (`CBCRD05BJ.jcl:40`).
 * Control cards (SYSIN): rounding convention `HALFUP` agreed with Finance/Audit, change-record controlled — a business parameter on cards, not in the program (`CBCRD05BJ.jcl:14-18,53-59`).
 * Db2: cursor/UPDATE `CARDSVC.ACCOUNT` (`CBCRD05B.cbl:251,723`), SELECT `CARDSVC.CARD_LIMIT`+`CARD` (`CBCRD05B.cbl:487-488`), SELECT/INSERT `CARDSVC.TRANSACTION` (`CBCRD05B.cbl:544,676`), INSERT/UPDATE `CARDSVC.REWARDS` (`CBCRD05B.cbl:798-852`).
-* Restart: deletes its interest rows for the cycle date before accruing — no double charge (`CBCRD05BJ.jcl:27-30`). Commits every `WS-COMMIT-FREQUENCY` (`CBCRD05B.cbl:467`).
+* Restart: the JCL comment claims interest rows for the cycle date are deleted before accruing (`CBCRD05BJ.jcl:27-30`), but no DELETE exists in CBCRD05B — a JCL-vs-source divergence, see §8. Commits every `WS-COMMIT-FREQUENCY` (`CBCRD05B.cbl:467`).
 * Completion flag: `CC-FILLER(2:1)` 'B'/'F' (`CBCRD05B.cbl:943-977`).
 * RC: 0 complete / 4 accounts skipped, no APR on file / 8 control card error or unsupported rounding (flag posted F) / 12 U0512 no flag (`CBCRD05BJ.jcl:20-25`). U0506 rounding/control card abend path (`CBCRD05B.cbl:388-395`), U0503 SQL, U0501 CYCLCTL.
 
@@ -177,7 +177,7 @@ PARM convention: the cycle date is set by `SET CYCDATE=` and reaches every progr
 * PARM: cycle date only (`CBCRD06J.jcl:113`; parsed `CBCRD06B.cbl:230-236`).
 * Db2: INSERT `CARDSVC.ROUTE_AUDIT` per crossing (`CBCRD06B.cbl:533-556`); commit every `WS-COMMIT-FREQUENCY` dispatches (`CBCRD06B.cbl:287-290`).
 * Per-party RC handling (contract in §7): worst-seen becomes the step RC; the JCL gates STEP040 on `IF RC <= 8` (`CBCRD06J.jcl:132-138`), although the program header says STEP040 "can be gated with IF RC <= 4" (`CBCRD06B.cbl:16-25`) — a source-comment-vs-JCL divergence (the JCL's ≤8 is what lets accepted parties proceed on a manual-review RC 8), see §8.
-* Abends: U0602 file, U0605 route unresolvable, U0606 crossing fatal, U0607 commarea version mismatch (`CBCRD06B.cbl:41-44,367-381`). Runbook maps the step's fatal path to U0632 (`docs/runbook-cardnite.md:103,148`) — see §8 discrepancies.
+* Abends: U0602 file, U0605 route unresolvable, U0606 crossing fatal, U0607 commarea version mismatch (`CBCRD06B.cbl:41-44,367-381`). Runbook maps the step's fatal path to U0632 (`docs/runbook-cardnite.md:103,148`) — see §8 discrepancies. Note: U0605 is unreachable — CBCRD90 exits with only `LK-RETURN-CD` = 8 on a not-found route without setting `RQ-RC` (`CBCRD90.cbl:115-121,307`), so CBCRD06B's `RQ-RC-NOT-FOUND` test (`CBCRD06B.cbl:367-374`) never fires for a missing route.
 * Operator doctrine: never re-run STEP030 alone to clear an RC 8; reviewed parties stay excluded until Financial Crime releases them (`docs/runbook-cardnite.md:150-159`).
 
 ### CBCRD06C — apply outcomes (CBCRD06J STEP040)
