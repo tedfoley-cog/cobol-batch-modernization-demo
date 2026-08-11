@@ -11,7 +11,7 @@ Interface (`app/cardsvc/cbl/CBCRD90.cbl:84-95`):
 
 | Parameter | Layout | Direction |
 |---|---|---|
-| `LK-ROUTE-REQUEST` PIC X(38) | ROUTE-REQUEST, CVROUT01Y (`app/cpy/CVROUT01Y.cpy:53-64`): RQ-ROUTE-TYPE X(4), RQ-ROUTE-KEY X(8), RQ-SEQ-NBR 9(2), RQ-RC 9(4), RQ-USED-FALLBACK X(1) | in/out |
+| `LK-ROUTE-REQUEST` PIC X(38) | ROUTE-REQUEST, CVROUT01Y (`app/cpy/CVROUT01Y.cpy:53-64`): RQ-ROUTE-TYPE X(4), RQ-ROUTE-KEY X(8), RQ-SEQ-NBR 9(4), RQ-RESOLVED-PGM X(8), RQ-RESOLVED-CALL X(1), RQ-RESOLVED-MOD X(8), RQ-USED-FALLBACK X(1), RQ-RC 9(4) | in/out |
 | `LK-PARM-AREA` PIC X(512) | opaque pass-through to the target (FEE-WORK-AREA or CV-RISK-AREA) | in/out |
 | `LK-RETURN-AREA` | LK-RETURN-CD 9(4) + program + message (`CBCRD90.cbl:88-91`) | out |
 
@@ -19,7 +19,7 @@ Interface (`app/cardsvc/cbl/CBCRD90.cbl:84-95`):
 
 **CBCRD90-FR-001 — Route resolution from the routing table, date/active filtered.**
 The dispatcher resolves `(ROUTE_TYPE, ROUTE_KEY, SEQ_NBR)` against `CARDSVC.PGM_ROUTE` with `ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE` (`CBCRD90.cbl:70-82`), caching up to 200 routes per run unit (`app/cpy/CVROUT01Y.cpy:36-51`, `CBCRD90.cbl:133-149`).
-*Target:* `ProgramRouter` resolves handler beans from `pgm_route` by `(routeType, routeKey)` with the same filter, ordered by `SEQ_NBR` (target design routing convention).
+*Target:* `ProgramRouter` resolves handler beans from `pgm_route` by the exact caller-supplied triple `(routeType, routeKey, seqNbr)` with the same active/date filter — the sequence number is part of the resolution key, not an ordering hint (callers pass seq 1: `CBCRD05A.cbl:500`, `CBCRD06B.cbl:352`; multi-row keys such as FRAU/HIGHRISK seq 1-3 exist in the seed, `40_SEED_PGM_ROUTE.sql:55-57`).
 
 **CBCRD90-FR-002 — VSAM fallback on route-store outage.**
 When the Db2 load fails, routes load from VSAM `CARD.PROD.PGMROUT` (`CBCRD90.cbl:133-146,217-261`).
@@ -54,5 +54,5 @@ CBCRD90 is the carrier of the XMOD/RSKRECAL crossing but owns none of PRBRSK1's 
 - Inactive or out-of-date-window routes are never resolved.
 - Route-not-found is reported to the caller as a distinct outcome (RC 8 equivalent) — visibly, unlike the legacy copy-back defect.
 - Unloadable target with a configured fallback dispatches the fallback and flags `usedFallback`.
-- Every dispatch (success and failure) produces exactly one `route_audit` row.
+- Every successful resolution produces exactly one `route_audit` row (legacy parity: `4000-AUDIT-DISPATCH` runs only after resolution, `CBCRD90.cbl:123-124`; not-found/table-error exits leave no audit row, `CBCRD90.cbl:385-395`). **Target improvement (explicit):** failed resolutions are also audited, and audit-insert failures are surfaced rather than ignored (legacy ignores the INSERT SQLCODE, `CBCRD90.cbl:373-375`).
 - A route change is honored by the next dispatch (legacy CANCEL semantics).

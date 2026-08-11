@@ -32,8 +32,10 @@ Tasklet step polling `cycle_control.fee_branch_status` / `interest_branch_status
 | both flags complete | RC 0 | step COMPLETED |
 | fee branch not complete at limit | U0610, RC 12 | exit 12, code U0610 logged |
 | interest branch not complete at limit | U0611 | exit 12, U0611 |
-| a branch posted 'F' — fail immediately, no wait | U0612 | exit 12, U0612 |
+| a branch posted 'F' — fail immediately, no wait | U0612 (intended; see caveat below) | exit 12, U0612 |
 | control record unusable | U0601 | exit 12, U0601 |
+
+**Source caveat (failed-flag path):** the intended immediate U0612 relies on an ill-defined construct — `2000-CHECK-BRANCHES` handles the failed flag with `GO TO 2000-EXIT` **without** incrementing `WS-POLL-CNT` (`CBCRD06W.cbl:187-189`), but `2000-EXIT` is a separate paragraph outside the PERFORM range (no `THRU`, `CBCRD06W.cbl:114-116,199-201`), so behavior depends on the compiler/runtime's handling of a GO TO out of a performed paragraph: fall-through reaches `3000-TERMINATE` (U0612), while a return to the loop would spin re-reading CYCLCTL forever since the counter never advances. The legacy outcome cannot be confirmed from the repo; the U0612 abend and runbook table indicate immediate failure is the intent. **Target:** deterministic immediate exit 12 / U0612 on a failed flag — recorded as intent-preserving; if the legacy runtime in fact hangs, this is a (desirable) divergence to note at parity sign-off.
 
 **Divergence reconciliation (FR §5.3 — U0602/U0603):** the JCL comment and runbook label the join failures U0602/U0603 (`CBCRD06J.jcl:32-34`, `docs/runbook-cardnite.md:101-102`) but the source raises only U0601/U0610/U0611/U0612 (`CBCRD06W.cbl:28-33`). Resolution: **source codes govern**; runbook/JCL labels retired at cutover.
 

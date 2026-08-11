@@ -11,7 +11,7 @@ PARM: cycle date only (`CBCRD05AJ.jcl:47`).
 
 ## 2. Field-level inputs / outputs
 
-- In: CYCLCTL (`CBCRD05AJ.jcl:50`).
+- In: CYCLCTL (`CBCRD05AJ.jcl:50`). Note: the dispatched fee handlers expect a FEEPARM card dataset, but CBCRD05AJ allocates no FEEPARM DD (absent artifact — see CBFEE01_FR §2, stream FR §5.3 item 14).
 - Out: fee audit trail `CARD.PROD.FEEAUDIT(+1)` LRECL 133 (`CBCRD05AJ.jcl:51-55`), printed when RC≤8 (`CBCRD05AJ.jcl:62-67`).
 - Db2: cursors on `CARDSVC.ACCOUNT`/`TRANSACTION` and `FEE_SCHEDULE` (`app/cardsvc/cbl/CBCRD05A.cbl:243-262`), `CARD_LIMIT`+`CARD` join (`CBCRD05A.cbl:394-395`), INSERT `TRANSACTION` / UPDATE `ACCOUNT` (`CBCRD05A.cbl:601,647`) — fee writes are done by the handlers; 05A owns the unit of work.
 - Dispatch: per applicable fee type fills FEE-WORK-AREA (FR-CALLER-ID 'CBCRD05A', `CBCRD05A.cbl:138,455`) and calls CBCRD90 with route FEEC (`CBCRD05A.cbl:495-508`).

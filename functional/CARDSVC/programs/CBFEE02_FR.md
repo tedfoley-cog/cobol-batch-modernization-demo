@@ -9,7 +9,7 @@ Reached only dynamically: routes FEEC/OVLM and FEEC/CASH (`app/cardsvc/cbl/CBFEE
 
 ## 2. Field-level inputs / outputs
 
-- Reads `CARDSVC.FEE_SCHEDULE`, `CARDSVC.TRANSACTION`, FEEPARM cards (`CBFEE02.cbl:9-10`).
+- Reads `CARDSVC.FEE_SCHEDULE`, `CARDSVC.TRANSACTION`, FEEPARM cards (`CBFEE02.cbl:9-10`) — no FEEPARM DD exists in any JCL (absent artifact; see CBFEE01_FR §2 and stream FR §5.3 item 14).
 - Writes INSERT `CARDSVC.TRANSACTION` (`CBFEE02.cbl:531`), UPDATE `CARDSVC.ACCOUNT` (`CBFEE02.cbl:581-597`).
 - Cash-advance basis comes from `FW-AUTH-IMAGE` — the 60-byte CVAUTH01Y detail area addressed through the `AUTH-CASH-ADV` REDEFINES under `EVALUATE AUTH-TYPE` (`CBFEE02.cbl:19-27`).
 - Outputs: BR-RETURN-CD, BR-FEE-TOTAL, BR-FEE-COUNT.

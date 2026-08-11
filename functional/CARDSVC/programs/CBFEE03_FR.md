@@ -9,7 +9,7 @@ Reached only dynamically: route FEEC/FRGN (`app/cardsvc/cbl/CBFEE03.cbl:4-5`; se
 
 ## 2. Field-level inputs / outputs
 
-- Reads `CARDSVC.FEE_SCHEDULE`, `CARDSVC.TRANSACTION`, `CARDSVC.MERCHANT` (`CBFEE03.cbl:9-10`, MERCHANT at `CBFEE03.cbl:402`), FEEPARM cards.
+- Reads `CARDSVC.FEE_SCHEDULE`, `CARDSVC.TRANSACTION`, `CARDSVC.MERCHANT` (`CBFEE03.cbl:9-10`, MERCHANT at `CBFEE03.cbl:402`), FEEPARM cards — no FEEPARM DD exists in any JCL (absent artifact; see CBFEE01_FR §2 and stream FR §5.3 item 14).
 - Writes INSERT `CARDSVC.TRANSACTION` (`CBFEE03.cbl:589`), UPDATE `CARDSVC.ACCOUNT` (`CBFEE03.cbl:639`).
 - Outputs: BR-RETURN-CD, BR-FEE-TOTAL, BR-FEE-COUNT.
 

@@ -388,6 +388,7 @@ Referenced but **not present** in the repo:
 | CICSCARD | `sched/CARDNITE.sched:9` | region shutdown job posting CICS-CARD-CLOSED, no JCL |
 | CARD.PROD.STGSTAT builder | `CBCRD10.cbl:21-22` says STGSTAT "is built by the job" — no producing step exists in any CARDNITE JCL | stage statistics producer unidentified in repo |
 | DFSORT/IDCAMS/IEBGENER, IKJEFT01 | throughout JCL | IBM utilities, expected absent |
+| **FEEPARM card dataset** | read by all three fee handlers (`CBFEE01.cbl:43-57`, `CBFEE02.cbl:41-56`, `CBFEE03.cbl:49-58`) for rates/thresholds/caps/waiver rules | **No FEEPARM DD exists in any JCL** — the only dispatching job CBCRD05AJ allocates only STEPLIB/CYCLCTL/FEEAUDIT (`CBCRD05AJ.jcl:36-55`). The card producer/allocation is absent from the estate; the migration must decide the authoritative fee-parameter source (plan wave 2 fee parameter table/config) |
 
 Documentation discrepancies (source is authoritative):
 
