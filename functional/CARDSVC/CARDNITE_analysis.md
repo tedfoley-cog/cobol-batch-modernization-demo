@@ -388,6 +388,7 @@ Referenced but **not present** in the repo:
 | CICSCARD | `sched/CARDNITE.sched:9` | region shutdown job posting CICS-CARD-CLOSED, no JCL |
 | CARD.PROD.STGSTAT builder | `CBCRD10.cbl:21-22` says STGSTAT "is built by the job" — no producing step exists in any CARDNITE JCL | stage statistics producer unidentified in repo |
 | DFSORT/IDCAMS/IEBGENER, IKJEFT01 | throughout JCL | IBM utilities, expected absent |
+| **FEEPARM card dataset** | read by all three fee handlers (`CBFEE01.cbl:43-57`, `CBFEE02.cbl:41-56`, `CBFEE03.cbl:49-58`) for rates/thresholds/caps/waiver rules | **No FEEPARM DD exists in any JCL** — the only dispatching job CBCRD05AJ allocates only STEPLIB/CYCLCTL/FEEAUDIT (`CBCRD05AJ.jcl:36-55`). The card producer/allocation is absent from the estate; the migration must decide the authoritative fee-parameter source (plan wave 2 fee parameter table/config) |
 
 Documentation discrepancies (source is authoritative):
 
@@ -397,3 +398,6 @@ Documentation discrepancies (source is authoritative):
 4. CBCRD06W abend codes: the source raises only U0601/U0610/U0611/U0612 (`CBCRD06W.cbl:28-33`); the U0602/U0603 codes for STEP005 exist only in the JCL comment (`app/jcl/cardsvc/CBCRD06J.jcl:32-34`) and runbook (`docs/runbook-cardnite.md:101-102`) — the legacy program never issues them.
 5. CBCRD06B header says STEP040 "can be gated with IF RC <= 4" (`CBCRD06B.cbl:24-25`), but the JCL gates on `IF RC <= 8` (`CBCRD06J.jcl:138`); the JCL is authoritative — RC 8 is the manual-review business outcome and STEP040 must still run for accepted parties.
 6. The CBCRD05A/05B branch flags are carried in bytes officially declared as filler (`app/cpy/CVCTRL01Y.cpy:41`) — the copybook does not document the overlay; only the program comments do (`CBCRD05A.cbl:710`, `CBCRD05B.cbl:943`, `CBCRD06W.cbl:10-11`).
+7. CBCRD05A unroutable fee type: the JCL comment says RC 8 / flag 'F' / join held (`CBCRD05AJ.jcl:21-26`), but the source treats a dispatcher 'ROUTE NOT FOUND' (RC 8, `CBCRD90.cbl:115-120`) as a declined fee — warning only, step RC 4, flag 'A', join proceeds (`CBCRD05A.cbl:522-530,728-732`).
+8. CBCRD05A/05B re-run deletion: the JCL restart comments claim each branch deletes its cycle-date rows before starting (`CBCRD05AJ.jcl:28-31`, `CBCRD05BJ.jcl:27-30`), but neither program contains a DELETE — legacy same-cycle re-run safety is unverified; the migration must implement idempotency explicitly.
+9. CBCRD06W standing WAIT: the JCL passes `WAIT=030` (`CBCRD06J.jcl:51`); the program header claims the standard schedule passes `WAIT=000` (`CBCRD06W.cbl:22-24`) — JCL authoritative.

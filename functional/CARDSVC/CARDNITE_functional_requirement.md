@@ -24,7 +24,7 @@ When the CICS card region has closed (condition `CICS-CARD-CLOSED`), the nightly
 **CARDNITE-FR-002 — A failed cycle is held, never skipped or cancelled.**
 When any job in the chain ends NOTOK, the cycle is placed in `CARDNITE-HELD` and stops; the remaining jobs do not run and the cycle is resumed by operators, not re-ordered (`sched/CARDNITE.sched:403-408`). Exception: a CBCRD09J (backup) failure still posts its successor so the close can run — see CARDNITE-FR-018 (`sched/CARDNITE.sched:350-357`).
 *Acceptance criteria:*
-- After a mid-chain failure, no downstream job runs until the failure is resolved.
+- After a mid-chain failure, no downstream job runs until the failure is resolved — except a CBCRD09J (backup) failure, which still posts its successor (see CARDNITE-FR-018).
 - The cycle-control record retains status and restart position (`app/cpy/CVCTRL01Y.cpy:6-34`).
 
 ### Authorization intake (CBCRD01J → CBCRD03J)
@@ -32,8 +32,8 @@ When any job in the chain ends NOTOK, the cycle is placed in `CARDNITE-HELD` and
 **CARDNITE-FR-003 — All of the day's authorizations are extracted for settlement.**
 When the cycle opens, every record on the authorization log (VSAM ESDS AUTHLOG) is extracted to the day's extract generation (AUTHEXTR GDG, FB 300) with cycle date/id stamped on each record (`app/jcl/cardsvc/CBCRD01J.jcl:32-43`, `app/cardsvc/cbl/CBCRD01.cbl:48`, layout `app/cardsvc/cpy/CVAXTR01Y.cpy:13-20`).
 *Acceptance criteria:*
-- Extract record count equals AUTHLOG record count minus explicitly skipped records; skips surface as RC 4 (`CBCRD01J.jcl:15-19`).
-- Zero records selected surfaces as RC 8, which the scheduler maps to NOTOK for CBCRD01J — operations are notified, `CARDNITE-HELD` is set and the cycle stops (`app/jcl/cardsvc/CBCRD01J.jcl:18`, `sched/CARDNITE.sched:47-53`).
+- Extract record count equals AUTHLOG record count minus explicitly skipped records; skips are counted and displayed only — they never affect the RC (a run that skips some records but extracts others ends RC 0, `CBCRD01.cbl:451-453`; the JCL comment's "skips surface as RC 4" is retired per §5.3 item 15).
+- Zero records selected surfaces as RC 4 with the 'NO RECORDS SELECTED' warning and the chain proceeds with an empty extract (`CBCRD01.cbl:24,449-453`) — the JCL comment's "RC 8, cycle held" is unreachable in the source (§5.3 item 15); whether an empty online day should hold the cycle is a business sign-off question.
 
 **CARDNITE-FR-004 — Extracted authorizations are edited and rejects split out under a duty-manager tolerance.**
 When the extract is processed, each record is validated (auth-type overlay decode + range checks) and written to the clean file or the reject file with a reason code R001–R010; the job ends RC 4 when rejects are within the PARM tolerance (standing 02 percent) and RC 8 — cycle held — when over it (`app/jcl/cardsvc/CBCRD02J.jcl:8-25,34-50`, `app/cardsvc/cbl/CBCRD02.cbl:240-241`, reason codes `app/cardsvc/cpy/CVRJCT01Y.cpy:13-22`, `docs/runbook-cardnite.md:76-77`).
@@ -46,14 +46,14 @@ When the extract is processed, each record is validated (auth-type overlay decod
 When the clean file exists, it is sorted into card/date/sequence order (rejected records dropped), then each record is enriched with MCC, acquirer and settlement route from the merchant reference (VSAM MERCHRTE + `CARDSVC.MERCHANT`); unmatched merchants take the Settlements-owned defaults from control cards (`DEFAULT-ROUTE=DFLT`, `DEFAULT-ACQID=…`) and surface as RC 4 (`app/jcl/cardsvc/CBCRD03J.jcl:16-26,37-58,65-90`, `app/cardsvc/cbl/CBCRD03.cbl:389`).
 *Acceptance criteria:*
 - Output is in posting sequence; no rejected record reaches posting.
-- Defaulted-merchant count is reported; missing default card is RC 8.
+- Defaulted-merchant count is reported. No RC 8 exists in CBCRD03 (§5.3 item 15), and a missing default card is not detected by legacy — it silently falls back to the hardcoded 'DFLT'/'UNKNOWN' values (`CBCRD03.cbl:152-154,255-274`); the target makes the defaults required, validated configuration (target-only rule, CBCRD03_FR §5).
 
 ### Posting (CBCRD04J)
 
 **CARDNITE-FR-006 — Every enriched authorization is posted exactly once to the account ledger.**
 When the enriched file is processed, each authorization creates a `CARDSVC.TRANSACTION` row, updates `CARDSVC.ACCOUNT` balances and `CARDSVC.CARD_LIMIT` exposure, and marks the source `CARDSVC.AUTHORIZATION` row posted; unpostable records are bypassed to a reject file rather than failing the run (`app/jcl/cardsvc/CBCRD04J.jcl:41-54`, `app/cardsvc/cbl/CBCRD04.cbl:458,730,816,850`).
 *Acceptance criteria:*
-- posted + bypassed = records read; bypasses surface as RC 4, "too many" as RC 8 (`CBCRD04J.jcl:19-23`).
+- posted + bypassed = records read; bypasses surface as RC 4 regardless of share — the JCL's "too many bypasses = RC 8" is unreachable in the source (`CBCRD04.cbl:966-970`; §5.3 item 15).
 - A transaction is never posted twice for the same authorization (duplicate insert in the checkpoint window is treated as already done, `CBCRD04.cbl:779`).
 
 **CARDNITE-FR-007 — Posting is restartable from the last committed checkpoint without re-posting.**
@@ -76,7 +76,7 @@ When posting completes, each account is evaluated for annual, late, over-limit, 
 In parallel with fees, interest is accrued per account on ADB at the account APR with cash advances at the cash APR, using the Finance/Audit-agreed rounding convention from control cards (`ROUNDING=HALFUP`, change-record controlled); rewards are accrued to `CARDSVC.REWARDS` (`app/jcl/cardsvc/CBCRD05BJ.jcl:5-18,53-59`, `app/cardsvc/cbl/CBCRD05B.cbl:251,487-488,544,676,723,798-852`).
 *Acceptance criteria:*
 - Accounts with no APR on file are skipped and counted (RC 4), not defaulted.
-- An unsupported rounding value or control-card error stops the branch (RC 8, flag posted failed) — no accrual under an unagreed convention (`CBCRD05BJ.jcl:20-25`).
+- An unsupported rounding value or control-card error stops the branch fatally before any accrual — U0506, RC 12, no branch flag posted (`CBCRD05B.cbl:384-397`); the JCL comment's "RC 8, flag 'F'" is a divergence — see §5.3 item 11.
 - Re-run safety: the JCL restart comment claims prior interest rows are deleted first (`CBCRD05BJ.jcl:27-30`), but no DELETE exists in CBCRD05B — see §5.3 item 9. The migration must provide same-cycle idempotency; the legacy claim is unverified.
 
 **CARDNITE-FR-010 — Exposure refresh runs only after both branches have completed successfully.**
@@ -87,10 +87,11 @@ When the fee and interest branches finish, each posts a completion flag on the c
 
 ### Exposure and risk refresh (CBCRD06J)
 
-**CARDNITE-FR-011 — Every party with cycle activity is selected exactly once for risk recalculation.**
-When both branches are complete, a party work list is built from accounts with cycle activity (`CARDSVC.ACCOUNT` with a `CARDSVC.TRANSACTION` existence test), then sorted and de-duplicated so each party appears once (`app/jcl/cardsvc/CBCRD06J.jcl:62-90`, `app/cardsvc/cbl/CBCRD06A.cbl:150-155`, `CBCRD06X.cbl:44-52`; layout `app/cardsvc/cpy/CVPWRK01Y.cpy:7-12`).
+**CARDNITE-FR-011 — Every risk-relevant party is selected exactly once for risk recalculation.**
+When both branches are complete, a party work list is built from accounts meeting any of three arms: cycle transaction activity, a delinquency bucket even with no movement (CRD5502), or closed with a non-zero balance (CRD8330) (`CBCRD06A.cbl:140-165`, header `CBCRD06A.cbl:13-15,39-42`), then sorted and **summarised per party** — one record per party with amounts/exposure summed across its accounts and the worst risk band (X > C > B > A) carried forward (`app/jcl/cardsvc/CBCRD06J.jcl:62-90`, `app/cardsvc/cbl/CBCRD06A.cbl:150-155`, `CBCRD06X.cbl:44-52,178-283`; layout `app/cardsvc/cpy/CVPWRK01Y.cpy:7-12`).
 *Acceptance criteria:*
-- No duplicate party ids on the sorted work list.
+- No duplicate party ids on the sorted work list; a multi-account party's record carries the summed amounts, the worst band, and — because the group header is the first record in (party, account) sort order — the lowest account number as representative key **plus every other non-summed field from that first account's record**, which the target group-by must reproduce or CBCRD06C updates a different limit row (`CBCRD06X.cbl:157-159,221-227`; CBCRD06X_FR).
+- Delinquent-no-movement and closed-with-balance accounts are selected; accounts matching none of the three arms are not.
 - Work-list records carry party/account keys and COMP-3 balances per CVPWRK01Y (LRECL 150).
 
 **CARDNITE-FR-012 — Each party's exposure is recalculated by the external risk service and the outcome is captured per party.** *(caller contract — see FR-013)*
@@ -113,24 +114,25 @@ When a party returns RC 8 (sanctions/KYC serious condition), it is written to th
 - Reviewed parties stay excluded until Financial Crime releases them; re-running the dispatch step alone must not clear the RC 8 (`docs/runbook-cardnite.md:150-159`).
 
 **CARDNITE-FR-015 — Accepted risk outcomes update card limits.**
-When the accepted file exists, each accepted party's risk band and exposure are applied to `CARDSVC.CARD_LIMIT` via positioned update, and a band-movement report is produced (`app/cardsvc/cbl/CBCRD06C.cbl:222-224,442-452`, `app/jcl/cardsvc/CBCRD06J.jcl:139-149`).
+When the accepted file exists, each accepted party's positioned update sets `RISK_BAND`, `LAST_REVIEW_DATE` and `AVAIL_AMT` on `CARDSVC.CARD_LIMIT` — band 'X' forces `AVAIL_AMT = 0` (suppression) while other bands recompute `LIMIT_AMT - USED_AMT` (CRD5810) — and a band-movement report is produced (`app/cardsvc/cbl/CBCRD06C.cbl:222-224,433-459`, `app/jcl/cardsvc/CBCRD06J.jcl:139-149`).
 *Acceptance criteria:*
-- Only records with accepted per-party RC (0/4) are applied.
+- Only accepted parties are applied — an upstream invariant: reviewed parties never reach the accepted file (CBCRD06C has no PW-RC test; CBCRD06C_FR §3).
+- Band-'X' parties get `AVAIL_AMT = 0` with `LIMIT_AMT` untouched.
 - Applied count equals accepted-file record count minus explicitly skipped records.
 
 ### Downstream financials (CBCRD07J, CBCRD08J)
 
 **CARDNITE-FR-016 — The general ledger feed is complete, mapped, and provably balanced — or not sent at all.**
-When posting data exists, every unposted transaction (`GL_POSTED_FLG = 'N'`) is aggregated by transaction type/product into `CARDSVC.GL_POSTING` using the Finance-owned mapping cards; total debits must equal total credits to the cent before commit — on any difference the entire feed is rolled back and the job abends (U0704), leaving no partial ledger (`app/cardsvc/cbl/CBCRD07.cbl:275-276,598,647-654,699-746`, `app/jcl/cardsvc/CBCRD07J.jcl:10-24,53-70`, `docs/runbook-cardnite.md:184-196`).
+When posting data exists, every unposted transaction (`GL_POSTED_FLG = 'N'`) is aggregated by transaction type/product into `CARDSVC.GL_POSTING` using the Finance-owned mapping cards; total debits must equal total credits to the cent — on any difference the job abends (U0704) with no partial ledger left behind (`app/cardsvc/cbl/CBCRD07.cbl:275-276,598,645-654,706-740`, `app/jcl/cardsvc/CBCRD07J.jcl:10-24,53-70`, `docs/runbook-cardnite.md:184-196`). **The no-partial-ledger guarantee is a target rule**: legacy commits mid-run every `CC-COMMIT-FREQ` rows, so a large out-of-balance feed leaves committed rows behind (§5.3 item 17); the target proves the balance before any commit.
 *Acceptance criteria:*
-- Debits = credits, always, or nothing is written.
+- Debits = credits, always, or nothing is written (single-transaction proof-before-commit — target rule, §5.3 item 17; legacy's end-of-run rollback only undoes work since the last mid-run commit).
 - Unmapped combinations post to the suspense account and surface RC 4 so Finance adds a mapping card (`CBCRD07J.jcl:26-32`).
 - Re-run only picks up transactions still flagged unposted (idempotent).
 
 **CARDNITE-FR-017 — Delinquency rolls forward at most one bucket per cycle and feeds collections.**
-When the ledger feed completes, each account's delinquency bucket is rolled forward at most one bucket per cycle, driven by payment due date and shortfall (not the previous bucket alone, so a same-date re-run cannot double-roll); `DELQ_AMT` is recomputed, accounts at bucket ≥ 3 are written to the collections feed (LRECL 100), and bucket-6 charge-off candidates surface as RC 4 (`app/jcl/cardsvc/CBCRD08J.jcl:5-29,34-58`, `app/cardsvc/cbl/CBCRD08.cbl:273,291,550`, `docs/runbook-cardnite.md:85-86`).
+When the ledger feed completes, each account's delinquency bucket is rolled forward at most one bucket per execution, driven by payment due date and shortfall; the source has **no per-cycle guard** — a same-date re-run double-rolls (§5.3 item 16; the target adds an explicit idempotency guard); `DELQ_AMT` is recomputed, accounts at bucket ≥ 3 are written to the collections feed (LRECL 100), and bucket-6 charge-off candidates surface as RC 4 (`app/jcl/cardsvc/CBCRD08J.jcl:5-29,34-58`, `app/cardsvc/cbl/CBCRD08.cbl:273,291,550`, `docs/runbook-cardnite.md:85-86`).
 *Acceptance criteria:*
-- No account moves more than one bucket in one cycle; same-date re-run is a no-op on buckets.
+- No account moves more than one bucket in one cycle; same-date re-run is a no-op on buckets (per-cycle guard — target rule, §5.3 item 16; legacy double-rolls).
 - The collections feed contains exactly the bucket ≥ 3 population; the feed is not transmitted when the job fails (transmission job released only on RC ≤ 4).
 - Grace days come from the SYSIN card (collections policy CP-07), not code.
 - Legacy 6-digit dates are windowed with the century pivot (`app/cpy/CVCONSTY.cpy:9-12`).
@@ -224,9 +226,9 @@ Authoritative dataset table (DSN, LRECL, producer → consumer) is analysis §4.
 ### 5.1 Edits and rejects
 - Intake edits: auth-type overlay decode + range checks; reject reasons R001–R010 (`CVRJCT01Y.cpy:13-22`) — FR-004.
 - Enrichment: unmatched merchant → defaults + warning count (FR-005).
-- Posting: unpostable → bypass file, not failure; excess bypasses → RC 8 (FR-006).
+- Posting: unpostable → bypass file (RC 4), not failure; no bypass-share RC 8 exists in the source (FR-006, §5.3 item 15).
 - Risk: per-party RC 0/4/8/12 (FR-012/014); commarea version check U0607 (FR-013).
-- Interest: unsupported rounding / card error → RC 8, branch flagged failed (FR-009).
+- Interest: unsupported rounding / card error → U0506, RC 12, no branch flag posted (FR-009, §5.3 item 11).
 - GL: unmapped → suspense + RC 4; imbalance → U0704 full rollback (FR-016).
 
 ### 5.2 Tolerances
@@ -246,6 +248,15 @@ Authoritative dataset table (DSN, LRECL, producer → consumer) is analysis §4.
 8. **CBCRD05A unroutable fee type**: the JCL comment says RC 8 / flag 'F' / join held (`CBCRD05AJ.jcl:21-26`), but the source treats a dispatcher 'ROUTE NOT FOUND' (RC 8, `CBCRD90.cbl:115-120`) as a declined fee — warning only, step RC 4, flag 'A', join proceeds (`CBCRD05A.cbl:522-530,728-732`); only handler RC 12 abends (U0505, `CBCRD05A.cbl:531-536`). Consequence: RC 8 is unreachable in CBCRD05A, and a missing fee handler load module is indistinguishable from a legitimately declined fee — fees silently go unassessed while the branch posts 'A' and the join proceeds. Same latent-defect class as the U0605 item in §3.3; the migration should resolve (not replicate) it.
 9. **CBCRD05A/05B re-run deletion**: the JCL restart comments claim each branch deletes its cycle-date rows before starting (`CBCRD05AJ.jcl:28-31`, `CBCRD05BJ.jcl:27-30`), but neither program contains a DELETE — legacy same-cycle re-run safety is unverified; the migration must implement idempotency explicitly (FR-008/FR-009).
 10. **CBCRD06W standing WAIT**: the JCL passes `WAIT=030` (`CBCRD06J.jcl:51`); the program header claims the standard schedule passes `WAIT=000` (single check, no wait) (`CBCRD06W.cbl:22-24`) — JCL authoritative.
+11. **CBCRD05B control-card failure**: the JCL comment claims RC 8 / flag 'F' (`CBCRD05BJ.jcl:20-25`), but the source abends U0506 in initialization — RC 12, no branch flag posted (`CBCRD05B.cbl:384-397`); legacy CBCRD06W then times out with U0611 rather than failing fast on an 'F' flag. Source governs.
+12. **JCL/runbook abend labels absent from source**: CBCRD05A's U0502 (`CBCRD05AJ.jcl:21-26`), CBCRD05B's U0512, CBCRD01's U0103 (`docs/runbook-cardnite.md:94`), and CBCRD04's swapped U0402/U0403 meanings (`CBCRD04J.jcl:19-23` vs `CBCRD04.cbl:46-47`) / CBCRD09's per-cluster U0901/U0902 labels (`CBCRD09J.jcl:18-24` vs `CBCRD09.cbl:28-31`) — source codes and meanings govern; stale labels retired at cutover.
+13. **APPROVED TARGET DIVERGENCE — CBCRD06B unresolvable risk route**: legacy behavior (via the unreachable-U0605 defect, §3.3) sends **every** party to manual review with an unpopulated risk area and ends step RC 8 when the XMOD/RSKRECAL route is missing or the route table is unavailable. The target treats an unresolvable risk route as a configuration failure that stops the step fatally (exit 12, U0605-equivalent) instead of flooding manual review — a deliberate, approved correction of the latent defect (plan Phase 5 divergence closure; CBCRD06B_FR §5).
+14. **FEEPARM card dataset has no supplying DD**: all three fee handlers read FEEPARM control cards for rates/thresholds/caps/waiver rules (`CBFEE01.cbl:43-57`, `CBFEE02.cbl:41-56`, `CBFEE03.cbl:49-58`), but no JCL in the estate allocates a FEEPARM DD — CBCRD05AJ (the only dispatching job) allocates only STEPLIB/CYCLCTL/FEEAUDIT (`CBCRD05AJ.jcl:36-55`). The parameter source is an absent artifact (analysis §8); the migration's fee parameter table/config (plan wave 2) becomes the authoritative source, with initial values to be confirmed with the business at wave-2 sign-off.
+15. **Unreachable RC 8 in CBCRD01/03/04/07/08**: the JCL comment blocks assign RC 8 meanings ("no records selected", "default card missing", "too many bypasses", "no transactions", "no accounts / grace card rejected"), but none of these programs ever sets 0008 — each moves only `WS-RC-WARNING` (0004) for its warning condition and routes fatal conditions through the abend path (RC 12) (`CBCRD01.cbl:24,449-453`, `CBCRD03.cbl:28-30,493-495`, `CBCRD04.cbl:966-970`, `CBCRD07.cbl:560-566`, `CBCRD08.cbl:520-537`). Same class as item 8 (CBCRD05A) and item 2 (CBCRD08's OUTOFBAL label); the fork legs share the property — CBCRD05A and CBCRD05B also never set 0008 (`CBCRD05A.cbl:521-529,771`, `CBCRD05B.cbl:912,1001`; covered by items 8 and 11). Consequence for CBCRD01: an empty AUTHLOG ends RC 4 and the chain **proceeds** — the cycle is not held (contra the JCL comment `CBCRD01J.jcl:18`); FR-003's empty-log criterion is corrected accordingly. Resolution: source RC behavior governs at parity in every owning program FR doc; whether any of these conditions *should* stop the cycle is an explicit business sign-off question, not silent target behavior.
+16. **CBCRD08 same-date re-run double-rolls**: the JCL restart comment claims a second run on the same cycle date does not double roll (`CBCRD08J.jcl:23-29`), but the source has no per-cycle guard — the DELQCSR predicate re-selects already-rolled accounts and the roll arm unconditionally adds +1 (`CBCRD08.cbl:275-303,495-540`). Same class as item 9 (05A/05B re-run safety unverified). Resolution: the target adds an explicit per-cycle idempotency guard as a deliberate improvement (CBCRD08_FR §5).
+17. **CBCRD07 partial-ledger rollback**: the program header and JCL claim an out-of-balance feed is rolled back whole ("an unbalanced feed is never sent to the ledger", `CBCRD07.cbl:27-30`, `CBCRD07J.jcl:10-13`), but the posting loop commits every `WS-COMMIT-FREQUENCY` inserted rows (`CBCRD07.cbl:522-528`) after flagging transactions posted (`CBCRD07.cbl:645-654`), while the balance proof runs only at end of run (`CBCRD07.cbl:706-740`) — the U0704 `ROLLBACK` (`CBCRD07.cbl:820`) undoes only the last uncommitted chunk, so a feed larger than the commit frequency (default 1000) survives partially, and a re-run skips the committed rows via `GL_POSTED_FLG='N'`. Resolution: the target proves the balance **before** any commit (single transaction) — a deliberate correction of a latent defect, not legacy parity (CBCRD07_FR §3).
+
+**Behavioral-change register (sign-off tracking):** most §5.3 items document source behavior governing at parity; three prescribe *changes* to legacy behavior and stand on the sign-off record explicitly: **item 13** (unresolvable risk route → fatal instead of review flood — approved at STOP 2), **item 16** (CBCRD08 per-cycle roll guard — proposed target correction), and **item 17** (CBCRD07 proof-before-commit — proposed target correction). Items 16 and 17 correct latent defects the estate's own comments claim not to have; they require the same explicit business sign-off as item 13 before the owning waves build to them (plan Phase 5 divergence closure).
 
 ### 5.4 User abends by job
 Source-derived abend inventory per program is in analysis §3 (U0101–U1003); the runbook table (`docs/runbook-cardnite.md:91-112`) is the operator view, with the divergences above.
@@ -260,7 +271,7 @@ Covering test and verification case columns to be filled by the migration waves.
 |---|---|---|---|
 | CARDNITE-FR-001 | `sched/CARDNITE.sched:17-27,43`; `CBCRD01.cbl:305-312` | _(wave)_ | region closed → cycle opens; record initialized |
 | CARDNITE-FR-002 | `sched/CARDNITE.sched:403-408` | _(wave)_ | mid-chain NOTOK → downstream held |
-| CARDNITE-FR-003 | `CBCRD01J.jcl:32-43`; `CBCRD01.cbl:48` | _(wave)_ | extract count reconciles; empty log → RC 8, cycle held |
+| CARDNITE-FR-003 | `CBCRD01J.jcl:32-43`; `CBCRD01.cbl:48` | _(wave)_ | extract count reconciles; empty log → RC 4 warning, chain proceeds (§5.3 item 15) |
 | CARDNITE-FR-004 | `CBCRD02J.jcl:8-25`; `CVRJCT01Y.cpy:13-22` | _(wave)_ | tolerance boundary RC 4/8; reason codes |
 | CARDNITE-FR-005 | `CBCRD03J.jcl:37-90`; `CBCRD03.cbl:389` | _(wave)_ | sequence order; defaulting; RC 4 count |
 | CARDNITE-FR-006 | `CBCRD04J.jcl:41-54`; `CBCRD04.cbl:730,850` | _(wave)_ | post-once; bypass accounting |
@@ -270,10 +281,10 @@ Covering test and verification case columns to be filled by the migration waves.
 | CARDNITE-FR-010 | `CBCRD05A.cbl:710-747`; `CBCRD05B.cbl:943-977`; `CBCRD06W.cbl:179-243` | _(wave)_ | late/failed branch gating |
 | CARDNITE-FR-011 | `CBCRD06A.cbl:150-155`; `CBCRD06X.cbl:44-52` | _(wave)_ | uniqueness; population match |
 | CARDNITE-FR-012 | `CBCRD06B.cbl:16-25,394-429` | _(wave)_ | outcome routing per RC |
-| CARDNITE-FR-013 | `CBCRD06B.cbl:348-381`; `CVRISK01Y.cpy:8-14`; `40_SEED_PGM_ROUTE.sql:42` | _(wave)_ | contract-only stub; version mismatch fatal |
+| CARDNITE-FR-013 | `CBCRD06B.cbl:348-381`; `CVRISK01Y.cpy:8-14`; `40_SEED_PGM_ROUTE.sql:42` | _(wave)_ | contract-only stub; version mismatch fatal; unresolvable route → fatal exit 12 (approved divergence, §5.3 item 13) |
 | CARDNITE-FR-014 | `CBCRD06B.cbl:16-25`; `CBCRD06J.jcl:132-157` | _(wave)_ | review exclusion persists; step-alone rerun forbidden |
 | CARDNITE-FR-015 | `CBCRD06C.cbl:222-224,442-452` | _(wave)_ | accepted-only application |
-| CARDNITE-FR-016 | `CBCRD07.cbl:275-276,699-746`; `CBCRD07J.jcl:53-70` | _(wave)_ | balance proof; suspense RC 4; rollback on imbalance |
+| CARDNITE-FR-016 | `CBCRD07.cbl:275-276,706-740`; `CBCRD07J.jcl:53-70` | _(wave)_ | balance proof; suspense RC 4; proof-before-commit (target rule, §5.3 item 17) |
 | CARDNITE-FR-017 | `CBCRD08J.jcl:5-29`; `CBCRD08.cbl:273-550` | _(wave)_ | one-bucket rule; re-run no-op; feed population |
 | CARDNITE-FR-018 | `CBCRD09J.jcl:8-16,34-122`; `CBCRD09.cbl:305-461` | _(wave)_ | backup-before-reset; empty-log proof |
 | CARDNITE-FR-019 | `CBCRD10J.jcl:14-27`; `CBCRD10.cbl:527-717`; `sched:375-389` | _(wave)_ | region gate on RC 8; totals reconcile; condition cleanup |
@@ -282,26 +293,27 @@ Covering test and verification case columns to be filled by the migration waves.
 
 ## 7. Program index (programs → requirements they own)
 
-Per-program FR doc links will be added after STOP 2.
-
-| Program | Owns / contributes to |
-|---|---|
-| CBCRD01 | FR-001, FR-003 |
-| CBCRD02 | FR-004 |
-| DFSORT step + CBCRD03 | FR-005 |
-| CBCRD04 | FR-006, FR-007 |
-| CBCRD05A (+CBCRD90, CBFEE01/02/03) | FR-008, FR-010 (flag) |
-| CBCRD05B | FR-009, FR-010 (flag) |
-| CBCRD06W | FR-010 (gate) |
-| CBCRD06A / CBCRD06X | FR-011 |
-| CBCRD06B (+CBCRD90) | FR-012, FR-013, FR-014 |
-| CBCRD06C | FR-015 |
-| CBCRD07 | FR-016 |
-| CBCRD08 | FR-017 |
-| IDCAMS ×3 + CBCRD09 | FR-018 |
-| CBCRD10 | FR-019, FR-001/002 (conditions) |
-| CBCRD90 | mechanics only (§3.1); contract carrier for FR-008/FR-013 |
-| CBCRD91 (absent — analysis §8) | fatal-path mechanics for all FRs; contract to be reconstructed |
-| Scheduler table CARDNITE | FR-001, FR-002, FR-019 |
+| Program | FR doc | Owns / contributes to |
+|---|---|---|
+| CBCRD01 | [CBCRD01_FR.md](programs/CBCRD01_FR.md) | FR-001, FR-003 |
+| CBCRD02 | [CBCRD02_FR.md](programs/CBCRD02_FR.md) | FR-004 |
+| DFSORT step + CBCRD03 | [CBCRD03_FR.md](programs/CBCRD03_FR.md) | FR-005 |
+| CBCRD04 | [CBCRD04_FR.md](programs/CBCRD04_FR.md) | FR-006, FR-007 |
+| CBCRD05A (+CBCRD90, CBFEE01/02/03) | [CBCRD05A_FR.md](programs/CBCRD05A_FR.md) | FR-008, FR-010 (flag) |
+| CBCRD05B | [CBCRD05B_FR.md](programs/CBCRD05B_FR.md) | FR-009, FR-010 (flag) |
+| CBCRD06W | [CBCRD06W_FR.md](programs/CBCRD06W_FR.md) | FR-010 (gate) |
+| CBCRD06A / CBCRD06X | [CBCRD06A_FR.md](programs/CBCRD06A_FR.md) / [CBCRD06X_FR.md](programs/CBCRD06X_FR.md) | FR-011 |
+| CBCRD06B (+CBCRD90) | [CBCRD06B_FR.md](programs/CBCRD06B_FR.md) | FR-012, FR-013, FR-014 |
+| CBCRD06C | [CBCRD06C_FR.md](programs/CBCRD06C_FR.md) | FR-015 |
+| CBCRD07 | [CBCRD07_FR.md](programs/CBCRD07_FR.md) | FR-016 |
+| CBCRD08 | [CBCRD08_FR.md](programs/CBCRD08_FR.md) | FR-017 |
+| IDCAMS ×3 + CBCRD09 | [CBCRD09_FR.md](programs/CBCRD09_FR.md) | FR-018 |
+| CBCRD10 | [CBCRD10_FR.md](programs/CBCRD10_FR.md) | FR-019, FR-001/002 (conditions) |
+| CBCRD90 | [CBCRD90_FR.md](programs/CBCRD90_FR.md) | mechanics only (§3.1); contract carrier for FR-008/FR-013 |
+| CBCRD91 (absent — analysis §8) | [CBCRD91_FR.md](programs/CBCRD91_FR.md) | fatal-path mechanics for all FRs; contract reconstructed as ErrorReporter |
+| CBFEE01 / CBFEE02 / CBFEE03 | [CBFEE01_FR.md](programs/CBFEE01_FR.md) / [CBFEE02_FR.md](programs/CBFEE02_FR.md) / [CBFEE03_FR.md](programs/CBFEE03_FR.md) | FR-008 (handlers) |
+| CYCLCTL cycle-control contract | [CYCLCTL_contract_FR.md](programs/CYCLCTL_contract_FR.md) | FR-002, FR-007, FR-010, FR-018, FR-019 (state carrier) |
+| XMOD/RSKRECAL caller contract | [RSKRECAL_contract_FR.md](programs/RSKRECAL_contract_FR.md) | FR-012, FR-013, FR-014 (contract only) |
+| Scheduler table CARDNITE | [CARDNITE_scheduler_FR.md](programs/CARDNITE_scheduler_FR.md) | FR-001, FR-002, FR-019 |
 
 19 functional requirements total (CARDNITE-FR-001 … CARDNITE-FR-019).
