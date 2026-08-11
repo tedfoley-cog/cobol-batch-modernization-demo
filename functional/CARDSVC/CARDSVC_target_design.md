@@ -35,7 +35,15 @@ backend/
 
 - Package-per-job, discovered by convention (`@Configuration` per job) — no shared
   hand-edited registry, so waves never conflict by construction.
-- The `PGM_ROUTE` dispatch table (CBCRD90) maps to a `ProgramRouter` component that
+- Legacy routing has two physical sources: the batch dispatcher `CBCRD90` loads
+  its route cache from Db2 `CARDSVC.PGM_ROUTE` first, falling back to the
+  `PGMROUT` VSAM KSDS (`CARD.PROD.PGMROUT`, `app/jcl/vsam/DEFCARD.jcl:153-164`)
+  when Db2 is unavailable (`app/cardsvc/cbl/CBCRD90.cbl:133-150`); the online
+  dispatcher `CACRD90` reads the Db2 table. Both converge onto the single migrated
+  `pgm_route` table; the migration seeds it from the Db2 seed
+  (`db2/ddl/40_SEED_PGM_ROUTE.sql`) and the analysis must reconcile and flag any
+  divergence between the VSAM cluster contents and the Db2 rows.
+- The dispatch maps to a `ProgramRouter` component that
   resolves handler beans from the migrated `pgm_route` table by `(routeType,
   routeKey)` filtered on `ACTIVE_FLG` and the EFF_DATE/EXP_DATE window, ordered
   by `SEQ_NBR` (pipelines like FRAU return an ordered handler list), preserving
