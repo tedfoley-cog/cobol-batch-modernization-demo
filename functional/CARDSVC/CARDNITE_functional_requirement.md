@@ -282,26 +282,27 @@ Covering test and verification case columns to be filled by the migration waves.
 
 ## 7. Program index (programs → requirements they own)
 
-Per-program FR doc links will be added after STOP 2.
-
-| Program | Owns / contributes to |
-|---|---|
-| CBCRD01 | FR-001, FR-003 |
-| CBCRD02 | FR-004 |
-| DFSORT step + CBCRD03 | FR-005 |
-| CBCRD04 | FR-006, FR-007 |
-| CBCRD05A (+CBCRD90, CBFEE01/02/03) | FR-008, FR-010 (flag) |
-| CBCRD05B | FR-009, FR-010 (flag) |
-| CBCRD06W | FR-010 (gate) |
-| CBCRD06A / CBCRD06X | FR-011 |
-| CBCRD06B (+CBCRD90) | FR-012, FR-013, FR-014 |
-| CBCRD06C | FR-015 |
-| CBCRD07 | FR-016 |
-| CBCRD08 | FR-017 |
-| IDCAMS ×3 + CBCRD09 | FR-018 |
-| CBCRD10 | FR-019, FR-001/002 (conditions) |
-| CBCRD90 | mechanics only (§3.1); contract carrier for FR-008/FR-013 |
-| CBCRD91 (absent — analysis §8) | fatal-path mechanics for all FRs; contract to be reconstructed |
-| Scheduler table CARDNITE | FR-001, FR-002, FR-019 |
+| Program | FR doc | Owns / contributes to |
+|---|---|---|
+| CBCRD01 | [CBCRD01_FR.md](programs/CBCRD01_FR.md) | FR-001, FR-003 |
+| CBCRD02 | [CBCRD02_FR.md](programs/CBCRD02_FR.md) | FR-004 |
+| DFSORT step + CBCRD03 | [CBCRD03_FR.md](programs/CBCRD03_FR.md) | FR-005 |
+| CBCRD04 | [CBCRD04_FR.md](programs/CBCRD04_FR.md) | FR-006, FR-007 |
+| CBCRD05A (+CBCRD90, CBFEE01/02/03) | [CBCRD05A_FR.md](programs/CBCRD05A_FR.md) | FR-008, FR-010 (flag) |
+| CBCRD05B | [CBCRD05B_FR.md](programs/CBCRD05B_FR.md) | FR-009, FR-010 (flag) |
+| CBCRD06W | [CBCRD06W_FR.md](programs/CBCRD06W_FR.md) | FR-010 (gate) |
+| CBCRD06A / CBCRD06X | [CBCRD06A_FR.md](programs/CBCRD06A_FR.md) / [CBCRD06X_FR.md](programs/CBCRD06X_FR.md) | FR-011 |
+| CBCRD06B (+CBCRD90) | [CBCRD06B_FR.md](programs/CBCRD06B_FR.md) | FR-012, FR-013, FR-014 |
+| CBCRD06C | [CBCRD06C_FR.md](programs/CBCRD06C_FR.md) | FR-015 |
+| CBCRD07 | [CBCRD07_FR.md](programs/CBCRD07_FR.md) | FR-016 |
+| CBCRD08 | [CBCRD08_FR.md](programs/CBCRD08_FR.md) | FR-017 |
+| IDCAMS ×3 + CBCRD09 | [CBCRD09_FR.md](programs/CBCRD09_FR.md) | FR-018 |
+| CBCRD10 | [CBCRD10_FR.md](programs/CBCRD10_FR.md) | FR-019, FR-001/002 (conditions) |
+| CBCRD90 | [CBCRD90_FR.md](programs/CBCRD90_FR.md) | mechanics only (§3.1); contract carrier for FR-008/FR-013 |
+| CBCRD91 (absent — analysis §8) | [CBCRD91_FR.md](programs/CBCRD91_FR.md) | fatal-path mechanics for all FRs; contract reconstructed as ErrorReporter |
+| CBFEE01 / CBFEE02 / CBFEE03 | [CBFEE01_FR.md](programs/CBFEE01_FR.md) / [CBFEE02_FR.md](programs/CBFEE02_FR.md) / [CBFEE03_FR.md](programs/CBFEE03_FR.md) | FR-008 (handlers) |
+| CYCLCTL cycle-control contract | [CYCLCTL_contract_FR.md](programs/CYCLCTL_contract_FR.md) | FR-002, FR-007, FR-010, FR-018, FR-019 (state carrier) |
+| XMOD/RSKRECAL caller contract | [RSKRECAL_contract_FR.md](programs/RSKRECAL_contract_FR.md) | FR-012, FR-013, FR-014 (contract only) |
+| Scheduler table CARDNITE | [CARDNITE_scheduler_FR.md](programs/CARDNITE_scheduler_FR.md) | FR-001, FR-002, FR-019 |
 
 19 functional requirements total (CARDNITE-FR-001 … CARDNITE-FR-019).
