@@ -12,6 +12,10 @@ spring:
   flyway:
     locations: classpath:db/migration
   batch:
+    job:
+      # One job per launch: without an explicit --spring.batch.job.name the
+      # runner fails fast (RC 12) instead of running every job in the context.
+      name: NO_JOB_SPECIFIED
     jdbc:
       initialize-schema: never
 

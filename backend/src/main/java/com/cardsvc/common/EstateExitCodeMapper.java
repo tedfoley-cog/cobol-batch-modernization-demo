@@ -50,6 +50,11 @@ public class EstateExitCodeMapper implements ExitCodeGenerator, ApplicationListe
             }
             Integer mapped = parseRc(execution.getExitStatus());
             if (mapped != null) {
+                if (mapped != 0 && mapped != 4 && mapped != 8 && mapped != 12) {
+                    log.error("RC=12: exit status '{}' is outside the estate convention (0/4/8/12)",
+                            execution.getExitStatus().getExitCode());
+                    return 12;
+                }
                 rc = Math.max(rc, mapped);
             }
         }
