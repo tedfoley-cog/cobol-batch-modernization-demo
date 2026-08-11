@@ -1,9 +1,0 @@
-legacy/
-site/
-__pycache__/
-.venv/
-artifacts/generated/*
-!artifacts/generated/.gitkeep
-.pytest_cache/
-.ruff_cache/
-*.egg-info/

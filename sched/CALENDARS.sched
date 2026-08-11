@@ -1,0 +1,154 @@
+*======================================================================*
+* CALENDARS.SCHED                                                      *
+*                                                                      *
+* SCHEDULING CALENDARS REFERENCED BY THE CARD SYSTEMS AND PARTY & RISK *
+* JOB TABLES.  MAINTAINED BY PRODUCTION CONTROL.  ANY CHANGE HERE IS   *
+* A CONTROLLED CHANGE - THE CYCLE DAY CALENDARS DRIVE CUSTOMER         *
+* STATEMENT PRODUCTION AND CANNOT BE ALTERED INSIDE A BILLING MONTH.   *
+*                                                                      *
+* EXPORTED FROM THE SCHEDULER CALENDAR FACILITY.  RELOAD WITH THE      *
+* CALENDAR UTILITY BEFORE THE JOB TABLES ARE ORDERED.                  *
+*======================================================================*
+
+CALENDAR NAME=BUSDAY
+         TYPE=REGULAR
+         DESC=BANK BUSINESS DAYS - MON TO FRI EXCLUDING BANK HOLIDAYS
+         OWNER=PRODCTL
+         PERIOD=ANNUAL
+         DAYS=MON,TUE,WED,THU,FRI
+         EXCLUDE=0101,0119,0216,0525,0619,0704,0907,1012,1111,1126,1225
+         EXCLUDE-DESC=NEW YEAR,MLK,PRESIDENTS,MEMORIAL,JUNETEENTH,
+                      INDEPENDENCE,LABOR,COLUMBUS,VETERANS,
+                      THANKSGIVING,CHRISTMAS
+         SHIFT=NEXT
+END-CALENDAR
+
+CALENDAR NAME=ALLDAY
+         TYPE=REGULAR
+         DESC=EVERY DAY INCLUDING WEEKENDS AND HOLIDAYS
+         OWNER=PRODCTL
+         PERIOD=ANNUAL
+         DAYS=ALL
+END-CALENDAR
+
+CALENDAR NAME=WEEKSUN
+         TYPE=REGULAR
+         DESC=SUNDAY ONLY - WEEKLY REFERENCE DATA WINDOW
+         OWNER=PRODCTL
+         PERIOD=ANNUAL
+         DAYS=SUN
+         SHIFT=NONE
+         NOTE=NOT SHIFTED.  IF SUNDAY IS A HOLIDAY THE CYCLE STILL RUNS,
+              THE ONLINE REGION IS CLOSED ON SUNDAY REGARDLESS.
+END-CALENDAR
+
+CALENDAR NAME=WEEKSAT
+         TYPE=REGULAR
+         DESC=SATURDAY ONLY - PARTY AND RISK WEEKLY WINDOW
+         OWNER=PRTYCTL
+         PERIOD=ANNUAL
+         DAYS=SAT
+         SHIFT=NONE
+END-CALENDAR
+
+CALENDAR NAME=MONTHEND
+         TYPE=REGULAR
+         DESC=LAST BUSINESS DAY OF EACH CALENDAR MONTH
+         OWNER=PRODCTL
+         PERIOD=ANNUAL
+         DAYS=L1
+         BASE-CALENDAR=BUSDAY
+         SHIFT=PREV
+END-CALENDAR
+
+*----------------------------------------------------------------------*
+* CYCLE DAY CALENDARS                                                  *
+*                                                                      *
+* THE CARD PORTFOLIO IS SPLIT ACROSS FOUR BILLING CYCLES.  ACCOUNT     *
+* CYCLE_DAY IN CARDDB.ACCOUNT CARRIES 03, 11, 18 OR 25 AND SELECTS     *
+* WHICH OF THESE CALENDARS ORDERS THE CARDBILL TABLE.  EACH CYCLE IS   *
+* A SEPARATE RUN OF THE SAME JOB TABLE WITH A DIFFERENT CYCLE          *
+* PARAMETER - THEY DO NOT OVERLAP.                                     *
+*----------------------------------------------------------------------*
+
+CALENDAR NAME=CYCLE03
+         TYPE=REGULAR
+         DESC=BILLING CYCLE DAY 03
+         OWNER=CARDCTL
+         PERIOD=ANNUAL
+         DAYS=D3
+         BASE-CALENDAR=BUSDAY
+         SHIFT=NEXT
+         PARM-CYCLE=01
+END-CALENDAR
+
+CALENDAR NAME=CYCLE11
+         TYPE=REGULAR
+         DESC=BILLING CYCLE DAY 11
+         OWNER=CARDCTL
+         PERIOD=ANNUAL
+         DAYS=D11
+         BASE-CALENDAR=BUSDAY
+         SHIFT=NEXT
+         PARM-CYCLE=02
+END-CALENDAR
+
+CALENDAR NAME=CYCLE18
+         TYPE=REGULAR
+         DESC=BILLING CYCLE DAY 18
+         OWNER=CARDCTL
+         PERIOD=ANNUAL
+         DAYS=D18
+         BASE-CALENDAR=BUSDAY
+         SHIFT=NEXT
+         PARM-CYCLE=03
+END-CALENDAR
+
+CALENDAR NAME=CYCLE25
+         TYPE=REGULAR
+         DESC=BILLING CYCLE DAY 25
+         OWNER=CARDCTL
+         PERIOD=ANNUAL
+         DAYS=D25
+         BASE-CALENDAR=BUSDAY
+         SHIFT=NEXT
+         PARM-CYCLE=04
+END-CALENDAR
+
+*----------------------------------------------------------------------*
+* NEGATIVE CALENDARS - USED TO SUPPRESS THE NIGHTLY CYCLE ON THE       *
+* NIGHT THE WEEKLY REFERENCE REBUILD OWNS THE VSAM CLUSTERS.           *
+*----------------------------------------------------------------------*
+
+CALENDAR NAME=NOTSUN
+         TYPE=REGULAR
+         DESC=EVERY DAY EXCEPT SUNDAY
+         OWNER=PRODCTL
+         PERIOD=ANNUAL
+         DAYS=MON,TUE,WED,THU,FRI,SAT
+END-CALENDAR
+
+*----------------------------------------------------------------------*
+* ON CALL AND NOTIFICATION GROUPS                                      *
+*----------------------------------------------------------------------*
+
+GROUP-DEF NAME=CARDOPS
+          DESC=CARD SYSTEMS ON CALL - NIGHTLY, BILLING AND REFERENCE
+          RACF-GROUP=CARDBAT
+          PAGE-DEST=CARDONCALL
+          CONSOLE-ROUTE=11
+END-GROUP-DEF
+
+GROUP-DEF NAME=PRTYOPS
+          DESC=PARTY AND RISK ON CALL - PARTYWK AND SANCTIONS FEED
+          RACF-GROUP=PRTYBAT
+          PAGE-DEST=PRTYONCALL
+          CONSOLE-ROUTE=12
+END-GROUP-DEF
+
+GROUP-DEF NAME=DBAOPS
+          DESC=DB2 SYSTEMS SUPPORT - BIND AND UTILITY FAILURES
+          RACF-GROUP=DB2ADM
+          PAGE-DEST=DB2ONCALL
+          CONSOLE-ROUTE=13
+END-GROUP-DEF

@@ -1,0 +1,214 @@
+======================================================================
+CARDCHK - INTERFACE NOTE
+======================================================================
+For COBOL programmers calling the assembler subroutine CARDCHK.
+Source: app/asm/CARDCHK.asm.  Built by app/jcl/build/COBASM.proc and
+included statically by the COBOL link edit steps.
+
+----------------------------------------------------------------------
+1.  CALL
+----------------------------------------------------------------------
+Static call, literal program name, six parameters, always six:
+
+           CALL 'CARDCHK'  USING CHK-FUNCTION
+                                 CHK-INPUT-1
+                                 CHK-INPUT-2
+                                 CHK-OUTPUT
+                                 CHK-FEEDBACK
+                                 CHK-WORK-AREA
+           MOVE RETURN-CODE TO WS-CHK-RC
+
+The routine is not LE enabled.  It does not establish an enclave, does
+not issue an SVC and issues no EXEC CICS command, so the same load
+module is used online and in batch.  Compile the caller NODYNAM - the
+routine is bound into the caller's load module by the INCLUDE in the
+link edit step, and a DYNAM caller will look for a separate module in
+STEPLIB that the build does not produce separately for it.
+
+----------------------------------------------------------------------
+2.  PARAMETER LIST
+----------------------------------------------------------------------
+Declare it exactly as below.  Lengths are checked by nothing at all -
+a short field is written past its end.
+
+       01  CHK-FUNCTION            PIC X(01).
+       01  CHK-INPUT-1             PIC X(40).
+       01  CHK-INPUT-2             PIC X(40).
+       01  CHK-OUTPUT              PIC X(20).
+       01  CHK-FEEDBACK            PIC X(04).
+       01  CHK-WORK-AREA           PIC X(256).
+
+CHK-WORK-AREA is the routine's save area and its scratch storage.  The
+routine is reentrant and holds no writable storage of its own, so the
+caller must supply it.  Requirements:
+
+  - at least 256 bytes.  112 are used today; the rest is headroom so
+    that a future function does not force every caller to recompile.
+  - doubleword aligned.  An 01 level in WORKING-STORAGE or in a
+    LINKAGE SECTION commarea is aligned; a field subordinate to
+    something else may not be.  Do not declare it under an 05.
+  - one work area per concurrent call.  Two tasks sharing one area
+    will overwrite each other's save area.  In CICS, put it in the
+    program's own WORKING-STORAGE, never in a shared commarea.
+  - the caller must not inspect or depend on its contents.
+
+CHK-INPUT-1, CHK-INPUT-2 and CHK-OUTPUT are declared X above so that
+one declaration serves every function.  Redefine them per function as
+shown in section 3.
+
+----------------------------------------------------------------------
+3.  FUNCTIONS
+----------------------------------------------------------------------
+
+3.1  'L' - mod-10 check digit validation
+----------------------------------------
+  CHK-INPUT-1   PIC X(16)   card number, zoned, left justified, no
+                            embedded blanks or dashes
+  CHK-INPUT-2               not used
+  CHK-OUTPUT    PIC X(01)   the check digit the first fifteen digits
+                            require.  Returned whether the number
+                            passed or failed, so a data fix job can
+                            use it directly.  '?' if the number was
+                            not all digits.
+  CHK-FEEDBACK  'NUMR'      a byte was not X'F0' through X'F9'
+                'CHKD'      digits are valid, check digit disagrees
+
+  Return   0   valid
+           8   invalid, see CHK-FEEDBACK
+
+  Only sixteen digit numbers are handled.  A thirteen or fifteen digit
+  number must be right justified into a sixteen byte field with the
+  leading positions zero filled before the call, which is what the
+  card number is stored as everywhere in the estate anyway.
+
+3.2  'P' - packed decimal add
+-----------------------------
+  CHK-INPUT-1   PIC S9(13)V99 COMP-3   addend
+  CHK-INPUT-2   PIC S9(13)V99 COMP-3   accumulator
+  CHK-OUTPUT    PIC S9(13)V99 COMP-3   sum
+  CHK-FEEDBACK  'DATA'      an operand is not valid packed decimal
+                'OVFL'      the sum needs more than fifteen digits
+                'ZERO'      the sum is zero
+                'NEGA'      the sum is negative
+
+  Return   0   sum stored, positive
+           4   sum stored, zero or negative
+           8   operand invalid, CHK-OUTPUT set to zero
+          12   overflow, CHK-OUTPUT set to zero
+
+  Both operands are tested before the add and the result is range
+  checked before it is stored, so this call cannot raise an 0C7 or an
+  0CA in the caller.  That is the reason it exists: the posting files
+  carry occasional fields that were never initialised, and an abend in
+  the middle of a commit interval costs a restart.
+
+  Use it where the operand comes off a file and has not already been
+  proved.  A COMPUTE on two fields the program itself built is
+  cheaper - do not route every addition through here.
+
+3.3  'B' - zoned and binary conversion
+--------------------------------------
+  CHK-INPUT-1   PIC X(15)   unsigned zoned numeric
+  CHK-INPUT-2               not used
+  CHK-OUTPUT                redefine as:
+                  05  CHK-BINARY    PIC S9(09) COMP.
+                  05  CHK-REZONED   PIC X(15).
+  CHK-FEEDBACK  'NUMR'      not all fifteen bytes are digits
+                'SIZE'      the value exceeds 2147483647
+
+  Return   0   converted
+           8   not numeric, CHK-BINARY zero, CHK-REZONED all zeroes
+          12   too large, CHK-BINARY zero, CHK-REZONED all nines
+
+  Gives both the binary value and the value converted back to zoned in
+  one pass, for the callers that need a binary key and then have to
+  redisplay the original with its leading zeroes intact.
+
+3.4  'C' - EBCDIC collating comparison
+--------------------------------------
+  CHK-INPUT-1   PIC X(40)   left operand
+  CHK-INPUT-2   PIC X(40)   right operand
+  CHK-OUTPUT                redefine as:
+                  05  CHK-ORDER     PIC X(01).
+                      88  CHK-LOW    VALUE 'L'.
+                      88  CHK-EQUAL  VALUE 'E'.
+                      88  CHK-HIGH   VALUE 'H'.
+                  05  CHK-DIFF-AT   PIC 9(02).
+  CHK-FEEDBACK  'PREF'      the difference is against a blank, so one
+                            operand is a prefix of the other
+
+  Return   0   the two are identical
+           4   they differ; CHK-DIFF-AT is the one based offset of
+               the first differing byte, 01 through 40
+
+  The comparison is on the raw EBCDIC collating sequence.  Lower case
+  sorts below upper case and digits sort above both.  Case is not
+  folded: the watch list alternate index is built on the same raw
+  sequence, and folding here would put this routine and the index out
+  of step.
+
+  CHK-DIFF-AT is the point of it.  A plain COBOL IF gives the ordering
+  and nothing else; the offset of the first difference is what the
+  screening programs use to grade a near miss and to build the generic
+  key for the next browse.
+
+----------------------------------------------------------------------
+4.  RETURN CODES
+----------------------------------------------------------------------
+R15 on return, which COBOL picks up in the RETURN-CODE special
+register.  Test it before anything else - CHK-OUTPUT is not
+meaningful on a non zero return.
+
+    0    successful
+    4    warning; the output is set and usable, CHK-FEEDBACK says why
+    8    validation failed; the output is set to a safe value
+   12    unusable request - unrecognised function code, or a result
+         that will not fit the caller's field
+
+  12 with CHK-FEEDBACK 'FUNC' is a programming error, not a data
+  condition.  It means the function code byte was not one of L, P, B
+  or C.  Treat it as fatal; do not retry.
+
+Note that RETURN-CODE is a signed halfword in COBOL and is not reset
+by the call sequence itself, so move it out immediately if the program
+goes on to do anything that could change it.
+
+----------------------------------------------------------------------
+5.  REGISTER CONVENTIONS
+----------------------------------------------------------------------
+Standard OS linkage throughout.
+
+  On entry
+    R1    address of the parameter list, six fullword addresses, high
+          order bit on in the last
+    R13   address of the caller's 72 byte save area
+    R14   return address
+    R15   entry point address
+
+  On return
+    R0-R14 restored exactly as they were on entry
+    R15    return code
+
+The routine saves the caller's registers with SAVE (14,12), chains the
+save area supplied in CHK-WORK-AREA both ways so that a dump walks
+back cleanly, and returns with RETURN (14,12),RC=(15).  It is AMODE 31
+RMODE ANY and is assembled RENT.
+
+If a dump shows the save area chain broken at this module, the usual
+cause is a caller that passed a CHK-WORK-AREA that was not doubleword
+aligned, or one that shared a single work area between two tasks.
+
+----------------------------------------------------------------------
+6.  REBUILDING
+----------------------------------------------------------------------
+Assemble and link with:
+
+    // EXEC COBASM,MEMBER=CARDCHK
+
+The load module must be built before any COBOL link edit runs - the
+COBOL link steps INCLUDE it.  After a reassemble, every caller has to
+be relinked to pick up the new copy, which in practice means running
+app/jcl/build/BUILDALL.jcl.  In the online region, CEMT SET PROGRAM
+NEWCOPY against CARDCHK on its own does nothing useful, because the
+copy the callers execute is the one bound into their own load modules.
+======================================================================

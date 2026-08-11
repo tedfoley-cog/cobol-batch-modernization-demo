@@ -1,0 +1,216 @@
+======================================================================
+REGION CICSCARD - SIT PARAMETERS AND STARTUP NOTES
+======================================================================
+
+Production card servicing region.  One region, one CSD, one group
+list.  There is no MRO, no AOR/TOR split and no dynamic routing to
+another region - everything the CA00 transaction needs is installed
+here.  The region was built in 1997 as a single AOR and has been
+carried forward through every CICS TS upgrade since.
+
+Region identifiers
+------------------
+  APPLID        CICSCARD
+  SYSIDNT       CARD
+  VTAM generic  CICSPROD
+  DB2 subsystem DB2P
+  RACF region   CICSCARD  (started task)
+  RACF users    CARDONL   (CARDSVC application)
+                PRTYONL   (PARTYRSK application)
+
+----------------------------------------------------------------------
+SIT PARAMETERS - CARD.PROD.PARMLIB(DFHSITCD)
+----------------------------------------------------------------------
+Anything not listed here is the IBM default.
+
+  APPLID=CICSCARD
+  SYSIDNT=CARD
+  START=AUTO
+  GRPLIST=(DFHLIST,CARDLIST)
+  CSDRECOV=ALL
+  DSALIM=8M
+  EDSALIM=800M
+  MXT=250
+  AMXT=200
+  TRANISO=YES
+  STGPROT=YES
+  RENTPGM=PROTECT
+  ICVR=15000
+  ICV=1000
+  RUWAPOOL=YES
+  FCT=NO
+  TCT=NO
+  PLTPI=CD
+  PLTSD=CD
+  TST=NO
+  AUXTR=OFF
+  AUXTRSW=NEXT
+  DUMP=YES
+  DUMPDS=AUTO
+  TRTABSZ=4096
+  SEC=YES
+  XTRAN=YES
+  XCMD=NO
+  XFCT=YES
+  XPCT=NO
+  XPPT=NO
+  XDCT=YES
+  XUSER=YES
+  RESSEC=ASIS
+  CMDSEC=ASIS
+  FORCEQR=NO
+  MAXOPENTCBS=32
+  MAXJVMTCBS=0
+  TCPIP=NO
+  ISC=NO
+  IRCSTRT=NO
+  SPOOL=YES
+  STATRCD=ON
+  STATINT=010000
+  MNPER=ON
+  MNEXC=ON
+
+Notes on the values that are not defaults:
+
+  GRPLIST      DFHLIST first, then CARDLIST.  CARDLIST is built by
+               app/cics/DFHCSDUP.jcl.
+
+  FORCEQR=NO   Required.  The application programs are defined
+               CONCURRENCY(THREADSAFE) and forcing them back onto the
+               QR TCB removes the whole benefit of the open TCB
+               support introduced when the region moved to CICS TS 3.
+
+  MAXOPENTCBS  Sized against MXT and the DB2 thread limit.  If this is
+               raised, DSNC MODIFY TRANSACTION must be reviewed at the
+               same time or tasks queue on the thread pool instead.
+
+  TRANISO=YES  With STGPROT and RENTPGM.  The application programs run
+               EXECKEY(USER); the dispatcher, the error handler and
+               the fallback responder run EXECKEY(CICS) because they
+               address the caller's commarea directly.
+
+  ICVR=15000   Runaway task interval 15 seconds.  The longest legitimate
+               online unit of work is a full statement inquiry, which
+               measures under three seconds even on a bad day.
+
+  XDCT=YES     The audit transient data queue is RACF protected.  Only
+               the region and the audit extract batch job may write it.
+
+----------------------------------------------------------------------
+STARTUP GROUP LIST - CARDLIST
+----------------------------------------------------------------------
+Installed in this order.  The order is set in the ADD GROUP statements
+in DFHCSDUP.jcl and matters.
+
+  1  CARDFILE   VSAM file definitions and the two LSR pools.
+                Installed first - several files are OPENTIME(STARTUP)
+                and must exist before any program is loaded.
+
+  2  CARDMAP    BMS mapsets CARDSET and CARDST2.
+
+  3  CARDTDQ    Operations log, session audit, referred work queue and
+                the temporary storage models.
+
+  4  CARDGRP    CARDSVC transaction and program definitions.
+
+  5  PRTYGRP    PARTYRSK program definitions.
+
+----------------------------------------------------------------------
+PLT
+----------------------------------------------------------------------
+  PLTPI=CD    DFHPLTCD  - program list table, initialisation
+                          Opens the reference files explicitly and
+                          writes the region start banner to CLOG.
+  PLTSD=CD    DFHPLTSD  - program list table, shutdown
+                          Closes CLOG and CAUD cleanly and posts the
+                          scheduler condition CICS-CARD-CLOSED that
+                          releases the nightly cycle.
+
+The shutdown PLT is the interlock between the online region and the
+nightly batch cycle.  If the region is cancelled rather than shut
+down, CICS-CARD-CLOSED is not posted and the cycle will sit waiting.
+Production control can post it by hand, but only after confirming on
+the console that the region is really down.
+
+----------------------------------------------------------------------
+DB2 ATTACHMENT - DSNCRCT / DB2CONN
+----------------------------------------------------------------------
+  DB2CONN     name CARDDB2
+  DB2ID       DB2P
+  PLAN        CARDONLP
+  THREADLIMIT 60
+  THREADWAIT  YES
+  ACCOUNTREC  TASK
+  SIGNID      CICSCARD
+  RESYNCMEMBER YES
+  DB2ENTRY    for CA00, plan CARDONLP, THREADLIMIT 40,
+              PROTECTNUM 10, PRIORITY HIGH
+
+The region runs everything under one plan.  A separate DB2ENTRY per
+transaction was proposed in 2011 and rejected - with a single online
+transaction there is nothing to separate.
+
+----------------------------------------------------------------------
+COMMON OPERATIONS
+----------------------------------------------------------------------
+Install an updated group without restarting the region:
+
+    CEDA INSTALL GROUP(CARDGRP)
+
+  A program that is currently in use is not replaced by INSTALL.  Use
+  CEMT SET PROGRAM(name) NEWCOPY afterwards, or PHASEIN if the module
+  may be in use by a running task.
+
+Pick up a recompiled module:
+
+    CEMT SET PROGRAM(CACRD05) PHASEIN
+
+Pick up a changed map:
+
+    CEMT SET PROGRAM(CARDSET) NEWCOPY
+    CEMT SET PROGRAM(cccccccc) NEWCOPY   for each program that copies
+                                         the symbolic map
+
+Close the files for a batch rebuild:
+
+    CEMT SET FILE(MERCHRTE) CLOSED DISABLED
+    CEMT SET FILE(RSNCODE)  CLOSED DISABLED
+    CEMT SET FILE(FRAUDRUL) CLOSED DISABLED
+    CEMT SET FILE(PGMROUT)  CLOSED DISABLED
+
+  The weekly reference cycle runs with the region down, so this is
+  only needed for an out of window rebuild.  Reopen with OPEN ENABLED
+  in the same order.  FRAUDRUL and RSNCODE are CICS maintained data
+  tables - closing and reopening reloads them from the cluster.
+
+Check what is holding a file:
+
+    CEMT INQUIRE FILE(name)
+    CEMT INQUIRE TASK
+
+----------------------------------------------------------------------
+ABEND CODES SEEN IN THIS REGION
+----------------------------------------------------------------------
+  AEY9    DB2 attachment not available.  The programs trap SQLCODE
+          -923 and route to the fallback responder, so an AEY9 that
+          reaches the terminal means the attachment failed between
+          the check and the SQL.  Check DSNC DISPLAY.
+
+  APCT    Program not defined or disabled.  Almost always a route
+          target whose PROGRAM definition was not installed after a
+          CSD apply - reinstall CARDGRP and PRTYGRP.
+
+  AFCA    File not open.  Check whether a batch job still holds the
+          cluster from an overrunning cycle.
+
+  ASRA    Program check.  With STGPROT on, an ASRA in an EXECKEY(USER)
+          program that was addressing a commarea usually means the
+          commarea length passed was shorter than the copybook.
+
+  AKCT    Terminal read timeout - the task waited longer than DTIMOUT.
+          Not an error, the operator walked away.
+
+  U0912   Issued by the error handler when the commarea version on a
+          cross module link does not match the level the program was
+          compiled against.  Both modules need a coordinated rebuild.
+======================================================================
