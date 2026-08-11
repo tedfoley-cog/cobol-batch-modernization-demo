@@ -18,6 +18,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CardsvcApplication {
 
     public static void main(String[] args) {
-        System.exit(SpringApplication.exit(SpringApplication.run(CardsvcApplication.class, args)));
+        try {
+            System.exit(SpringApplication.exit(SpringApplication.run(CardsvcApplication.class, args)));
+        } catch (Throwable failure) {
+            failure.printStackTrace();
+            System.exit(12);
+        }
     }
 }
