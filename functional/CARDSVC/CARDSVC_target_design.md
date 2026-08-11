@@ -56,7 +56,11 @@ backend/
   steps' mapped RCs, but each FR doc defines the job's RC mapping explicitly —
   where a specific RC is a distinct business outcome (e.g. CBCRD08's RC 8 =
   OUTOFBAL) that code is reserved for that outcome only, and generic step
-  failures map to 12, never to a reserved business RC.
+  failures map to 12, never to a reserved business RC. Where scheduler and
+  program disagree on an RC's meaning (e.g. CBCRD02 RC 4 is `EMPTY` in
+  `sched/CARDNITE.sched` but "rejects within tolerance" in
+  `app/cardsvc/cbl/CBCRD02.cbl:26-27`), the FR doc must reconcile the
+  divergence explicitly before migration.
 - Restartability: the cycle control record (`CYCLCTL`) becomes a `cycle_control`
   table; checkpointed jobs resume from `cc_last_key`, matching operator note 3 in
   `sched/CARDNITE.sched`.
