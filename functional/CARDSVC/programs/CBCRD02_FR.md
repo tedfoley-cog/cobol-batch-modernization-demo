@@ -37,7 +37,7 @@ Chunk step: `FlatFileItemReader` (CVAXTR01Y layout) → classifier writer to cle
 
 Abends: U0201 control unusable (`CBCRD02.cbl:29,237`), U0202 extract file failure (`CBCRD02.cbl:261`).
 
-**Divergence reconciliation (FR §5.3 — CBCRD02 RC 4):** the scheduler comments call RC 4 `EMPTY` and post the successor with an operator notify on a zero-record outcome (`sched/CARDNITE.sched:75-79`), while the source's RC 4 means "rejects within tolerance" (`CBCRD02.cbl:25-28`). Resolution: **source semantics govern** — RC 4 = within-tolerance warning. The zero-record case cannot reach CBCRD02 in practice (CBCRD01 exits 8 on an empty extract and holds the cycle — `CBCRD01J.jcl:15-19`); the migrated job still logs an explicit `records_read=0` warning if it ever occurs. The stale scheduler note is retired with the scheduler table.
+**Divergence reconciliation (FR §5.3 — CBCRD02 RC 4):** the scheduler comments call RC 4 `EMPTY` and post the successor with an operator notify on a zero-record outcome (`sched/CARDNITE.sched:75-79`), while the source's RC 4 means "rejects within tolerance" (`CBCRD02.cbl:25-28`). Resolution: **source semantics govern** — RC 4 = within-tolerance warning. The zero-record case IS reachable — CBCRD01 ends RC 4 on an empty extract and the chain proceeds (stream FR §5.3 item 15, `CBCRD01.cbl:449-453`) — and CBCRD02 handles it: zero reads short-circuit the percentage (`CBCRD02.cbl:585-586`) and zero rejects end RC 0 (`CBCRD02.cbl:593-594`); the migrated job logs an explicit `records_read=0` warning for the case. The stale scheduler note is retired with the scheduler table.
 
 ## 6. Hard-stop boundary
 
@@ -46,6 +46,6 @@ None.
 ## 7. Acceptance criteria
 
 - Each R001–R010 rule fires on a crafted bad record and routes it to the reject file with the correct reason code; clean records pass byte-unchanged except the edit status.
-- Reject share is compared as a whole percent rounded to the nearest integer (`CBCRD02.cbl:584-590`): rounded share ≤ tolerance ⇒ RC 4; rounded share > tolerance ⇒ RC 8 and downstream does not run (boundary tests must use the rounded value, not a single-record delta).
+- Reject share is held to **two decimal places** (`WS-REJECT-PCT PIC S9(5)V99 COMP-3`, `CBCRD02.cbl:167-168`; `COMPUTE … ROUNDED` rounds to hundredths, `CBCRD02.cbl:588-590`) and compared against the whole-percent tolerance: share ≤ tolerance ⇒ RC 4; any share strictly above it (e.g. 2.01% vs tolerance 02) ⇒ RC 8 and downstream does not run. Zero reads ⇒ share 0; zero rejects ⇒ RC 0.
 - Tolerance is a required job parameter; a non-numeric value fails startup, not mid-file.
 - clean+reject record counts equal records read; counters written to `cycle_control`.

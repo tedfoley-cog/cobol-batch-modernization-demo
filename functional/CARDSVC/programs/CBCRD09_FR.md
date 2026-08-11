@@ -16,7 +16,7 @@ PARM (STEP040): cycle date only (`CBCRD09J.jcl:113`).
 ### STEP020 — IDCAMS REPRO (gated `IF STEP010.RC=0`, `CBCRD09J.jcl:50`)
 REPRO three clusters to backup GDGs: CARDXREF→`CARD.PROD.BKP.CARDXREF(+1)` FB 128, CYCLCTL→`BKP.CYCLCTL(+1)` FB 256, AUTHLOG→`BKP.AUTHLOG(+1)` FB 200 (`CBCRD09J.jcl:51-78`).
 
-### STEP030 — IDCAMS DELETE/DEFINE (gated after STEP020, `CBCRD09J.jcl:89`)
+### STEP030 — IDCAMS DELETE/DEFINE (gated `IF STEP020.RC = 0`, `CBCRD09J.jcl:88`)
 DELETE/DEFINE `CARD.PROD.AUTHLOG` — NONINDEXED (ESDS), RECORDSIZE(200 200), CISZ 8192, matching `app/jcl/vsam/DEFCARD.jcl:37-48` (`CBCRD09J.jcl:89-107`). AUTHLOG is never reused in place; the new day starts fresh.
 
 ### STEP040 — CBCRD09 verification (gated `IF STEP030.RC=0`, `CBCRD09J.jcl:111`)
