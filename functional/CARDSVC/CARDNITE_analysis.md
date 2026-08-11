@@ -92,7 +92,7 @@ CICS-CARD-CLOSED                       (sched:43)
 ```
 
 * Fork semantics: 05A and 05B both trigger on `CBCRD04J-OK` (`sched:172,204`), run concurrently, touch different tables, hold no common resource (`sched/CARDNITE.sched:155-158`); serialized resources: CBCRD04J and CBCRD07J both hold `CARDDB-POSTING QUANTITY=1` (`sched:130,280`) so posting and GL never overlap.
-* Join semantics: scheduler AND-join (`sched:240-242`) **plus** an application-level check — CBCRD06J STEP005 (CBCRD06W) reads the CYCLCTL record and does not trust the scheduler (`app/jcl/cardsvc/CBCRD06J.jcl:10-14`). Branch completion flags live in the *filler* bytes of the cycle control record: fee branch posts `CC-FILLER(1:1)` = 'A' complete / 'F' failed (`app/cardsvc/cbl/CBCRD05A.cbl:729-733`), interest branch posts `CC-FILLER(2:1)` = 'B' / 'F' (`CBCRD05B.cbl:960-962`); CBCRD06W reads both (`CBCRD06W.cbl:179-180`), polls once a minute up to the `WAIT=NNN` PARM limit (standing 030) with a CPU-spin delay loop (`CBCRD06W.cbl:205-215`, `docs/runbook-cardnite.md:44-47`), then abends U0602/U0610/U0611 (not complete) or U0603/U0612 (flag posted as failed) (`CBCRD06W.cbl:216-243`, `docs/runbook-cardnite.md:101-102`). **Migration note:** these flags are an undocumented overlay of `CC-FILLER` (declared as plain filler at `app/cpy/CVCTRL01Y.cpy:41`); CBCRD05A also stores its cycle id at `CC-FILLER(3:8)` (`CBCRD05A.cbl:733`).
+* Join semantics: scheduler AND-join (`sched:240-242`) **plus** an application-level check — CBCRD06J STEP005 (CBCRD06W) reads the CYCLCTL record and does not trust the scheduler (`app/jcl/cardsvc/CBCRD06J.jcl:10-14`). Branch completion flags live in the *filler* bytes of the cycle control record: fee branch posts `CC-FILLER(1:1)` = 'A' complete / 'F' failed (`app/cardsvc/cbl/CBCRD05A.cbl:729-733`), interest branch posts `CC-FILLER(2:1)` = 'B' / 'F' (`CBCRD05B.cbl:960-962`); CBCRD06W reads both (`CBCRD06W.cbl:179-180`), polls once a minute up to the `WAIT=NNN` PARM limit (standing 030) with a CPU-spin delay loop (`CBCRD06W.cbl:205-215`, `docs/runbook-cardnite.md:44-47`), then abends U0610 (fee branch not complete), U0611 (interest branch not complete) or U0612 (a branch posted a failed flag); U0601 is CYCLCTL unusable (`CBCRD06W.cbl:28-33,216-243`). The JCL comment and runbook label these outcomes U0602/U0603 instead (`app/jcl/cardsvc/CBCRD06J.jcl:32-34`, `docs/runbook-cardnite.md:101-102`) — a JCL/runbook-vs-source divergence, see §8. **Migration note:** these flags are an undocumented overlay of `CC-FILLER` (declared as plain filler at `app/cpy/CVCTRL01Y.cpy:41`); CBCRD05A also stores its cycle id at `CC-FILLER(3:8)` (`CBCRD05A.cbl:733`).
 * CBCRD09J failure does not hold the cycle — the successor condition is posted either way (`sched:350-357`).
 * On any NOTOK the cycle is **held, not cancelled** via `CARDNITE-HELD` (`sched:403-408`).
 
@@ -150,18 +150,18 @@ PARM convention: the cycle date is set by `SET CYCDATE=` and reaches every progr
 * RC: 0 all assessed / 4 skips or handler warning / 8 fee type not routable (flag posted F, join held) / 12 U0502 no flag posted (`CBCRD05AJ.jcl:21-26`). U0501 CYCLCTL unusable (`CBCRD05A.cbl:33`), U0503 SQL (`CBCRD05A.cbl:332` etc.).
 
 ### CBCRD05B — interest and rewards branch (CBCRD05BJ)
-* Inputs: CYCLCTL (`app/jcl/cardsvc/CBCRD05BJ.jcl:39`); report `INTRPT` SYSOUT FBA 133 (`CBCRD05BJ.jcl:40-41`).
-* PARM: cycle date only (`CBCRD05BJ.jcl:36`).
-* Control cards (SYSIN): rounding convention `HALFUP` agreed with Finance/Audit, change-record controlled — a business parameter on cards, not in the program (`CBCRD05BJ.jcl:10-14,47-58`).
+* Inputs: CYCLCTL (`app/jcl/cardsvc/CBCRD05BJ.jcl:43`); report `INTRPT` SYSOUT FBA 133 (`CBCRD05BJ.jcl:44-45`).
+* PARM: cycle date only (`CBCRD05BJ.jcl:40`).
+* Control cards (SYSIN): rounding convention `HALFUP` agreed with Finance/Audit, change-record controlled — a business parameter on cards, not in the program (`CBCRD05BJ.jcl:14-18,53-59`).
 * Db2: cursor/UPDATE `CARDSVC.ACCOUNT` (`CBCRD05B.cbl:251,723`), SELECT `CARDSVC.CARD_LIMIT`+`CARD` (`CBCRD05B.cbl:487-488`), SELECT/INSERT `CARDSVC.TRANSACTION` (`CBCRD05B.cbl:544,676`), INSERT/UPDATE `CARDSVC.REWARDS` (`CBCRD05B.cbl:798-852`).
-* Restart: deletes its interest rows for the cycle date before accruing — no double charge (`CBCRD05BJ.jcl:23-26`). Commits every `WS-COMMIT-FREQUENCY` (`CBCRD05B.cbl:467`).
+* Restart: deletes its interest rows for the cycle date before accruing — no double charge (`CBCRD05BJ.jcl:27-30`). Commits every `WS-COMMIT-FREQUENCY` (`CBCRD05B.cbl:467`).
 * Completion flag: `CC-FILLER(2:1)` 'B'/'F' (`CBCRD05B.cbl:943-977`).
-* RC: 0 complete / 4 accounts skipped, no APR on file / 8 control card error or unsupported rounding (flag posted F) / 12 U0512 no flag (`CBCRD05BJ.jcl:16-21`). U0506 rounding/control card abend path (`CBCRD05B.cbl:388-395`), U0503 SQL, U0501 CYCLCTL.
+* RC: 0 complete / 4 accounts skipped, no APR on file / 8 control card error or unsupported rounding (flag posted F) / 12 U0512 no flag (`CBCRD05BJ.jcl:20-25`). U0506 rounding/control card abend path (`CBCRD05B.cbl:388-395`), U0503 SQL, U0501 CYCLCTL.
 
 ### CBCRD06W — join guard (CBCRD06J STEP005)
 * Input: CYCLCTL only (`app/jcl/cardsvc/CBCRD06J.jcl:55`).
 * PARM: `'&CYCDATE,WAIT=NNN'` — NNN polls, one minute each, standing value 030 (`CBCRD06J.jcl:27-29,50-51`); parsed at `CBCRD06W.cbl:137-141`.
-* Behavior: reads the CARDNITE control record, checks the two branch flags, polls, and abends U0602(poll limit at scheduler level)/U0610/U0611/U0612 per §2.3. RC 0 only when both flags complete (`CBCRD06W.cbl:248`).
+* Behavior: reads the CARDNITE control record, checks the two branch flags, polls, and abends U0601 (control unusable) / U0610/U0611 (branch not complete at poll limit) / U0612 (branch posted failed) per §2.3 (`CBCRD06W.cbl:28-33`); the JCL/runbook's U0602/U0603 labels do not exist in the source (§8). RC 0 only when both flags complete (`CBCRD06W.cbl:248`).
 
 ### CBCRD06A — party work list build (CBCRD06J STEP010)
 * Output: `CARD.PROD.PARTYWK(+1)` FB **LRECL 150** (`CBCRD06J.jcl:70-74`); record layout CVPWRK01Y.
@@ -176,7 +176,7 @@ PARM convention: the cycle date is set by `SET CYCDATE=` and reaches every progr
 * Files: PARTYSRT input LRECL 150; PARTYACC accepted output 150; PARTYRVW manual review output 150; RISKEXC exception listing FBA 133 (`CBCRD06B.cbl:30-33,62-99`; JCL `CBCRD06J.jcl:116-128`).
 * PARM: cycle date only (`CBCRD06J.jcl:113`; parsed `CBCRD06B.cbl:230-236`).
 * Db2: INSERT `CARDSVC.ROUTE_AUDIT` per crossing (`CBCRD06B.cbl:533-556`); commit every `WS-COMMIT-FREQUENCY` dispatches (`CBCRD06B.cbl:287-290`).
-* Per-party RC handling (contract in §7): worst-seen becomes the step RC so STEP040 gates on `IF RC <= 8` (`CBCRD06B.cbl:16-25`, `CBCRD06J.jcl:132-138`).
+* Per-party RC handling (contract in §7): worst-seen becomes the step RC; the JCL gates STEP040 on `IF RC <= 8` (`CBCRD06J.jcl:132-138`), although the program header says STEP040 "can be gated with IF RC <= 4" (`CBCRD06B.cbl:16-25`) — a source-comment-vs-JCL divergence (the JCL's ≤8 is what lets accepted parties proceed on a manual-review RC 8), see §8.
 * Abends: U0602 file, U0605 route unresolvable, U0606 crossing fatal, U0607 commarea version mismatch (`CBCRD06B.cbl:41-44,367-381`). Runbook maps the step's fatal path to U0632 (`docs/runbook-cardnite.md:103,148`) — see §8 discrepancies.
 * Operator doctrine: never re-run STEP030 alone to clear an RC 8; reviewed parties stay excluded until Financial Crime releases them (`docs/runbook-cardnite.md:150-159`).
 
@@ -354,7 +354,7 @@ Waves order migration units so nothing is migrated before its callees/contracts.
 * Exchanged data — `CV-RISK-AREA` (CVRISK01Y, 512 bytes, version 0003, `app/cpy/CVRISK01Y.cpy:11-86`):
   * Request (set per party at `CBCRD06B.cbl:300-341`): version 0003, caller id/mod, correlation id `RCAL`+yymmdd+seq, channel 'B', party/cust/acct/card ids, exposure amount capped at S9(9)V99 max (`CBCRD06B.cbl:320-329`), currency USD, country USA, request type **'RCAL'**; hop trace seeded with the caller.
   * Response (consumed at `CBCRD06B.cbl:394-407`): CV-RISK-RC, score, band A/B/C/X, KYC status, sanction flag, exposure amount, advice/reason codes; the version is checked on return — down-level → U0607 (`CBCRD06B.cbl:376-381`).
-  * PRBRSK1 accepts batch-only: request type 'RCAL' and channel 'B', else RC 12 (`app/partyrsk/cbl/PRBRSK1.cbl:8-11,157`). It owns the Db2 unit of work for its chain (`PRBRSK1.cbl:13-17`).
+  * PRBRSK1 accepts batch-only: request type 'RCAL' and channel 'B', else RC 12 (`app/partyrsk/cbl/PRBRSK1.cbl:8-11`, validation at `PRBRSK1.cbl:239-258`). It owns the Db2 unit of work for its chain (`PRBRSK1.cbl:13-17`).
 * Per-party RC handling (`CBCRD06B.cbl:16-25,411-429`; runbook §6 `docs/runbook-cardnite.md:138-162`):
   * 0 — accepted, written to PARTYACC.
   * 4 — accepted with warning, also written to RISKEXC exception listing.
@@ -362,7 +362,7 @@ Waves order migration units so nothing is migrated before its callees/contracts.
   * 12 — fatal, step abends (runbook U0632 / source U0606 — see §8).
   * The dispatcher return area is only a transport-failure indicator; the higher of dispatcher RC and CV-RISK-RC wins (`CBCRD06B.cbl:383-388`).
 * Work-list files carried across the step boundary: PARTYSRT (in), PARTYACC/PARTYRVW (out), all LRECL 150 CVPWRK01Y (`CBCRD06J.jcl:116-126`).
-* **Contract risk found:** CBCRD90 issues `CANCEL` after every call (`CBCRD90.cbl:305-306`), but PRBRSK1's run-unit counters assume "the driver does not cancel us between parties" (`PRBRSK1.cbl:53-54`) — its every-N-parties commit logic therefore degrades to commit-per-party under this driver. Document for the migration; do not change behavior.
+* **Contract risk found:** CBCRD90 issues `CANCEL` after every call (`CBCRD90.cbl:305-306`), but PRBRSK1's run-unit counters assume "the driver does not cancel us between parties" (`PRBRSK1.cbl:51-52`) — its every-N-parties commit logic therefore degrades to commit-per-party under this driver. Document for the migration; do not change behavior.
 
 ### 7.2 Other exits from the analysis boundary
 
@@ -394,4 +394,6 @@ Documentation discrepancies (source is authoritative):
 1. Scheduler DESC lines for CBCRD06J/07J/08J are stale vs the COBOL/JCL (detailed at top of this document).
 2. Abend numbering: the runbook and scheduler use a `U4xxx`/`U0x0y` mixed scheme (`sched:55,87,147` U4001/U4002/U4004; `docs/runbook-cardnite.md:91-112` U0102/U0202/…), while the source builds abend codes from `WS-ABEND-CODE` values like 0101/0201/0301/0401/0501/0601/0602/0605-0608/0610-0612/0701-0704/0802-0803/0901-0903/1002-1003 (§3 per program). In particular the runbook's U0632 "crossing fatal" (`docs/runbook-cardnite.md:103,148`) corresponds to U0606 in the source (`CBCRD06B.cbl:43`), and the scheduler's ABEND-COND codes (U4001-U4010) match nothing in the source. Map both schemes during migration.
 3. `CBCRD10J` PARM `FORCEOPEN` documented in scheduler operator note 4 (`sched:416-419`) has no corresponding handling in the source: CBCRD10 parses only `LK-PARM-DATA(1:8)` as the cycle date and never reads a FORCEOPEN token (`CBCRD10.cbl:325-331`; no reference to FORCEOPEN anywhere in the program). The operator note is stale vs the source — the CBCRD10 functional-requirements doc must resolve whether FORCEOPEN is implemented or dropped.
-4. The CBCRD05A/05B branch flags are carried in bytes officially declared as filler (`app/cpy/CVCTRL01Y.cpy:41`) — the copybook does not document the overlay; only the program comments do (`CBCRD05A.cbl:710`, `CBCRD05B.cbl:943`, `CBCRD06W.cbl:10-11`).
+4. CBCRD06W abend codes: the source raises only U0601/U0610/U0611/U0612 (`CBCRD06W.cbl:28-33`); the U0602/U0603 codes for STEP005 exist only in the JCL comment (`app/jcl/cardsvc/CBCRD06J.jcl:32-34`) and runbook (`docs/runbook-cardnite.md:101-102`) — the legacy program never issues them.
+5. CBCRD06B header says STEP040 "can be gated with IF RC <= 4" (`CBCRD06B.cbl:24-25`), but the JCL gates on `IF RC <= 8` (`CBCRD06J.jcl:138`); the JCL is authoritative — RC 8 is the manual-review business outcome and STEP040 must still run for accepted parties.
+6. The CBCRD05A/05B branch flags are carried in bytes officially declared as filler (`app/cpy/CVCTRL01Y.cpy:41`) — the copybook does not document the overlay; only the program comments do (`CBCRD05A.cbl:710`, `CBCRD05B.cbl:943`, `CBCRD06W.cbl:10-11`).
