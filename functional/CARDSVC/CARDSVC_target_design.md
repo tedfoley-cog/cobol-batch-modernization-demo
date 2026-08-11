@@ -17,7 +17,7 @@ repository. Drift from this document is a wave defect.
 | Logging | SLF4J + Logback, structured key=value messages carrying cycle date and job name |
 | Testing | JUnit 5, AssertJ, Testcontainers (PostgreSQL) for integration tests; Spring Batch `JobLauncherTestUtils` for job-level tests |
 | Build / CI | Maven, GitHub Actions (`cardsvc-ci.yml`): build, unit + integration tests |
-| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` required for every job plus per-job parameters mirroring each JCL `PARM` exactly, resolved in the job's FR doc — e.g. CBCRD01 `cycleId` (`PARM='&CYCDATE,&CYCID'`), CBCRD02 `tolerancePct` (`&TOLER`), CBCRD04 `restart=Y|N` (safety-critical cold/warm switch), CBCRD06 `waitLimit` (`WAIT=030`), CBCRD09 cycleDate only, CBCRD10 optional `FORCEOPEN` (operator note 4 in `sched/CARDNITE.sched`) |
+| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` required for every job plus per-job parameters mirroring each JCL `PARM` exactly, resolved in the job's FR doc — e.g. CBCRD01 `cycleId` (`PARM='&CYCDATE,&CYCID'`), CBCRD02 `tolerancePct` (`&TOLER`), CBCRD04 `restart=Y|N` (safety-critical cold/warm switch), CBCRD06 `waitLimit` (`WAIT=030`), CBCRD09 cycleDate only. Note: `FORCEOPEN` for CBCRD10 exists only in scheduler operator note 4 (`sched/CARDNITE.sched:416-419`) and is NOT parsed by CBCRD10 (`CBCRD10.cbl:325-331` reads only the CCYYMMDD cycle date) — the CBCRD10 FR doc must resolve whether it is implemented or dropped |
 
 ## Layout and conventions
 
