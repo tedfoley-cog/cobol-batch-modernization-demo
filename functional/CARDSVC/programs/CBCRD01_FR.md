@@ -35,7 +35,7 @@ PARM: `'&CYCDATE,&CYCID'` — CCYYMMDD cycle date, cycle id after the comma (`CB
 | 8 | *unreachable in source* — JCL comment only (`CBCRD01J.jcl:18`); see divergence below | — |
 | 12 | fatal — U0101/U0102 (source) | `CBCRD01.cbl:26-27` |
 
-Abends (source): U0101 cycle-control record unreadable (`CBCRD01.cbl:26,204`), U0102 AUTHLOG open failed (`CBCRD01.cbl:27,235`). **Divergence:** U0103 appears only in the runbook (`docs/runbook-cardnite.md:94`) — the source raises no 0103; source codes govern, runbook label retired at cutover.
+Abends (source): U0101 cycle-control record unreadable (`CBCRD01.cbl:26,204`), U0102 AUTHLOG open failed (`CBCRD01.cbl:27,235`). **Divergence:** U0103 appears in the JCL comment (`CBCRD01J.jcl:19`) and the runbook (`docs/runbook-cardnite.md:94`) — the source raises no 0103; source codes govern, both labels retired at cutover.
 **Divergence reconciliation (unreachable RC 8 — stream FR §5.3 item 15):** the JCL comment claims "8 = no records selected, cycle held", but the source moves only `WS-RC-WARNING` (0004) on zero written records (`CBCRD01.cbl:24,449-453`) — the program never sets 0008, so an empty AUTHLOG ends RC 4 and the chain **proceeds** (scheduler NOTOK fires at 8+, `sched/CARDNITE.sched:52-55`). Resolution: **source behavior governs at parity** — empty extract exits 4 with the warning; whether the business wants an empty online day to hold the cycle is a sign-off question, not silent target behavior.
 
 Restart: STEP010 rerunnable from scratch; never restart at STEP020 (`CBCRD01J.jcl:21-26`) — target job is idempotent per cycle (re-run overwrites the cycle's extract file).

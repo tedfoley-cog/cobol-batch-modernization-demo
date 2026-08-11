@@ -12,7 +12,7 @@ PARM: cycle date only (`CBCRD06J.jcl:113`; parsed `app/cardsvc/cbl/CBCRD06B.cbl:
 
 - Files: PARTYSRT in, PARTYACC accepted out, PARTYRVW manual-review out — all FB 150 CVPWRK01Y; RISKEXC exception listing FBA 133 (`CBCRD06B.cbl:30-33,62-99`; `CBCRD06J.jcl:116-128`).
 - Per party: populates CV-RISK-AREA request (see RSKRECAL_contract_FR §2), calls `CALL 'CBCRD90' USING ROUTE-REQUEST CV-RISK-AREA WS-RETURN-AREA` (`CBCRD06B.cbl:359-361`), consumes the response into PW-OUTCOME (PW-RC, reason, advice, sanction flag, score, dispatch timestamp — `app/cardsvc/cpy/CVPWRK01Y.cpy:25-34`).
-- Db2: INSERT `CARDSVC.ROUTE_AUDIT` per crossing (`CBCRD06B.cbl:533-556`); commit every `WS-COMMIT-FREQUENCY` dispatches (`CBCRD06B.cbl:287-290`).
+- Db2: INSERT `CARDSVC.ROUTE_AUDIT` per crossing (`CBCRD06B.cbl:533-556`); commit every `WS-COMMIT-FREQUENCY` dispatches (`CBCRD06B.cbl:287-290`). Note: this insert is **in addition to** the dispatcher's own audit insert (`CBCRD90.cbl:343-375`, CBCRD90-FR-004) — legacy writes **two** `ROUTE_AUDIT` rows per crossing (one caller-side, one dispatcher-side); parity keeps both.
 
 ## 3. Requirements owned
 
@@ -52,5 +52,5 @@ Everything past `RiskRecalculationClient` is out of scope (see RSKRECAL_contract
 - Stub scripted RC 0/4/8/12 per party routes records to PARTYACC/RISKEXC/PARTYRVW/fatal exactly per FR-001; step exit is worst-seen.
 - Version-mismatch response fails the step fatally.
 - Unresolvable risk route fails the step fatally (corrected behavior) — no review-file flood.
-- One `route_audit` row per dispatched party.
+- Two `route_audit` rows per dispatched party — the caller-side insert plus the dispatcher's (legacy parity, §2); consolidating to one would be a divergence requiring sign-off.
 - Re-driving after a mid-run failure does not re-dispatch parties already committed (checkpoint parity with `WS-COMMIT-FREQUENCY` commits).

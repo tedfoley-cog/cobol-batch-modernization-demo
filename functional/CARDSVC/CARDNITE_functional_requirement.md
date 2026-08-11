@@ -46,7 +46,7 @@ When the extract is processed, each record is validated (auth-type overlay decod
 When the clean file exists, it is sorted into card/date/sequence order (rejected records dropped), then each record is enriched with MCC, acquirer and settlement route from the merchant reference (VSAM MERCHRTE + `CARDSVC.MERCHANT`); unmatched merchants take the Settlements-owned defaults from control cards (`DEFAULT-ROUTE=DFLT`, `DEFAULT-ACQID=…`) and surface as RC 4 (`app/jcl/cardsvc/CBCRD03J.jcl:16-26,37-58,65-90`, `app/cardsvc/cbl/CBCRD03.cbl:389`).
 *Acceptance criteria:*
 - Output is in posting sequence; no rejected record reaches posting.
-- Defaulted-merchant count is reported; missing default card is fatal (exit 12 — §5.3 item 15; no RC 8 exists in CBCRD03).
+- Defaulted-merchant count is reported. No RC 8 exists in CBCRD03 (§5.3 item 15), and a missing default card is not detected by legacy — it silently falls back to the hardcoded 'DFLT'/'UNKNOWN' values (`CBCRD03.cbl:152-154,255-274`); the target makes the defaults required, validated configuration (target-only rule, CBCRD03_FR §5).
 
 ### Posting (CBCRD04J)
 

@@ -46,6 +46,6 @@ None.
 ## 7. Acceptance criteria
 
 - Each R001–R010 rule fires on a crafted bad record and routes it to the reject file with the correct reason code; clean records pass byte-unchanged except the edit status.
-- Reject share exactly at tolerance ⇒ RC 4; one record over ⇒ RC 8 and downstream does not run.
+- Reject share is compared as a whole percent rounded to the nearest integer (`CBCRD02.cbl:584-590`): rounded share ≤ tolerance ⇒ RC 4; rounded share > tolerance ⇒ RC 8 and downstream does not run (boundary tests must use the rounded value, not a single-record delta).
 - Tolerance is a required job parameter; a non-numeric value fails startup, not mid-file.
 - clean+reject record counts equal records read; counters written to `cycle_control`.
