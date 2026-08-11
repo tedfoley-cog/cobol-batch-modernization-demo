@@ -20,7 +20,7 @@ Control cards (SYSIN): Finance-owned mapping — `BATCH=`, `SUSPENSE=`, and `MAP
 
 **CBCRD07-FR-001 — Mapped double-entry feed.** Every unposted transaction produces debit/credit GL_POSTING rows per the Finance mapping; unmapped type/product combinations go to the SUSPENSE account and end RC 4 (Finance adds a card next day).
 
-**CBCRD07-FR-002 — Debits = credits or nothing.** Total debits must equal total credits before commit; on difference the whole feed rolls back and the job abends U0704 — **no partial ledger ever** (`CBCRD07J.jcl:10-13`, `CBCRD07.cbl:737`; procedure `docs/runbook-cardnite.md:184-196`). Cross-ref CARDNITE-FR-016.
+**CBCRD07-FR-002 — Debits = credits or nothing (target rule).** Total debits must equal total credits; on difference the job abends U0704 with **nothing left in the ledger** (`CBCRD07J.jcl:10-13`, `CBCRD07.cbl:728-738`; procedure `docs/runbook-cardnite.md:184-196`). **Divergence — legacy cannot deliver full rollback (stream FR §5.3 item 17):** the header claims "the whole unit of work is rolled back" (`CBCRD07.cbl:27-30`), but the loop commits every `WS-COMMIT-FREQUENCY` inserted rows (`CBCRD07.cbl:522-528`) after already flagging transactions `GL_POSTED_FLG='Y'` (`CBCRD07.cbl:645-654`); the proof runs only at end of run (`CBCRD07.cbl:706-740`) and the U0704 `ROLLBACK` (`CBCRD07.cbl:820`) undoes only work since the last commit — a feed larger than the commit frequency (default 1000) leaves committed `GL_POSTING` rows and flags behind, and a re-run skips them (the `GL_POSTED_FLG='N'` predicate). The target performs the proof **before** any commit (single transaction) — a deliberate correction, not legacy parity. Cross-ref CARDNITE-FR-016.
 
 **CBCRD07-FR-003 — Once-only feed.** The `GL_POSTED_FLG='N'` predicate makes the job restartable/idempotent (`CBCRD07J.jcl:34-37`; `sched/CARDNITE.sched:293-294`).
 
@@ -49,6 +49,6 @@ GL downstream pickup is external — signalled only by `GL-CARD-FEED-READY`/comp
 
 - Balanced seeded set: every transaction gets debit+credit rows, flags set, RC 0, GLRPT totals match.
 - Unmapped combination posts to suspense, RC 4, named on GLRPT.
-- Forced imbalance: zero `gl_posting` rows, zero flags updated, exit 12 with U0704 (Phase 4 failure-path E2E, FR-016).
+- Forced imbalance: zero `gl_posting` rows, zero flags updated, exit 12 with U0704 (Phase 4 failure-path E2E, FR-016) — **target-only guarantee**; legacy leaves committed rows/flags behind when the feed exceeds the commit frequency (§3 FR-002 divergence, stream FR §5.3 item 17).
 - Re-run after success feeds nothing (flags already 'Y') and ends clean — no RC 8 exists in the source (divergence §5).
 - Malformed mapping configuration fails startup (U0701-equivalent), touching nothing.
