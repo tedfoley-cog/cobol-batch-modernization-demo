@@ -11,7 +11,7 @@ repository. Drift from this document is a wave defect.
 | Framework | Spring Boot 3.x |
 | Batch runtime | Spring Batch 5.x — one Spring Batch `Job` per scheduler job (`CBCRD01J`..`CBCRD10J`, including the forked legs `CBCRD05AJ`/`CBCRD05BJ`), one `Step` per JCL step that runs application code |
 | Persistence | Spring Data JPA (Hibernate) over PostgreSQL; explicit `@Transactional` boundaries; chunk-oriented steps commit per chunk mirroring each program's own COBOL commit/checkpoint behavior, resolved per job in its FR doc — where the interval is operator-tunable (e.g. CBCRD04 reads `CC-COMMIT-FREQ` from the cycle control record, falling back to its own constant when zero, `app/cardsvc/cbl/CBCRD04.cbl:334-335`) the chunk size is bound to the `cycle_control` row, not hardcoded |
-| Data target | PostgreSQL 16. Db2 DDL in `db2/ddl/` translated to Flyway migrations. VSAM clusters become tables — KSDS (CYCLCTL, CARDXREF, ...) keyed on the cluster key, and the AUTHLOG ESDS (append-only, entry-sequenced per `app/jcl/vsam/DEFCARD.jcl:32`) as an append-only table with a synthetic sequence; QSAM/GDG work datasets become filesystem files (Spring Batch `FlatFileItemReader/Writer`) or tables where the plan says so |
+| Data target | PostgreSQL 16. Db2 DDL in `db2/ddl/` translated to Flyway migrations. VSAM clusters become tables — KSDS (CYCLCTL, CARDXREF, ...) keyed on the cluster key, and the AUTHLOG ESDS (append-only, entry-sequenced — `NONINDEXED` per `app/jcl/vsam/DEFCARD.jcl:37-47`) as an append-only table with a synthetic sequence; QSAM/GDG work datasets become filesystem files (Spring Batch `FlatFileItemReader/Writer`) or tables where the plan says so |
 | DTO / mapping | Java `record` DTOs at job/step boundaries; MapStruct for entity↔DTO mapping |
 | Error handling | Estate return-code convention preserved: each job exits 0 / 4 / 8 / 12 via `ExitCodeGenerator`; the batch error handler `CBCRD91` (called by every job but ABSENT from the repo — no `CBCRD91.cbl` exists) becomes a shared `ErrorReporter` component whose contract is derived from the callers' `ERROR-AREA` usage and the online `CACRD91.cbl` severity semantics; the absence is flagged as an absent-module item in the stream analysis |
 | Logging | SLF4J + Logback, structured key=value messages carrying cycle date and job name |
@@ -37,9 +37,11 @@ backend/
   hand-edited registry, so waves never conflict by construction.
 - Legacy routing has two physical sources: the batch dispatcher `CBCRD90` loads
   its route cache from Db2 `CARDSVC.PGM_ROUTE` first, falling back to the
-  `PGMROUT` VSAM KSDS (`CARD.PROD.PGMROUT`, `app/jcl/vsam/DEFCARD.jcl:153-164`)
+  `PGMROUT` VSAM KSDS (`CARD.PROD.PGMROUT`, `app/jcl/vsam/DEFCARD.jcl:152-165`)
   when Db2 is unavailable (`app/cardsvc/cbl/CBCRD90.cbl:133-150`); the online
-  dispatcher `CACRD90` reads the Db2 table. Both converge onto the single migrated
+  dispatcher `CACRD90` resolves from a TSQ cache first, then the Db2 table, then
+  the same `PGMROUT` VSAM fallback (`app/cardsvc/cbl/CACRD90.cbl:130-155`). Both
+  converge onto the single migrated
   `pgm_route` table; the migration seeds it from the Db2 seed
   (`db2/ddl/40_SEED_PGM_ROUTE.sql`) and the analysis must reconcile and flag any
   divergence between the VSAM cluster contents and the Db2 rows.
