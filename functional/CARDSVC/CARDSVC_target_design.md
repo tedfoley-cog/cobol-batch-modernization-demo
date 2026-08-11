@@ -17,7 +17,7 @@ repository. Drift from this document is a wave defect.
 | Logging | SLF4J + Logback, structured key=value messages carrying cycle date and job name |
 | Testing | JUnit 5, AssertJ, Testcontainers (PostgreSQL) for integration tests; Spring Batch `JobLauncherTestUtils` for job-level tests |
 | Build / CI | Maven, GitHub Actions (`cardsvc-ci.yml`): build, unit + integration tests |
-| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` required for every job plus per-job parameters mirroring each JCL `PARM` exactly, resolved in the job's FR doc — e.g. CBCRD01 `cycleId` (`PARM='&CYCDATE,&CYCID'`), CBCRD02 `tolerancePct` (`&TOLER`), CBCRD04 `restart=Y|N` (safety-critical cold/warm switch), CBCRD06 `waitLimit` (`WAIT=030`), CBCRD09 cycleDate only |
+| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` required for every job plus per-job parameters mirroring each JCL `PARM` exactly, resolved in the job's FR doc — e.g. CBCRD01 `cycleId` (`PARM='&CYCDATE,&CYCID'`), CBCRD02 `tolerancePct` (`&TOLER`), CBCRD04 `restart=Y|N` (safety-critical cold/warm switch), CBCRD06 `waitLimit` (`WAIT=030`), CBCRD09 cycleDate only, CBCRD10 optional `FORCEOPEN` (operator note 4 in `sched/CARDNITE.sched`) |
 
 ## Layout and conventions
 
@@ -50,8 +50,11 @@ backend/
   fallback semantics via `FALLBACK_PGM`.
 - RC 4 "warning/partial" legs (e.g. CBCRD06's PARTIAL refresh) map to a
   per-step `ExitStatus` contribution resolved in each job's FR doc, so a warning
-  never surfaces as FAILED; the job-level exit code is the max of its steps'
-  mapped RCs.
+  never surfaces as FAILED. The default job-level exit code is the max of its
+  steps' mapped RCs, but each FR doc defines the job's RC mapping explicitly —
+  where a specific RC is a distinct business outcome (e.g. CBCRD08's RC 8 =
+  OUTOFBAL) that code is reserved for that outcome only, and generic step
+  failures map to 12, never to a reserved business RC.
 - Restartability: the cycle control record (`CYCLCTL`) becomes a `cycle_control`
   table; checkpointed jobs resume from `cc_last_key`, matching operator note 3 in
   `sched/CARDNITE.sched`.
