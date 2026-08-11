@@ -33,9 +33,9 @@ PARM: `'&CYCDATE,&CYCID'` — CCYYMMDD cycle date, cycle id after the comma (`CB
 | 0 | complete | `CBCRD01J.jcl:15-19` |
 | 4 | records skipped | same |
 | 8 | **no records selected** — scheduler NOTOK, cycle held | same; scheduler treats RC≤4 OK, 8+ NOTOK abend U4001 (`sched/CARDNITE.sched:52-55`) |
-| 12 | fatal U0102–U0103 | `CBCRD01J.jcl:15-19` |
+| 12 | fatal — U0101/U0102 (source) | `CBCRD01.cbl:26-27` |
 
-Abends: U0101 CYCLCTL unreadable (`CBCRD01.cbl:26,204`), U0102 file failure (`CBCRD01.cbl:235`), U0103 no control record (`docs/runbook-cardnite.md:94`).
+Abends (source): U0101 cycle-control record unreadable (`CBCRD01.cbl:26,204`), U0102 AUTHLOG open failed (`CBCRD01.cbl:27,235`). **Divergence:** U0103 appears only in the runbook (`docs/runbook-cardnite.md:94`) — the source raises no 0103; source codes govern, runbook label retired at cutover.
 Restart: STEP010 rerunnable from scratch; never restart at STEP020 (`CBCRD01J.jcl:21-26`) — target job is idempotent per cycle (re-run overwrites the cycle's extract file).
 Edge: empty AUTHLOG ⇒ RC 8 and the cycle holds (a real business signal — the online day produced nothing).
 

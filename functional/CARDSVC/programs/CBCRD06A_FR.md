@@ -23,9 +23,9 @@ Chunk step: repository cursor (account + transaction-existence predicate) → `F
 
 ## 5. Error / edge behavior and RC mapping
 
-- RC 0/4 warnings only (`CBCRD06A.cbl` per analysis §3); abends U0601 CYCLCTL, U0602 file, U0603 SQL (`app/cardsvc/cbl/CBCRD06A.cbl:29,197-263`).
-- Empty work list (no activity) is a valid RC 0 outcome — downstream steps process zero records.
-- A party appearing under multiple accounts produces multiple records here; de-duplication is CBCRD06X's job, not this one.
+- RC 0 normal / RC 4 warning (empty work list, `CBCRD06A.cbl:27,367-370`); abends U0601 CYCLCTL, U0602 file, U0603 SQL (`app/cardsvc/cbl/CBCRD06A.cbl:29,197-263`).
+- Empty work list (no activity) ends RC 4 (`WORK LIST IS EMPTY` warning) — downstream steps still run and process zero records (STEP020 is gated `RC <= 4`).
+- A party appearing under multiple accounts produces multiple records here; per-party summarisation is CBCRD06X's job, not this one.
 
 ## 6. Hard-stop boundary
 
@@ -34,5 +34,6 @@ None.
 ## 7. Acceptance criteria
 
 - Given seeded accounts with/without cycle transactions, the work list contains exactly the active ones, with COMP-3-scale-faithful `BigDecimal` balances.
+- Empty work list exits 4 with the warning message.
 - Outcome block is written empty/initial.
 - Record length/layout is byte-compatible CVPWRK01Y FB 150.

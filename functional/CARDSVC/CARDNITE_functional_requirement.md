@@ -76,7 +76,7 @@ When posting completes, each account is evaluated for annual, late, over-limit, 
 In parallel with fees, interest is accrued per account on ADB at the account APR with cash advances at the cash APR, using the Finance/Audit-agreed rounding convention from control cards (`ROUNDING=HALFUP`, change-record controlled); rewards are accrued to `CARDSVC.REWARDS` (`app/jcl/cardsvc/CBCRD05BJ.jcl:5-18,53-59`, `app/cardsvc/cbl/CBCRD05B.cbl:251,487-488,544,676,723,798-852`).
 *Acceptance criteria:*
 - Accounts with no APR on file are skipped and counted (RC 4), not defaulted.
-- An unsupported rounding value or control-card error stops the branch (RC 8, flag posted failed) — no accrual under an unagreed convention (`CBCRD05BJ.jcl:20-25`).
+- An unsupported rounding value or control-card error stops the branch fatally before any accrual — U0506, RC 12, no branch flag posted (`CBCRD05B.cbl:384-397`); the JCL comment's "RC 8, flag 'F'" is a divergence — see §5.3 item 11.
 - Re-run safety: the JCL restart comment claims prior interest rows are deleted first (`CBCRD05BJ.jcl:27-30`), but no DELETE exists in CBCRD05B — see §5.3 item 9. The migration must provide same-cycle idempotency; the legacy claim is unverified.
 
 **CARDNITE-FR-010 — Exposure refresh runs only after both branches have completed successfully.**
@@ -88,9 +88,9 @@ When the fee and interest branches finish, each posts a completion flag on the c
 ### Exposure and risk refresh (CBCRD06J)
 
 **CARDNITE-FR-011 — Every party with cycle activity is selected exactly once for risk recalculation.**
-When both branches are complete, a party work list is built from accounts with cycle activity (`CARDSVC.ACCOUNT` with a `CARDSVC.TRANSACTION` existence test), then sorted and de-duplicated so each party appears once (`app/jcl/cardsvc/CBCRD06J.jcl:62-90`, `app/cardsvc/cbl/CBCRD06A.cbl:150-155`, `CBCRD06X.cbl:44-52`; layout `app/cardsvc/cpy/CVPWRK01Y.cpy:7-12`).
+When both branches are complete, a party work list is built from accounts with cycle activity (`CARDSVC.ACCOUNT` with a `CARDSVC.TRANSACTION` existence test), then sorted and **summarised per party** — one record per party with amounts/exposure summed across its accounts and the worst risk band (X > C > B > A) carried forward (`app/jcl/cardsvc/CBCRD06J.jcl:62-90`, `app/cardsvc/cbl/CBCRD06A.cbl:150-155`, `CBCRD06X.cbl:44-52,178-283`; layout `app/cardsvc/cpy/CVPWRK01Y.cpy:7-12`).
 *Acceptance criteria:*
-- No duplicate party ids on the sorted work list.
+- No duplicate party ids on the sorted work list; a multi-account party's record carries the summed amounts and worst band (CBCRD06X_FR).
 - Work-list records carry party/account keys and COMP-3 balances per CVPWRK01Y (LRECL 150).
 
 **CARDNITE-FR-012 — Each party's exposure is recalculated by the external risk service and the outcome is captured per party.** *(caller contract — see FR-013)*
@@ -246,6 +246,9 @@ Authoritative dataset table (DSN, LRECL, producer → consumer) is analysis §4.
 8. **CBCRD05A unroutable fee type**: the JCL comment says RC 8 / flag 'F' / join held (`CBCRD05AJ.jcl:21-26`), but the source treats a dispatcher 'ROUTE NOT FOUND' (RC 8, `CBCRD90.cbl:115-120`) as a declined fee — warning only, step RC 4, flag 'A', join proceeds (`CBCRD05A.cbl:522-530,728-732`); only handler RC 12 abends (U0505, `CBCRD05A.cbl:531-536`). Consequence: RC 8 is unreachable in CBCRD05A, and a missing fee handler load module is indistinguishable from a legitimately declined fee — fees silently go unassessed while the branch posts 'A' and the join proceeds. Same latent-defect class as the U0605 item in §3.3; the migration should resolve (not replicate) it.
 9. **CBCRD05A/05B re-run deletion**: the JCL restart comments claim each branch deletes its cycle-date rows before starting (`CBCRD05AJ.jcl:28-31`, `CBCRD05BJ.jcl:27-30`), but neither program contains a DELETE — legacy same-cycle re-run safety is unverified; the migration must implement idempotency explicitly (FR-008/FR-009).
 10. **CBCRD06W standing WAIT**: the JCL passes `WAIT=030` (`CBCRD06J.jcl:51`); the program header claims the standard schedule passes `WAIT=000` (single check, no wait) (`CBCRD06W.cbl:22-24`) — JCL authoritative.
+11. **CBCRD05B control-card failure**: the JCL comment claims RC 8 / flag 'F' (`CBCRD05BJ.jcl:20-25`), but the source abends U0506 in initialization — RC 12, no branch flag posted (`CBCRD05B.cbl:384-397`); legacy CBCRD06W then times out with U0611 rather than failing fast on an 'F' flag. Source governs.
+12. **JCL/runbook abend labels absent from source**: CBCRD05A's U0502 (`CBCRD05AJ.jcl:21-26`), CBCRD05B's U0512, CBCRD01's U0103 (`docs/runbook-cardnite.md:94`), and CBCRD04's swapped U0402/U0403 meanings (`CBCRD04J.jcl:19-23` vs `CBCRD04.cbl:46-47`) / CBCRD09's per-cluster U0901/U0902 labels (`CBCRD09J.jcl:18-24` vs `CBCRD09.cbl:28-31`) — source codes and meanings govern; stale labels retired at cutover.
+13. **APPROVED TARGET DIVERGENCE — CBCRD06B unresolvable risk route**: legacy behavior (via the unreachable-U0605 defect, §3.3) sends **every** party to manual review with an unpopulated risk area and ends step RC 8 when the XMOD/RSKRECAL route is missing or the route table is unavailable. The target treats an unresolvable risk route as a configuration failure that stops the step fatally (exit 12, U0605-equivalent) instead of flooding manual review — a deliberate, approved correction of the latent defect (plan Phase 5 divergence closure; CBCRD06B_FR §5).
 
 ### 5.4 User abends by job
 Source-derived abend inventory per program is in analysis §3 (U0101–U1003); the runbook table (`docs/runbook-cardnite.md:91-112`) is the operator view, with the divergences above.
@@ -270,7 +273,7 @@ Covering test and verification case columns to be filled by the migration waves.
 | CARDNITE-FR-010 | `CBCRD05A.cbl:710-747`; `CBCRD05B.cbl:943-977`; `CBCRD06W.cbl:179-243` | _(wave)_ | late/failed branch gating |
 | CARDNITE-FR-011 | `CBCRD06A.cbl:150-155`; `CBCRD06X.cbl:44-52` | _(wave)_ | uniqueness; population match |
 | CARDNITE-FR-012 | `CBCRD06B.cbl:16-25,394-429` | _(wave)_ | outcome routing per RC |
-| CARDNITE-FR-013 | `CBCRD06B.cbl:348-381`; `CVRISK01Y.cpy:8-14`; `40_SEED_PGM_ROUTE.sql:42` | _(wave)_ | contract-only stub; version mismatch fatal |
+| CARDNITE-FR-013 | `CBCRD06B.cbl:348-381`; `CVRISK01Y.cpy:8-14`; `40_SEED_PGM_ROUTE.sql:42` | _(wave)_ | contract-only stub; version mismatch fatal; unresolvable route → fatal exit 12 (approved divergence, §5.3 item 13) |
 | CARDNITE-FR-014 | `CBCRD06B.cbl:16-25`; `CBCRD06J.jcl:132-157` | _(wave)_ | review exclusion persists; step-alone rerun forbidden |
 | CARDNITE-FR-015 | `CBCRD06C.cbl:222-224,442-452` | _(wave)_ | accepted-only application |
 | CARDNITE-FR-016 | `CBCRD07.cbl:275-276,699-746`; `CBCRD07J.jcl:53-70` | _(wave)_ | balance proof; suspense RC 4; rollback on imbalance |

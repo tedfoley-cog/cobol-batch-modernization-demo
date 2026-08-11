@@ -47,6 +47,6 @@ None.
 
 - Both flags set ⇒ proceeds immediately.
 - One flag missing, appearing during the window ⇒ proceeds on the poll that sees it.
-- Flag never appearing ⇒ fails after exactly waitLimit polls with the branch-specific code.
+- Flag never appearing ⇒ fails with the branch-specific code after waitLimit+1 checks/reads and waitLimit delays — legacy loops `UNTIL … WS-POLL-CNT > WS-WAIT-LIMIT` with the counter incremented after a failed check (`CBCRD06W.cbl:113-116,194-201`), so WAIT=030 means 31 reads / 30 one-minute delays; the target reproduces this window.
 - Either flag 'F' ⇒ fails immediately (no polling) with U0612.
-- A branch flag from a different `branch_cycle_id` is treated as missing (stale-cycle guard).
+- A branch flag from a different `branch_cycle_id` is treated as missing (**stale-cycle guard — target-only improvement**: legacy CBCRD06W reads only the flag bytes and never inspects the cycle id, `CBCRD06W.cbl:179-186`; depends on both 05A and 05B populating `branch_cycle_id` in the target — see CBCRD05B_FR §7 and CYCLCTL_contract_FR §3).

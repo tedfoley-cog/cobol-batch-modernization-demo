@@ -35,9 +35,9 @@ Chunk-oriented step; chunk size bound to `cycle_control.commit_freq` (not hardco
 | 0 | all posted |
 | 4 | bypasses written to reject |
 | 8 | too many bypasses or restart key not found |
-| 12 | fatal — U0402 SQL, U0403 control failure |
+| 12 | fatal — U0401 CYCLCTL unusable, U0402 file open/I-O failure, U0403 unrecoverable SQL error, U0404 restart key not found (source `CBCRD04.cbl:44-48`; **divergence:** the JCL comment `CBCRD04J.jcl:19-23` has U0402/U0403 swapped — source codes govern) |
 
-(`CBCRD04J.jcl:19-23`.) Also U0401 CYCLCTL unusable (`CBCRD04.cbl:45`), U0404 restart key not on input (`CBCRD04.cbl:48`). Scheduler: U4004/S0C7 NOTOK, usually a bad packed field (`sched/CARDNITE.sched:147-148,420-421`) — packed-decimal parse failures become typed validation errors at file read.
+Scheduler: U4004/S0C7 NOTOK, usually a bad packed field (`sched/CARDNITE.sched:147-148,420-421`) — packed-decimal parse failures become typed validation errors at file read.
 
 ## 6. Hard-stop boundary
 

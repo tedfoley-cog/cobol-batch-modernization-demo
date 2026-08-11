@@ -34,9 +34,9 @@ Chunk step over accounts; per fee type calls `ProgramRouter` → fee handler bea
 |---|---|
 | 0 | all assessed |
 | 4 | skips, handler warning, or unroutable/declined fee |
-| 12 | U0502 — no flag posted |
+| 12 | fatal — U0501/U0503/U0505 (source); no flag posted |
 
-(`CBCRD05AJ.jcl:21-26`, source-reconciled.) Abends: U0501 CYCLCTL unusable (`CBCRD05A.cbl:33`), U0503 SQL (`CBCRD05A.cbl:332`), U0505 fatal handler RC only (`CBCRD05A.cbl:531-536`).
+Abends (source, `CBCRD05A.cbl:33-35`): U0501 CYCLCTL unusable, U0503 SQL (`CBCRD05A.cbl:332`), U0505 fatal handler RC (`CBCRD05A.cbl:531-536`). **Divergence:** the JCL comment labels the fatal path U0502 (`CBCRD05AJ.jcl:21-26`) — the source raises no 0502; source codes govern, JCL label retired.
 
 **Divergence reconciliation (FR §5.3 — unroutable fee):** the JCL claims "8 fee type not routable (flag F, join held)" (`CBCRD05AJ.jcl:21-26`), but the source handles dispatcher 'ROUTE NOT FOUND' (RC 8, `app/cardsvc/cbl/CBCRD90.cbl:115-120`) as a **declined fee — warning RC 4, flag 'A', join proceeds** (`CBCRD05A.cbl:522-530,728-732`). Resolution: **source behavior governs** (an unroutable fee type is a configuration gap, not a cycle-stopper), with a mandatory structured warning naming the unroutable fee type so operations sees the gap; the JCL comment is retired.
 

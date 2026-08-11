@@ -9,13 +9,14 @@ VSAM KSDS `CARD.PROD.CYCLCTL`, KEYS(16 0) RECORDSIZE(256 256) (`app/jcl/vsam/DEF
 
 | Field | Picture / meaning |
 |---|---|
-| CC-CYCLE-TYPE X(8) + CC-CYCLE-DATE X(8) | key — CARDNITE + CCYYMMDD |
+| CC-CYCLE-TYPE X(8) + CC-CYCLE-DATE 9(8) | key — CARDNITE + CCYYMMDD (`CVCTRL01Y.cpy:9-13`) |
+| CC-CYCLE-ID X(8) | cycle identifier (`CVCTRL01Y.cpy:14`) — the id CBCRD05A echoes into the CC-FILLER overlay at (3:8) |
 | CC-STATUS X(1) | N new / R running / C complete / F failed / S suspended |
-| CC-COMMIT-FREQ 9(4) | operator-tunable commit interval; 0 ⇒ program constant `WS-COMMIT-FREQUENCY`=1000 (`app/cpy/CVCONSTY.cpy:37`, `app/cardsvc/cbl/CBCRD04.cbl:334-335`) |
+| CC-COMMIT-FREQ 9(6) | operator-tunable commit interval; 0 ⇒ program constant `WS-COMMIT-FREQUENCY`=001000 (`CVCTRL01Y.cpy:29`, `app/cpy/CVCONSTY.cpy:37`, `app/cardsvc/cbl/CBCRD04.cbl:334-335`) |
 | CC-RECS-READ / -WRITTEN / -REJECTED 9(9) | counters |
 | CC-LAST-KEY X(32) | checkpoint restart key |
 | CC-RESTART-CNT 9(2) | restarts this cycle; runbook cap ≤ 3 (`docs/runbook-cardnite.md:114-136`) |
-| CC-TOT-DR / CC-TOT-CR COMP-3 | control totals (`CVCTRL01Y.cpy:36-39`) |
+| CC-TOTAL-DR-AMT / CC-TOTAL-CR-AMT S9(13)V99 COMP-3 + CC-HASH-TOTAL S9(15) COMP-3 | control totals (`CVCTRL01Y.cpy:36-39`); zeroed by CBCRD01 on cycle open (`CBCRD01.cbl:306-311`), reported by CBCRD10 |
 | CC-ONLINE-CLOSED-FLG X(1) | region gate flag set by CBCRD10 (`CVCTRL01Y.cpy:40`, `CBCRD10.cbl:713-717`) |
 | CC-FILLER X(30) | **undocumented overlay** (`CVCTRL01Y.cpy:41`): (1:1) fee branch 'A'/'F' (`CBCRD05A.cbl:729-733`), (2:1) interest branch 'B'/'F' (`CBCRD05B.cbl:960-962`), (3:8) cycle id (`CBCRD05A.cbl:733`); read by CBCRD06W (`CBCRD06W.cbl:179-180`) |
 
@@ -29,12 +30,12 @@ VSAM KSDS `CARD.PROD.CYCLCTL`, KEYS(16 0) RECORDSIZE(256 256) (`app/jcl/vsam/DEF
 
 ## 3. Target mechanism (approved D2)
 
-`cycle_control` table: PK (cycle_type, cycle_date); checkpoint block as columns; **overlay promoted to named columns** `fee_branch_status`, `interest_branch_status`, `branch_cycle_id` — a deliberate divergence from byte-compat, approved at STOP 2 (plan §5 D2). Chunk size for tunable-interval jobs is bound to `commit_freq` on the row, not hardcoded (target design "Persistence" row). Restart-count guard (≤3) enforced in the component (plan Phase 5).
+`cycle_control` table: PK (cycle_type, cycle_date); checkpoint block as columns; **overlay promoted to named columns** `fee_branch_status`, `interest_branch_status`, `branch_cycle_id` — a deliberate divergence from byte-compat, approved at STOP 2 (plan §5 D2). Chunk size for tunable-interval jobs is bound to `commit_freq` on the row, not hardcoded (target design "Persistence" row). Restart-count guard (≤3) enforced in the component (plan Phase 5). `branch_cycle_id` must be populated by **both** branch jobs in the target — legacy only CBCRD05A writes it (`CBCRD05A.cbl:733`), CBCRD05B does not (`CBCRD05B.cbl:947-978`); required for CBCRD06W's stale-cycle guard (recorded improvement).
 
 ## 4. Error / edge behavior
 
 - Missing/unreadable control record is fatal to every job (per-program U0x01 codes) — the component throws to `ErrorReporter`.
-- CC-COMMIT-FREQ = 0 falls back to the program constant 1000; negative/non-numeric is a data error (legacy would abend on the PIC).
+- CC-COMMIT-FREQ = 0 falls back to the program constant 001000; non-numeric is a data error (legacy would abend on the PIC).
 - Checkpoint update and business writes must be atomic — a crash between them may not lose or double work (CARDNITE-FR-006/007).
 - Status transitions: N→R→C on success; R→F on failure; S per operator suspend. Same-cycle re-open with status C is an operator error the component must reject (legacy CBCRD01 zeroes counters unconditionally — target adds an explicit guard; recorded divergence, resolve in wave 3 CBCRD01 doc).
 
