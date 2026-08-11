@@ -31,7 +31,7 @@ PARM: `'&CYCDATE,&CYCID'` — CCYYMMDD cycle date, cycle id after the comma (`CB
 | RC | Meaning | Source |
 |---|---|---|
 | 0 | complete | `CBCRD01J.jcl:15-19` |
-| 4 | records skipped | same |
+| 4 | extract complete, **no records selected** (source; the JCL comment's "records skipped" meaning is not source behavior — skips are counted and displayed only, never fed into the RC) | `CBCRD01.cbl:24,449-453` |
 | 8 | *unreachable in source* — JCL comment only (`CBCRD01J.jcl:18`); see divergence below | — |
 | 12 | fatal — U0101/U0102 (source) | `CBCRD01.cbl:26-27` |
 
