@@ -1,0 +1,23 @@
+package com.cardsvc;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+/**
+ * CARDSVC batch backend. Jobs are launched one at a time via the CLI seam:
+ *
+ * <pre>
+ *   java -jar cardsvc-backend.jar \
+ *     --spring.batch.job.name=&lt;job&gt; cycleDate=&lt;CCYYMMDD&gt; [job-specific params]
+ * </pre>
+ *
+ * The process exit code carries the estate return-code convention (0/4/8/12)
+ * through Spring Boot's {@code ExitCodeGenerator} chain.
+ */
+@SpringBootApplication
+public class CardsvcApplication {
+
+    public static void main(String[] args) {
+        System.exit(SpringApplication.exit(SpringApplication.run(CardsvcApplication.class, args)));
+    }
+}

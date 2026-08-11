@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: cardsvc
+      POSTGRES_USER: cardsvc
+      POSTGRES_PASSWORD: cardsvc
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U cardsvc -d cardsvc"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
