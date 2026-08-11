@@ -36,6 +36,8 @@ Exit criteria: Flyway clean-migrate green in CI; repository round-trip tests for
 ### Phase 2 — program waves 1..6 (leaf-first)
 Wave order, contents and gating in §2. Each wave: per-program FR docs written first (`functional/CARDSVC/programs/`), then implementation, then FR-acceptance tests.
 
+*(There is intentionally no Phase 3 — phase numbers follow the orchestrator's contract, which reserves 3; the sequence is 0 → 1 → 2 → 4 → 5.)*
+
 ### Phase 4 — E2E flow test + CI regression gate
 - Full-cycle E2E test: seeded `auth_log` → run CBCRD01…CBCRD10 in scheduler order (incl. the 05A∥05B fork and the 06W gate) → assert the FR acceptance criteria end-state (post-once totals, balanced GL, bucket rolls, region-gate exit code, reset `auth_log`).
 - Failure-path E2E: kill/restart CBCRD04 mid-run (FR-007), fail one branch and prove the 06W hold (FR-010), force a GL imbalance and prove full rollback (FR-016).
