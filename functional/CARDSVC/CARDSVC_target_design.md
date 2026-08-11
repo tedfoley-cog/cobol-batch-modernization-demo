@@ -17,7 +17,7 @@ repository. Drift from this document is a wave defect.
 | Logging | SLF4J + Logback, structured key=value messages carrying cycle date and job name |
 | Testing | JUnit 5, AssertJ, Testcontainers (PostgreSQL) for integration tests; Spring Batch `JobLauncherTestUtils` for job-level tests |
 | Build / CI | Maven, GitHub Actions (`cardsvc-ci.yml`): build, unit + integration tests |
-| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` as a required job parameter, mirroring the JCL `PARM` / `SET CYCDATE=` |
+| Scheduling seam | Jobs are launchable via CLI (`spring.batch.job.name=<job>`) with `cycleDate` and `cycleId` as required job parameters, mirroring the JCL `PARM='&CYCDATE,&CYCID'` (`app/jcl/cardsvc/CBCRD01J.jcl:29-33`) |
 
 ## Layout and conventions
 
@@ -26,7 +26,7 @@ backend/
   pom.xml
   src/main/java/com/cardsvc/
     common/            shared components (cycle control, routing, error reporter)
-    jobs/cbcrd01..cbcrd10, cbcrd05a, cbcrd05b   one package per migrated job
+    jobs/cbcrd01..cbcrd04, cbcrd05a, cbcrd05b, cbcrd06..cbcrd10   one package per job
     domain/            JPA entities per CARDSVC table
     repository/        Spring Data repositories
   src/main/resources/db/migration/   Flyway migrations
@@ -40,6 +40,10 @@ backend/
   routeKey)` filtered on `ACTIVE_FLG` and the EFF_DATE/EXP_DATE window, ordered
   by `SEQ_NBR` (pipelines like FRAU return an ordered handler list), preserving
   fallback semantics via `FALLBACK_PGM`.
+- RC 4 "warning/partial" legs (e.g. CBCRD06's PARTIAL refresh) map to a
+  per-step `ExitStatus` contribution resolved in each job's FR doc, so a warning
+  never surfaces as FAILED; the job-level exit code is the max of its steps'
+  mapped RCs.
 - Restartability: the cycle control record (`CYCLCTL`) becomes a `cycle_control`
   table; checkpointed jobs resume from `cc_last_key`, matching operator note 3 in
   `sched/CARDNITE.sched`.
