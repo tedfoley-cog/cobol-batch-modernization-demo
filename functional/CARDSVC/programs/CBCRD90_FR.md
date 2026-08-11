@@ -23,7 +23,7 @@ The dispatcher resolves `(ROUTE_TYPE, ROUTE_KEY, SEQ_NBR)` against `CARDSVC.PGM_
 
 **CBCRD90-FR-002 — VSAM fallback on route-store outage.**
 When the Db2 load fails, routes load from VSAM `CARD.PROD.PGMROUT` (`CBCRD90.cbl:133-146,217-261`).
-*Target resolution (plan §4.3, accepted behavior change):* dropped — single `pgm_route` table; PostgreSQL is the only store.
+*Target resolution (plan §4.3, accepted behavior change):* dropped — single `pgm_route` table; PostgreSQL is the only store. Parity notes: the legacy VSAM fallback filters on `RT-ACTIVE` only — **no eff/exp date window** — unlike the Db2 cursor (`CBCRD90.cbl:229-253` vs `79-80`), and both loads silently truncate the cache at 200 entries (`CBCRD90.cbl:164-165,229-230`), so a route could be "not found" purely because the cache filled; the target has no cache-size limit and applies the date filter uniformly.
 
 **CBCRD90-FR-003 — Dynamic call with fallback target and post-call cancel.**
 The resolved target is called dynamically (`CALL WS-PGM-NAME`, `CBCRD90.cbl:294-304`); on load failure the row's `FALLBACK_PGM` is retried (`CBCRD90.cbl:311-341`); after every call the module is `CANCEL`ed so a changed route takes effect on re-drive (`CBCRD90.cbl:305-306`).
@@ -50,7 +50,7 @@ CBCRD90 is the carrier of the XMOD/RSKRECAL crossing but owns none of PRBRSK1's 
 
 ## 5. Acceptance criteria
 
-- Resolving each seeded FEEC key (ANNU/LATE/OVLM/CASH/FRGN → CBFEE01/02/02/02/03 handlers) returns the same target as `db2/ddl/40_SEED_PGM_ROUTE.sql:66-70`.
+- Resolving each seeded FEEC key (ANNU/LATE/OVLM/CASH/FRGN → CBFEE01/01/02/02/03 handlers) returns the same target as `db2/ddl/40_SEED_PGM_ROUTE.sql:66-70`.
 - Inactive or out-of-date-window routes are never resolved.
 - Route-not-found is reported to the caller as a distinct outcome (RC 8 equivalent) — visibly, unlike the legacy copy-back defect.
 - Unloadable target with a configured fallback dispatches the fallback and flags `usedFallback`.

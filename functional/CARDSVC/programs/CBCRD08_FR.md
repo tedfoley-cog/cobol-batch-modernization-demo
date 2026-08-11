@@ -34,12 +34,14 @@ Chunk step with positioned updates via JPA (plan §3); GRACE-DAYS to validated c
 |---|---|
 | 0 | nothing at charge-off |
 | 4 | bucket-6 charge-off candidates present |
-| 8 | no accounts or grace card rejected |
+| 8 | *unreachable in source* — JCL comment only; see divergences below |
 | 12 | U0803 SQL |
 
 (`CBCRD08J.jcl:16-21`; U0802 file at `CBCRD08.cbl:337`.)
 
-**Divergence reconciliation (FR §5.3 — CBCRD08 RC 8):** the scheduler labels RC 8 `OUTOFBAL` (out-of-balance), but out-of-balance is CBCRD07's U0704 abend, not a CBCRD08 outcome; the source's RC 8 means "no accounts selected or grace card rejected". Resolution: **source semantics govern**; RC 8 is reserved for the source meanings only, generic failures map to 12, and the `OUTOFBAL` scheduler label is retired (target design RC-mapping convention: a reserved business RC is never reused).
+**Divergence reconciliation (FR §5.3 — CBCRD08 RC 8):** the scheduler labels RC 8 `OUTOFBAL` (out-of-balance), but out-of-balance is CBCRD07's U0704 abend, not a CBCRD08 outcome; the JCL comment's RC 8 ("no accounts selected or grace card rejected") is itself **unreachable in the source** (stream FR §5.3 item 15) — the program sets only `WS-RC-WARNING` (0004) for charge-off candidates (`CBCRD08.cbl:520-537`) and ignores unrecognized control cards rather than rejecting them (`CBCRD08.cbl:378-392`). Resolution: **source semantics govern**; no RC 8 outcome exists, generic failures map to 12, and both the `OUTOFBAL` scheduler label and the JCL comment are retired.
+
+**Grace-days default caveat:** the source hardcodes `WS-GRACE-DAYS VALUE 003` (`CBCRD08.cbl:144`) while the operational SYSIN card supplies 005 (`CBCRD08J.jcl:13-14`), and a missing/invalid card is silently ignored — falling back to 3 would silently change bucket-1 timing. **Target:** graceDays is a required, validated parameter (no built-in default); startup fails fast when absent or non-numeric.
 
 ## 6. Hard-stop boundary
 
@@ -50,4 +52,4 @@ Collections transmission (CBCRD88J) is external — the byte-compatible file is 
 - Account one payment behind rolls exactly one bucket after grace; re-running the same cycle date rolls no further.
 - Bucket ≥ 3 accounts appear on the FB-100 feed byte-exactly; bucket 6 candidates set RC 4.
 - 6-digit legacy dates window correctly around pivot 50 (49→2049, 50→1950 boundary tests).
-- Invalid GRACE-DAYS configuration exits 8 touching nothing.
+- Missing or invalid graceDays fails startup touching nothing (required parameter — target rule, §5; legacy silently falls back to the hardcoded 3).

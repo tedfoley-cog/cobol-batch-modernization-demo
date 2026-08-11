@@ -34,8 +34,10 @@ Chunk-oriented step; chunk size bound to `cycle_control.commit_freq` (not hardco
 |---|---|
 | 0 | all posted |
 | 4 | bypasses written to reject |
-| 8 | too many bypasses or restart key not found |
+| 8 | *unreachable in source* — JCL comment only; see divergence below |
 | 12 | fatal — U0401 CYCLCTL unusable, U0402 file open/I-O failure, U0403 unrecoverable SQL error, U0404 restart key not found (source `CBCRD04.cbl:44-48`; **divergence:** the JCL comment `CBCRD04J.jcl:19-23` has U0402/U0403 swapped — source codes govern) |
+
+**Divergence reconciliation (unreachable RC 8 — stream FR §5.3 item 15):** the JCL comment labels 8 "too many bypasses or restart key not found", but the source sets only `WS-RC-WARNING` (0004) for bypasses (`CBCRD04.cbl:966-970`) and handles a missing restart key as the fatal U0404 abend (RC 12) — no 0008 is ever set, and no bypass-share threshold exists in the source. Resolution: **source governs** — bypasses end RC 4 regardless of share; restart-key-not-found is exit 12/U0404; JCL comment retired.
 
 Scheduler: U4004/S0C7 NOTOK, usually a bad packed field (`sched/CARDNITE.sched:147-148,420-421`) — packed-decimal parse failures become typed validation errors at file read.
 
@@ -48,5 +50,5 @@ None.
 - Kill mid-run, restart with restart=Y: every record posted exactly once (Phase 4 failure-path E2E, FR-007).
 - restart=Y with a `cc_last_key` absent from input exits with the U0404-equivalent error.
 - Changing `commit_freq` on the control row changes commit cadence next run.
-- Unpostable records go to the bypass file and RC 4; bypass share above the threshold exits 8.
+- Unpostable records go to the bypass file and RC 4 regardless of bypass share (no threshold exists in the source — divergence §5).
 - Debit/credit control totals accumulate in `cycle_control` (`cc_tot_dr/cr`) for CBCRD10's proof.

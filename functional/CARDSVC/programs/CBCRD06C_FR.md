@@ -5,7 +5,7 @@ Stream FRs owned: CARDNITE-FR-015 (accepted-risk application).
 
 ## 1. Trigger / caller contract
 
-Gated `IF STEP030.RC <= 8` (`app/jcl/cardsvc/CBCRD06J.jcl:132-143`) — runs even when parties went to manual review, applying only the accepted ones. STEP050 prints the review file when STEP030.RC = 8 (`CBCRD06J.jcl:157`). PARM: cycle date.
+Gated `IF STEP030.RC <= 8` (`app/jcl/cardsvc/CBCRD06J.jcl:132-143`) — runs even when parties went to manual review, applying only the accepted ones. STEP050 prints the review file when STEP030.RC = 8 (`CBCRD06J.jcl:157`) — note it re-references `PARTYRVW(+1)` rather than `(0)` (`CBCRD06J.jcl:122,159`); within one job both resolve to the generation STEP030 created, so it works on z/OS, but the migrated print step must read the file the dispatch step actually produced, not mirror the relative-generation pattern. PARM: cycle date.
 
 ## 2. Field-level inputs / outputs
 

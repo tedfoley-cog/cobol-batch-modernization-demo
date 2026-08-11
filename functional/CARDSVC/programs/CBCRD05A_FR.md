@@ -22,7 +22,7 @@ PARM: cycle date only (`CBCRD05AJ.jcl:47`).
 
 **CBCRD05A-FR-002 — Fee audit trail.** Every dispatch outcome (assessed, waived, declined) is a FEEAUDIT line.
 
-**CBCRD05A-FR-003 — Branch completion flag.** As its last act posts `CC-FILLER(1:1)` = 'A' complete / 'F' failed plus the cycle id at `(3:8)` (`CBCRD05A.cbl:710-747`) — the join contract with CBCRD06W (CARDNITE-FR-010). Target: `cycle_control.fee_branch_status` / `branch_cycle_id` (D2).
+**CBCRD05A-FR-003 — Branch completion flag.** As its last act posts `CC-FILLER(1:1)` = 'A' complete plus the cycle id at `(3:8)` (`CBCRD05A.cbl:710-747`) — the join contract with CBCRD06W (CARDNITE-FR-010). The 'F' branch of `3100-POST-BRANCH-FLAG` (final RC > 4) is vestigial: RC 8 is never set (§5) and the fatal path `GOBACK`s without reaching the flag post (`CBCRD05A.cbl:761-772`) — so legacy never writes 'F' and a failed fee branch is detected by the join's timeout (U0610), the same policy as CBCRD05B. Target: `cycle_control.fee_branch_status` / `branch_cycle_id` (D2), status untouched on a fatal exit.
 
 ## 4. Target mechanism
 
@@ -50,6 +50,6 @@ Dispatches only FEEC routes — never XMOD. The fee handlers are in-module (wave
 
 - Account matrix covering each fee type dispatches to the right handler with a correctly-populated work area (callerId 'CBCRD05A').
 - Unroutable fee type: job exits 4, flag 'A', warning logged with the fee type; join proceeds.
-- Handler RC 12 rolls back the current chunk and fails the job (flag 'F').
+- Handler RC 12 rolls back the current chunk and fails the job (exit 12, U0505-equivalent); `fee_branch_status` untouched — the join subsequently times out (U0610 path, matching CBCRD05B's policy).
 - Re-running the job over the same cycle assesses no duplicate fees.
-- On success `fee_branch_status='A'` and `branch_cycle_id` set; on failure `'F'` — both visible to CBCRD06W.
+- On success `fee_branch_status='A'` and `branch_cycle_id` set, visible to CBCRD06W; on a fatal exit the status is untouched (legacy parity — see FR-003).

@@ -32,12 +32,14 @@ PARM: `'&CYCDATE,&CYCID'` — CCYYMMDD cycle date, cycle id after the comma (`CB
 |---|---|---|
 | 0 | complete | `CBCRD01J.jcl:15-19` |
 | 4 | records skipped | same |
-| 8 | **no records selected** — scheduler NOTOK, cycle held | same; scheduler treats RC≤4 OK, 8+ NOTOK abend U4001 (`sched/CARDNITE.sched:52-55`) |
+| 8 | *unreachable in source* — JCL comment only (`CBCRD01J.jcl:18`); see divergence below | — |
 | 12 | fatal — U0101/U0102 (source) | `CBCRD01.cbl:26-27` |
 
 Abends (source): U0101 cycle-control record unreadable (`CBCRD01.cbl:26,204`), U0102 AUTHLOG open failed (`CBCRD01.cbl:27,235`). **Divergence:** U0103 appears only in the runbook (`docs/runbook-cardnite.md:94`) — the source raises no 0103; source codes govern, runbook label retired at cutover.
+**Divergence reconciliation (unreachable RC 8 — stream FR §5.3 item 15):** the JCL comment claims "8 = no records selected, cycle held", but the source moves only `WS-RC-WARNING` (0004) on zero written records (`CBCRD01.cbl:24,449-453`) — the program never sets 0008, so an empty AUTHLOG ends RC 4 and the chain **proceeds** (scheduler NOTOK fires at 8+, `sched/CARDNITE.sched:52-55`). Resolution: **source behavior governs at parity** — empty extract exits 4 with the warning; whether the business wants an empty online day to hold the cycle is a sign-off question, not silent target behavior.
+
 Restart: STEP010 rerunnable from scratch; never restart at STEP020 (`CBCRD01J.jcl:21-26`) — target job is idempotent per cycle (re-run overwrites the cycle's extract file).
-Edge: empty AUTHLOG ⇒ RC 8 and the cycle holds (a real business signal — the online day produced nothing).
+Edge: empty AUTHLOG ⇒ RC 4 warning ('NO RECORDS SELECTED') and the chain proceeds with an empty extract (see divergence above).
 
 ## 6. Hard-stop boundary
 
@@ -47,5 +49,5 @@ None. Consumes the `CICS-CARD-CLOSED` condition only as an external gate (schedu
 
 - Given N auth-log rows for the cycle, the extract has exactly N records, byte-identical auth images, sequential extract seq, correct cycle date/id header.
 - Cycle-control row is (re)initialized: counters zero, `cc_last_key` cleared, `commit_freq` defaulted.
-- Empty input exits 8 and the chain does not proceed.
+- Empty input exits 4 with the no-records warning; the chain proceeds (legacy parity — divergence §5).
 - Unreadable cycle control exits 12 with the U0101-equivalent error record.

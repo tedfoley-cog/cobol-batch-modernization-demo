@@ -40,10 +40,14 @@ SYSIN control cards: `DEFAULT-ROUTE=DFLT`, `DEFAULT-ACQID=99999999999` — busin
 |---|---|
 | 0 | all merchants resolved |
 | 4 | defaults taken |
-| 8 | default card missing or MERCHRTE unusable |
+| 8 | *unreachable in source* — JCL comment only; see divergence below |
 | 12 | fatal U0302–U0303 |
 
-(`CBCRD03J.jcl:22-26`.) Restart: RESTART=STEP020 safe if the sort was good (`CBCRD03J.jcl:28-31`) — target: step-level restart with the sorted file retained.
+(`CBCRD03J.jcl:22-26`.)
+
+**Divergence reconciliation (unreachable RC 8 — stream FR §5.3 item 15):** the JCL comment labels 8 "default card missing or MERCHRTE unusable", but the source sets only 0000/0004 (`WS-RC-WARNING` on rejects, `CBCRD03.cbl:28-30,493-495`) and routes fatal conditions through the U030x abend path (RC 12) — no 0008 is ever set. Resolution: **source governs** — missing/unusable configuration is fatal (exit 12), not RC 8; JCL comment retired.
+
+Restart: RESTART=STEP020 safe if the sort was good (`CBCRD03J.jcl:28-31`) — target: step-level restart with the sorted file retained.
 
 ## 6. Hard-stop boundary
 
@@ -53,5 +57,5 @@ None.
 
 - Output order is strictly (cardNumber, date, seq); any record with edit status 'R' present on input is dropped by the sort filter.
 - Known merchant enriches with its MCC/acquirer/route; unknown merchant gets DFLT route + default acquirer id and the job exits 4.
-- Missing default configuration exits 8 before processing records.
+- Missing default configuration is fatal at startup (exit 12, U030x-equivalent) before processing records (divergence §5).
 - Enrichment never mutates the 179-byte auth image.

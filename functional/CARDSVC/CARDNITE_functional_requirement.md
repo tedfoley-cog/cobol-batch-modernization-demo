@@ -33,7 +33,7 @@ When any job in the chain ends NOTOK, the cycle is placed in `CARDNITE-HELD` and
 When the cycle opens, every record on the authorization log (VSAM ESDS AUTHLOG) is extracted to the day's extract generation (AUTHEXTR GDG, FB 300) with cycle date/id stamped on each record (`app/jcl/cardsvc/CBCRD01J.jcl:32-43`, `app/cardsvc/cbl/CBCRD01.cbl:48`, layout `app/cardsvc/cpy/CVAXTR01Y.cpy:13-20`).
 *Acceptance criteria:*
 - Extract record count equals AUTHLOG record count minus explicitly skipped records; skips surface as RC 4 (`CBCRD01J.jcl:15-19`).
-- Zero records selected surfaces as RC 8, which the scheduler maps to NOTOK for CBCRD01J — operations are notified, `CARDNITE-HELD` is set and the cycle stops (`app/jcl/cardsvc/CBCRD01J.jcl:18`, `sched/CARDNITE.sched:47-53`).
+- Zero records selected surfaces as RC 4 with the 'NO RECORDS SELECTED' warning and the chain proceeds with an empty extract (`CBCRD01.cbl:24,449-453`) — the JCL comment's "RC 8, cycle held" is unreachable in the source (§5.3 item 15); whether an empty online day should hold the cycle is a business sign-off question.
 
 **CARDNITE-FR-004 — Extracted authorizations are edited and rejects split out under a duty-manager tolerance.**
 When the extract is processed, each record is validated (auth-type overlay decode + range checks) and written to the clean file or the reject file with a reason code R001–R010; the job ends RC 4 when rejects are within the PARM tolerance (standing 02 percent) and RC 8 — cycle held — when over it (`app/jcl/cardsvc/CBCRD02J.jcl:8-25,34-50`, `app/cardsvc/cbl/CBCRD02.cbl:240-241`, reason codes `app/cardsvc/cpy/CVRJCT01Y.cpy:13-22`, `docs/runbook-cardnite.md:76-77`).
@@ -46,14 +46,14 @@ When the extract is processed, each record is validated (auth-type overlay decod
 When the clean file exists, it is sorted into card/date/sequence order (rejected records dropped), then each record is enriched with MCC, acquirer and settlement route from the merchant reference (VSAM MERCHRTE + `CARDSVC.MERCHANT`); unmatched merchants take the Settlements-owned defaults from control cards (`DEFAULT-ROUTE=DFLT`, `DEFAULT-ACQID=…`) and surface as RC 4 (`app/jcl/cardsvc/CBCRD03J.jcl:16-26,37-58,65-90`, `app/cardsvc/cbl/CBCRD03.cbl:389`).
 *Acceptance criteria:*
 - Output is in posting sequence; no rejected record reaches posting.
-- Defaulted-merchant count is reported; missing default card is RC 8.
+- Defaulted-merchant count is reported; missing default card is fatal (exit 12 — §5.3 item 15; no RC 8 exists in CBCRD03).
 
 ### Posting (CBCRD04J)
 
 **CARDNITE-FR-006 — Every enriched authorization is posted exactly once to the account ledger.**
 When the enriched file is processed, each authorization creates a `CARDSVC.TRANSACTION` row, updates `CARDSVC.ACCOUNT` balances and `CARDSVC.CARD_LIMIT` exposure, and marks the source `CARDSVC.AUTHORIZATION` row posted; unpostable records are bypassed to a reject file rather than failing the run (`app/jcl/cardsvc/CBCRD04J.jcl:41-54`, `app/cardsvc/cbl/CBCRD04.cbl:458,730,816,850`).
 *Acceptance criteria:*
-- posted + bypassed = records read; bypasses surface as RC 4, "too many" as RC 8 (`CBCRD04J.jcl:19-23`).
+- posted + bypassed = records read; bypasses surface as RC 4 regardless of share — the JCL's "too many bypasses = RC 8" is unreachable in the source (`CBCRD04.cbl:966-970`; §5.3 item 15).
 - A transaction is never posted twice for the same authorization (duplicate insert in the checkpoint window is treated as already done, `CBCRD04.cbl:779`).
 
 **CARDNITE-FR-007 — Posting is restartable from the last committed checkpoint without re-posting.**
@@ -224,9 +224,9 @@ Authoritative dataset table (DSN, LRECL, producer → consumer) is analysis §4.
 ### 5.1 Edits and rejects
 - Intake edits: auth-type overlay decode + range checks; reject reasons R001–R010 (`CVRJCT01Y.cpy:13-22`) — FR-004.
 - Enrichment: unmatched merchant → defaults + warning count (FR-005).
-- Posting: unpostable → bypass file, not failure; excess bypasses → RC 8 (FR-006).
+- Posting: unpostable → bypass file (RC 4), not failure; no bypass-share RC 8 exists in the source (FR-006, §5.3 item 15).
 - Risk: per-party RC 0/4/8/12 (FR-012/014); commarea version check U0607 (FR-013).
-- Interest: unsupported rounding / card error → RC 8, branch flagged failed (FR-009).
+- Interest: unsupported rounding / card error → U0506, RC 12, no branch flag posted (FR-009, §5.3 item 11).
 - GL: unmapped → suspense + RC 4; imbalance → U0704 full rollback (FR-016).
 
 ### 5.2 Tolerances
@@ -250,6 +250,7 @@ Authoritative dataset table (DSN, LRECL, producer → consumer) is analysis §4.
 12. **JCL/runbook abend labels absent from source**: CBCRD05A's U0502 (`CBCRD05AJ.jcl:21-26`), CBCRD05B's U0512, CBCRD01's U0103 (`docs/runbook-cardnite.md:94`), and CBCRD04's swapped U0402/U0403 meanings (`CBCRD04J.jcl:19-23` vs `CBCRD04.cbl:46-47`) / CBCRD09's per-cluster U0901/U0902 labels (`CBCRD09J.jcl:18-24` vs `CBCRD09.cbl:28-31`) — source codes and meanings govern; stale labels retired at cutover.
 13. **APPROVED TARGET DIVERGENCE — CBCRD06B unresolvable risk route**: legacy behavior (via the unreachable-U0605 defect, §3.3) sends **every** party to manual review with an unpopulated risk area and ends step RC 8 when the XMOD/RSKRECAL route is missing or the route table is unavailable. The target treats an unresolvable risk route as a configuration failure that stops the step fatally (exit 12, U0605-equivalent) instead of flooding manual review — a deliberate, approved correction of the latent defect (plan Phase 5 divergence closure; CBCRD06B_FR §5).
 14. **FEEPARM card dataset has no supplying DD**: all three fee handlers read FEEPARM control cards for rates/thresholds/caps/waiver rules (`CBFEE01.cbl:43-57`, `CBFEE02.cbl:41-56`, `CBFEE03.cbl:49-58`), but no JCL in the estate allocates a FEEPARM DD — CBCRD05AJ (the only dispatching job) allocates only STEPLIB/CYCLCTL/FEEAUDIT (`CBCRD05AJ.jcl:36-55`). The parameter source is an absent artifact (analysis §8); the migration's fee parameter table/config (plan wave 2) becomes the authoritative source, with initial values to be confirmed with the business at wave-2 sign-off.
+15. **Unreachable RC 8 in CBCRD01/03/04/07/08**: the JCL comment blocks assign RC 8 meanings ("no records selected", "default card missing", "too many bypasses", "no transactions", "no accounts / grace card rejected"), but none of these programs ever sets 0008 — each moves only `WS-RC-WARNING` (0004) for its warning condition and routes fatal conditions through the abend path (RC 12) (`CBCRD01.cbl:24,449-453`, `CBCRD03.cbl:28-30,493-495`, `CBCRD04.cbl:966-970`, `CBCRD07.cbl:560-566`, `CBCRD08.cbl:520-537`). Same class as item 8 (CBCRD05A) and item 2 (CBCRD08's OUTOFBAL label). Consequence for CBCRD01: an empty AUTHLOG ends RC 4 and the chain **proceeds** — the cycle is not held (contra the JCL comment `CBCRD01J.jcl:18`); FR-003's empty-log criterion is corrected accordingly. Resolution: source RC behavior governs at parity in every owning program FR doc; whether any of these conditions *should* stop the cycle is an explicit business sign-off question, not silent target behavior.
 
 ### 5.4 User abends by job
 Source-derived abend inventory per program is in analysis §3 (U0101–U1003); the runbook table (`docs/runbook-cardnite.md:91-112`) is the operator view, with the divergences above.
@@ -264,7 +265,7 @@ Covering test and verification case columns to be filled by the migration waves.
 |---|---|---|---|
 | CARDNITE-FR-001 | `sched/CARDNITE.sched:17-27,43`; `CBCRD01.cbl:305-312` | _(wave)_ | region closed → cycle opens; record initialized |
 | CARDNITE-FR-002 | `sched/CARDNITE.sched:403-408` | _(wave)_ | mid-chain NOTOK → downstream held |
-| CARDNITE-FR-003 | `CBCRD01J.jcl:32-43`; `CBCRD01.cbl:48` | _(wave)_ | extract count reconciles; empty log → RC 8, cycle held |
+| CARDNITE-FR-003 | `CBCRD01J.jcl:32-43`; `CBCRD01.cbl:48` | _(wave)_ | extract count reconciles; empty log → RC 4 warning, chain proceeds (§5.3 item 15) |
 | CARDNITE-FR-004 | `CBCRD02J.jcl:8-25`; `CVRJCT01Y.cpy:13-22` | _(wave)_ | tolerance boundary RC 4/8; reason codes |
 | CARDNITE-FR-005 | `CBCRD03J.jcl:37-90`; `CBCRD03.cbl:389` | _(wave)_ | sequence order; defaulting; RC 4 count |
 | CARDNITE-FR-006 | `CBCRD04J.jcl:41-54`; `CBCRD04.cbl:730,850` | _(wave)_ | post-once; bypass accounting |

@@ -34,10 +34,12 @@ Mapping cards → `gl_mapping` table (Finance-owned, plan §3); aggregation + pr
 |---|---|
 | 0 | balanced |
 | 4 | suspense used — Finance adds a mapping card |
-| 8 | no transactions |
+| 8 | *unreachable in source* — JCL comment only; see divergence below |
 | 12 | U0701 card error, U0703 SQL, U0704 out of balance |
 
 (`CBCRD07J.jcl:26-32`.)
+
+**Divergence reconciliation (unreachable RC 8 — stream FR §5.3 item 15):** the JCL comment labels 8 "no transactions", but the source sets only `WS-RC-WARNING` (0004, suspense used, `CBCRD07.cbl:560-566`) — no 0008 is ever set; a feed with nothing to post ends RC 0/4. Resolution: **source governs**; JCL comment retired.
 
 ## 6. Hard-stop boundary
 
@@ -48,5 +50,5 @@ GL downstream pickup is external — signalled only by `GL-CARD-FEED-READY`/comp
 - Balanced seeded set: every transaction gets debit+credit rows, flags set, RC 0, GLRPT totals match.
 - Unmapped combination posts to suspense, RC 4, named on GLRPT.
 - Forced imbalance: zero `gl_posting` rows, zero flags updated, exit 12 with U0704 (Phase 4 failure-path E2E, FR-016).
-- Re-run after success feeds nothing (flags already 'Y'), RC 8 "no transactions" semantics preserved.
+- Re-run after success feeds nothing (flags already 'Y') and ends clean — no RC 8 exists in the source (divergence §5).
 - Malformed mapping configuration fails startup (U0701-equivalent), touching nothing.
