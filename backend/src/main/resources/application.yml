@@ -13,7 +13,7 @@ spring:
     locations: classpath:db/migration
   batch:
     jdbc:
-      initialize-schema: always
+      initialize-schema: never
 
 logging:
   pattern:

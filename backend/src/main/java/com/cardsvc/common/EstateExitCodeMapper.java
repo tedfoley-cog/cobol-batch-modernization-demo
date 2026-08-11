@@ -34,8 +34,7 @@ public class EstateExitCodeMapper implements ExitCodeGenerator, ApplicationListe
     public int getExitCode() {
         int rc = 0;
         for (JobExecution execution : executions) {
-            if (execution.getStatus() != BatchStatus.COMPLETED
-                    && execution.getStatus() != BatchStatus.STOPPED) {
+            if (execution.getStatus() != BatchStatus.COMPLETED) {
                 return 12;
             }
             Integer mapped = parseRc(execution.getExitStatus());

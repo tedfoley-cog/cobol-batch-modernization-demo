@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-@SpringBootTest
+@SpringBootTest(properties = "spring.batch.job.enabled=false")
 @ContextConfiguration(classes = {CardsvcApplication.class, CardsvcApplicationTests.TestContainersConfig.class})
 class CardsvcApplicationTests {
 
