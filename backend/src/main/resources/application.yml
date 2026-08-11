@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: cardsvc-backend
+  datasource:
+    url: ${CARDSVC_DB_URL:jdbc:postgresql://localhost:5432/cardsvc}
+    username: ${CARDSVC_DB_USER:cardsvc}
+    password: ${CARDSVC_DB_PASSWORD:cardsvc}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    locations: classpath:db/migration
+  batch:
+    job:
+      # One job per launch: without an explicit --spring.batch.job.name the
+      # runner fails fast (RC 12) instead of running every job in the context.
+      name: NO_JOB_SPECIFIED
+    jdbc:
+      initialize-schema: never
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} %-5level job=%X{jobName} cycleDate=%X{cycleDate} %logger{36} - %msg%n"
