@@ -1,0 +1,6544 @@
+{
+  "meta": {
+    "module": "CARDSVC",
+    "generated_at": "2026-09-28T13:34:09Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {
+      "src": [
+        "app/cardsvc/cbl"
+      ],
+      "copybooks": [
+        "app/cardsvc/cpy",
+        "app/cpy"
+      ]
+    }
+  },
+  "audit": {
+    "call_tokens_unaccounted": [],
+    "skipped_files": []
+  },
+  "sources": [
+    {
+      "path": "app/cpy/CVACCT01Y.cpy",
+      "kind": "copybook",
+      "lines": 39,
+      "code_lines": 35
+    },
+    {
+      "path": "app/cpy/CVAUTH01Y.cpy",
+      "kind": "copybook",
+      "lines": 68,
+      "code_lines": 50
+    },
+    {
+      "path": "app/cpy/CVAUTHW1Y.cpy",
+      "kind": "copybook",
+      "lines": 161,
+      "code_lines": 114
+    },
+    {
+      "path": "app/cardsvc/cpy/CVAXTR01Y.cpy",
+      "kind": "copybook",
+      "lines": 42,
+      "code_lines": 24
+    },
+    {
+      "path": "app/cardsvc/cpy/CVBRTN1Y.cpy",
+      "kind": "copybook",
+      "lines": 32,
+      "code_lines": 20
+    },
+    {
+      "path": "app/cardsvc/cpy/CVBWRK1Y.cpy",
+      "kind": "copybook",
+      "lines": 41,
+      "code_lines": 31
+    },
+    {
+      "path": "app/cpy/CVCARD01Y.cpy",
+      "kind": "copybook",
+      "lines": 35,
+      "code_lines": 30
+    },
+    {
+      "path": "app/cpy/CVCONSTY.cpy",
+      "kind": "copybook",
+      "lines": 42,
+      "code_lines": 29
+    },
+    {
+      "path": "app/cardsvc/cpy/CVCPRF1Y.cpy",
+      "kind": "copybook",
+      "lines": 40,
+      "code_lines": 30
+    },
+    {
+      "path": "app/cpy/CVCTRL01Y.cpy",
+      "kind": "copybook",
+      "lines": 41,
+      "code_lines": 32
+    },
+    {
+      "path": "app/cpy/CVCUST01Y.cpy",
+      "kind": "copybook",
+      "lines": 31,
+      "code_lines": 25
+    },
+    {
+      "path": "app/cpy/CVERRS01Y.cpy",
+      "kind": "copybook",
+      "lines": 45,
+      "code_lines": 37
+    },
+    {
+      "path": "app/cardsvc/cpy/CVFEEW1Y.cpy",
+      "kind": "copybook",
+      "lines": 73,
+      "code_lines": 54
+    },
+    {
+      "path": "app/cardsvc/cpy/CVFRAU1Y.cpy",
+      "kind": "copybook",
+      "lines": 74,
+      "code_lines": 56
+    },
+    {
+      "path": "app/cardsvc/cpy/CVMRTE1Y.cpy",
+      "kind": "copybook",
+      "lines": 28,
+      "code_lines": 18
+    },
+    {
+      "path": "app/cardsvc/cpy/CVPWRK01Y.cpy",
+      "kind": "copybook",
+      "lines": 36,
+      "code_lines": 28
+    },
+    {
+      "path": "app/cpy/CVRISK01Y.cpy",
+      "kind": "copybook",
+      "lines": 86,
+      "code_lines": 69
+    },
+    {
+      "path": "app/cardsvc/cpy/CVRJCT01Y.cpy",
+      "kind": "copybook",
+      "lines": 27,
+      "code_lines": 20
+    },
+    {
+      "path": "app/cpy/CVROUT01Y.cpy",
+      "kind": "copybook",
+      "lines": 64,
+      "code_lines": 53
+    },
+    {
+      "path": "app/cardsvc/cpy/CVRSNC1Y.cpy",
+      "kind": "copybook",
+      "lines": 30,
+      "code_lines": 21
+    },
+    {
+      "path": "app/cpy/CVSTMT01Y.cpy",
+      "kind": "copybook",
+      "lines": 45,
+      "code_lines": 39
+    },
+    {
+      "path": "app/cpy/CVTRAN01Y.cpy",
+      "kind": "copybook",
+      "lines": 48,
+      "code_lines": 39
+    },
+    {
+      "path": "app/cardsvc/cpy/CVXREF1Y.cpy",
+      "kind": "copybook",
+      "lines": 36,
+      "code_lines": 24
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD00.cbl",
+      "kind": "program",
+      "lines": 468,
+      "code_lines": 359
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD01.cbl",
+      "kind": "program",
+      "lines": 554,
+      "code_lines": 451
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD02.cbl",
+      "kind": "program",
+      "lines": 749,
+      "code_lines": 607
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD03.cbl",
+      "kind": "program",
+      "lines": 651,
+      "code_lines": 529
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD04.cbl",
+      "kind": "program",
+      "lines": 758,
+      "code_lines": 609
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD05.cbl",
+      "kind": "program",
+      "lines": 380,
+      "code_lines": 271
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD06.cbl",
+      "kind": "program",
+      "lines": 487,
+      "code_lines": 376
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD07.cbl",
+      "kind": "program",
+      "lines": 778,
+      "code_lines": 584
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD08.cbl",
+      "kind": "program",
+      "lines": 542,
+      "code_lines": 382
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD09.cbl",
+      "kind": "program",
+      "lines": 508,
+      "code_lines": 357
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD10.cbl",
+      "kind": "program",
+      "lines": 816,
+      "code_lines": 633
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD11.cbl",
+      "kind": "program",
+      "lines": 1378,
+      "code_lines": 1173
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD12.cbl",
+      "kind": "program",
+      "lines": 988,
+      "code_lines": 803
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD13.cbl",
+      "kind": "program",
+      "lines": 1598,
+      "code_lines": 1317
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD14.cbl",
+      "kind": "program",
+      "lines": 1426,
+      "code_lines": 1184
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD15.cbl",
+      "kind": "program",
+      "lines": 906,
+      "code_lines": 731
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD16.cbl",
+      "kind": "program",
+      "lines": 1115,
+      "code_lines": 941
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD17.cbl",
+      "kind": "program",
+      "lines": 396,
+      "code_lines": 289
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD90.cbl",
+      "kind": "program",
+      "lines": 484,
+      "code_lines": 391
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD91.cbl",
+      "kind": "program",
+      "lines": 430,
+      "code_lines": 299
+    },
+    {
+      "path": "app/cardsvc/cbl/CACRD92.cbl",
+      "kind": "program",
+      "lines": 233,
+      "code_lines": 138
+    },
+    {
+      "path": "app/cardsvc/cbl/CAFRD01.cbl",
+      "kind": "program",
+      "lines": 739,
+      "code_lines": 578
+    },
+    {
+      "path": "app/cardsvc/cbl/CAFRD02.cbl",
+      "kind": "program",
+      "lines": 624,
+      "code_lines": 482
+    },
+    {
+      "path": "app/cardsvc/cbl/CAFRD03.cbl",
+      "kind": "program",
+      "lines": 497,
+      "code_lines": 377
+    },
+    {
+      "path": "app/cardsvc/cbl/CAFRD04.cbl",
+      "kind": "program",
+      "lines": 628,
+      "code_lines": 499
+    },
+    {
+      "path": "app/cardsvc/cbl/CBBIL01.cbl",
+      "kind": "program",
+      "lines": 766,
+      "code_lines": 600
+    },
+    {
+      "path": "app/cardsvc/cbl/CBBIL02.cbl",
+      "kind": "program",
+      "lines": 756,
+      "code_lines": 599
+    },
+    {
+      "path": "app/cardsvc/cbl/CBBIL03.cbl",
+      "kind": "program",
+      "lines": 614,
+      "code_lines": 478
+    },
+    {
+      "path": "app/cardsvc/cbl/CBBIL04.cbl",
+      "kind": "program",
+      "lines": 492,
+      "code_lines": 383
+    },
+    {
+      "path": "app/cardsvc/cbl/CBBIL05.cbl",
+      "kind": "program",
+      "lines": 506,
+      "code_lines": 423
+    },
+    {
+      "path": "app/cardsvc/cbl/CBBIL06.cbl",
+      "kind": "program",
+      "lines": 697,
+      "code_lines": 563
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD01.cbl",
+      "kind": "program",
+      "lines": 534,
+      "code_lines": 394
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD02.cbl",
+      "kind": "program",
+      "lines": 661,
+      "code_lines": 521
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD03.cbl",
+      "kind": "program",
+      "lines": 559,
+      "code_lines": 440
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD04.cbl",
+      "kind": "program",
+      "lines": 1030,
+      "code_lines": 782
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD05A.cbl",
+      "kind": "program",
+      "lines": 773,
+      "code_lines": 613
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD05B.cbl",
+      "kind": "program",
+      "lines": 1003,
+      "code_lines": 777
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD06A.cbl",
+      "kind": "program",
+      "lines": 408,
+      "code_lines": 311
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD06B.cbl",
+      "kind": "program",
+      "lines": 618,
+      "code_lines": 459
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD06C.cbl",
+      "kind": "program",
+      "lines": 597,
+      "code_lines": 471
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD06W.cbl",
+      "kind": "program",
+      "lines": 265,
+      "code_lines": 183
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD06X.cbl",
+      "kind": "program",
+      "lines": 321,
+      "code_lines": 233
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD07.cbl",
+      "kind": "program",
+      "lines": 824,
+      "code_lines": 640
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD08.cbl",
+      "kind": "program",
+      "lines": 722,
+      "code_lines": 565
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD09.cbl",
+      "kind": "program",
+      "lines": 543,
+      "code_lines": 413
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD10.cbl",
+      "kind": "program",
+      "lines": 807,
+      "code_lines": 622
+    },
+    {
+      "path": "app/cardsvc/cbl/CBCRD90.cbl",
+      "kind": "program",
+      "lines": 395,
+      "code_lines": 322
+    },
+    {
+      "path": "app/cardsvc/cbl/CBFEE01.cbl",
+      "kind": "program",
+      "lines": 744,
+      "code_lines": 583
+    },
+    {
+      "path": "app/cardsvc/cbl/CBFEE02.cbl",
+      "kind": "program",
+      "lines": 635,
+      "code_lines": 501
+    },
+    {
+      "path": "app/cardsvc/cbl/CBFEE03.cbl",
+      "kind": "program",
+      "lines": 678,
+      "code_lines": 523
+    },
+    {
+      "path": "app/cardsvc/cbl/CBREF01.cbl",
+      "kind": "program",
+      "lines": 719,
+      "code_lines": 589
+    },
+    {
+      "path": "app/cardsvc/cbl/CBREF02.cbl",
+      "kind": "program",
+      "lines": 525,
+      "code_lines": 419
+    },
+    {
+      "path": "app/cardsvc/cbl/CBREF03.cbl",
+      "kind": "program",
+      "lines": 807,
+      "code_lines": 659
+    },
+    {
+      "path": "app/cardsvc/cbl/CBREF04.cbl",
+      "kind": "program",
+      "lines": 579,
+      "code_lines": 451
+    },
+    {
+      "path": "app/cardsvc/cbl/CBREF05.cbl",
+      "kind": "program",
+      "lines": 1068,
+      "code_lines": 882
+    },
+    {
+      "path": "app/cardsvc/cbl/CBSTM01.cbl",
+      "kind": "program",
+      "lines": 619,
+      "code_lines": 477
+    },
+    {
+      "path": "app/cardsvc/cbl/CBSTM02.cbl",
+      "kind": "program",
+      "lines": 527,
+      "code_lines": 387
+    }
+  ],
+  "missing_copybooks": [
+    {
+      "member": "CARDSET",
+      "mechanisms": [
+        "copy"
+      ],
+      "referenced_by": [
+        {
+          "program": "CACRD00",
+          "source": "app/cardsvc/cbl/CACRD00.cbl:86"
+        },
+        {
+          "program": "CACRD01",
+          "source": "app/cardsvc/cbl/CACRD01.cbl:60"
+        },
+        {
+          "program": "CACRD02",
+          "source": "app/cardsvc/cbl/CACRD02.cbl:120"
+        },
+        {
+          "program": "CACRD03",
+          "source": "app/cardsvc/cbl/CACRD03.cbl:75"
+        },
+        {
+          "program": "CACRD04",
+          "source": "app/cardsvc/cbl/CACRD04.cbl:110"
+        },
+        {
+          "program": "CACRD10",
+          "source": "app/cardsvc/cbl/CACRD10.cbl:103"
+        },
+        {
+          "program": "CACRD17",
+          "source": "app/cardsvc/cbl/CACRD17.cbl:111"
+        },
+        {
+          "program": "CACRD91",
+          "source": "app/cardsvc/cbl/CACRD91.cbl:123"
+        }
+      ]
+    },
+    {
+      "member": "CARDST2",
+      "mechanisms": [
+        "copy"
+      ],
+      "referenced_by": [
+        {
+          "program": "CACRD11",
+          "source": "app/cardsvc/cbl/CACRD11.cbl:176"
+        },
+        {
+          "program": "CACRD12",
+          "source": "app/cardsvc/cbl/CACRD12.cbl:143"
+        },
+        {
+          "program": "CACRD13",
+          "source": "app/cardsvc/cbl/CACRD13.cbl:195"
+        },
+        {
+          "program": "CACRD14",
+          "source": "app/cardsvc/cbl/CACRD14.cbl:192"
+        },
+        {
+          "program": "CACRD15",
+          "source": "app/cardsvc/cbl/CACRD15.cbl:134"
+        },
+        {
+          "program": "CACRD16",
+          "source": "app/cardsvc/cbl/CACRD16.cbl:145"
+        }
+      ]
+    }
+  ],
+  "programs": [
+    {
+      "id": "CVACCT01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVACCT01Y.cpy",
+      "lines": 39,
+      "code_lines": 35,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVAUTH01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVAUTH01Y.cpy",
+      "lines": 68,
+      "code_lines": 50,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVAUTHW1Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVAUTHW1Y.cpy",
+      "lines": 161,
+      "code_lines": 114,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVAXTR01Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVAXTR01Y.cpy",
+      "lines": 42,
+      "code_lines": 24,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVBRTN1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVBRTN1Y.cpy",
+      "lines": 32,
+      "code_lines": 20,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVBWRK1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVBWRK1Y.cpy",
+      "lines": 41,
+      "code_lines": 31,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCARD01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVCARD01Y.cpy",
+      "lines": 35,
+      "code_lines": 30,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCONSTY",
+      "kind": "copybook",
+      "path": "app/cpy/CVCONSTY.cpy",
+      "lines": 42,
+      "code_lines": 29,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCPRF1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVCPRF1Y.cpy",
+      "lines": 40,
+      "code_lines": 30,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCTRL01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVCTRL01Y.cpy",
+      "lines": 41,
+      "code_lines": 32,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCUST01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVCUST01Y.cpy",
+      "lines": 31,
+      "code_lines": 25,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVERRS01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVERRS01Y.cpy",
+      "lines": 45,
+      "code_lines": 37,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVFEEW1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVFEEW1Y.cpy",
+      "lines": 73,
+      "code_lines": 54,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVFRAU1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVFRAU1Y.cpy",
+      "lines": 74,
+      "code_lines": 56,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVMRTE1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVMRTE1Y.cpy",
+      "lines": 28,
+      "code_lines": 18,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVPWRK01Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVPWRK01Y.cpy",
+      "lines": 36,
+      "code_lines": 28,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVRISK01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVRISK01Y.cpy",
+      "lines": 86,
+      "code_lines": 69,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVRJCT01Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVRJCT01Y.cpy",
+      "lines": 27,
+      "code_lines": 20,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVROUT01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVROUT01Y.cpy",
+      "lines": 64,
+      "code_lines": 53,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVRSNC1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVRSNC1Y.cpy",
+      "lines": 30,
+      "code_lines": 21,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVSTMT01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVSTMT01Y.cpy",
+      "lines": 45,
+      "code_lines": 39,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVTRAN01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVTRAN01Y.cpy",
+      "lines": 48,
+      "code_lines": 39,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVXREF1Y",
+      "kind": "copybook",
+      "path": "app/cardsvc/cpy/CVXREF1Y.cpy",
+      "lines": 36,
+      "code_lines": 24,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD00",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD00.cbl",
+      "lines": 468,
+      "code_lines": 359,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 422
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 462
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 80
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 81
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 82
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 83
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 86
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 122
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 141
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 146
+        },
+        {
+          "kind": "cics",
+          "detail": "ASSIGN USERID",
+          "program": null,
+          "variable": null,
+          "line": 162
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 200
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 360
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 371
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 422
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 462
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD01",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD01.cbl",
+      "lines": 554,
+      "code_lines": 451,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 496
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 537
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 55
+        },
+        {
+          "name": "CVACCT01Y",
+          "mechanism": "copy",
+          "line": 56
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 57
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 58
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 59
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 60
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 65
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 133
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 148
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 149
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 191
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 436
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 446
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": null,
+          "line": 471
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 496
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 537
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 546
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 553
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD02",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD02.cbl",
+      "lines": 749,
+      "code_lines": 607,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 690
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 733
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 116
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 117
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 118
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 119
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 120
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 162
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 180
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 181
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 322
+        },
+        {
+          "kind": "cics",
+          "detail": "STARTBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 385
+        },
+        {
+          "kind": "cics",
+          "detail": "READNEXT FILE",
+          "program": null,
+          "variable": null,
+          "line": 432
+        },
+        {
+          "kind": "cics",
+          "detail": "READNEXT FILE",
+          "program": null,
+          "variable": null,
+          "line": 467
+        },
+        {
+          "kind": "cics",
+          "detail": "READNEXT FILE",
+          "program": null,
+          "variable": null,
+          "line": 490
+        },
+        {
+          "kind": "cics",
+          "detail": "READPREV FILE",
+          "program": null,
+          "variable": null,
+          "line": 519
+        },
+        {
+          "kind": "cics",
+          "detail": "ENDBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 563
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 625
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 636
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": null,
+          "line": 655
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 690
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 733
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 742
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 748
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD03",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD03.cbl",
+      "lines": 651,
+      "code_lines": 529,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 589
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 635
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 70
+        },
+        {
+          "name": "CVCARD01Y",
+          "mechanism": "copy",
+          "line": 71
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 72
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 73
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 74
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 75
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 80
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 163
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 180
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 181
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 217
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 537
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 548
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": null,
+          "line": 567
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 589
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 635
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 644
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 650
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD04",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD04.cbl",
+      "lines": 758,
+      "code_lines": 609,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-NEXT-PGM",
+            "line": 701
+          },
+          {
+            "command": "XCTL",
+            "variable": "WS-MENU-PGM",
+            "line": 717
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 742
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 106
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 107
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 108
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 109
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 110
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 148
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 163
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 164
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 170
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 225
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 594
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 595
+        },
+        {
+          "kind": "cics",
+          "detail": "DELETEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 614
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 621
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 671
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 682
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 701
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 717
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 742
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 751
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 757
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD05",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD05.cbl",
+      "lines": 380,
+      "code_lines": 271,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 161
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 319
+          },
+          {
+            "command": "XCTL",
+            "variable": "WS-NEXT-PGM",
+            "line": 337
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 365
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 54
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 55
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 56
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 57
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 58
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 81
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 89
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 90
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 161
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 319
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 328
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 337
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 365
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 374
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD06",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD06.cbl",
+      "lines": 487,
+      "code_lines": 376,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-NEXT-PGM",
+            "line": 426
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 453
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 472
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 59
+        },
+        {
+          "name": "CVCARD01Y",
+          "mechanism": "copy",
+          "line": 60
+        },
+        {
+          "name": "CVACCT01Y",
+          "mechanism": "copy",
+          "line": 61
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 62
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 63
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 68
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 132
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 148
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 149
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 426
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 453
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 472
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 481
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD07",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD07.cbl",
+      "lines": 778,
+      "code_lines": 584,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 582
+          },
+          {
+            "command": "XCTL",
+            "variable": "WS-NEXT-PGM",
+            "line": 708
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 763
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 112
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 113
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 114
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 115
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 120
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 186
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 203
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 204
+        },
+        {
+          "kind": "cics",
+          "detail": "READ FILE",
+          "program": null,
+          "variable": null,
+          "line": 435
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 582
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 708
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 763
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 772
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD08",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD08.cbl",
+      "lines": 542,
+      "code_lines": 382,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-NEXT-PGM",
+            "line": 484
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 527
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 69
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 70
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 71
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 76
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 130
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 155
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 156
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 484
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 527
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 536
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD09",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD09.cbl",
+      "lines": 508,
+      "code_lines": 357,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-NEXT-PGM",
+            "line": 467
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 493
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 69
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 70
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 71
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 95
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 104
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 105
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 467
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 493
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 502
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD10",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD10.cbl",
+      "lines": 816,
+      "code_lines": 633,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-NEXT-PGM",
+            "line": 741
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 798
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 99
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 100
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 101
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 102
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 103
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 108
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 165
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 174
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 175
+        },
+        {
+          "kind": "cics",
+          "detail": "READQ TS",
+          "program": null,
+          "variable": null,
+          "line": 210
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITE FILE",
+          "program": null,
+          "variable": null,
+          "line": 572
+        },
+        {
+          "kind": "cics",
+          "detail": "DELETEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 649
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 716
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 741
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 798
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 810
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD11",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD11.cbl",
+      "lines": 1378,
+      "code_lines": 1173,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-MENU-PGM",
+            "line": 258
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 1330
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVCARD01Y",
+          "mechanism": "copy",
+          "line": 169
+        },
+        {
+          "name": "CVXREF1Y",
+          "mechanism": "copy",
+          "line": 170
+        },
+        {
+          "name": "CVRSNC1Y",
+          "mechanism": "copy",
+          "line": 171
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 172
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 173
+        },
+        {
+          "name": "CARDST2",
+          "mechanism": "copy",
+          "line": 176
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 181
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 258
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 273
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 305
+        },
+        {
+          "kind": "cics",
+          "detail": "READ FILE",
+          "program": null,
+          "variable": null,
+          "line": 410
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT RESP",
+          "program": null,
+          "variable": null,
+          "line": 819
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT ROLLBACK",
+          "program": null,
+          "variable": null,
+          "line": 831
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITE FILE",
+          "program": null,
+          "variable": null,
+          "line": 1033
+        },
+        {
+          "kind": "cics",
+          "detail": "READ FILE",
+          "program": null,
+          "variable": null,
+          "line": 1071
+        },
+        {
+          "kind": "cics",
+          "detail": "REWRITE FILE",
+          "program": null,
+          "variable": null,
+          "line": 1114
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 1143
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1220
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1225
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 1240
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 1249
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 1278
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 1287
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 1330
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 1366
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 1374
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD12",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD12.cbl",
+      "lines": 988,
+      "code_lines": 803,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-MENU-PGM",
+            "line": 236
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 711
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 960
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 137
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 138
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 139
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 140
+        },
+        {
+          "name": "CARDST2",
+          "mechanism": "copy",
+          "line": 143
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 157
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 229
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 236
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 280
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 711
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT RESP",
+          "program": null,
+          "variable": null,
+          "line": 868
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT ROLLBACK",
+          "program": null,
+          "variable": null,
+          "line": 880
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 890
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 895
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 907
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 916
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 960
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 979
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 987
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD13",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD13.cbl",
+      "lines": 1598,
+      "code_lines": 1317,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-MENU-PGM",
+            "line": 356
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 1570
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVTRAN01Y",
+          "mechanism": "copy",
+          "line": 189
+        },
+        {
+          "name": "CVRSNC1Y",
+          "mechanism": "copy",
+          "line": 190
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 191
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 192
+        },
+        {
+          "name": "CARDST2",
+          "mechanism": "copy",
+          "line": 195
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 215
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 349
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 356
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 393
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 903
+        },
+        {
+          "kind": "cics",
+          "detail": "READ FILE",
+          "program": null,
+          "variable": null,
+          "line": 1022
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT RESP",
+          "program": null,
+          "variable": null,
+          "line": 1159
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT ROLLBACK",
+          "program": null,
+          "variable": null,
+          "line": 1171
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1180
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1426
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1431
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 1446
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 1455
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 1532
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 1541
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 1570
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 1589
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 1597
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD14",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD14.cbl",
+      "lines": 1426,
+      "code_lines": 1184,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-MENU-PGM",
+            "line": 298
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 1398
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVTRAN01Y",
+          "mechanism": "copy",
+          "line": 187
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 188
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 189
+        },
+        {
+          "name": "CARDST2",
+          "mechanism": "copy",
+          "line": 192
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 197
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 291
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 298
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 334
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT RESP",
+          "program": null,
+          "variable": null,
+          "line": 669
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT ROLLBACK",
+          "program": null,
+          "variable": null,
+          "line": 700
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 746
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT RESP",
+          "program": null,
+          "variable": null,
+          "line": 971
+        },
+        {
+          "kind": "cics",
+          "detail": "SYNCPOINT ROLLBACK",
+          "program": null,
+          "variable": null,
+          "line": 990
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1342
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1347
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 1364
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 1381
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 1398
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 1417
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 1425
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD15",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD15.cbl",
+      "lines": 906,
+      "code_lines": 731,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-MENU-PGM",
+            "line": 217
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-DISPATCHER-ONLINE",
+            "line": 627
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 878
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 117
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 118
+        },
+        {
+          "name": "CVCUST01Y",
+          "mechanism": "copy",
+          "line": 119
+        },
+        {
+          "name": "CVCPRF1Y",
+          "mechanism": "copy",
+          "line": 120
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 121
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 122
+        },
+        {
+          "name": "CARDST2",
+          "mechanism": "copy",
+          "line": 134
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 139
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 210
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 217
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 256
+        },
+        {
+          "kind": "cics",
+          "detail": "READ FILE",
+          "program": null,
+          "variable": null,
+          "line": 489
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-DISPATCHER-ONLINE",
+          "line": 627
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 824
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 829
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 842
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 859
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 878
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 897
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 905
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD16",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD16.cbl",
+      "lines": 1115,
+      "code_lines": 941,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "XCTL",
+            "variable": "WS-MENU-PGM",
+            "line": 226
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 1087
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVRSNC1Y",
+          "mechanism": "copy",
+          "line": 140
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 141
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 142
+        },
+        {
+          "name": "CARDST2",
+          "mechanism": "copy",
+          "line": 145
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 150
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 219
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-MENU-PGM",
+          "line": 226
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 269
+        },
+        {
+          "kind": "cics",
+          "detail": "ENDBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 423
+        },
+        {
+          "kind": "cics",
+          "detail": "STARTBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 445
+        },
+        {
+          "kind": "cics",
+          "detail": "READNEXT FILE",
+          "program": null,
+          "variable": null,
+          "line": 478
+        },
+        {
+          "kind": "cics",
+          "detail": "READPREV FILE",
+          "program": null,
+          "variable": null,
+          "line": 509
+        },
+        {
+          "kind": "cics",
+          "detail": "RECEIVE MAP",
+          "program": null,
+          "variable": null,
+          "line": 714
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1007
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 1012
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 1024
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 1047
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 1068
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 1087
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 1106
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 1114
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD17",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD17.cbl",
+      "lines": 396,
+      "code_lines": 289,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM-ONLINE",
+            "line": 388
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVAUTHW1Y",
+          "mechanism": "copy",
+          "line": 108
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 109
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 110
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 111
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 138
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 145
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 146
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TD",
+          "program": null,
+          "variable": null,
+          "line": 185
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TD",
+          "program": null,
+          "variable": null,
+          "line": 250
+        },
+        {
+          "kind": "cics",
+          "detail": "DELETEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 277
+        },
+        {
+          "kind": "cics",
+          "detail": "DELETEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 298
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 346
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM-ONLINE",
+          "line": 388
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD90",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD90.cbl",
+      "lines": 484,
+      "code_lines": 391,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-PGM-NAME",
+            "line": 360
+          },
+          {
+            "command": "XCTL",
+            "variable": "WS-PGM-NAME",
+            "line": 388
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 43
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 44
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 45
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 50
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 127
+        },
+        {
+          "kind": "cics",
+          "detail": "READQ TS",
+          "program": null,
+          "variable": null,
+          "line": 164
+        },
+        {
+          "kind": "cics",
+          "detail": "STARTBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 249
+        },
+        {
+          "kind": "cics",
+          "detail": "READNEXT FILE",
+          "program": null,
+          "variable": null,
+          "line": 264
+        },
+        {
+          "kind": "cics",
+          "detail": "ENDBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 291
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 304
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-PGM-NAME",
+          "line": 360
+        },
+        {
+          "kind": "cics",
+          "detail": "XCTL PROGRAM",
+          "program": null,
+          "variable": "WS-PGM-NAME",
+          "line": 388
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": null,
+          "line": 478
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD91",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD91.cbl",
+      "lines": 430,
+      "code_lines": 299,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 121
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 122
+        },
+        {
+          "name": "CARDSET",
+          "mechanism": "copy",
+          "line": 123
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 169
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 178
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 179
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TD",
+          "program": null,
+          "variable": null,
+          "line": 272
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TD",
+          "program": null,
+          "variable": null,
+          "line": 314
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND MAP",
+          "program": null,
+          "variable": null,
+          "line": 367
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 381
+        },
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 397
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 405
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN TRANSID",
+          "program": null,
+          "variable": null,
+          "line": 416
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 424
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CACRD92",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CACRD92.cbl",
+      "lines": 233,
+      "code_lines": 138,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 76
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 79
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN RESP",
+          "program": null,
+          "variable": null,
+          "line": 99
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 104
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 105
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 112
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TD",
+          "program": null,
+          "variable": null,
+          "line": 209
+        },
+        {
+          "kind": "cics",
+          "detail": "SEND TEXT",
+          "program": null,
+          "variable": null,
+          "line": 227
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CAFRD01",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CAFRD01.cbl",
+      "lines": 739,
+      "code_lines": 578,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 92
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 93
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 95
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 129
+        },
+        {
+          "name": "CVFRAU1Y",
+          "mechanism": "copy",
+          "line": 130
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CAFRD02",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CAFRD02.cbl",
+      "lines": 624,
+      "code_lines": 482,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 78
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 79
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 81
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 117
+        },
+        {
+          "name": "CVFRAU1Y",
+          "mechanism": "copy",
+          "line": 118
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CAFRD03",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CAFRD03.cbl",
+      "lines": 497,
+      "code_lines": 377,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 66
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 67
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 69
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 94
+        },
+        {
+          "name": "CVFRAU1Y",
+          "mechanism": "copy",
+          "line": 95
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CAFRD04",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CAFRD04.cbl",
+      "lines": 628,
+      "code_lines": 499,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 76
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 77
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 79
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 116
+        },
+        {
+          "name": "CVFRAU1Y",
+          "mechanism": "copy",
+          "line": 117
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBBIL01",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBBIL01.cbl",
+      "lines": 766,
+      "code_lines": 600,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 31
+        },
+        {
+          "select": "BILLWRK-FILE",
+          "assign": "BILLWRK",
+          "organization": "SEQUENTIAL",
+          "line": 37
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 754,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 135
+        },
+        {
+          "name": "CVACCT01Y",
+          "mechanism": "copy",
+          "line": 136
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 137
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 138
+        },
+        {
+          "name": "CVBWRK1Y",
+          "mechanism": "copy",
+          "line": 139
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 141
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBBIL02",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBBIL02.cbl",
+      "lines": 756,
+      "code_lines": 599,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "BILLWRK-FILE",
+          "assign": "BILLWRK",
+          "organization": "SEQUENTIAL",
+          "line": 33
+        },
+        {
+          "select": "STMTWRK-FILE",
+          "assign": "STMTWRK",
+          "organization": "SEQUENTIAL",
+          "line": 37
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 744,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 148
+        },
+        {
+          "name": "CVSTMT01Y",
+          "mechanism": "copy",
+          "line": 149
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 150
+        },
+        {
+          "name": "CVBWRK1Y",
+          "mechanism": "copy",
+          "line": 151
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 153
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBBIL03",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBBIL03.cbl",
+      "lines": 614,
+      "code_lines": 478,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "STMTWRK-FILE",
+          "assign": "STMTWRK",
+          "organization": "SEQUENTIAL",
+          "line": 33
+        },
+        {
+          "select": "STMTWK2-FILE",
+          "assign": "STMTWK2",
+          "organization": "SEQUENTIAL",
+          "line": 37
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 602,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 151
+        },
+        {
+          "name": "CVSTMT01Y",
+          "mechanism": "copy",
+          "line": 152
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 153
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 155
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBBIL04",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBBIL04.cbl",
+      "lines": 492,
+      "code_lines": 383,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "STMTWK2-FILE",
+          "assign": "STMTWK2",
+          "organization": "SEQUENTIAL",
+          "line": 36
+        },
+        {
+          "select": "STMTWK3-FILE",
+          "assign": "STMTWK3",
+          "organization": "SEQUENTIAL",
+          "line": 40
+        },
+        {
+          "select": "CUSTPREF-FILE",
+          "assign": "CUSTPREF",
+          "organization": "INDEXED",
+          "line": 44
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD90",
+            "line": 348,
+            "system": false
+          },
+          {
+            "target": "CBCRD90",
+            "line": 427,
+            "system": false
+          },
+          {
+            "target": "CBCRD91",
+            "line": 478,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 140
+        },
+        {
+          "name": "CVSTMT01Y",
+          "mechanism": "copy",
+          "line": 141
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 142
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 143
+        },
+        {
+          "name": "CVBRTN1Y",
+          "mechanism": "copy",
+          "line": 144
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBBIL05",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBBIL05.cbl",
+      "lines": 506,
+      "code_lines": 423,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "STMTWK3-FILE",
+          "assign": "STMTWK3",
+          "organization": "SEQUENTIAL",
+          "line": 32
+        },
+        {
+          "select": "STMTARC-FILE",
+          "assign": "STMTARC",
+          "organization": "SEQUENTIAL",
+          "line": 36
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 494,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 119
+        },
+        {
+          "name": "CVSTMT01Y",
+          "mechanism": "copy",
+          "line": 120
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 121
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 123
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBBIL06",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBBIL06.cbl",
+      "lines": 697,
+      "code_lines": 563,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "BILLWRK-FILE",
+          "assign": "BILLWRK",
+          "organization": "SEQUENTIAL",
+          "line": 35
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 39
+        },
+        {
+          "select": "RECONRPT-FILE",
+          "assign": "RECONRPT",
+          "organization": "SEQUENTIAL",
+          "line": 45
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 683,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 207
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 208
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 209
+        },
+        {
+          "name": "CVBWRK1Y",
+          "mechanism": "copy",
+          "line": 210
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 212
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD01",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD01.cbl",
+      "lines": 534,
+      "code_lines": 394,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "AUTHLOG-FILE",
+          "assign": "AUTHLOG",
+          "organization": "SEQUENTIAL",
+          "line": 48
+        },
+        {
+          "select": "EXTRACT-FILE",
+          "assign": "AUTHEXTR",
+          "organization": "SEQUENTIAL",
+          "line": 53
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 57
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 529,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 148
+        },
+        {
+          "name": "CVAXTR01Y",
+          "mechanism": "copy",
+          "line": 151
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 154
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 156
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 157
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD02",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD02.cbl",
+      "lines": 661,
+      "code_lines": 521,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "EXTRACT-FILE",
+          "assign": "AUTHEXTR",
+          "organization": "SEQUENTIAL",
+          "line": 45
+        },
+        {
+          "select": "CLEAN-FILE",
+          "assign": "AUTHCLN",
+          "organization": "SEQUENTIAL",
+          "line": 49
+        },
+        {
+          "select": "REJECT-FILE",
+          "assign": "AUTHREJ",
+          "organization": "SEQUENTIAL",
+          "line": 53
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 57
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 658,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVAXTR01Y",
+          "mechanism": "copy",
+          "line": 186
+        },
+        {
+          "name": "CVRJCT01Y",
+          "mechanism": "copy",
+          "line": 187
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 188
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 189
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 190
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 191
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD03",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD03.cbl",
+      "lines": 559,
+      "code_lines": 440,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "SORTED-FILE",
+          "assign": "AUTHSRT",
+          "organization": "SEQUENTIAL",
+          "line": 48
+        },
+        {
+          "select": "ENRICH-FILE",
+          "assign": "AUTHENR",
+          "organization": "SEQUENTIAL",
+          "line": 52
+        },
+        {
+          "select": "MERCHRTE-FILE",
+          "assign": "MERCHRTE",
+          "organization": "INDEXED",
+          "line": 56
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 62
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 556,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVAXTR01Y",
+          "mechanism": "copy",
+          "line": 167
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 168
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 169
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 170
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 171
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 173
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD04",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD04.cbl",
+      "lines": 1030,
+      "code_lines": 782,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "ENRICH-FILE",
+          "assign": "AUTHENR",
+          "organization": "SEQUENTIAL",
+          "line": 68
+        },
+        {
+          "select": "REJECT-FILE",
+          "assign": "AUTHREJ",
+          "organization": "SEQUENTIAL",
+          "line": 72
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 76
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 1027,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVAXTR01Y",
+          "mechanism": "copy",
+          "line": 191
+        },
+        {
+          "name": "CVRJCT01Y",
+          "mechanism": "copy",
+          "line": 192
+        },
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 193
+        },
+        {
+          "name": "CVTRAN01Y",
+          "mechanism": "copy",
+          "line": 194
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 195
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 196
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 197
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 205
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD05A",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD05A.cbl",
+      "lines": 773,
+      "code_lines": 613,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 52
+        },
+        {
+          "select": "AUDIT-FILE",
+          "assign": "FEEAUDIT",
+          "organization": "SEQUENTIAL",
+          "line": 58
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD90",
+            "line": 508,
+            "system": false
+          },
+          {
+            "target": "CBCRD91",
+            "line": 770,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 184
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 185
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 186
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 187
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 189
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD05B",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD05B.cbl",
+      "lines": 1003,
+      "code_lines": 777,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 61
+        },
+        {
+          "select": "REPORT-FILE",
+          "assign": "INTRPT",
+          "organization": "SEQUENTIAL",
+          "line": 67
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 1000,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 193
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 194
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 195
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 197
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD06A",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD06A.cbl",
+      "lines": 408,
+      "code_lines": 311,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "WORK-FILE",
+          "assign": "PARTYWK",
+          "organization": "SEQUENTIAL",
+          "line": 47
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 51
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 405,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVPWRK01Y",
+          "mechanism": "copy",
+          "line": 110
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 111
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 112
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 113
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 115
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD06B",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD06B.cbl",
+      "lines": 618,
+      "code_lines": 459,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "SORTED-FILE",
+          "assign": "PARTYSRT",
+          "organization": "SEQUENTIAL",
+          "line": 62
+        },
+        {
+          "select": "ACCEPT-FILE",
+          "assign": "PARTYACC",
+          "organization": "SEQUENTIAL",
+          "line": 66
+        },
+        {
+          "select": "REVIEW-FILE",
+          "assign": "PARTYRVW",
+          "organization": "SEQUENTIAL",
+          "line": 70
+        },
+        {
+          "select": "EXCEPT-FILE",
+          "assign": "RISKEXC",
+          "organization": "SEQUENTIAL",
+          "line": 74
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD90",
+            "line": 359,
+            "system": false
+          },
+          {
+            "target": "CBCRD91",
+            "line": 615,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVPWRK01Y",
+          "mechanism": "copy",
+          "line": 182
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 183
+        },
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 184
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 185
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 186
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 188
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD06C",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD06C.cbl",
+      "lines": 597,
+      "code_lines": 471,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "ACCEPT-FILE",
+          "assign": "PARTYACC",
+          "organization": "SEQUENTIAL",
+          "line": 47
+        },
+        {
+          "select": "REPORT-FILE",
+          "assign": "BANDRPT",
+          "organization": "SEQUENTIAL",
+          "line": 51
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 55
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 594,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVPWRK01Y",
+          "mechanism": "copy",
+          "line": 187
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 188
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 189
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 190
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 192
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD06W",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD06W.cbl",
+      "lines": 265,
+      "code_lines": 183,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 50
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 262,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 100
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 101
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 102
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD06X",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD06X.cbl",
+      "lines": 321,
+      "code_lines": 233,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "WORK-FILE",
+          "assign": "PARTYWK",
+          "organization": "SEQUENTIAL",
+          "line": 44
+        },
+        {
+          "select": "SORTED-FILE",
+          "assign": "PARTYSRT",
+          "organization": "SEQUENTIAL",
+          "line": 48
+        },
+        {
+          "select": "SORT-FILE",
+          "assign": "SORTWK",
+          "organization": "SEQUENTIAL",
+          "line": 52
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 318,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVPWRK01Y",
+          "mechanism": "copy",
+          "line": 112
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 141
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 142
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD07",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD07.cbl",
+      "lines": 824,
+      "code_lines": 640,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "REPORT-FILE",
+          "assign": "GLRPT",
+          "organization": "SEQUENTIAL",
+          "line": 66
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 70
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 821,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 241
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 242
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 243
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 245
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD08",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD08.cbl",
+      "lines": 722,
+      "code_lines": 565,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "REPORT-FILE",
+          "assign": "AGERPT",
+          "organization": "SEQUENTIAL",
+          "line": 56
+        },
+        {
+          "select": "COLLECT-FILE",
+          "assign": "COLLECT",
+          "organization": "SEQUENTIAL",
+          "line": 60
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 64
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 719,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 244
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 245
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 246
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 248
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD09",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD09.cbl",
+      "lines": 543,
+      "code_lines": 413,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "BKPXREF-FILE",
+          "assign": "BKPXREF",
+          "organization": "SEQUENTIAL",
+          "line": 46
+        },
+        {
+          "select": "BKPCTL-FILE",
+          "assign": "BKPCTL",
+          "organization": "SEQUENTIAL",
+          "line": 50
+        },
+        {
+          "select": "BKPAUTH-FILE",
+          "assign": "BKPAUTH",
+          "organization": "SEQUENTIAL",
+          "line": 54
+        },
+        {
+          "select": "AUTHLOG-FILE",
+          "assign": "AUTHLOG",
+          "organization": "SEQUENTIAL",
+          "line": 58
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 62
+        },
+        {
+          "select": "REGISTER-FILE",
+          "assign": "BKPREG",
+          "organization": "SEQUENTIAL",
+          "line": 68
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 540,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 204
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 205
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 206
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD10",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD10.cbl",
+      "lines": 807,
+      "code_lines": 622,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "STGSTAT-FILE",
+          "assign": "STGSTAT",
+          "organization": "SEQUENTIAL",
+          "line": 60
+        },
+        {
+          "select": "REPORT-FILE",
+          "assign": "CTLRPT",
+          "organization": "SEQUENTIAL",
+          "line": 64
+        },
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 68
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 804,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 278
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 279
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 280
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 282
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBCRD90",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBCRD90.cbl",
+      "lines": 395,
+      "code_lines": 322,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "PGMROUT-FILE",
+          "assign": "PGMROUT",
+          "organization": "INDEXED",
+          "line": 23
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [
+          {
+            "variable": "WS-PGM-NAME",
+            "line": 297
+          },
+          {
+            "variable": "WS-PGM-NAME",
+            "line": 331
+          }
+        ],
+        "sql": [],
+        "cancel": [
+          {
+            "variable": "WS-PGM-NAME",
+            "line": 306
+          },
+          {
+            "variable": "WS-PGM-NAME",
+            "line": 339
+          }
+        ],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 53
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 54
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 55
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 57
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBFEE01",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBFEE01.cbl",
+      "lines": 744,
+      "code_lines": 583,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "FEEPARM-FILE",
+          "assign": "FEEPARM",
+          "organization": "SEQUENTIAL",
+          "line": 43
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 145
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 147
+        },
+        {
+          "name": "CVFEEW1Y",
+          "mechanism": "copy",
+          "line": 177
+        },
+        {
+          "name": "CVBRTN1Y",
+          "mechanism": "copy",
+          "line": 178
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBFEE02",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBFEE02.cbl",
+      "lines": 635,
+      "code_lines": 501,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "FEEPARM-FILE",
+          "assign": "FEEPARM",
+          "organization": "SEQUENTIAL",
+          "line": 41
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVAUTH01Y",
+          "mechanism": "copy",
+          "line": 128
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 130
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 132
+        },
+        {
+          "name": "CVFEEW1Y",
+          "mechanism": "copy",
+          "line": 156
+        },
+        {
+          "name": "CVBRTN1Y",
+          "mechanism": "copy",
+          "line": 157
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBFEE03",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBFEE03.cbl",
+      "lines": 678,
+      "code_lines": 523,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "FEEPARM-FILE",
+          "assign": "FEEPARM",
+          "organization": "SEQUENTIAL",
+          "line": 49
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 134
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 136
+        },
+        {
+          "name": "CVFEEW1Y",
+          "mechanism": "copy",
+          "line": 165
+        },
+        {
+          "name": "CVBRTN1Y",
+          "mechanism": "copy",
+          "line": 166
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBREF01",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBREF01.cbl",
+      "lines": 719,
+      "code_lines": 589,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "MERCHFD-FILE",
+          "assign": "MERCHFD",
+          "organization": "SEQUENTIAL",
+          "line": 38
+        },
+        {
+          "select": "REFPARM-FILE",
+          "assign": "REFPARM",
+          "organization": "SEQUENTIAL",
+          "line": 42
+        },
+        {
+          "select": "MERCHRPT-FILE",
+          "assign": "MERCHRPT",
+          "organization": "SEQUENTIAL",
+          "line": 46
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 718,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 199
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 200
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 202
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBREF02",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBREF02.cbl",
+      "lines": 525,
+      "code_lines": 419,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "MERCHUNL-FILE",
+          "assign": "MERCHUNL",
+          "organization": "SEQUENTIAL",
+          "line": 38
+        },
+        {
+          "select": "MERCHCTL-FILE",
+          "assign": "MERCHCTL",
+          "organization": "SEQUENTIAL",
+          "line": 42
+        },
+        {
+          "select": "MERCHRTE-FILE",
+          "assign": "MERCHRTE",
+          "organization": "INDEXED",
+          "line": 46
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 524,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVMRTE1Y",
+          "mechanism": "copy",
+          "line": 77
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 118
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 119
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 121
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBREF03",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBREF03.cbl",
+      "lines": 807,
+      "code_lines": 659,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "FRAUUNL-FILE",
+          "assign": "FRAUUNL",
+          "organization": "SEQUENTIAL",
+          "line": 40
+        },
+        {
+          "select": "RSNFEED-FILE",
+          "assign": "RSNFEED",
+          "organization": "SEQUENTIAL",
+          "line": 44
+        },
+        {
+          "select": "RSNUNL-FILE",
+          "assign": "RSNUNL",
+          "organization": "SEQUENTIAL",
+          "line": 48
+        },
+        {
+          "select": "REFCTL-FILE",
+          "assign": "REFCTL",
+          "organization": "SEQUENTIAL",
+          "line": 52
+        },
+        {
+          "select": "FRAUDRUL-FILE",
+          "assign": "FRAUDRUL",
+          "organization": "INDEXED",
+          "line": 56
+        },
+        {
+          "select": "RSNCODE-FILE",
+          "assign": "RSNCODE",
+          "organization": "INDEXED",
+          "line": 62
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 806,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 196
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 197
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 199
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBREF04",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBREF04.cbl",
+      "lines": 579,
+      "code_lines": 451,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "ROUTUNL-FILE",
+          "assign": "ROUTUNL",
+          "organization": "SEQUENTIAL",
+          "line": 43
+        },
+        {
+          "select": "ROUTCTL-FILE",
+          "assign": "ROUTCTL",
+          "organization": "SEQUENTIAL",
+          "line": 47
+        },
+        {
+          "select": "PGMROUT-FILE",
+          "assign": "PGMROUT",
+          "organization": "INDEXED",
+          "line": 51
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 578,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVROUT01Y",
+          "mechanism": "copy",
+          "line": 83
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 123
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 124
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 126
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBREF05",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBREF05.cbl",
+      "lines": 1068,
+      "code_lines": 882,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "REFPARM-FILE",
+          "assign": "REFPARM",
+          "organization": "SEQUENTIAL",
+          "line": 38
+        },
+        {
+          "select": "REFRPT-FILE",
+          "assign": "REFRPT",
+          "organization": "SEQUENTIAL",
+          "line": 42
+        },
+        {
+          "select": "MERCHRTE-FILE",
+          "assign": "MERCHRTE",
+          "organization": "INDEXED",
+          "line": 46
+        },
+        {
+          "select": "PGMROUT-FILE",
+          "assign": "PGMROUT",
+          "organization": "INDEXED",
+          "line": 52
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "CBCRD91",
+            "line": 1067,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 214
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 215
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 217
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBSTM01",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBSTM01.cbl",
+      "lines": 619,
+      "code_lines": 477,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "STMTPRT-FILE",
+          "assign": "STMTPRT",
+          "organization": "SEQUENTIAL",
+          "line": 37
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 241
+        },
+        {
+          "name": "CVSTMT01Y",
+          "mechanism": "copy",
+          "line": 244
+        },
+        {
+          "name": "CVBRTN1Y",
+          "mechanism": "copy",
+          "line": 245
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBSTM02",
+      "kind": "program",
+      "path": "app/cardsvc/cbl/CBSTM02.cbl",
+      "lines": 527,
+      "code_lines": 387,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "STMTEXT-FILE",
+          "assign": "STMTEXT",
+          "organization": "SEQUENTIAL",
+          "line": 50
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 144
+        },
+        {
+          "name": "CVSTMT01Y",
+          "mechanism": "copy",
+          "line": 147
+        },
+        {
+          "name": "CVBRTN1Y",
+          "mechanism": "copy",
+          "line": 148
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    }
+  ]
+}

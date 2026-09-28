@@ -1,0 +1,103 @@
+{
+ "meta": {
+  "module": "CARDSVC",
+  "skill": "module-classification",
+  "updated_at": "2026-09-28T13:36:59Z"
+ },
+ "members": [
+  {
+   "name": "PRKYC01",
+   "artifact": "unresolved-target",
+   "module": "PARTYRSK",
+   "binding": {
+    "kind": "application-module",
+    "product": null,
+    "component": null,
+    "confidence": "derived",
+    "evidence": [
+     "app/partyrsk/cbl/PRKYC01.cbl:1",
+     "app/cics/CSDPRTY.csd:25",
+     "app/jcl/build/BUILDALL.jcl:204",
+     "store/modules.json#PARTYRSK"
+    ],
+    "reasoning": "source member in app/partyrsk/cbl, defined in CICS group PRTYGRP, built in the PARTYRSK section of BUILDALL; scanned in store/PARTYRSK. Seed row XMOD/RISKSVC names MODULE_ID PARTYRSK (db2/ddl/40_SEED_PGM_ROUTE.sql:40)",
+    "confirmed": null
+   },
+   "request": null
+  },
+  {
+   "name": "PRKYC03",
+   "artifact": "unresolved-target",
+   "module": "PARTYRSK",
+   "binding": {
+    "kind": "application-module",
+    "product": null,
+    "component": null,
+    "confidence": "derived",
+    "evidence": [
+     "app/partyrsk/cbl/PRKYC03.cbl:1",
+     "app/cics/CSDPRTY.csd:49",
+     "app/jcl/build/BUILDALL.jcl:212",
+     "store/modules.json#PARTYRSK"
+    ],
+    "reasoning": "source member in app/partyrsk/cbl, defined in CICS group PRTYGRP, built in the PARTYRSK section of BUILDALL; scanned in store/PARTYRSK",
+    "confirmed": null
+   },
+   "request": null
+  },
+  {
+   "name": "PRBRSK1",
+   "artifact": "unresolved-target",
+   "module": "PARTYRSK",
+   "binding": {
+    "kind": "application-module",
+    "product": null,
+    "component": null,
+    "confidence": "derived",
+    "evidence": [
+     "app/partyrsk/cbl/PRBRSK1.cbl:1",
+     "app/jcl/build/BUILDALL.jcl:241",
+     "store/modules.json#PARTYRSK"
+    ],
+    "reasoning": "batch source member in app/partyrsk/cbl built by BUILDALL PRB0010 into the PRTY libraries; scanned in store/PARTYRSK. Seed row XMOD/RSKRECAL names MODULE_ID PARTYRSK (db2/ddl/40_SEED_PGM_ROUTE.sql:42)",
+    "confirmed": null
+   },
+   "request": null
+  },
+  {
+   "name": "CACRD07X",
+   "artifact": "unresolved-target",
+   "module": "CARDSVC",
+   "binding": {
+    "kind": "application-module",
+    "product": null,
+    "component": null,
+    "confidence": "derived",
+    "evidence": [
+     "app/cics/CSDCARD.csd:261",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+    ],
+    "reasoning": "CSD group CARDGRP defines it (STATUS DISABLED, 'WITHDRAWN 2020 - DISPUTE ENTRY, DO NOT ENABLE'); the expired seed row MENU/OPT07 names MODULE_ID CARDSVC. No source member in the drop",
+    "confirmed": null
+   },
+   "request": "Confirm CACRD07X is retired (no load module in CARD.PROD.LOADLIB) or supply its source member"
+  },
+  {
+   "name": "CBCRD91",
+   "artifact": "unresolved-target",
+   "module": "CARDSVC",
+   "binding": {
+    "kind": "application-module",
+    "product": null,
+    "component": null,
+    "confidence": "derived",
+    "evidence": [
+     "app/jcl/build/BUILDALL.jcl:172"
+    ],
+    "reasoning": "built by BUILDALL step BAT0140 from CARD.PROD.CBL(CBCRD91) in the CARDSVC batch section and statically called by 26 CARDSVC batch programs; the source member is not in the drop",
+    "confirmed": null
+   },
+   "request": "Provide source member CARD.PROD.CBL(CBCRD91) (the CARDSVC batch error handler called by every CB* program)"
+  }
+ ]
+}

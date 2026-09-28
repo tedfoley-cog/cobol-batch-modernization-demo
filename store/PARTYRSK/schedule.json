@@ -1,0 +1,5331 @@
+{
+  "meta": {
+    "module": "PARTYRSK",
+    "generated_at": "2026-09-28T13:34:12Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {
+      "sched": [
+        "sched"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "path": "sched/CALENDARS.sched",
+      "kind": "sched",
+      "lines": 154,
+      "code_lines": 111
+    },
+    {
+      "path": "sched/CARDBILL.sched",
+      "kind": "sched",
+      "lines": 277,
+      "code_lines": 222
+    },
+    {
+      "path": "sched/CARDNITE.sched",
+      "kind": "sched",
+      "lines": 422,
+      "code_lines": 355
+    },
+    {
+      "path": "sched/CARDREF.sched",
+      "kind": "sched",
+      "lines": 212,
+      "code_lines": 170
+    },
+    {
+      "path": "sched/PARTYWK.sched",
+      "kind": "sched",
+      "lines": 198,
+      "code_lines": 158
+    }
+  ],
+  "tables": [
+    {
+      "name": "",
+      "path": "sched/CARDBILL.sched",
+      "dialect": "ctmblt",
+      "library": null,
+      "entity": null,
+      "application": null,
+      "owner": "CARDBAT",
+      "group": "CARD-SYSTEMS-PROD",
+      "desc": "MONTHLY BILLING - ONE ORDER PER CYCLE DAY",
+      "memlib": "CARD.PROD.JCLLIB",
+      "jobs": [
+        {
+          "name": "CBBIL01J",
+          "memname": "CBBIL01J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "SELECT ACCOUNTS DUE THIS CYCLE, OPEN BILLING CONTROL RECORD",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "85",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDBILL.sched:45"
+        },
+        {
+          "name": "CBBIL02J",
+          "memname": "CBBIL02J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "CLOSE BALANCES AND CALCULATE MINIMUM PAYMENT",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "85",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "1",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [
+            "CARDDB-POSTING QUANTITY=1"
+          ],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDBILL.sched:84"
+        },
+        {
+          "name": "CBBIL03J",
+          "memname": "CBBIL03J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "BUILD STATEMENT LINE DETAIL FROM POSTED TRANSACTIONS",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "75",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDBILL.sched:120"
+        },
+        {
+          "name": "CBBIL04J",
+          "memname": "CBBIL04J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "FORMAT STATEMENTS FOR PRINT AND ELECTRONIC DELIVERY",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "75",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDBILL.sched:152"
+        },
+        {
+          "name": "CBBIL05J",
+          "memname": "CBBIL05J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "CREATE PRINT AND E-DELIVERY VENDOR FILES, TRANSMIT",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": "07:00",
+          "due_in": null,
+          "priority": "90",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDBILL.sched:187"
+        },
+        {
+          "name": "CBBIL06J",
+          "memname": "CBBIL06J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "CLOSE BILLING CYCLE, SET NEXT CYCLE DATES, CYCLE REPORTS",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "85",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDBILL.sched:231"
+        }
+      ],
+      "edges": [],
+      "cross_run": [],
+      "external_triggers": [],
+      "guards": [],
+      "handoffs": []
+    },
+    {
+      "name": "",
+      "path": "sched/CARDNITE.sched",
+      "dialect": "ctmblt",
+      "library": null,
+      "entity": null,
+      "application": null,
+      "owner": "CARDBAT",
+      "group": "CARD-SYSTEMS-PROD",
+      "desc": "NIGHTLY AUTHORISATION SETTLEMENT AND POSTING CYCLE",
+      "memlib": "CARD.PROD.JCLLIB",
+      "jobs": [
+        {
+          "name": "CBCRD01J",
+          "memname": "CBCRD01J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "OPEN CYCLE, VALIDATE CONTROL RECORD, TAKE VSAM BACKUP",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "80",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:32"
+        },
+        {
+          "name": "CBCRD02J",
+          "memname": "CBCRD02J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "EXTRACT UNSETTLED AUTHORISATIONS FROM AUTHLOG",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "75",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:61"
+        },
+        {
+          "name": "CBCRD03J",
+          "memname": "CBCRD03J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "SORT AND MERGE THE SETTLEMENT EXTRACT INTO POSTING SEQUENCE",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "75",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:93"
+        },
+        {
+          "name": "CBCRD04J",
+          "memname": "CBCRD04J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "POST TRANSACTIONS TO ACCOUNT AND TRANSACTION TABLES",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "90",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "1",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [
+            "CARDDB-POSTING QUANTITY=1"
+          ],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:119"
+        },
+        {
+          "name": "CBCRD05AJ",
+          "memname": "CBCRD05AJ",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "FEE ASSESSMENT FOR THE POSTED DAY",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "70",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:162"
+        },
+        {
+          "name": "CBCRD05BJ",
+          "memname": "CBCRD05BJ",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "REWARD POINT ACCRUAL FOR THE POSTED DAY",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "60",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:194"
+        },
+        {
+          "name": "CBCRD06J",
+          "memname": "CBCRD06J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "NIGHTLY EXPOSURE AND DELINQUENCY REFRESH",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "70",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:229"
+        },
+        {
+          "name": "CBCRD07J",
+          "memname": "CBCRD07J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "INTEREST ACCRUAL ON REVOLVING BALANCES",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "80",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "1",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [
+            "CARDDB-POSTING QUANTITY=1"
+          ],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:269"
+        },
+        {
+          "name": "CBCRD08J",
+          "memname": "CBCRD08J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "GENERAL LEDGER EXTRACT AND BALANCING",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "85",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:300"
+        },
+        {
+          "name": "CBCRD09J",
+          "memname": "CBCRD09J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "DAILY OPERATIONS AND EXCEPTION REPORTING",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "40",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:336"
+        },
+        {
+          "name": "CBCRD10J",
+          "memname": "CBCRD10J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "CLOSE CYCLE, ARCHIVE WORK FILES, RELEASE ONLINE REGION",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": "06:00",
+          "due_in": null,
+          "priority": "95",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDNITE.sched:363"
+        }
+      ],
+      "edges": [],
+      "cross_run": [],
+      "external_triggers": [],
+      "guards": [],
+      "handoffs": []
+    },
+    {
+      "name": "",
+      "path": "sched/CARDREF.sched",
+      "dialect": "ctmblt",
+      "library": null,
+      "entity": null,
+      "application": null,
+      "owner": "CARDBAT",
+      "group": "CARD-SYSTEMS-PROD",
+      "desc": "WEEKLY REFERENCE AND CONTROL FILE REBUILD",
+      "memlib": "CARD.PROD.JCLLIB",
+      "jobs": [
+        {
+          "name": "CBREF01J",
+          "memname": "CBREF01J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "BACKUP REFERENCE CLUSTERS AND OPEN THE REFERENCE CYCLE",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "70",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDREF.sched:31"
+        },
+        {
+          "name": "CBREF02J",
+          "memname": "CBREF02J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "REBUILD MERCHANT SETTLEMENT ROUTING AND REASON CODE FILES",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "60",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDREF.sched:60"
+        },
+        {
+          "name": "CBREF03J",
+          "memname": "CBREF03J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "REBUILD FRAUD RULE AND CUSTOMER PREFERENCE FILES",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "60",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDREF.sched:95"
+        },
+        {
+          "name": "CBREF04J",
+          "memname": "CBREF04J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "REBUILD THE ROUTE TABLE VSAM CLUSTER FROM THE DB2 CONTROL TABLE",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "99",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDREF.sched:122"
+        },
+        {
+          "name": "CBREF05J",
+          "memname": "CBREF05J",
+          "definition": 1,
+          "memlib": "CARD.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "VERIFY REBUILT CLUSTERS, REPORT, CLOSE THE REFERENCE CYCLE",
+          "owner": "CARDBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "CARD-SYSTEMS-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": "20:00",
+          "due_in": null,
+          "priority": "70",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "3",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/CARDREF.sched:166"
+        }
+      ],
+      "edges": [],
+      "cross_run": [],
+      "external_triggers": [],
+      "guards": [],
+      "handoffs": []
+    },
+    {
+      "name": "",
+      "path": "sched/PARTYWK.sched",
+      "dialect": "ctmblt",
+      "library": null,
+      "entity": null,
+      "application": null,
+      "owner": "PRTYBAT",
+      "group": "PARTY-RISK-PROD",
+      "desc": "WEEKLY PARTY EXPOSURE, SCREENING AND RISK RESCORE",
+      "memlib": "PRTY.PROD.JCLLIB",
+      "jobs": [
+        {
+          "name": "CBPRT01J",
+          "memname": "CBPRT01J",
+          "definition": 1,
+          "memlib": "PRTY.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "OPEN CYCLE AND REFRESH PARTY EXPOSURE FROM PRODUCT SYSTEMS",
+          "owner": "PRTYBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "PARTY-RISK-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "75",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/PARTYWK.sched:31"
+        },
+        {
+          "name": "CBPRT02J",
+          "memname": "CBPRT02J",
+          "definition": 1,
+          "memlib": "PRTY.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "LOAD SANCTIONS FEED AND REBUILD THE CONSOLIDATED WATCH LIST",
+          "owner": "PRTYBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "PARTY-RISK-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "90",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "2",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/PARTYWK.sched:68"
+        },
+        {
+          "name": "CBPRT03J",
+          "memname": "CBPRT03J",
+          "definition": 1,
+          "memlib": "PRTY.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "RESCREEN THE ACTIVE PARTY POPULATION AGAINST THE WATCH LIST",
+          "owner": "PRTYBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "PARTY-RISK-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": null,
+          "due_in": null,
+          "priority": "85",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "1",
+          "maxrerun": "1",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/PARTYWK.sched:109"
+        },
+        {
+          "name": "CBPRT04J",
+          "memname": "CBPRT04J",
+          "definition": 1,
+          "memlib": "PRTY.PROD.JCLLIB",
+          "overlib": null,
+          "desc": "RESCORE ACTIVE PARTIES, WRITE AUDIT, CLOSE THE CYCLE",
+          "owner": "PRTYBAT",
+          "node": null,
+          "tasktype": null,
+          "application": null,
+          "group": "PARTY-RISK-PROD",
+          "time_from": null,
+          "time_until": null,
+          "due_out": "23:59",
+          "due_in": null,
+          "priority": "80",
+          "critical": false,
+          "confirm": null,
+          "maxwait": "0",
+          "maxrerun": "1",
+          "interval": null,
+          "rerunmem": null,
+          "docmem": null,
+          "doclib": null,
+          "schenv": null,
+          "system_id": null,
+          "prevent_nct2": null,
+          "stat_cal": null,
+          "time_zone": null,
+          "scheduling": {},
+          "in_conds": [],
+          "out_conds": [],
+          "setvars": [],
+          "controls": [],
+          "resources": [],
+          "on_blocks": [],
+          "shouts": [],
+          "attrs": {},
+          "model": null,
+          "cleared": [],
+          "level": 0,
+          "source": "sched/PARTYWK.sched:145"
+        }
+      ],
+      "edges": [],
+      "cross_run": [],
+      "external_triggers": [],
+      "guards": [],
+      "handoffs": []
+    }
+  ],
+  "cross_table": [],
+  "calendars_referenced": [],
+  "unparsed": [
+    {
+      "line": "CALENDAR NAME=BUSDAY",
+      "source": "sched/CALENDARS.sched:13",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:14",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=BANK BUSINESS DAYS - MON TO FRI EXCLUDING BANK HOLIDAYS",
+      "source": "sched/CALENDARS.sched:15",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=PRODCTL",
+      "source": "sched/CALENDARS.sched:16",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:17",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=MON,TUE,WED,THU,FRI",
+      "source": "sched/CALENDARS.sched:18",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "EXCLUDE=0101,0119,0216,0525,0619,0704,0907,1012,1111,1126,1225",
+      "source": "sched/CALENDARS.sched:19",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "EXCLUDE-DESC=NEW YEAR,MLK,PRESIDENTS,MEMORIAL,JUNETEENTH,",
+      "source": "sched/CALENDARS.sched:20",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "INDEPENDENCE,LABOR,COLUMBUS,VETERANS,",
+      "source": "sched/CALENDARS.sched:21",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "THANKSGIVING,CHRISTMAS",
+      "source": "sched/CALENDARS.sched:22",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=NEXT",
+      "source": "sched/CALENDARS.sched:23",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:24",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=ALLDAY",
+      "source": "sched/CALENDARS.sched:26",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:27",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=EVERY DAY INCLUDING WEEKENDS AND HOLIDAYS",
+      "source": "sched/CALENDARS.sched:28",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=PRODCTL",
+      "source": "sched/CALENDARS.sched:29",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:30",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=ALL",
+      "source": "sched/CALENDARS.sched:31",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:32",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=WEEKSUN",
+      "source": "sched/CALENDARS.sched:34",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:35",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=SUNDAY ONLY - WEEKLY REFERENCE DATA WINDOW",
+      "source": "sched/CALENDARS.sched:36",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=PRODCTL",
+      "source": "sched/CALENDARS.sched:37",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:38",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=SUN",
+      "source": "sched/CALENDARS.sched:39",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=NONE",
+      "source": "sched/CALENDARS.sched:40",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "NOTE=NOT SHIFTED.  IF SUNDAY IS A HOLIDAY THE CYCLE STILL RUNS,",
+      "source": "sched/CALENDARS.sched:41",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "THE ONLINE REGION IS CLOSED ON SUNDAY REGARDLESS.",
+      "source": "sched/CALENDARS.sched:42",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:43",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=WEEKSAT",
+      "source": "sched/CALENDARS.sched:45",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:46",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=SATURDAY ONLY - PARTY AND RISK WEEKLY WINDOW",
+      "source": "sched/CALENDARS.sched:47",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=PRTYCTL",
+      "source": "sched/CALENDARS.sched:48",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:49",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=SAT",
+      "source": "sched/CALENDARS.sched:50",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=NONE",
+      "source": "sched/CALENDARS.sched:51",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:52",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=MONTHEND",
+      "source": "sched/CALENDARS.sched:54",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:55",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=LAST BUSINESS DAY OF EACH CALENDAR MONTH",
+      "source": "sched/CALENDARS.sched:56",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=PRODCTL",
+      "source": "sched/CALENDARS.sched:57",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:58",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=L1",
+      "source": "sched/CALENDARS.sched:59",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "BASE-CALENDAR=BUSDAY",
+      "source": "sched/CALENDARS.sched:60",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=PREV",
+      "source": "sched/CALENDARS.sched:61",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:62",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=CYCLE03",
+      "source": "sched/CALENDARS.sched:74",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:75",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=BILLING CYCLE DAY 03",
+      "source": "sched/CALENDARS.sched:76",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=CARDCTL",
+      "source": "sched/CALENDARS.sched:77",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:78",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=D3",
+      "source": "sched/CALENDARS.sched:79",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "BASE-CALENDAR=BUSDAY",
+      "source": "sched/CALENDARS.sched:80",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=NEXT",
+      "source": "sched/CALENDARS.sched:81",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PARM-CYCLE=01",
+      "source": "sched/CALENDARS.sched:82",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:83",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=CYCLE11",
+      "source": "sched/CALENDARS.sched:85",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:86",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=BILLING CYCLE DAY 11",
+      "source": "sched/CALENDARS.sched:87",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=CARDCTL",
+      "source": "sched/CALENDARS.sched:88",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:89",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=D11",
+      "source": "sched/CALENDARS.sched:90",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "BASE-CALENDAR=BUSDAY",
+      "source": "sched/CALENDARS.sched:91",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=NEXT",
+      "source": "sched/CALENDARS.sched:92",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PARM-CYCLE=02",
+      "source": "sched/CALENDARS.sched:93",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:94",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=CYCLE18",
+      "source": "sched/CALENDARS.sched:96",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:97",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=BILLING CYCLE DAY 18",
+      "source": "sched/CALENDARS.sched:98",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=CARDCTL",
+      "source": "sched/CALENDARS.sched:99",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:100",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=D18",
+      "source": "sched/CALENDARS.sched:101",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "BASE-CALENDAR=BUSDAY",
+      "source": "sched/CALENDARS.sched:102",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=NEXT",
+      "source": "sched/CALENDARS.sched:103",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PARM-CYCLE=03",
+      "source": "sched/CALENDARS.sched:104",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:105",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=CYCLE25",
+      "source": "sched/CALENDARS.sched:107",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:108",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=BILLING CYCLE DAY 25",
+      "source": "sched/CALENDARS.sched:109",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=CARDCTL",
+      "source": "sched/CALENDARS.sched:110",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:111",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=D25",
+      "source": "sched/CALENDARS.sched:112",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "BASE-CALENDAR=BUSDAY",
+      "source": "sched/CALENDARS.sched:113",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "SHIFT=NEXT",
+      "source": "sched/CALENDARS.sched:114",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PARM-CYCLE=04",
+      "source": "sched/CALENDARS.sched:115",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:116",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CALENDAR NAME=NOTSUN",
+      "source": "sched/CALENDARS.sched:123",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "TYPE=REGULAR",
+      "source": "sched/CALENDARS.sched:124",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=EVERY DAY EXCEPT SUNDAY",
+      "source": "sched/CALENDARS.sched:125",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "OWNER=PRODCTL",
+      "source": "sched/CALENDARS.sched:126",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PERIOD=ANNUAL",
+      "source": "sched/CALENDARS.sched:127",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DAYS=MON,TUE,WED,THU,FRI,SAT",
+      "source": "sched/CALENDARS.sched:128",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-CALENDAR",
+      "source": "sched/CALENDARS.sched:129",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "GROUP-DEF NAME=CARDOPS",
+      "source": "sched/CALENDARS.sched:135",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=CARD SYSTEMS ON CALL - NIGHTLY, BILLING AND REFERENCE",
+      "source": "sched/CALENDARS.sched:136",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "RACF-GROUP=CARDBAT",
+      "source": "sched/CALENDARS.sched:137",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PAGE-DEST=CARDONCALL",
+      "source": "sched/CALENDARS.sched:138",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CONSOLE-ROUTE=11",
+      "source": "sched/CALENDARS.sched:139",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-GROUP-DEF",
+      "source": "sched/CALENDARS.sched:140",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "GROUP-DEF NAME=PRTYOPS",
+      "source": "sched/CALENDARS.sched:142",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=PARTY AND RISK ON CALL - PARTYWK AND SANCTIONS FEED",
+      "source": "sched/CALENDARS.sched:143",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "RACF-GROUP=PRTYBAT",
+      "source": "sched/CALENDARS.sched:144",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PAGE-DEST=PRTYONCALL",
+      "source": "sched/CALENDARS.sched:145",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CONSOLE-ROUTE=12",
+      "source": "sched/CALENDARS.sched:146",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-GROUP-DEF",
+      "source": "sched/CALENDARS.sched:147",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "GROUP-DEF NAME=DBAOPS",
+      "source": "sched/CALENDARS.sched:149",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "DESC=DB2 SYSTEMS SUPPORT - BIND AND UTILITY FAILURES",
+      "source": "sched/CALENDARS.sched:150",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "RACF-GROUP=DB2ADM",
+      "source": "sched/CALENDARS.sched:151",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "PAGE-DEST=DB2ONCALL",
+      "source": "sched/CALENDARS.sched:152",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "CONSOLE-ROUTE=13",
+      "source": "sched/CALENDARS.sched:153",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "END-GROUP-DEF",
+      "source": "sched/CALENDARS.sched:154",
+      "why": "outside any TABLE"
+    },
+    {
+      "line": "APPLICATION=CARDSVC",
+      "source": "sched/CARDBILL.sched:21",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DATACENTER=DCPROD1",
+      "source": "sched/CARDBILL.sched:23",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-METHOD=AUTO",
+      "source": "sched/CARDBILL.sched:24",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-TIME=18:00",
+      "source": "sched/CARDBILL.sched:25",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-TYPE=CARDBILL",
+      "source": "sched/CARDBILL.sched:26",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-DEF NAME=CYCLE-01 CALENDAR=CYCLE03 PARM=%%CYCLE=01 CYCLE-DAY=03",
+      "source": "sched/CARDBILL.sched:37",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-DEF NAME=CYCLE-02 CALENDAR=CYCLE11 PARM=%%CYCLE=02 CYCLE-DAY=11",
+      "source": "sched/CARDBILL.sched:38",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-DEF NAME=CYCLE-03 CALENDAR=CYCLE18 PARM=%%CYCLE=03 CYCLE-DAY=18",
+      "source": "sched/CARDBILL.sched:39",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-DEF NAME=CYCLE-04 CALENDAR=CYCLE25 PARM=%%CYCLE=04 CYCLE-DAY=25",
+      "source": "sched/CARDBILL.sched:40",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBBIL01J",
+      "source": "sched/CARDBILL.sched:43",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDBILL.sched:48",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=CYCLE03,CYCLE11,CYCLE18,CYCLE25",
+      "source": "sched/CARDBILL.sched:49",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PARM=CYCLE=%%CYCLE",
+      "source": "sched/CARDBILL.sched:50",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=22:00",
+      "source": "sched/CARDBILL.sched:51",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=02:00",
+      "source": "sched/CARDBILL.sched:52",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDBILL.sched:55",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDBILL.sched:57",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CARDNITE-COMPLETE ODAT",
+      "source": "sched/CARDBILL.sched:58",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBBIL01J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:59",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDBILL.sched:60",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL01J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:61",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOACCTS",
+      "source": "sched/CARDBILL.sched:62",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDBILL.sched:63",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CYCLE %%CYCLE SELECTED ZERO ACCOUNTS'",
+      "source": "sched/CARDBILL.sched:64",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:65",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:66",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDBILL.sched:67",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDBILL.sched:68",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL01J FAILED CYCLE %%CYCLE'",
+      "source": "sched/CARDBILL.sched:69",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:70",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:71",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDBILL.sched:72",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) NOACCTS",
+      "source": "sched/CARDBILL.sched:73",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDBILL.sched:74",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4101 NOTOK",
+      "source": "sched/CARDBILL.sched:75",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=ZERO SELECTED ACCOUNTS IS TREATED AS AN ERROR.  A POPULATED",
+      "source": "sched/CARDBILL.sched:76",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE ALWAYS HAS ACCOUNTS - AN EMPTY SELECT MEANS THE CYCLE",
+      "source": "sched/CARDBILL.sched:77",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PARAMETER OR THE CALENDAR IS WRONG.",
+      "source": "sched/CARDBILL.sched:78",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDBILL.sched:79",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBBIL02J",
+      "source": "sched/CARDBILL.sched:82",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDBILL.sched:87",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=CYCLE03,CYCLE11,CYCLE18,CYCLE25",
+      "source": "sched/CARDBILL.sched:88",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PARM=CYCLE=%%CYCLE",
+      "source": "sched/CARDBILL.sched:89",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=22:30",
+      "source": "sched/CARDBILL.sched:90",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=03:00",
+      "source": "sched/CARDBILL.sched:91",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:10",
+      "source": "sched/CARDBILL.sched:94",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDBILL.sched:96",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBBIL01J-OK ODAT",
+      "source": "sched/CARDBILL.sched:98",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBBIL02J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:99",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDBILL.sched:100",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL02J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:101",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=WARN",
+      "source": "sched/CARDBILL.sched:102",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL02J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:103",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDBILL.sched:104",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL02J ACCOUNTS BYPASSED - SEE REJECT'",
+      "source": "sched/CARDBILL.sched:105",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDBILL.sched:106",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDBILL.sched:107",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL02J BALANCE CLOSE FAILED'",
+      "source": "sched/CARDBILL.sched:108",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:109",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:110",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDBILL.sched:111",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) WARN",
+      "source": "sched/CARDBILL.sched:112",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDBILL.sched:113",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4102 NOTOK",
+      "source": "sched/CARDBILL.sched:114",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDBILL.sched:115",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBBIL03J",
+      "source": "sched/CARDBILL.sched:118",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDBILL.sched:123",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=CYCLE03,CYCLE11,CYCLE18,CYCLE25",
+      "source": "sched/CARDBILL.sched:124",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PARM=CYCLE=%%CYCLE",
+      "source": "sched/CARDBILL.sched:125",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=23:15",
+      "source": "sched/CARDBILL.sched:126",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=04:00",
+      "source": "sched/CARDBILL.sched:127",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDBILL.sched:130",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBBIL02J-OK ODAT",
+      "source": "sched/CARDBILL.sched:132",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBBIL03J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:133",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDBILL.sched:134",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL03J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:135",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDBILL.sched:136",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDBILL.sched:137",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL03J STATEMENT DETAIL FAILED'",
+      "source": "sched/CARDBILL.sched:138",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:139",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:140",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDBILL.sched:141",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDBILL.sched:142",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4103 NOTOK",
+      "source": "sched/CARDBILL.sched:143",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=THE STATEMENT ARCHIVE IS RECFM=VB.  A RERUN MUST START FROM",
+      "source": "sched/CARDBILL.sched:144",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "AN EMPTY GENERATION - THE JCL DELETES THE +1 GDG BEFORE",
+      "source": "sched/CARDBILL.sched:145",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "REWRITING.",
+      "source": "sched/CARDBILL.sched:146",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDBILL.sched:147",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBBIL04J",
+      "source": "sched/CARDBILL.sched:150",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDBILL.sched:155",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=CYCLE03,CYCLE11,CYCLE18,CYCLE25",
+      "source": "sched/CARDBILL.sched:156",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PARM=CYCLE=%%CYCLE",
+      "source": "sched/CARDBILL.sched:157",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=00:30",
+      "source": "sched/CARDBILL.sched:158",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=05:00",
+      "source": "sched/CARDBILL.sched:159",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDBILL.sched:162",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDBILL.sched:164",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBBIL03J-OK ODAT",
+      "source": "sched/CARDBILL.sched:165",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBBIL04J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:166",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDBILL.sched:167",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL04J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:168",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=WARN",
+      "source": "sched/CARDBILL.sched:169",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL04J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:170",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDBILL.sched:171",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL04J FORMAT FALLBACK USED FOR SOME'",
+      "source": "sched/CARDBILL.sched:172",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDBILL.sched:173",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDBILL.sched:174",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL04J FORMATTING FAILED'",
+      "source": "sched/CARDBILL.sched:175",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:176",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:177",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDBILL.sched:178",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) WARN",
+      "source": "sched/CARDBILL.sched:179",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDBILL.sched:180",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4104 NOTOK",
+      "source": "sched/CARDBILL.sched:181",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDBILL.sched:182",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBBIL05J",
+      "source": "sched/CARDBILL.sched:185",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDBILL.sched:190",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=CYCLE03,CYCLE11,CYCLE18,CYCLE25",
+      "source": "sched/CARDBILL.sched:191",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PARM=CYCLE=%%CYCLE",
+      "source": "sched/CARDBILL.sched:192",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=02:00",
+      "source": "sched/CARDBILL.sched:193",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=06:30",
+      "source": "sched/CARDBILL.sched:194",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:10",
+      "source": "sched/CARDBILL.sched:197",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDBILL.sched:199",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBBIL04J-OK ODAT",
+      "source": "sched/CARDBILL.sched:200",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBBIL05J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:201",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=STMT-VENDOR-SENT ODAT ADD",
+      "source": "sched/CARDBILL.sched:202",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDBILL.sched:203",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL05J-OK ODAT ADD",
+      "source": "sched/CARDBILL.sched:204",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=STMT-VENDOR-SENT ODAT ADD",
+      "source": "sched/CARDBILL.sched:205",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=XMITFAIL",
+      "source": "sched/CARDBILL.sched:206",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDBILL.sched:207",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL05J TRANSMISSION FAILED - SLA RISK'",
+      "source": "sched/CARDBILL.sched:208",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:209",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:210",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDBILL.sched:211",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDBILL.sched:212",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL05J VENDOR FILE BUILD FAILED'",
+      "source": "sched/CARDBILL.sched:213",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:214",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:215",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDBILL.sched:216",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0008) XMITFAIL",
+      "source": "sched/CARDBILL.sched:217",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0012) NOTOK",
+      "source": "sched/CARDBILL.sched:218",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-DUE-OUT-LATE",
+      "source": "sched/CARDBILL.sched:220",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDBILL.sched:221",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CYCLE %%CYCLE LATE - MAILING SLA MISSED'",
+      "source": "sched/CARDBILL.sched:222",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=THE VENDOR FILES ARE CHECKPOINTED AT THE TRANSMISSION STEP.",
+      "source": "sched/CARDBILL.sched:223",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "A RERUN AFTER A PARTIAL SEND RESUMES FROM THE LAST",
+      "source": "sched/CARDBILL.sched:224",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ACKNOWLEDGED BLOCK - DO NOT RESEND THE WHOLE FILE.",
+      "source": "sched/CARDBILL.sched:225",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDBILL.sched:226",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBBIL06J",
+      "source": "sched/CARDBILL.sched:229",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDBILL.sched:234",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=CYCLE03,CYCLE11,CYCLE18,CYCLE25",
+      "source": "sched/CARDBILL.sched:235",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PARM=CYCLE=%%CYCLE",
+      "source": "sched/CARDBILL.sched:236",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=03:00",
+      "source": "sched/CARDBILL.sched:237",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=07:30",
+      "source": "sched/CARDBILL.sched:238",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDBILL.sched:241",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDBILL.sched:243",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBBIL05J-OK ODAT",
+      "source": "sched/CARDBILL.sched:244",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CARDBILL-COMPLETE ODAT ADD",
+      "source": "sched/CARDBILL.sched:245",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDBILL.sched:246",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-COMPLETE ODAT ADD",
+      "source": "sched/CARDBILL.sched:247",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL01J-OK ODAT DEL",
+      "source": "sched/CARDBILL.sched:248",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL02J-OK ODAT DEL",
+      "source": "sched/CARDBILL.sched:249",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL03J-OK ODAT DEL",
+      "source": "sched/CARDBILL.sched:250",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL04J-OK ODAT DEL",
+      "source": "sched/CARDBILL.sched:251",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBBIL05J-OK ODAT DEL",
+      "source": "sched/CARDBILL.sched:252",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDBILL.sched:253",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDBILL.sched:254",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDBILL CBBIL06J CLOSE FAILED CYCLE %%CYCLE'",
+      "source": "sched/CARDBILL.sched:255",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDBILL-HELD ODAT ADD",
+      "source": "sched/CARDBILL.sched:256",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDBILL.sched:257",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDBILL.sched:258",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDBILL.sched:259",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4106 NOTOK",
+      "source": "sched/CARDBILL.sched:260",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDBILL.sched:261",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "APPLICATION=CARDSVC",
+      "source": "sched/CARDNITE.sched:19",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DATACENTER=DCPROD1",
+      "source": "sched/CARDNITE.sched:21",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=ALLDAY",
+      "source": "sched/CARDNITE.sched:22",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOT-CALENDAR=WEEKSUN",
+      "source": "sched/CARDNITE.sched:23",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-METHOD=AUTO",
+      "source": "sched/CARDNITE.sched:24",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-TIME=17:30",
+      "source": "sched/CARDNITE.sched:25",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-TYPE=CARDNITE",
+      "source": "sched/CARDNITE.sched:26",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD01J",
+      "source": "sched/CARDNITE.sched:30",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:35",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=20:30",
+      "source": "sched/CARDNITE.sched:36",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=23:30",
+      "source": "sched/CARDNITE.sched:37",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDNITE.sched:40",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDNITE.sched:42",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CICS-CARD-CLOSED ODAT",
+      "source": "sched/CARDNITE.sched:43",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD01J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:44",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:45",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD01J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:46",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:47",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:48",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD01J FAILED - CYCLE NOT OPENED'",
+      "source": "sched/CARDNITE.sched:49",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:50",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:51",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDNITE.sched:52",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:53",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0012) NOTOK",
+      "source": "sched/CARDNITE.sched:54",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4001 NOTOK",
+      "source": "sched/CARDNITE.sched:55",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:56",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD02J",
+      "source": "sched/CARDNITE.sched:59",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:64",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=20:45",
+      "source": "sched/CARDNITE.sched:65",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=00:30",
+      "source": "sched/CARDNITE.sched:66",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDNITE.sched:69",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD01J-OK ODAT",
+      "source": "sched/CARDNITE.sched:71",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD02J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:72",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:73",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD02J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:74",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=EMPTY",
+      "source": "sched/CARDNITE.sched:75",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD02J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:76",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDNITE.sched:77",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD02J EXTRACTED ZERO RECORDS'",
+      "source": "sched/CARDNITE.sched:78",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:79",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:80",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD02J FAILED - EXTRACT INCOMPLETE'",
+      "source": "sched/CARDNITE.sched:81",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:82",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:83",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDNITE.sched:84",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) EMPTY",
+      "source": "sched/CARDNITE.sched:85",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:86",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4002 NOTOK",
+      "source": "sched/CARDNITE.sched:87",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:88",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD03J",
+      "source": "sched/CARDNITE.sched:91",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:96",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=21:00",
+      "source": "sched/CARDNITE.sched:97",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=01:00",
+      "source": "sched/CARDNITE.sched:98",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:03",
+      "source": "sched/CARDNITE.sched:101",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD02J-OK ODAT",
+      "source": "sched/CARDNITE.sched:103",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD03J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:104",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:105",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD03J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:106",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:107",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:108",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD03J SORT FAILED'",
+      "source": "sched/CARDNITE.sched:109",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:110",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:111",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDNITE.sched:112",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:113",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:114",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD04J",
+      "source": "sched/CARDNITE.sched:117",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:122",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=21:15",
+      "source": "sched/CARDNITE.sched:123",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=03:00",
+      "source": "sched/CARDNITE.sched:124",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:10",
+      "source": "sched/CARDNITE.sched:127",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDNITE.sched:129",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD03J-OK ODAT",
+      "source": "sched/CARDNITE.sched:131",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD04J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:132",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:133",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD04J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:134",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=WARN",
+      "source": "sched/CARDNITE.sched:135",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD04J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:136",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDNITE.sched:137",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD04J POSTED WITH REJECTS - CHECK RPT'",
+      "source": "sched/CARDNITE.sched:138",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:139",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:140",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD04J POSTING ABEND - RESTART REQUIRED'",
+      "source": "sched/CARDNITE.sched:141",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:142",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:143",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDNITE.sched:144",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) WARN",
+      "source": "sched/CARDNITE.sched:145",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:146",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4004 NOTOK",
+      "source": "sched/CARDNITE.sched:147",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=S0C7  NOTOK",
+      "source": "sched/CARDNITE.sched:148",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=CHECKPOINTS EVERY 1000 RECORDS.  A RERUN RESUMES FROM THE",
+      "source": "sched/CARDNITE.sched:149",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "LAST GOOD KEY IN THE CYCLE CONTROL RECORD - DO NOT RESTORE",
+      "source": "sched/CARDNITE.sched:150",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "THE TABLES BEFORE RERUNNING.",
+      "source": "sched/CARDNITE.sched:151",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:152",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD05AJ",
+      "source": "sched/CARDNITE.sched:160",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:165",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=22:00",
+      "source": "sched/CARDNITE.sched:166",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=04:00",
+      "source": "sched/CARDNITE.sched:167",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDNITE.sched:170",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD04J-OK ODAT",
+      "source": "sched/CARDNITE.sched:172",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD05AJ-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:173",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:174",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD05AJ-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:175",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=WARN",
+      "source": "sched/CARDNITE.sched:176",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD05AJ-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:177",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDNITE.sched:178",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD05AJ FEE WAIVERS EXCEEDED THRESHOLD'",
+      "source": "sched/CARDNITE.sched:179",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:180",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:181",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD05AJ FEE ASSESSMENT FAILED'",
+      "source": "sched/CARDNITE.sched:182",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:183",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:184",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDNITE.sched:185",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) WARN",
+      "source": "sched/CARDNITE.sched:186",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:187",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4005 NOTOK",
+      "source": "sched/CARDNITE.sched:188",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:189",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD05BJ",
+      "source": "sched/CARDNITE.sched:192",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:197",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=22:00",
+      "source": "sched/CARDNITE.sched:198",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=04:00",
+      "source": "sched/CARDNITE.sched:199",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDNITE.sched:202",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD04J-OK ODAT",
+      "source": "sched/CARDNITE.sched:204",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD05BJ-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:205",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:206",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD05BJ-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:207",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=WARN",
+      "source": "sched/CARDNITE.sched:208",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD05BJ-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:209",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDNITE.sched:210",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD05BJ ACCRUED WITH RATE DEFAULTS'",
+      "source": "sched/CARDNITE.sched:211",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:212",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:213",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD05BJ REWARD ACCRUAL FAILED'",
+      "source": "sched/CARDNITE.sched:214",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:215",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:216",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDNITE.sched:217",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) WARN",
+      "source": "sched/CARDNITE.sched:218",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:219",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4006 NOTOK",
+      "source": "sched/CARDNITE.sched:220",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:221",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD06J",
+      "source": "sched/CARDNITE.sched:227",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:232",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=23:00",
+      "source": "sched/CARDNITE.sched:233",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=04:30",
+      "source": "sched/CARDNITE.sched:234",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:10",
+      "source": "sched/CARDNITE.sched:237",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDNITE.sched:239",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD05AJ-OK ODAT",
+      "source": "sched/CARDNITE.sched:240",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD05BJ-OK ODAT",
+      "source": "sched/CARDNITE.sched:241",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND-RELATION=AND",
+      "source": "sched/CARDNITE.sched:242",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD06J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:243",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:244",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD06J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:245",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=PARTIAL",
+      "source": "sched/CARDNITE.sched:246",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD06J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:247",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDNITE.sched:248",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD06J PARTIAL REFRESH - STALE ROWS SET'",
+      "source": "sched/CARDNITE.sched:249",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=REGULAR",
+      "source": "sched/CARDNITE.sched:250",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD06J PARTIAL - EXPOSURE MAY BE STALE'",
+      "source": "sched/CARDNITE.sched:251",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:252",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:253",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD06J FAILED'",
+      "source": "sched/CARDNITE.sched:254",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:255",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:256",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDNITE.sched:257",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) PARTIAL",
+      "source": "sched/CARDNITE.sched:258",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:259",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4008 NOTOK",
+      "source": "sched/CARDNITE.sched:260",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=RC 0004 IS RAISED WHEN A DOWNSTREAM SERVICE DID NOT ANSWER",
+      "source": "sched/CARDNITE.sched:261",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "WITHIN THE STEP TIMEOUT.  THE CYCLE CONTINUES - THE AFFECTED",
+      "source": "sched/CARDNITE.sched:262",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ROWS ARE MARKED STALE AND PICKED UP BY THE NEXT RUN.",
+      "source": "sched/CARDNITE.sched:263",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:264",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD07J",
+      "source": "sched/CARDNITE.sched:267",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:272",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=23:30",
+      "source": "sched/CARDNITE.sched:273",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=05:00",
+      "source": "sched/CARDNITE.sched:274",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:10",
+      "source": "sched/CARDNITE.sched:277",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDNITE.sched:279",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD06J-OK ODAT",
+      "source": "sched/CARDNITE.sched:281",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD07J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:282",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:283",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD07J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:284",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:285",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:286",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD07J INTEREST ACCRUAL FAILED'",
+      "source": "sched/CARDNITE.sched:287",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:288",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:289",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDNITE.sched:290",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:291",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4009 NOTOK",
+      "source": "sched/CARDNITE.sched:292",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=CHECKPOINT RESTARTABLE.  ACCRUAL IS IDEMPOTENT PER ACCOUNT",
+      "source": "sched/CARDNITE.sched:293",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "PER CYCLE DATE - A RERUN SKIPS ACCOUNTS ALREADY ACCRUED.",
+      "source": "sched/CARDNITE.sched:294",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:295",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD08J",
+      "source": "sched/CARDNITE.sched:298",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:303",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=00:30",
+      "source": "sched/CARDNITE.sched:304",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=05:15",
+      "source": "sched/CARDNITE.sched:305",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDNITE.sched:308",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDNITE.sched:310",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD07J-OK ODAT",
+      "source": "sched/CARDNITE.sched:311",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD08J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:312",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=GL-CARD-FEED-READY ODAT ADD",
+      "source": "sched/CARDNITE.sched:313",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:314",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD08J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:315",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=GL-CARD-FEED-READY ODAT ADD",
+      "source": "sched/CARDNITE.sched:316",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OUTOFBAL",
+      "source": "sched/CARDNITE.sched:317",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDNITE.sched:318",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD08J GL OUT OF BALANCE - DO NOT SEND'",
+      "source": "sched/CARDNITE.sched:319",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:320",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:321",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:322",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDNITE.sched:323",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD08J GL EXTRACT FAILED'",
+      "source": "sched/CARDNITE.sched:324",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:325",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:326",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDNITE.sched:327",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0008) OUTOFBAL",
+      "source": "sched/CARDNITE.sched:328",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0012) NOTOK",
+      "source": "sched/CARDNITE.sched:329",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4010 OUTOFBAL",
+      "source": "sched/CARDNITE.sched:330",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:331",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD09J",
+      "source": "sched/CARDNITE.sched:334",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:339",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=01:00",
+      "source": "sched/CARDNITE.sched:340",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=05:30",
+      "source": "sched/CARDNITE.sched:341",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:03",
+      "source": "sched/CARDNITE.sched:344",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD08J-OK ODAT",
+      "source": "sched/CARDNITE.sched:346",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBCRD09J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:347",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:348",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD09J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:349",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:350",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDNITE.sched:351",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD09J REPORTS FAILED - CYCLE CONTINUES'",
+      "source": "sched/CARDNITE.sched:352",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD09J-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:353",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDNITE.sched:354",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:355",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=REPORTING ONLY.  A FAILURE HERE DOES NOT HOLD THE CYCLE, THE",
+      "source": "sched/CARDNITE.sched:356",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "SUCCESSOR CONDITION IS POSTED EITHER WAY.",
+      "source": "sched/CARDNITE.sched:357",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:358",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBCRD10J",
+      "source": "sched/CARDNITE.sched:361",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDNITE.sched:366",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=01:30",
+      "source": "sched/CARDNITE.sched:367",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=05:45",
+      "source": "sched/CARDNITE.sched:368",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:03",
+      "source": "sched/CARDNITE.sched:371",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDNITE.sched:373",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBCRD09J-OK ODAT",
+      "source": "sched/CARDNITE.sched:374",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CARDNITE-COMPLETE ODAT ADD",
+      "source": "sched/CARDNITE.sched:375",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CICS-CARD-OPEN-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:376",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDNITE.sched:377",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-COMPLETE ODAT ADD",
+      "source": "sched/CARDNITE.sched:378",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CICS-CARD-OPEN-OK ODAT ADD",
+      "source": "sched/CARDNITE.sched:379",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD01J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:380",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD02J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:381",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD03J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:382",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD04J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:383",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD05AJ-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:384",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD05BJ-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:385",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD06J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:386",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD07J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:387",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD08J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:388",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBCRD09J-OK ODAT DEL",
+      "source": "sched/CARDNITE.sched:389",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDNITE.sched:390",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDNITE.sched:391",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE CBCRD10J CLOSE FAILED - ONLINE NOT OPENED'",
+      "source": "sched/CARDNITE.sched:392",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDNITE-HELD ODAT ADD",
+      "source": "sched/CARDNITE.sched:393",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDNITE.sched:394",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDNITE.sched:395",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDNITE.sched:396",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-DUE-OUT-LATE",
+      "source": "sched/CARDNITE.sched:398",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDNITE.sched:399",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDNITE LATE - ONLINE OPEN AT RISK'",
+      "source": "sched/CARDNITE.sched:400",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDNITE.sched:401",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "APPLICATION=CARDSVC",
+      "source": "sched/CARDREF.sched:19",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DATACENTER=DCPROD1",
+      "source": "sched/CARDREF.sched:21",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=WEEKSUN",
+      "source": "sched/CARDREF.sched:22",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-METHOD=AUTO",
+      "source": "sched/CARDREF.sched:23",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-TIME=06:00",
+      "source": "sched/CARDREF.sched:24",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-TYPE=CARDREF",
+      "source": "sched/CARDREF.sched:25",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBREF01J",
+      "source": "sched/CARDREF.sched:29",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDREF.sched:34",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=08:00",
+      "source": "sched/CARDREF.sched:35",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=12:00",
+      "source": "sched/CARDREF.sched:36",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDREF.sched:39",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDREF.sched:41",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CICS-CARD-CLOSED ODAT",
+      "source": "sched/CARDREF.sched:42",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBREF01J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:43",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDREF.sched:44",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF01J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:45",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDREF.sched:46",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDREF.sched:47",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF01J BACKUP FAILED - REBUILD BLOCKED'",
+      "source": "sched/CARDREF.sched:48",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDREF-HELD ODAT ADD",
+      "source": "sched/CARDREF.sched:49",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDREF.sched:50",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDREF.sched:51",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDREF.sched:52",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=THE BACKUP IS THE ONLY WAY BACK IF A REBUILD PRODUCES A BAD",
+      "source": "sched/CARDREF.sched:53",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CLUSTER.  DO NOT BYPASS THIS JOB TO SAVE WINDOW TIME.",
+      "source": "sched/CARDREF.sched:54",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDREF.sched:55",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBREF02J",
+      "source": "sched/CARDREF.sched:58",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDREF.sched:63",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=08:30",
+      "source": "sched/CARDREF.sched:64",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=14:00",
+      "source": "sched/CARDREF.sched:65",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDREF.sched:68",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBREF01J-OK ODAT",
+      "source": "sched/CARDREF.sched:70",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBREF02J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:71",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDREF.sched:72",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF02J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:73",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=WARN",
+      "source": "sched/CARDREF.sched:74",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF02J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:75",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=REGULAR",
+      "source": "sched/CARDREF.sched:76",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF02J MERCHANTS WITHOUT A ROUTE ENTRY'",
+      "source": "sched/CARDREF.sched:77",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDREF.sched:78",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDREF.sched:79",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF02J REFERENCE REBUILD FAILED'",
+      "source": "sched/CARDREF.sched:80",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDREF-HELD ODAT ADD",
+      "source": "sched/CARDREF.sched:81",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDREF.sched:82",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDREF.sched:83",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) WARN",
+      "source": "sched/CARDREF.sched:84",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDREF.sched:85",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4201 NOTOK",
+      "source": "sched/CARDREF.sched:86",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=RC 0004 LISTS MERCHANTS PRESENT IN CARDDB WITH NO SETTLEMENT",
+      "source": "sched/CARDREF.sched:87",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ROUTE.  THEY AUTHORISE NORMALLY BUT SETTLE TO THE DEFAULT",
+      "source": "sched/CARDREF.sched:88",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ROUTE - THE LIST GOES TO MERCHANT SERVICES EACH WEEK.",
+      "source": "sched/CARDREF.sched:89",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDREF.sched:90",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBREF03J",
+      "source": "sched/CARDREF.sched:93",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDREF.sched:98",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=09:30",
+      "source": "sched/CARDREF.sched:99",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=15:00",
+      "source": "sched/CARDREF.sched:100",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDREF.sched:103",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBREF02J-OK ODAT",
+      "source": "sched/CARDREF.sched:105",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBREF03J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:106",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDREF.sched:107",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF03J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:108",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDREF.sched:109",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=URGENT",
+      "source": "sched/CARDREF.sched:110",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF03J RULE FILE REBUILD FAILED'",
+      "source": "sched/CARDREF.sched:111",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDREF-HELD ODAT ADD",
+      "source": "sched/CARDREF.sched:112",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDREF.sched:113",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDREF.sched:114",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDREF.sched:115",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4202 NOTOK",
+      "source": "sched/CARDREF.sched:116",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDREF.sched:117",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBREF04J",
+      "source": "sched/CARDREF.sched:120",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDREF.sched:125",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=10:30",
+      "source": "sched/CARDREF.sched:126",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=16:00",
+      "source": "sched/CARDREF.sched:127",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDREF.sched:130",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDREF.sched:132",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CONFIRM-REQUIRED=N",
+      "source": "sched/CARDREF.sched:133",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBREF03J-OK ODAT",
+      "source": "sched/CARDREF.sched:134",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBREF04J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:135",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=PGMROUT-REBUILT ODAT ADD",
+      "source": "sched/CARDREF.sched:136",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDREF.sched:137",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF04J-OK ODAT ADD",
+      "source": "sched/CARDREF.sched:138",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PGMROUT-REBUILT ODAT ADD",
+      "source": "sched/CARDREF.sched:139",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=COUNTMISMATCH",
+      "source": "sched/CARDREF.sched:140",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDREF.sched:141",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF04J ROUTE COUNT MISMATCH - RESTORE'",
+      "source": "sched/CARDREF.sched:142",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=DBAOPS URGENCY=URGENT",
+      "source": "sched/CARDREF.sched:143",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF04J ROUTE UNLOAD SUSPECT'",
+      "source": "sched/CARDREF.sched:144",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDREF-HELD ODAT ADD",
+      "source": "sched/CARDREF.sched:145",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDREF.sched:146",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDREF.sched:147",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDREF.sched:148",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF04J ROUTE REBUILD FAILED - CRITICAL'",
+      "source": "sched/CARDREF.sched:149",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDREF-HELD ODAT ADD",
+      "source": "sched/CARDREF.sched:150",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDREF.sched:151",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/CARDREF.sched:152",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0008) COUNTMISMATCH",
+      "source": "sched/CARDREF.sched:153",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0012) NOTOK",
+      "source": "sched/CARDREF.sched:154",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U4203 NOTOK",
+      "source": "sched/CARDREF.sched:155",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=CRITICAL.  THE REBUILT CLUSTER IS THE FALLBACK USED BY THE",
+      "source": "sched/CARDREF.sched:156",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ONLINE REGION WHEN DB2 IS NOT AVAILABLE AT REGION START.",
+      "source": "sched/CARDREF.sched:157",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IF THE ROW COUNT WRITTEN DOES NOT MATCH THE UNLOAD COUNT THE",
+      "source": "sched/CARDREF.sched:158",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB SETS RC 8 AND LEAVES THE PREVIOUS CLUSTER IN PLACE.",
+      "source": "sched/CARDREF.sched:159",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RESTORE FROM THE CBREF01J BACKUP BEFORE ANY RERUN.",
+      "source": "sched/CARDREF.sched:160",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDREF.sched:161",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBREF05J",
+      "source": "sched/CARDREF.sched:164",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/CARDREF.sched:169",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=11:30",
+      "source": "sched/CARDREF.sched:170",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=18:00",
+      "source": "sched/CARDREF.sched:171",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:05",
+      "source": "sched/CARDREF.sched:174",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/CARDREF.sched:176",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBREF04J-OK ODAT",
+      "source": "sched/CARDREF.sched:177",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CARDREF-COMPLETE ODAT ADD",
+      "source": "sched/CARDREF.sched:178",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/CARDREF.sched:179",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDREF-COMPLETE ODAT ADD",
+      "source": "sched/CARDREF.sched:180",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF01J-OK ODAT DEL",
+      "source": "sched/CARDREF.sched:181",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF02J-OK ODAT DEL",
+      "source": "sched/CARDREF.sched:182",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF03J-OK ODAT DEL",
+      "source": "sched/CARDREF.sched:183",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBREF04J-OK ODAT DEL",
+      "source": "sched/CARDREF.sched:184",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/CARDREF.sched:185",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDREF.sched:186",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF CBREF05J VERIFY FAILED - MONDAY OPEN RISK'",
+      "source": "sched/CARDREF.sched:187",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CARDREF-HELD ODAT ADD",
+      "source": "sched/CARDREF.sched:188",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/CARDREF.sched:189",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,LE,0004) OK",
+      "source": "sched/CARDREF.sched:190",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/CARDREF.sched:191",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-DUE-OUT-LATE",
+      "source": "sched/CARDREF.sched:193",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=CARDOPS URGENCY=VERYURGENT",
+      "source": "sched/CARDREF.sched:194",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='CARDREF LATE - MONDAY ONLINE OPEN AT RISK'",
+      "source": "sched/CARDREF.sched:195",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/CARDREF.sched:196",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "APPLICATION=PARTYRSK",
+      "source": "sched/PARTYWK.sched:19",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DATACENTER=DCPROD1",
+      "source": "sched/PARTYWK.sched:21",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CALENDAR=WEEKSAT",
+      "source": "sched/PARTYWK.sched:22",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-METHOD=AUTO",
+      "source": "sched/PARTYWK.sched:23",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ORDER-TIME=06:00",
+      "source": "sched/PARTYWK.sched:24",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE-TYPE=PARTYWK",
+      "source": "sched/PARTYWK.sched:25",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBPRT01J",
+      "source": "sched/PARTYWK.sched:29",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/PARTYWK.sched:34",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=07:00",
+      "source": "sched/PARTYWK.sched:35",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=13:00",
+      "source": "sched/PARTYWK.sched:36",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:10",
+      "source": "sched/PARTYWK.sched:39",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/PARTYWK.sched:41",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CARDNITE-COMPLETE PREV",
+      "source": "sched/PARTYWK.sched:42",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBPRT01J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:43",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/PARTYWK.sched:44",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT01J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:45",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=STALE",
+      "source": "sched/PARTYWK.sched:46",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT01J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:47",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=REGULAR",
+      "source": "sched/PARTYWK.sched:48",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT01J FEED STALE - EXPOSURE CARRIED'",
+      "source": "sched/PARTYWK.sched:49",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/PARTYWK.sched:50",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=URGENT",
+      "source": "sched/PARTYWK.sched:51",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT01J EXPOSURE REFRESH FAILED'",
+      "source": "sched/PARTYWK.sched:52",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PARTYWK-HELD ODAT ADD",
+      "source": "sched/PARTYWK.sched:53",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/PARTYWK.sched:54",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/PARTYWK.sched:55",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) STALE",
+      "source": "sched/PARTYWK.sched:56",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/PARTYWK.sched:57",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U5001 NOTOK",
+      "source": "sched/PARTYWK.sched:58",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=THE IN-CONDITION IS ON THE PREVIOUS DAY'S NIGHTLY COMPLETION",
+      "source": "sched/PARTYWK.sched:59",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "SO THE FRIDAY NIGHT POSITION IS USED.  IF THE FRIDAY CYCLE",
+      "source": "sched/PARTYWK.sched:60",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "WAS HELD, EXPOSURE IS CARRIED FORWARD AND THE ROWS ARE",
+      "source": "sched/PARTYWK.sched:61",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "FLAGGED STALE RATHER THAN THE CYCLE FAILING.",
+      "source": "sched/PARTYWK.sched:62",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/PARTYWK.sched:63",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBPRT02J",
+      "source": "sched/PARTYWK.sched:66",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/PARTYWK.sched:71",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=09:00",
+      "source": "sched/PARTYWK.sched:72",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=15:00",
+      "source": "sched/PARTYWK.sched:73",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:10",
+      "source": "sched/PARTYWK.sched:76",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/PARTYWK.sched:78",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBPRT01J-OK ODAT",
+      "source": "sched/PARTYWK.sched:79",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=SANCTION-FEED-ARRIVED ODAT",
+      "source": "sched/PARTYWK.sched:80",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND-RELATION=AND",
+      "source": "sched/PARTYWK.sched:81",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBPRT02J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:82",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=WATCHLST-REBUILT ODAT ADD",
+      "source": "sched/PARTYWK.sched:83",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/PARTYWK.sched:84",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT02J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:85",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=WATCHLST-REBUILT ODAT ADD",
+      "source": "sched/PARTYWK.sched:86",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=DELTALARGE",
+      "source": "sched/PARTYWK.sched:87",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=VERYURGENT",
+      "source": "sched/PARTYWK.sched:88",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT02J FEED DELTA OVER TOLERANCE'",
+      "source": "sched/PARTYWK.sched:89",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PARTYWK-HELD ODAT ADD",
+      "source": "sched/PARTYWK.sched:90",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/PARTYWK.sched:91",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/PARTYWK.sched:92",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=VERYURGENT",
+      "source": "sched/PARTYWK.sched:93",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT02J WATCH LIST REBUILD FAILED'",
+      "source": "sched/PARTYWK.sched:94",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PARTYWK-HELD ODAT ADD",
+      "source": "sched/PARTYWK.sched:95",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/PARTYWK.sched:96",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/PARTYWK.sched:97",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0008) DELTALARGE",
+      "source": "sched/PARTYWK.sched:98",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0012) NOTOK",
+      "source": "sched/PARTYWK.sched:99",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U5002 NOTOK",
+      "source": "sched/PARTYWK.sched:100",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=A DELTA OF MORE THAN 15 PERCENT OF THE LIST IS TREATED AS A",
+      "source": "sched/PARTYWK.sched:101",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "BAD FEED.  THE EXISTING WATCH LIST IS LEFT IN PLACE AND THE",
+      "source": "sched/PARTYWK.sched:102",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CYCLE IS HELD FOR COMPLIANCE TO CONFIRM BEFORE ANY RERUN.",
+      "source": "sched/PARTYWK.sched:103",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/PARTYWK.sched:104",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBPRT03J",
+      "source": "sched/PARTYWK.sched:107",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/PARTYWK.sched:112",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=11:00",
+      "source": "sched/PARTYWK.sched:113",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=19:00",
+      "source": "sched/PARTYWK.sched:114",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:15",
+      "source": "sched/PARTYWK.sched:117",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/PARTYWK.sched:119",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBPRT02J-OK ODAT",
+      "source": "sched/PARTYWK.sched:120",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=CBPRT03J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:121",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/PARTYWK.sched:122",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT03J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:123",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=HITS",
+      "source": "sched/PARTYWK.sched:124",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT03J-OK ODAT ADD",
+      "source": "sched/PARTYWK.sched:125",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=URGENT",
+      "source": "sched/PARTYWK.sched:126",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT03J SANCTION HITS RAISED FOR REVIEW'",
+      "source": "sched/PARTYWK.sched:127",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/PARTYWK.sched:128",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=VERYURGENT",
+      "source": "sched/PARTYWK.sched:129",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT03J SCREENING FAILED - REG EXPOSURE'",
+      "source": "sched/PARTYWK.sched:130",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PARTYWK-HELD ODAT ADD",
+      "source": "sched/PARTYWK.sched:131",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/PARTYWK.sched:132",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/PARTYWK.sched:133",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) HITS",
+      "source": "sched/PARTYWK.sched:134",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/PARTYWK.sched:135",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U5003 NOTOK",
+      "source": "sched/PARTYWK.sched:136",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NOTE=CHECKPOINT RESTARTABLE EVERY 1000 PARTIES.  HITS AND NEAR",
+      "source": "sched/PARTYWK.sched:137",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MISSES ARE WRITTEN TO THE REVIEW QUEUE - THE CYCLE DOES NOT",
+      "source": "sched/PARTYWK.sched:138",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "WAIT FOR DISPOSITION.",
+      "source": "sched/PARTYWK.sched:139",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/PARTYWK.sched:140",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "JOB NAME=CBPRT04J",
+      "source": "sched/PARTYWK.sched:143",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "NODE=DCPROD1",
+      "source": "sched/PARTYWK.sched:148",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-FROM=14:00",
+      "source": "sched/PARTYWK.sched:149",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "TIME-UNTIL=23:00",
+      "source": "sched/PARTYWK.sched:150",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RERUN-INTERVAL=00:15",
+      "source": "sched/PARTYWK.sched:153",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "CRITICAL=Y",
+      "source": "sched/PARTYWK.sched:155",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "IN-COND=CBPRT03J-OK ODAT",
+      "source": "sched/PARTYWK.sched:156",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=PARTYWK-COMPLETE ODAT ADD",
+      "source": "sched/PARTYWK.sched:157",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "OUT-COND=RISK-SCORES-CURRENT ODAT ADD",
+      "source": "sched/PARTYWK.sched:158",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=OK",
+      "source": "sched/PARTYWK.sched:159",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PARTYWK-COMPLETE ODAT ADD",
+      "source": "sched/PARTYWK.sched:160",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=RISK-SCORES-CURRENT ODAT ADD",
+      "source": "sched/PARTYWK.sched:161",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT01J-OK ODAT DEL",
+      "source": "sched/PARTYWK.sched:162",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT02J-OK ODAT DEL",
+      "source": "sched/PARTYWK.sched:163",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=CBPRT03J-OK ODAT DEL",
+      "source": "sched/PARTYWK.sched:164",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=PARTIAL",
+      "source": "sched/PARTYWK.sched:165",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PARTYWK-COMPLETE ODAT ADD",
+      "source": "sched/PARTYWK.sched:166",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=URGENT",
+      "source": "sched/PARTYWK.sched:167",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT04J PARTIAL RESCORE - MODEL DEFAULTS'",
+      "source": "sched/PARTYWK.sched:168",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-STMT=* CODE=NOTOK",
+      "source": "sched/PARTYWK.sched:169",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=VERYURGENT",
+      "source": "sched/PARTYWK.sched:170",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK CBPRT04J RESCORE FAILED'",
+      "source": "sched/PARTYWK.sched:171",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-COND=PARTYWK-HELD ODAT ADD",
+      "source": "sched/PARTYWK.sched:172",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-STOPCYCLE",
+      "source": "sched/PARTYWK.sched:173",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0000) OK",
+      "source": "sched/PARTYWK.sched:174",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,EQ,0004) PARTIAL",
+      "source": "sched/PARTYWK.sched:175",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "RC-COND=(RC,GE,0008) NOTOK",
+      "source": "sched/PARTYWK.sched:176",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ABEND-COND=U5004 NOTOK",
+      "source": "sched/PARTYWK.sched:177",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "ON-DUE-OUT-LATE",
+      "source": "sched/PARTYWK.sched:179",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "DO-NOTIFY=PRTYOPS URGENCY=URGENT",
+      "source": "sched/PARTYWK.sched:180",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "MSG='PARTYWK LATE - SUNDAY REGULATORY EXTRACT AT RISK'",
+      "source": "sched/PARTYWK.sched:181",
+      "why": "not a CTMBLT parameter"
+    },
+    {
+      "line": "END-JOB",
+      "source": "sched/PARTYWK.sched:182",
+      "why": "not a CTMBLT parameter"
+    }
+  ]
+}

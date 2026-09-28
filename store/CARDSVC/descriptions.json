@@ -1,0 +1,1069 @@
+{
+  "meta": {
+    "module": "CARDSVC",
+    "generated_at": "2026-09-28T13:40:01Z",
+    "tool": "mftb 0.2.1",
+    "inputs": [
+      "programs.json",
+      "jobs.json",
+      "schedule.json"
+    ]
+  },
+  "author": "agent",
+  "summary": {
+    "subjects": 89,
+    "written": 89,
+    "unknown": 0,
+    "by_kind": {
+      "program": 57,
+      "jcl": 28,
+      "proc": 4
+    },
+    "with_key_points": 5,
+    "overviews": 5,
+    "overviews_written": 1
+  },
+  "overviews": [
+    {
+      "kind": "module",
+      "name": "CARDSVC",
+      "key_points": [
+        "Runs card servicing: the CA00 online menu and authorization chain for card accounts, and the nightly posting, monthly billing and weekly reference-rebuild batch cycles over CARDDB.",
+        "Program selection is table-driven: online and batch dispatchers resolve route keys from CARDSVC.PGM_ROUTE, which is also how card authorisations and nightly exposure recalculation reach Party & Risk.",
+        "Owns the card DB2 tables and VSAM clusters; Party & Risk reads CARDSVC.ACCOUNT and CARD_LIMIT directly under a cross-database grant."
+      ],
+      "basis": [
+        "README.md:1-11",
+        "app/cardsvc/cbl/CACRD00.cbl:1-20",
+        "app/cardsvc/cbl/CACRD90.cbl:1-20",
+        "sched/CARDNITE.sched:1-30",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:1-45",
+        "app/partyrsk/cbl/PRBRSK3.cbl:1-20"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    }
+  ],
+  "descriptions": [
+    {
+      "kind": "program",
+      "name": "CACRD00",
+      "path": "app/cardsvc/cbl/CACRD00.cbl",
+      "description": "CA00 main menu: turns the selected option into a MENU route key (OPT01-OPT10, OPTX) and links CACRD90 to transfer to the servicing program.",
+      "key_points": [
+        "Entry program of CICS transaction CA00; pseudo-conversational, each pass ends with RETURN TRANSID('CA00').",
+        "Does not know which program serves an option - the route key is resolved by the dispatcher from CARDSVC.PGM_ROUTE."
+      ],
+      "basis": [
+        "app/cardsvc/cbl/CACRD00.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD01",
+      "path": "app/cardsvc/cbl/CACRD01.cbl",
+      "description": "Menu option 1 account inquiry: reads CARDSVC.ACCOUNT and shows balances, cycle dates, delinquency and minimum payment.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD02",
+      "path": "app/cardsvc/cbl/CACRD02.cbl",
+      "description": "Menu option 2 card list: pages through the cards of an account over the CARDXREF alternate-index path, ten per page.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD03",
+      "path": "app/cardsvc/cbl/CACRD03.cbl",
+      "description": "Menu option 3 card detail: shows card status, expiry, block reason and today's limits from CARDSVC.CARD and CARD_LIMIT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD04",
+      "path": "app/cardsvc/cbl/CACRD04.cbl",
+      "description": "First step of the online authorization chain: edits the request screen, builds the auth-record skeleton on TSQ CARDAUTQ and passes to CACRD05.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD05",
+      "path": "app/cardsvc/cbl/CACRD05.cbl",
+      "description": "Authorization risk step: asks the dispatcher for route XMOD/RISKSVC to obtain the Party & Risk opinion, then continues to CACRD06 or CACRD09.",
+      "key_points": [
+        "The load module answering XMOD/RISKSVC is not named here; the seeded route row points at PARTYRSK program PRKYC01 with CACRD92 as fallback.",
+        "RC 8 from the risk service jumps straight to the decision step; RC 12 goes to the error handler."
+      ],
+      "basis": [
+        "app/cardsvc/cbl/CACRD05.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD06",
+      "path": "app/cardsvc/cbl/CACRD06.cbl",
+      "description": "Authorization status step: applies the card and account status, expiry, PIN-try and delinquency rules and records the verdict.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD06.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD07",
+      "path": "app/cardsvc/cbl/CACRD07.cbl",
+      "description": "Authorization fraud step: picks the STANDARD or HIGHRISK rule class and drives the FRAU handler pipeline through the dispatcher.",
+      "key_points": [
+        "Asks CACRD90 for FRAU/<class> sequence 1, 2, 3... until no route is returned; the strongest action (DECL > REFR > FLAG > SCOR) wins.",
+        "In the seeded route table the FRAU rows carry CALL_TYPE 'D', which the online dispatcher rejects, so as coded the pipeline would end at the first sequence."
+      ],
+      "basis": [
+        "app/cardsvc/cbl/CACRD07.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD08",
+      "path": "app/cardsvc/cbl/CACRD08.cbl",
+      "description": "Authorization limit step: checks the amount against today's CARD_LIMIT row less pending authorisations, with the product over-limit tolerance.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD08.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD09",
+      "path": "app/cardsvc/cbl/CACRD09.cbl",
+      "description": "Authorization decision: applies the fixed precedence of sanctions, risk, status, fraud, limit and KYC verdicts to approve, refer or decline.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD09.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD10",
+      "path": "app/cardsvc/cbl/CACRD10.cbl",
+      "description": "Authorization record write: inserts CARDSVC.AUTHORIZATION, updates pending and limit amounts on approval and logs the image to ESDS AUTHLOG.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD10.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD11",
+      "path": "app/cardsvc/cbl/CACRD11.cbl",
+      "description": "Menu option 5 card maintenance: block, unblock, replace and reissue a plastic on CARDSVC.CARD and the CARDXREF file.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD11.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD12",
+      "path": "app/cardsvc/cbl/CACRD12.cbl",
+      "description": "Menu option 6 credit limit change: applies small increases directly and gets a Party & Risk opinion via route XMOD/KYCINQ for larger ones.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD12.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD13",
+      "path": "app/cardsvc/cbl/CACRD13.cbl",
+      "description": "Menu option 7 dispute entry: raises a dispute against a posted transaction and posts a provisional credit when it qualifies.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD13.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD14",
+      "path": "app/cardsvc/cbl/CACRD14.cbl",
+      "description": "Menu option 8 payment posting: posts or same-day reverses a counter or telephone payment in one syncpoint.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD14.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD15",
+      "path": "app/cardsvc/cbl/CACRD15.cbl",
+      "description": "Menu option 9 customer/KYC inquiry: read-only card view of the customer with the risk and KYC opinion from route XMOD/KYCINQ.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD15.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD16",
+      "path": "app/cardsvc/cbl/CACRD16.cbl",
+      "description": "Menu option 10 reference lookup: browses reason codes on the RSNCODE KSDS and merchants on CARDSVC.MERCHANT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD16.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD17",
+      "path": "app/cardsvc/cbl/CACRD17.cbl",
+      "description": "CA00 session exit: writes the session audit to TDQ CAUD, deletes the route cache and auth queues and ends the pseudo-conversation.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD17.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD90",
+      "path": "app/cardsvc/cbl/CACRD90.cbl",
+      "description": "Online route dispatcher: resolves a route type/key/sequence from CARDSVC.PGM_ROUTE (TSQ cache, VSAM PGMROUT fallback) and LINKs or XCTLs.",
+      "key_points": [
+        "Route rows are loaded once per task into TSQ CARDRTQ; if DB2 is unavailable the VSAM copy PGMROUT is read.",
+        "Only CALL_TYPE 'L' (LINK) and 'X' (XCTL) are dispatched online; on PGMIDERR the row's FALLBACK_PGM is tried once."
+      ],
+      "basis": [
+        "app/cardsvc/cbl/CACRD90.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD91",
+      "path": "app/cardsvc/cbl/CACRD91.cbl",
+      "description": "CARDSVC online error handler: logs the caller's error area and, by severity, returns, sends the diagnostic screen or abends the task.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD91.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CACRD92",
+      "path": "app/cardsvc/cbl/CACRD92.cbl",
+      "description": "Cross-module route fallback: answers an XMOD risk request conservatively (band X, advice REFR, RC 4) when the Party & Risk target cannot be loaded.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CACRD92.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CAFRD01",
+      "path": "app/cardsvc/cbl/CAFRD01.cbl",
+      "description": "Fraud rule handler for velocity: scores the authorisation against FRAUD_RULE velocity parameters (route FRAU sequence 1).",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CAFRD01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CAFRD02",
+      "path": "app/cardsvc/cbl/CAFRD02.cbl",
+      "description": "Fraud rule handler for geography and merchant category lists on the rule row (route FRAU sequence 2).",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CAFRD02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CAFRD03",
+      "path": "app/cardsvc/cbl/CAFRD03.cbl",
+      "description": "Fraud rule handler for amount patterns - round-amount probing, structuring, repeated amounts (route FRAU/STANDARD sequence 3).",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CAFRD03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CAFRD04",
+      "path": "app/cardsvc/cbl/CAFRD04.cbl",
+      "description": "Fraud rule handler for merchant and acquirer reputation (FRAU/STANDARD seq 4, FRAU/HIGHRISK seq 3).",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CAFRD04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBBIL01",
+      "path": "app/cardsvc/cbl/CBBIL01.cbl",
+      "description": "CARDBILL step 1: selects the accounts whose cycle day matches the control card onto the billing work file and opens the cycle in CYCLCTL.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBBIL01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBBIL02",
+      "path": "app/cardsvc/cbl/CBBIL02.cbl",
+      "description": "CARDBILL step 2: assembles one statement record per account from the cycle's posted transactions with balances and category buckets.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBBIL02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBBIL03",
+      "path": "app/cardsvc/cbl/CBBIL03.cbl",
+      "description": "CARDBILL step 3: computes the minimum payment and payment due date and updates CARDSVC.ACCOUNT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBBIL03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBBIL04",
+      "path": "app/cardsvc/cbl/CBBIL04.cbl",
+      "description": "CARDBILL step 4: turns the CUSTPREF delivery preference into a STMT route key and hands each statement to the batch dispatcher to render.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBBIL04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBBIL05",
+      "path": "app/cardsvc/cbl/CBBIL05.cbl",
+      "description": "CARDBILL step 5: inserts rendered statements into CARDSVC.STATEMENT and writes the variable-length archive image.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBBIL05.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBBIL06",
+      "path": "app/cardsvc/cbl/CBBIL06.cbl",
+      "description": "CARDBILL step 6: reconciles statements against the selection and account balances and marks the cycle complete only when the proof passes.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBBIL06.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD01",
+      "path": "app/cardsvc/cbl/CBCRD01.cbl",
+      "description": "CARDNITE step 1: extracts the cycle date's records from the AUTHLOG ESDS to the extract GDG and creates the cycle control record.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD02",
+      "path": "app/cardsvc/cbl/CBCRD02.cbl",
+      "description": "CARDNITE step 2: edits every extract record by authorisation type and splits clean records from rejects with reason codes.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD03",
+      "path": "app/cardsvc/cbl/CBCRD03.cbl",
+      "description": "CARDNITE step 3: enriches the sorted clean file with merchant data from VSAM MERCHRTE and CARDSVC.MERCHANT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD04",
+      "path": "app/cardsvc/cbl/CBCRD04.cbl",
+      "description": "CARDNITE step 4: posts enriched authorisations into CARDSVC.TRANSACTION, moves account balances and marks the authorisation posted.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD05A",
+      "path": "app/cardsvc/cbl/CBCRD05A.cbl",
+      "description": "CARDNITE job 5A: runs the CBCRD05A fee assessment branch in parallel with 5B.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD05A.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD05B",
+      "path": "app/cardsvc/cbl/CBCRD05B.cbl",
+      "description": "CARDNITE job 5B: runs the CBCRD05B interest and rewards branch in parallel with 5A.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD05B.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD06A",
+      "path": "app/cardsvc/cbl/CBCRD06A.cbl",
+      "description": "CBCRD06J step 1: builds the party exposure work list, one record per account the cycle posted to.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD06A.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD06B",
+      "path": "app/cardsvc/cbl/CBCRD06B.cbl",
+      "description": "CBCRD06J step 3: sends each party's risk area to the batch dispatcher on route XMOD/RSKRECAL for Party & Risk recalculation.",
+      "key_points": [
+        "The answering load module is not named here; the seeded route points at PARTYRSK entry point PRBRSK1."
+      ],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD06B.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD06C",
+      "path": "app/cardsvc/cbl/CBCRD06C.cbl",
+      "description": "CBCRD06J step 4: applies accepted risk bands to the parties' current credit limit rows and reports deteriorations.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD06C.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD06W",
+      "path": "app/cardsvc/cbl/CBCRD06W.cbl",
+      "description": "CBCRD06J join check: verifies both the fee and interest branches posted their completion flags in CYCLCTL before the join proceeds.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD06W.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD06X",
+      "path": "app/cardsvc/cbl/CBCRD06X.cbl",
+      "description": "CBCRD06J step 2: sorts the party work list and collapses each party's accounts into one record with summed exposure.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD06X.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD07",
+      "path": "app/cardsvc/cbl/CBCRD07.cbl",
+      "description": "Nightly general ledger posting: aggregates the cycle's transactions into balanced double-entry rows on CARDSVC.GL_POSTING.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD07.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD08",
+      "path": "app/cardsvc/cbl/CBCRD08.cbl",
+      "description": "Nightly delinquency roll: moves ACCOUNT.DELQ_BUCKET for unpaid minimum payments and prints the aging report.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD08.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD09",
+      "path": "app/cardsvc/cbl/CBCRD09.cbl",
+      "description": "Nightly backup verification: counts and hashes the new VSAM backup generations against the cycle control record.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD09.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD10",
+      "path": "app/cardsvc/cbl/CBCRD10.cbl",
+      "description": "CARDNITE close: marks the cycle complete, prints the nightly control report and signals whether the online region may reopen.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD10.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBCRD90",
+      "path": "app/cardsvc/cbl/CBCRD90.cbl",
+      "description": "Batch route dispatcher: resolves a route from CARDSVC.PGM_ROUTE (VSAM PGMROUT fallback), dynamically CALLs the target and CANCELs it.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBCRD90.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBFEE01",
+      "path": "app/cardsvc/cbl/CBFEE01.cbl",
+      "description": "Fee handler for annual and late fees (routes FEEC/ANNU and FEEC/LATE), posting to CARDSVC.TRANSACTION and ACCOUNT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBFEE01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBFEE02",
+      "path": "app/cardsvc/cbl/CBFEE02.cbl",
+      "description": "Fee handler for over-limit and cash-advance fees (routes FEEC/OVLM and FEEC/CASH).",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBFEE02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBFEE03",
+      "path": "app/cardsvc/cbl/CBFEE03.cbl",
+      "description": "Fee handler for foreign transaction fees (route FEEC/FRGN).",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBFEE03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBREF01",
+      "path": "app/cardsvc/cbl/CBREF01.cbl",
+      "description": "CARDREF step 1: applies the weekly acquirer merchant feed to CARDSVC.MERCHANT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBREF01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBREF02",
+      "path": "app/cardsvc/cbl/CBREF02.cbl",
+      "description": "CARDREF step 2: unloads CARDSVC.MERCHANT for the MERCHRTE VSAM rebuild and verifies the rebuilt cluster count (PARM UNLOAD/VERIFY).",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBREF02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBREF03",
+      "path": "app/cardsvc/cbl/CBREF03.cbl",
+      "description": "CARDREF step 3: unloads FRAUD_RULE and the reason-code feed for the FRAUDRUL/RSNCODE rebuild and verifies the counts.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBREF03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBREF04",
+      "path": "app/cardsvc/cbl/CBREF04.cbl",
+      "description": "CARDREF step 4: unloads active, in-date PGM_ROUTE rows as the PGMROUT VSAM fallback image and verifies the rebuilt cluster.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBREF04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBREF05",
+      "path": "app/cardsvc/cbl/CBREF05.cbl",
+      "description": "CARDREF step 5: read-only reference integrity report - orphans, route table sanity and VSAM versus DB2 counts.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBREF05.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBSTM01",
+      "path": "app/cardsvc/cbl/CBSTM01.cbl",
+      "description": "Statement formatter for paper delivery (route STMT/PAPR): writes the print image to STMTPRT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBSTM01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBSTM02",
+      "path": "app/cardsvc/cbl/CBSTM02.cbl",
+      "description": "Statement formatter for electronic delivery (route STMT/ELEC): writes the vendor pipe-delimited extract to STMTEXT.",
+      "key_points": [],
+      "basis": [
+        "app/cardsvc/cbl/CBSTM02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "BINDCARD",
+      "path": "app/jcl/build/BINDCARD.jcl",
+      "description": "Binds every CARDSVC package into collection CARDCOLL and the four card application plans.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/BINDCARD.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "BINDPRTY",
+      "path": "app/jcl/build/BINDPRTY.jcl",
+      "description": "Binds every PARTYRSK package into collection PRTYCOLL and the two Party & Risk plans; must run before BINDCARD.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/BINDPRTY.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "BUILDALL",
+      "path": "app/jcl/build/BUILDALL.jcl",
+      "description": "Full rebuild of the card estate from source: assembler, CICS and batch COBOL members of both modules.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/BUILDALL.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBBIL01J",
+      "path": "app/jcl/cardsvc/CBBIL01J.jcl",
+      "description": "CARDBILL job 1 of 6: runs CBBIL01 to select the billing cycle's accounts.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBBIL01J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBBIL02J",
+      "path": "app/jcl/cardsvc/CBBIL02J.jcl",
+      "description": "CARDBILL job 2 of 6: runs CBBIL02 statement assembly onto the variable-length statement work file.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBBIL02J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBBIL03J",
+      "path": "app/jcl/cardsvc/CBBIL03J.jcl",
+      "description": "CARDBILL job 3 of 6: runs CBBIL03 minimum payment and due-date calculation.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBBIL03J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBBIL04J",
+      "path": "app/jcl/cardsvc/CBBIL04J.jcl",
+      "description": "CARDBILL job 4 of 6: runs CBBIL04 statement rendering through the batch dispatcher.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBBIL04J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBBIL05J",
+      "path": "app/jcl/cardsvc/CBBIL05J.jcl",
+      "description": "CARDBILL job 5 of 6: runs CBBIL05 statement persistence and seven-year archive.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBBIL05J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBBIL06J",
+      "path": "app/jcl/cardsvc/CBBIL06J.jcl",
+      "description": "CARDBILL job 6 of 6: runs CBBIL06 reconciliation and cycle close.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBBIL06J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD01J",
+      "path": "app/jcl/cardsvc/CBCRD01J.jcl",
+      "description": "CARDNITE job 1: runs CBCRD01 authorization log extract to the AUTHEXTR GDG.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD01J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD02J",
+      "path": "app/jcl/cardsvc/CBCRD02J.jcl",
+      "description": "CARDNITE job 2: runs CBCRD02 edit and reject split.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD02J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD03J",
+      "path": "app/jcl/cardsvc/CBCRD03J.jcl",
+      "description": "CARDNITE job 3: DFSORT of the clean extract then CBCRD03 merchant enrichment.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD03J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD04J",
+      "path": "app/jcl/cardsvc/CBCRD04J.jcl",
+      "description": "CARDNITE job 4: runs CBCRD04 transaction posting with commit-point restart.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD04J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD05A",
+      "path": "app/jcl/cardsvc/CBCRD05AJ.jcl",
+      "description": "CARDNITE job 5A: runs the CBCRD05A fee assessment branch in parallel with 5B.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD05B",
+      "path": "app/jcl/cardsvc/CBCRD05BJ.jcl",
+      "description": "CARDNITE job 5B: runs the CBCRD05B interest and rewards branch in parallel with 5A.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD05BJ.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD06J",
+      "path": "app/jcl/cardsvc/CBCRD06J.jcl",
+      "description": "CARDNITE job 6: joins the branches, builds and dedups the party work list, calls Party & Risk recalculation and applies the bands.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD06J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD07J",
+      "path": "app/jcl/cardsvc/CBCRD07J.jcl",
+      "description": "CARDNITE job 7: runs CBCRD07 general ledger feed.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD07J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD08J",
+      "path": "app/jcl/cardsvc/CBCRD08J.jcl",
+      "description": "CARDNITE job 8: runs CBCRD08 delinquency roll, aging report and collections feed.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD08J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD09J",
+      "path": "app/jcl/cardsvc/CBCRD09J.jcl",
+      "description": "CARDNITE job 9: IDCAMS export/repro of CYCLCTL, CARDXREF and AUTHLOG, AUTHLOG redefine, then CBCRD09 verification.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD09J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBCRD10J",
+      "path": "app/jcl/cardsvc/CBCRD10J.jcl",
+      "description": "CARDNITE job 10: runs CBCRD10 cycle close and control report.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBCRD10J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBREF01J",
+      "path": "app/jcl/cardsvc/CBREF01J.jcl",
+      "description": "CARDREF job 1 of 5: runs CBREF01 merchant reference refresh.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBREF01J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBREF02J",
+      "path": "app/jcl/cardsvc/CBREF02J.jcl",
+      "description": "CARDREF job 2 of 5: unload, sort, delete/define, repro and verify of VSAM MERCHRTE.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBREF02J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBREF03J",
+      "path": "app/jcl/cardsvc/CBREF03J.jcl",
+      "description": "CARDREF job 3 of 5: rebuilds VSAM FRAUDRUL and RSNCODE and verifies the counts.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBREF03J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBREF04J",
+      "path": "app/jcl/cardsvc/CBREF04J.jcl",
+      "description": "CARDREF job 4 of 5: rebuilds the PGMROUT VSAM fallback copy from CARDSVC.PGM_ROUTE.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBREF04J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBREF05J",
+      "path": "app/jcl/cardsvc/CBREF05J.jcl",
+      "description": "CARDREF job 5 of 5: runs CBREF05 reference integrity report.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/cardsvc/CBREF05J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CSDUPCRD",
+      "path": "app/cics/DFHCSDUP.jcl",
+      "description": "Applies the card servicing CICS resource definitions to the CSD of production region CICSCARD via DFHCSDUP.",
+      "key_points": [],
+      "basis": [
+        "app/cics/DFHCSDUP.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "DEFCARD",
+      "path": "app/jcl/vsam/DEFCARD.jcl",
+      "description": "Install job that defines the CARDSVC VSAM clusters.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/vsam/DEFCARD.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "DEFPARTY",
+      "path": "app/jcl/vsam/DEFPARTY.jcl",
+      "description": "Install job that defines the PARTYRSK VSAM clusters under their own HLQ.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/vsam/DEFPARTY.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "proc",
+      "name": "CARDDB2",
+      "path": "app/jcl/proc/CARDDB2.jcl",
+      "description": "PROC that runs a CARDSVC DB2 batch program under IKJEFT01/TSO; callers override SYSTSIN and add application DDs.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/proc/CARDDB2.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "proc",
+      "name": "COBASM",
+      "path": "app/jcl/build/COBASM.proc",
+      "description": "PROC that assembles and links the HLASM subroutine as a separate load module for static inclusion by COBOL link edits.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/COBASM.proc:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "proc",
+      "name": "COBBATCH",
+      "path": "app/jcl/build/COBBATCH.proc",
+      "description": "PROC that precompiles, compiles and link-edits batch COBOL programs (no CICS translate), CALLOPT selecting DYNAM or NODYNAM.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/COBBATCH.proc:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "proc",
+      "name": "COBCICS",
+      "path": "app/jcl/build/COBCICS.proc",
+      "description": "PROC that translates, precompiles, compiles and link-edits CICS/DB2 online COBOL programs.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/COBCICS.proc:1-25"
+      ],
+      "written_by": "agent"
+    }
+  ]
+}

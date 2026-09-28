@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>mftb estate - tedfoley-cog/cobol-batch-modernization-demo</title>
+<style>
+
+  :root {
+    --bg: #edeceb; --card: #ffffff; --ink: #191919; --muted: #626870;
+    --line: rgba(25, 25, 25, .13); --hair: rgba(25, 25, 25, .07);
+    --wash: #f7f6f5; --accent: #2200ff; --tan: #b9a07a;
+    --high: #b3261e; --medium: #8a6a2f; --info: #2200ff; --det: #146c2e;
+    --gen: #8a6a2f; --evr: #5b21b6;
+    --high-bg: #fdeceb; --medium-bg: #f8f2e6; --info-bg: #ecebff;
+    --det-bg: #eaf4ec; --evr-bg: #f2ecfb; --flat-bg: #f1f0ef;
+    --sans: "NB International Pro", Inter, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 14px/1.55 var(--sans); -webkit-font-smoothing: antialiased; }
+  header { background: #0f0f0f; color: #fff; padding: 22px 28px 20px;
+           border-bottom: 2px solid var(--accent); }
+  header .wrap { max-width: 1200px; margin: 0 auto; display: flex; gap: 16px;
+                 align-items: flex-start; }
+  header .mark { width: 30px; height: 30px; color: #fff; flex: none; margin-top: 3px; }
+  header h1 { margin: 0; font-size: 21px; font-weight: 500; letter-spacing: -.015em; }
+  header .eyebrow { font: 600 10px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase;
+                    color: rgba(255, 255, 255, .5); margin-bottom: 8px; }
+  header .sub { color: rgba(255, 255, 255, .5); font: 11px/1.5 var(--mono); margin-top: 6px; }
+  main { max-width: 1200px; margin: 0 auto; padding: 26px 28px 80px; }
+  a { color: var(--accent); }
+  h2 { font: 600 11px/1 var(--mono); letter-spacing: .16em; text-transform: uppercase;
+       color: var(--muted); margin: 38px 0 14px; padding-bottom: 8px;
+       border-bottom: 1px solid var(--line); }
+  h3 { font-size: 13px; font-weight: 600; margin: 22px 0 8px; letter-spacing: -.005em; }
+  p.muted, .note { color: var(--muted); }
+  .note { font-size: 12px; display: flex; gap: 6px; flex-wrap: wrap; align-items: center;
+          margin: 0 0 10px; }
+  .muted { color: var(--muted); }
+  table { width: 100%; max-width: 100%; border-collapse: collapse; background: var(--card); }
+  th { text-align: left; font: 600 10px/1.4 var(--mono); letter-spacing: .1em;
+       text-transform: uppercase; color: var(--muted); background: var(--wash);
+       padding: 9px 12px; border-bottom: 1px solid var(--line); }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--hair); vertical-align: top;
+       overflow-wrap: break-word; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  tbody tr:hover td { background: #fbfbfa; }
+  tr:last-child td { border-bottom: none; }
+  .box { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+         overflow: hidden; }
+  code, .mono { font-family: var(--mono); font-size: 12.5px; }
+  td code, td.mono, td .mono { overflow-wrap: anywhere; }
+  td.mono { min-width: 10ch; }
+  /* A narrow window: the wide inventory tables give up padding and letter
+     width before they give up fitting, and the card scrolls only if even
+     that is not enough, so the page itself never scrolls sideways. */
+  @media (max-width: 960px) {
+    .box { overflow-x: auto; }
+    th, td { padding: 6px 7px; }
+    th { font-size: 9.5px; letter-spacing: .04em; }
+    td, td code, td .mono { font-size: 11.5px; overflow-wrap: anywhere; }
+    td.mono { min-width: 0; }
+  }
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 6px;
+           font: 600 10.5px/1.5 var(--mono); letter-spacing: .04em; text-transform: uppercase;
+           color: var(--muted); background: var(--flat-bg);
+           border: 1px solid var(--hair); white-space: nowrap; }
+  .badge.high, .badge.unresolved, .badge.open, .badge.missing, .badge.missing-proc,
+  .badge.external, .badge.mixed, .badge.unplaced, .badge.unsupplied-module,
+  .badge.sql-only, .badge.undefined
+    { color: var(--high); background: var(--high-bg); border-color: rgba(179, 38, 30, .22); }
+  .badge.medium, .badge.gen, .badge.GEN, .badge.derived, .badge.candidate, .badge.partial,
+  .badge.proposed, .badge.assumed, .badge.default, .badge.fragment, .badge.include,
+  .badge.copybook, .badge.none, .badge.boundary, .badge.schedule
+    { color: var(--medium); background: var(--medium-bg); border-color: rgba(185, 160, 122, .4); }
+  .badge.info, .badge.job, .badge.chain, .badge.trace, .badge.runtime, .badge.answered,
+  .badge.asserted, .badge.data
+    { color: var(--info); background: var(--info-bg); border-color: rgba(34, 0, 255, .18); }
+  .badge.det, .badge.DET, .badge.program, .badge.agent, .badge.skill, .badge.scanner,
+  .badge.resolved, .badge.closed, .badge.bound, .badge.proven, .badge.confirmed,
+  .badge.annot, .badge.deterministic, .badge.detected, .badge.present, .badge.dclgen,
+  .badge.ddl, .badge.code
+    { color: var(--det); background: var(--det-bg); border-color: rgba(20, 108, 46, .22); }
+  .badge.evr, .badge.EVR, .badge.human, .badge.launcher, .badge.proc, .badge.inherited,
+  .badge.shared, .badge.online
+    { color: var(--evr); background: var(--evr-bg); border-color: rgba(91, 33, 182, .18); }
+  .empty { color: var(--muted); font-size: 13px; padding: 16px; }
+  .request { background: var(--medium-bg); border-left: 2px solid var(--tan); padding: 6px 10px;
+             margin-top: 4px; font-size: 12.5px; border-radius: 0 6px 6px 0; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; color: var(--muted);
+            margin: 8px 2px 0; }
+  /* toolbar: text filter + dropdowns + expand/collapse */
+  .toolbar { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 0 0 12px; }
+  .toolbar input, .toolbar select { padding: 6px 10px; border: 1px solid var(--line);
+                border-radius: 8px; font-size: 13px; font-family: inherit; background: var(--card);
+                color: var(--ink); }
+  .toolbar input:focus, .toolbar select:focus { outline: 2px solid rgba(34, 0, 255, .25);
+                outline-offset: -1px; border-color: var(--accent); }
+  .toolbar input { width: 260px; }
+  .toolbar button { padding: 5px 10px; border: 1px solid var(--line); border-radius: 8px;
+                    background: var(--card); font: inherit; font-size: 12px; cursor: pointer;
+                    color: var(--ink); }
+  .toolbar button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+  .toolbar .count { color: var(--muted); font: 11px/1 var(--mono); margin-left: auto; }
+  .toolbar button:disabled { color: var(--muted); cursor: default; }
+
+  /* the estate's headline counts */
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+           gap: 12px; margin: 22px 0 6px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+          padding: 14px 16px; }
+  .card .n { font-size: 26px; font-weight: 500; font-variant-numeric: tabular-nums;
+             letter-spacing: -.02em; }
+  .card .k { font: 600 10px/1 var(--mono); text-transform: uppercase; letter-spacing: .16em;
+             color: var(--muted); margin-bottom: 8px; }
+  .card .s { font-size: 12px; color: var(--muted); }
+  .card.alert .n { color: var(--high); }
+  /* one disclosure per section: the page opens as a table of contents */
+  details.sect { border-top: 1px solid var(--line); }
+  details.sect > summary { list-style: none; cursor: pointer; padding: 16px 0 14px;
+                           display: flex; align-items: baseline; gap: 10px; }
+  details.sect > summary::-webkit-details-marker { display: none; }
+  /* the marker is drawn, not typed: a glyph the reader's fonts lack shows as
+     a hex box, and a report is read on machines nobody chose */
+  details.sect > summary::before { content: ''; width: 0; height: 0; position: relative;
+                           top: -2px; border: 5px solid transparent;
+                           border-left-color: var(--ink); }
+  details.sect[open] > summary::before { top: 0; border-left-color: transparent;
+                           border-top-color: var(--ink); }
+  details.sect > summary h2 { margin: 0; padding: 0; border: none; }
+  details.sect > summary .n { color: var(--muted); font: 11px/1 var(--mono);
+                              font-variant-numeric: tabular-nums; }
+  details.sect .body { padding: 0 0 26px; }
+  /* the module cloud: area = files, so two modules compare by eye */
+  .cloud { background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+           padding: 10px; overflow: auto; }
+  .cloud svg { display: block; margin: 0 auto; }
+  .cloud .bub { fill: var(--info-bg); stroke: var(--accent); stroke-width: 1.2; cursor: pointer; }
+  .cloud .bub.shared { fill: var(--evr-bg); stroke: var(--evr); stroke-dasharray: 5 4; }
+  .cloud .bub.unplaced { fill: var(--high-bg); stroke: var(--high); stroke-dasharray: 3 3; }
+  .cloud .bub.unscanned { fill: var(--flat-bg); stroke: var(--muted); }
+  .cloud .lb { font: 600 13px var(--mono); fill: var(--ink); text-anchor: middle;
+               pointer-events: none; }
+  .cloud .ls { font: 11px var(--sans); fill: var(--muted); text-anchor: middle;
+               pointer-events: none; }
+  .cloud a { text-decoration: none; }
+  ul.cites { margin: 4px 0 0; padding-left: 18px; }
+  ul.cites li { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <svg class="mark" viewBox="0 0 48 48" aria-hidden="true">
+  <g fill="currentColor">
+    <polygon points="24.00,31.36 17.63,27.68 17.63,20.32 24.00,16.64 30.37,20.32 30.37,27.68"/>
+    <polygon points="37.86,31.36 31.48,27.68 31.48,20.32 37.86,16.64 44.23,20.32 44.23,27.68"/>
+    <polygon points="30.93,43.36 24.55,39.68 24.55,32.32 30.93,28.64 37.30,32.32 37.30,39.68"/>
+    <polygon points="17.07,43.36 10.70,39.68 10.70,32.32 17.07,28.64 23.45,32.32 23.45,39.68"/>
+    <polygon points="10.14,31.36 3.77,27.68 3.77,20.32 10.14,16.64 16.52,20.32 16.52,27.68"/>
+    <polygon points="17.07,19.36 10.70,15.68 10.70,8.32 17.07,4.64 23.45,8.32 23.45,15.68"/>
+    <polygon points="30.93,19.36 24.55,15.68 24.55,8.32 30.93,4.64 37.30,8.32 37.30,15.68"/>
+  </g>
+</svg>
+    <div>
+      <div class="eyebrow">mftb</div>
+      <h1>Estate &mdash; tedfoley-cog/cobol-batch-modernization-demo</h1>
+      <div class="sub" id="meta"></div>
+    </div>
+  </div>
+</header>
+<main>
+  <div class="cards" id="cards"></div>
+  <p class="muted" id="lead"></p>
+
+  <details class="sect" id="s-modules" open>
+    <summary><h2>Modules</h2><span class="n" id="n-modules"></span></summary>
+    <div class="body">
+      <p class="muted">Bubble area is catalogued files; shared and unplaced bubbles are what no
+      module owns. Click a module for its own report.</p>
+      <div class="cloud" id="cloud"></div>
+      <div class="legend" id="cloud-legend"></div>
+      <div class="box" id="modules" style="margin-top:14px"></div>
+    </div>
+  </details>
+
+  <details class="sect" id="s-site">
+    <summary><h2>Site &amp; environment</h2><span class="n" id="n-site"></span></summary>
+    <div class="body">
+      <p class="muted">Every scanned module's profile answers. Disagreements are shown, never
+      merged; ASSUMED is still an open question.</p>
+      <div class="box" id="site"></div>
+    </div>
+  </details>
+
+  <details class="sect" id="s-inventory">
+    <summary><h2>Inventory</h2><span class="n" id="n-inventory"></span></summary>
+    <div class="body">
+      <p class="muted">Every catalogued file by kind and owner, counted against the catalog.</p>
+      <div class="toolbar" id="t-inventory"></div>
+      <div class="box" id="inventory"></div>
+    </div>
+  </details>
+
+  <details class="sect" id="s-connections">
+    <summary><h2>Connections between modules</h2><span class="n" id="n-connections"></span></summary>
+    <div class="body">
+      <p class="muted" id="conn-intro"></p>
+      <div class="toolbar" id="t-connections"></div>
+      <div class="box" id="connections"></div>
+    </div>
+  </details>
+</main>
+<script>
+const DATA = {"meta": {"estate": ["."], "generated_at": "2026-09-28T13:32:09Z", "tool": "mftb 0.2.1", "exclude": [], "view": "estate"}, "summary": {"estate": "tedfoley-cog/cobol-batch-modernization-demo", "files": 229, "catalogued": 203, "excluded": 26, "placeable": 162, "modules": 2, "scanned_modules": 2, "shared": 12, "unplaced": 0, "unclassified": 2, "unsupported": 0, "asks": 34}, "site": [{"field": "database_managers", "answers": {"CARDSVC": {"value": "IBM Db2 for z/OS", "source": "detected", "confidence": "derived", "evidence": ["app/cardsvc/cbl/CACRD01.cbl:1", "app/cardsvc/cbl/CACRD03.cbl:1", "app/cardsvc/cbl/CACRD06.cbl:1", "app/cardsvc/cbl/CACRD07.cbl:1"]}, "PARTYRSK": {"value": "IBM Db2 for z/OS", "source": "detected", "confidence": "derived", "evidence": ["app/jcl/build/BINDCARD.jcl:36", "app/jcl/build/BINDPRTY.jcl:23", "app/jcl/partyrsk/CBPRT01J.jcl:55", "app/jcl/partyrsk/CBPRT02J.jcl:64"]}}, "agreed": true, "value": "IBM Db2 for z/OS", "assumed": false, "source": "detected"}, {"field": "environment_topology", "answers": {"CARDSVC": {"value": null, "source": null, "confidence": "unknown", "evidence": []}, "PARTYRSK": {"value": null, "source": null, "confidence": "unknown", "evidence": []}}, "agreed": true, "value": "None", "assumed": false, "source": null}, {"field": "file_transfer", "answers": {"CARDSVC": {"value": "IBM Connect:Direct", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "IBM Connect:Direct", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "IBM Connect:Direct", "assumed": true, "source": "default"}, {"field": "library_manager", "answers": {"CARDSVC": {"value": "Broadcom Endevor", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "Broadcom Endevor", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "Broadcom Endevor", "assumed": true, "source": "default"}, {"field": "masking_policy", "answers": {"CARDSVC": {"value": null, "source": null, "confidence": "unknown", "evidence": []}, "PARTYRSK": {"value": null, "source": null, "confidence": "unknown", "evidence": []}}, "agreed": true, "value": "None", "assumed": false, "source": null}, {"field": "online_monitors", "answers": {"CARDSVC": {"value": "IBM CICS Transaction Server", "source": "detected", "confidence": "derived", "evidence": ["app/cardsvc/cbl/CACRD00.cbl:1", "app/cardsvc/cbl/CACRD00.cbl:422", "app/cardsvc/cbl/CACRD00.cbl:462", "app/cardsvc/cbl/CACRD01.cbl:1"]}, "PARTYRSK": {"value": "IBM CICS Transaction Server", "source": "detected", "confidence": "derived", "evidence": ["app/partyrsk/cbl/PRERR01.cbl:1", "app/partyrsk/cbl/PRKYC01.cbl:1", "app/partyrsk/cbl/PRKYC01.cbl:441", "app/partyrsk/cbl/PRKYC01.cbl:613"]}}, "agreed": true, "value": "IBM CICS Transaction Server", "assumed": false, "source": "detected"}, {"field": "output_manager", "answers": {"CARDSVC": {"value": "Broadcom CA View", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "Broadcom CA View", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "Broadcom CA View", "assumed": true, "source": "default"}, {"field": "scheduler_product", "answers": {"CARDSVC": {"value": "BMC Control-M", "source": "detected", "confidence": "proven", "evidence": ["sched/CARDBILL.sched:1", "sched/CARDNITE.sched:1", "sched/CARDREF.sched:1", "sched/PARTYWK.sched:1"]}, "PARTYRSK": {"value": "BMC Control-M", "source": "detected", "confidence": "proven", "evidence": ["sched/CARDBILL.sched:1", "sched/CARDNITE.sched:1", "sched/CARDREF.sched:1", "sched/PARTYWK.sched:1"]}}, "agreed": true, "value": "BMC Control-M", "assumed": false, "source": "detected"}, {"field": "security_manager", "answers": {"CARDSVC": {"value": "IBM RACF", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "IBM RACF", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "IBM RACF", "assumed": true, "source": "default"}, {"field": "sort_product", "answers": {"CARDSVC": {"value": "IBM DFSORT", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "IBM DFSORT", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "IBM DFSORT", "assumed": true, "source": "default"}, {"field": "standard_compiler", "answers": {"CARDSVC": {"value": "IBM Enterprise COBOL for z/OS 6.3", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "IBM Enterprise COBOL for z/OS 6.3", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "IBM Enterprise COBOL for z/OS 6.3", "assumed": true, "source": "default"}, {"field": "standard_compiler_options", "answers": {"CARDSVC": {"value": "RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)", "assumed": true, "source": "default"}, {"field": "tape_manager", "answers": {"CARDSVC": {"value": "Broadcom CA 1", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "Broadcom CA 1", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "Broadcom CA 1", "assumed": true, "source": "default"}, {"field": "test_lpar", "answers": {"CARDSVC": {"value": null, "source": null, "confidence": "unknown", "evidence": []}, "PARTYRSK": {"value": null, "source": null, "confidence": "unknown", "evidence": []}}, "agreed": true, "value": "None", "assumed": false, "source": null}, {"field": "zos_version", "answers": {"CARDSVC": {"value": "IBM z/OS 2.5", "source": "default", "confidence": "assumed", "evidence": []}, "PARTYRSK": {"value": "IBM z/OS 2.5", "source": "default", "confidence": "assumed", "evidence": []}}, "agreed": true, "value": "IBM z/OS 2.5", "assumed": true, "source": "default"}], "modules": [{"id": "CARDSVC", "name": "Card Services", "what_it_does": "issues and services card accounts: the CA00 online dialogue (inquiry, maintenance, authorisation, fraud screens) and the CARDNITE, CARDBILL and CARDREF batch cycles over CARDDB", "naming": "proposed", "confidence": "derived", "confirmed": null, "evidence": ["README.md:9", "app/cardsvc/cbl/", "app/jcl/cardsvc/", "app/cics/CSDCARD.csd:22", "sched/CARDNITE.sched:32"], "files": 115, "kinds": {"bms-mapset": 2, "cics-csd": 3, "cobol-copybook": 19, "cobol-program": 57, "jcl-fragment": 1, "jcl-job": 24, "jcl-proc": 2, "scheduler-table": 3, "sql-ddl": 3, "sql-seed": 1}, "scanned": true, "programs": 80, "jobs": 28, "tables": 4, "db2_tables": 14, "datasets": 93, "cics_commands": 237, "boundary": {"unknown": 12, "must-establish": 98, "satisfied-in-drop": 36}, "counterparts": ["PARTYRSK"], "findings": {"open": 159, "high": 19}}, {"id": "PARTYRSK", "name": "Party & Risk", "what_it_does": "maintains party KYC, sanctions/watch-list screening and credit-exposure risk scores: PRKYC/PRRSK online services reached from CA00 and the weekly PARTYWK batch over PARTYDB", "naming": "proposed", "confidence": "derived", "confirmed": null, "evidence": ["README.md:10", "app/partyrsk/cbl/", "app/jcl/partyrsk/", "app/cics/CSDPRTY.csd:16", "sched/PARTYWK.sched:31"], "files": 35, "kinds": {"cics-csd": 1, "cobol-copybook": 5, "cobol-program": 19, "jcl-job": 7, "scheduler-table": 1, "sql-ddl": 2}, "scanned": true, "programs": 36, "jobs": 11, "tables": 4, "db2_tables": 8, "datasets": 60, "cics_commands": 63, "boundary": {"unknown": 5, "must-establish": 66, "satisfied-in-drop": 9}, "counterparts": ["CARDSVC"], "findings": {"open": 73, "high": 10}}], "shared": [{"name": "CARDCHK", "artifact": "assembler program", "path": "app/asm/CARDCHK.asm", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/jcl/build/COBBATCH.proc:111", "app/jcl/build/COBCICS.proc:134", "app/jcl/build/BUILDALL.jcl:18", "app/cics/CSDCARD.csd:272"], "why": "HLASM subroutine INCLUDEd statically by the COBCICS and COBBATCH link-edit steps, which BUILDALL uses for both modules; CSD-defined in CARDGRP. Only its names are known: mftb has no assembler analyser (catalog-assembler ask), and no scanned COBOL source CALLs it by literal"}, {"name": "CARDXREF", "artifact": "csd", "path": "app/cics/CSDFILE.csd", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/cics/CSDFILE.csd:22", "app/cics/CSDFILE.csd:277"], "why": "group CARDFILE defines the region FCTs for both CARD.PROD.* and PRTY.PROD.* (RSKPARM, WATCHLST) datasets in the one CICSCARD region"}, {"name": "CSDUPCRD", "artifact": "job", "path": "app/cics/DFHCSDUP.jcl", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/cics/DFHCSDUP.jcl:67", "app/cics/DFHCSDUP.jcl:71"], "why": "installs CARDFILE/CARDMAP/CARDTDQ/CARDGRP and PRTYGRP into the single CARDLIST group list of region CICSCARD"}, {"name": "CVCONSTY", "artifact": "copybook", "path": "app/cpy/CVCONSTY.cpy", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/cardsvc/cbl/CACRD00.cbl:83", "app/partyrsk/cbl/CBPRT01.cbl:158"], "why": "estate copybook library (README.md:15) copied by programs of both modules"}, {"name": "CVCTRL01Y", "artifact": "copybook", "path": "app/cpy/CVCTRL01Y.cpy", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/cardsvc/cbl/CBBIL01.cbl:137", "app/partyrsk/cbl/CBPRT03.cbl:161"], "why": "estate copybook library (README.md:15) copied by programs of both modules"}, {"name": "CVERRS01Y", "artifact": "copybook", "path": "app/cpy/CVERRS01Y.cpy", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/cardsvc/cbl/CACRD00.cbl:82", "app/partyrsk/cbl/CBPRT01.cbl:156"], "why": "estate copybook library (README.md:15) copied by programs of both modules"}, {"name": "CVRISK01Y", "artifact": "copybook", "path": "app/cpy/CVRISK01Y.cpy", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/cardsvc/cbl/CACRD05.cbl:55", "app/partyrsk/cbl/CBPRT03.cbl:159"], "why": "estate copybook library (README.md:15) copied by programs of both modules"}, {"name": "BUILDALL", "artifact": "job", "path": "app/jcl/build/BUILDALL.jcl", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/jcl/build/BUILDALL.jcl:123", "app/jcl/build/BUILDALL.jcl:204"], "why": "full estate rebuild: compiles CARDSVC (ONL/OND/BAT/BDY steps) and PARTYRSK (PRO/PRB steps)"}, {"name": "COBBATCH", "artifact": "proc", "path": "app/jcl/build/COBBATCH.proc", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/jcl/build/BUILDALL.jcl:159", "app/jcl/build/BUILDALL.jcl:241"], "why": "batch compile/link PROC used by BUILDALL for both CARDSVC and PARTYRSK batch programs"}, {"name": "COBCICS", "artifact": "proc", "path": "app/jcl/build/COBCICS.proc", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["app/jcl/build/BUILDALL.jcl:123", "app/jcl/build/BUILDALL.jcl:204"], "why": "CICS compile/link PROC used by BUILDALL for both CARDSVC and PARTYRSK online programs"}, {"name": "20_INDEXES", "artifact": "sql ddl", "path": "db2/ddl/20_INDEXES.sql", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["db2/ddl/20_INDEXES.sql:6", "db2/ddl/20_INDEXES.sql:119"], "why": "CREATE INDEX for both CARDSVC.* and PARTYRSK.* tables in one member"}, {"name": "50_GRANTS", "artifact": "sql script", "path": "db2/ddl/50_GRANTS.sql", "used_by": ["CARDSVC", "PARTYRSK"], "evidence": ["db2/ddl/50_GRANTS.sql:25", "db2/ddl/50_GRANTS.sql:42"], "why": "grants for both collections and schemas, including the legacy cross-database grants of CARDSVC.ACCOUNT/CARD_LIMIT to PRTYONL/PRTYBAT"}], "unplaced": [], "inventory": [{"kind": "assembler-program", "files": 1, "by_module": {"shared": 1}, "placeable": true}, {"kind": "binary", "files": 6, "by_module": {"not-an-artifact": 6}, "placeable": false}, {"kind": "bms-mapset", "files": 2, "by_module": {"CARDSVC": 2}, "placeable": true}, {"kind": "cics-csd", "files": 5, "by_module": {"CARDSVC": 3, "shared": 1, "PARTYRSK": 1}, "placeable": true}, {"kind": "cobol-copybook", "files": 28, "by_module": {"CARDSVC": 19, "shared": 4, "PARTYRSK": 5}, "placeable": true}, {"kind": "cobol-program", "files": 76, "by_module": {"CARDSVC": 57, "PARTYRSK": 19}, "placeable": true}, {"kind": "data", "files": 10, "by_module": {"not-an-artifact": 10}, "placeable": false}, {"kind": "document", "files": 12, "by_module": {"not-an-artifact": 12}, "placeable": false}, {"kind": "empty", "files": 2, "by_module": {"not-an-artifact": 2}, "placeable": false}, {"kind": "jcl-fragment", "files": 1, "by_module": {"CARDSVC": 1}, "placeable": true}, {"kind": "jcl-job", "files": 33, "by_module": {"shared": 2, "CARDSVC": 24, "PARTYRSK": 7}, "placeable": true}, {"kind": "jcl-proc", "files": 4, "by_module": {"CARDSVC": 2, "shared": 2}, "placeable": true}, {"kind": "scheduler-table", "files": 4, "by_module": {"CARDSVC": 3, "PARTYRSK": 1}, "placeable": true}, {"kind": "sql-ddl", "files": 6, "by_module": {"CARDSVC": 3, "PARTYRSK": 2, "shared": 1}, "placeable": true}, {"kind": "sql-script", "files": 1, "by_module": {"shared": 1}, "placeable": true}, {"kind": "sql-seed", "files": 1, "by_module": {"CARDSVC": 1}, "placeable": true}, {"kind": "tooling", "files": 9, "by_module": {"not-an-artifact": 9}, "placeable": false}, {"kind": "unclassified", "files": 2, "by_module": {"not-an-artifact": 2}, "placeable": false}], "connections": [{"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy 20_INDEXES", "certainty": "proven", "evidence": ["db2/ddl/20_INDEXES.sql"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy 50_GRANTS", "certainty": "proven", "evidence": ["db2/ddl/50_GRANTS.sql"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy BUILDALL", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy CARDCHK", "certainty": "proven", "evidence": ["app/asm/CARDCHK.asm"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy CARDXREF", "certainty": "proven", "evidence": ["app/cics/CSDFILE.csd"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy COBBATCH", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy COBCICS", "certainty": "proven", "evidence": ["app/jcl/build/COBCICS.proc"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy CSDUPCRD", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy CVCONSTY", "certainty": "proven", "evidence": ["app/cpy/CVCONSTY.cpy"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy CVCTRL01Y", "certainty": "proven", "evidence": ["app/cpy/CVCTRL01Y.cpy"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy CVERRS01Y", "certainty": "proven", "evidence": ["app/cpy/CVERRS01Y.cpy"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "both copy CVRISK01Y", "certainty": "proven", "evidence": ["app/cpy/CVRISK01Y.cpy"], "seen_by": []}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "calls PRBRSK1, which PARTYRSK declares", "certainty": "proven", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:306"], "seen_by": ["CARDSVC"]}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "calls PRKYC01, which PARTYRSK declares", "certainty": "proven", "evidence": ["app/cardsvc/cbl/CACRD90.cbl:360"], "seen_by": ["CARDSVC"]}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "calls PRKYC03, which PARTYRSK declares", "certainty": "proven", "evidence": ["app/cardsvc/cbl/CACRD90.cbl:360"], "seen_by": ["CARDSVC"]}, {"kind": "code", "between": ["CARDSVC", "PARTYRSK"], "detail": "module PARTYRSK: 3 program(s) owned by PARTYRSK: PRBRSK1, PRKYC01, PRKYC03 (via dynamic CALL, dynamic CANCEL, dynamic CICS-LINK)", "certainty": "proven", "evidence": ["app/cardsvc/cbl/CACRD90.cbl:360", "app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:306"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "both use dataset CARD.PROD.CICS.AUDIT", "certainty": "proven", "evidence": [], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "both use dataset CARD.PROD.CICS.OPSLOG", "certainty": "proven", "evidence": [], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &ASMHLQ..SASMMOD1: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:34"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &ASMHLQ..SASMMOD1: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:34"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &CICSHLQ..SDFHCOB: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBCICS.proc:48", "app/jcl/build/COBCICS.proc:96"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &CICSHLQ..SDFHCOB: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBCICS.proc:48", "app/jcl/build/COBCICS.proc:96"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &CICSHLQ..SDFHLOAD: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBCICS.proc:126", "app/jcl/build/COBCICS.proc:44"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &CICSHLQ..SDFHLOAD: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBCICS.proc:126", "app/jcl/build/COBCICS.proc:44"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &COBHLQ..SIGYCOMP: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:75", "app/jcl/build/COBCICS.proc:91"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &COBHLQ..SIGYCOMP: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:75", "app/jcl/build/COBCICS.proc:91"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &DB2HLQ..SDSNLOAD: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:104", "app/jcl/build/COBBATCH.proc:55", "app/jcl/build/COBCICS.proc:127", "app/jcl/build/COBCICS.proc:63"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &DB2HLQ..SDSNLOAD: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:104", "app/jcl/build/COBBATCH.proc:55", "app/jcl/build/COBCICS.proc:127", "app/jcl/build/COBCICS.proc:63"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &DBRMLIB.: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:56", "app/jcl/build/COBCICS.proc:64"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &DBRMLIB.: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:56", "app/jcl/build/COBCICS.proc:64"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &LEHLQ..SCEELKED: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:54", "app/jcl/build/COBBATCH.proc:105", "app/jcl/build/COBCICS.proc:128"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &LEHLQ..SCEELKED: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:54", "app/jcl/build/COBBATCH.proc:105", "app/jcl/build/COBCICS.proc:128"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &LEHLQ..SCEERUN: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:76", "app/jcl/build/COBCICS.proc:92"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &LEHLQ..SCEERUN: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:76", "app/jcl/build/COBCICS.proc:92"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &SORTHLQ..SORTLIB: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:106"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset &SORTHLQ..SORTLIB: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:106"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset ASM.SASMMOD1: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:100", "app/jcl/build/BUILDALL.jcl:58", "app/jcl/build/BUILDALL.jcl:68", "app/jcl/build/BUILDALL.jcl:90"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset ASM.SASMMOD1: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:100", "app/jcl/build/BUILDALL.jcl:58", "app/jcl/build/BUILDALL.jcl:68", "app/jcl/build/BUILDALL.jcl:90"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.ASM: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:35"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.ASM: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:35"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.AUTHLOG: ESDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:37"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.BMS: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:103", "app/jcl/build/BUILDALL.jcl:61", "app/jcl/build/BUILDALL.jcl:71", "app/jcl/build/BUILDALL.jcl:93"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.BMS: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:103", "app/jcl/build/BUILDALL.jcl:61", "app/jcl/build/BUILDALL.jcl:71", "app/jcl/build/BUILDALL.jcl:93"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CARDXREF.AIX1: AIX: created here; who consumes it is outside the scan", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:171"], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CARDXREF.PATH1: PATH: created here; who consumes it is outside the scan", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:180"], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CARDXREF: KSDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:15"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CBL: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:62", "app/jcl/build/COBCICS.proc:45"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CBL: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:62", "app/jcl/build/COBCICS.proc:45"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CICS.EXTRACT: sequential (QSAM by DD DCB): created here; who consumes it is outside the scan", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:88"], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CICS: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:47", "app/cics/DFHCSDUP.jcl:48", "app/cics/DFHCSDUP.jcl:49", "app/cics/DFHCSDUP.jcl:50"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CICS: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:47", "app/cics/DFHCSDUP.jcl:48", "app/cics/DFHCSDUP.jcl:49", "app/cics/DFHCSDUP.jcl:50"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CPY: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:62", "app/jcl/build/BUILDALL.jcl:94", "app/jcl/build/COBBATCH.proc:60", "app/jcl/build/COBBATCH.proc:78", "app/jcl/build/COBCICS.proc:46", "app/jcl/build/COBCICS.proc:68", "app/jcl/build/COBCICS.proc:94"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CPY: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:62", "app/jcl/build/BUILDALL.jcl:94", "app/jcl/build/COBBATCH.proc:60", "app/jcl/build/COBBATCH.proc:78", "app/jcl/build/COBCICS.proc:46", "app/jcl/build/COBCICS.proc:68", "app/jcl/build/COBCICS.proc:94"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CUSTPREF: KSDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:92"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.CYCLCTL: KSDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:132"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.DBRMLIB: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BINDCARD.jcl:31"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.DBRMLIB: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BINDCARD.jcl:31"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.FRAUDRUL: KSDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:73"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.JCLLIB: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:293"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.JCLLIB: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:293"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.LOADLIB: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:116", "app/jcl/build/BUILDALL.jcl:84", "app/jcl/build/COBASM.proc:60", "app/jcl/build/COBBATCH.proc:107", "app/jcl/build/COBBATCH.proc:114", "app/jcl/build/COBCICS.proc:129", "app/jcl/build/COBCICS.proc:138"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.LOADLIB: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:116", "app/jcl/build/BUILDALL.jcl:84", "app/jcl/build/COBASM.proc:60", "app/jcl/build/COBBATCH.proc:107", "app/jcl/build/COBBATCH.proc:114", "app/jcl/build/COBCICS.proc:129", "app/jcl/build/COBCICS.proc:138", "app/jcl/cardsvc/CBBIL01J.jcl:26", "app/jcl/cardsvc/CBBIL02J.jcl:44", "app/jcl/cardsvc/CBBIL03J.jcl:22", "app/jcl/cardsvc/CBBIL04J.jcl:26", "app/jcl/cardsvc/CBBIL05J.jcl:25", "app/jcl/cardsvc/CBBIL06J.jcl:22", "app/jcl/cardsvc/CBCRD01J.jcl:35", "app/jcl/cardsvc/CBCRD02J.jcl:37", "app/jcl/cardsvc/CBCRD06J.jcl:53", "app/jcl/cardsvc/CBCRD06J.jcl:80", "app/jcl/cardsvc/CBCRD09J.jcl:115", "app/jcl/cardsvc/CBREF01J.jcl:43", "app/jcl/cardsvc/CBREF02J.jcl:24", "app/jcl/cardsvc/CBREF02J.jcl:95", "app/jcl/cardsvc/CBREF03J.jcl:128", "app/jcl/cardsvc/CBREF03J.jcl:25", "app/jcl/cardsvc/CBREF04J.jcl:101", "app/jcl/cardsvc/CBREF04J.jcl:30", "app/jcl/cardsvc/CBREF05J.jcl:25", "app/jcl/proc/CARDDB2L.jcl:15"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.MACLIB: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:36"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.MACLIB: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:36"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.MERCHRTE: KSDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:53"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.PGMROUT: KSDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:152"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CARD.PROD.RSNCODE: KSDS: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFCARD.jcl:112"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CICS.CARD.DFHCSD.BACKUP: sequential (QSAM by DD DCB): created here; who consumes it is outside the scan", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:27"], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CICS.CARD.DFHCSD: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:26", "app/cics/DFHCSDUP.jcl:45", "app/cics/DFHCSDUP.jcl:86"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CICS.CARD.DFHCSD: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:26", "app/cics/DFHCSDUP.jcl:45", "app/cics/DFHCSDUP.jcl:86"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CICSTS.SDFHLOAD: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:44", "app/cics/DFHCSDUP.jcl:85"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CICSTS.SDFHLOAD: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:44", "app/cics/DFHCSDUP.jcl:85"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CICSTS.SDFHMAC: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:101", "app/jcl/build/BUILDALL.jcl:59", "app/jcl/build/BUILDALL.jcl:69", "app/jcl/build/BUILDALL.jcl:91"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset CICSTS.SDFHMAC: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:101", "app/jcl/build/BUILDALL.jcl:59", "app/jcl/build/BUILDALL.jcl:69", "app/jcl/build/BUILDALL.jcl:91"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset DSN.SDSNLOAD: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BINDCARD.jcl:30", "app/jcl/build/BINDPRTY.jcl:17"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset DSN.SDSNLOAD: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BINDCARD.jcl:30", "app/jcl/build/BINDPRTY.jcl:17"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.CBL: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:62", "app/jcl/build/COBCICS.proc:45"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.CBL: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:62", "app/jcl/build/COBCICS.proc:45"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.CICS: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:51"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.CICS: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/cics/DFHCSDUP.jcl:51"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.CPY: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:61", "app/jcl/build/COBBATCH.proc:79", "app/jcl/build/COBCICS.proc:47", "app/jcl/build/COBCICS.proc:69", "app/jcl/build/COBCICS.proc:95"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.CPY: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:61", "app/jcl/build/COBBATCH.proc:79", "app/jcl/build/COBCICS.proc:47", "app/jcl/build/COBCICS.proc:69", "app/jcl/build/COBCICS.proc:95"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.DBRMLIB: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BINDPRTY.jcl:18", "app/jcl/build/COBBATCH.proc:56", "app/jcl/build/COBCICS.proc:64"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.DBRMLIB: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BINDPRTY.jcl:18", "app/jcl/build/COBBATCH.proc:56", "app/jcl/build/COBCICS.proc:64"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.JCLLIB: PDS member: created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:292"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.JCLLIB: PDS member: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:292"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.LOADLIB: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:107", "app/jcl/build/COBBATCH.proc:114", "app/jcl/build/COBCICS.proc:129", "app/jcl/build/COBCICS.proc:138", "app/jcl/partyrsk/CBPRT01J.jcl:44", "app/jcl/partyrsk/CBPRT02J.jcl:55", "app/jcl/partyrsk/CBPRT02J.jcl:76", "app/jcl/partyrsk/CBPRT03J.jcl:65", "app/jcl/partyrsk/CBPRT04J.jcl:37"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.LOADLIB: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBBATCH.proc:107", "app/jcl/build/COBBATCH.proc:114", "app/jcl/build/COBCICS.proc:129", "app/jcl/build/COBCICS.proc:138"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.RSKPARM: KSDS: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFPARTY.jcl:16"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.WATCHLST.AIX1: AIX: created here; who consumes it is outside the scan", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFPARTY.jcl:58"], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.WATCHLST.PATH1: PATH: created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFPARTY.jcl:67"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset PRTY.PROD.WATCHLST: KSDS: created here; who consumes it is outside the scan", "certainty": "proven", "evidence": ["app/jcl/vsam/DEFPARTY.jcl:37"], "seen_by": ["CARDSVC", "PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset SYS1.MACLIB: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:102", "app/jcl/build/BUILDALL.jcl:60", "app/jcl/build/BUILDALL.jcl:70", "app/jcl/build/BUILDALL.jcl:92", "app/jcl/build/COBASM.proc:37"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset SYS1.MACLIB: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/BUILDALL.jcl:102", "app/jcl/build/BUILDALL.jcl:60", "app/jcl/build/BUILDALL.jcl:70", "app/jcl/build/BUILDALL.jcl:92", "app/jcl/build/COBASM.proc:37"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset SYS1.MODGEN: sequential (no catalog evidence): created here and read by CARDSVC", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:38"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "dataset SYS1.MODGEN: sequential (no catalog evidence): created here and read by PARTYRSK", "certainty": "proven", "evidence": ["app/jcl/build/COBASM.proc:38"], "seen_by": ["CARDSVC"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "db2 CARDSVC.ACCOUNT: 2 read(s), 0 write(s); DDL in the scan, the table itself is in the subsystem", "certainty": "proven", "evidence": ["app/partyrsk/cbl/PRBRSK3.cbl:163-177", "app/partyrsk/cbl/PRBRSK3.cbl:397-407", "app/partyrsk/cbl/PRRSK02.cbl:446-462", "db2/ddl/10_CARDDB_TABLES.sql:9"], "seen_by": ["PARTYRSK"]}, {"kind": "data", "between": ["CARDSVC", "PARTYRSK"], "detail": "db2 CARDSVC.CARD_LIMIT: 1 read(s), 0 write(s); DDL in the scan, the table itself is in the subsystem", "certainty": "proven", "evidence": ["app/partyrsk/cbl/PRBRSK3.cbl:497-510", "db2/ddl/10_CARDDB_TABLES.sql:71"], "seen_by": ["PARTYRSK"]}], "asks": [{"scope": "estate", "kind": "catalog-assembler", "severity": "medium", "message": "app/asm/CARDCHK.asm is HLASM: the sweep has its sections, its entry points and the names it reaches, but mftb has no assembler analyser, so its logic is not inventoried", "request": "Is this member in scope for the migration, and who can read it? Its behaviour (and any transfer the sweep listed as unresolved) needs a human.", "evidence": ["app/asm/CARDCHK.asm:75"]}, {"scope": "estate", "kind": "catalog-untranslated", "severity": "medium", "message": "app/data/cardmast.ebc does not decode as UTF-8: EBCDIC data or a binary carried in the estate", "request": "Is this data in scope? If so, supply it translated (or its record layout) \u2014 the sweep lists it but cannot read it.", "evidence": ["app/data/cardmast.ebc"]}, {"scope": "estate", "kind": "catalog-untranslated", "severity": "medium", "message": "app/data/glpost.ebc does not decode as UTF-8: EBCDIC data or a binary carried in the estate", "request": "Is this data in scope? If so, supply it translated (or its record layout) \u2014 the sweep lists it but cannot read it.", "evidence": ["app/data/glpost.ebc"]}, {"scope": "estate", "kind": "catalog-unclassified", "severity": "high", "message": "sched/CALENDARS.sched matches no artifact signature: the sweep cannot say what it is", "request": "What is this member (language / artifact type), or may it be excluded from the estate?", "evidence": ["sched/CALENDARS.sched"]}, {"scope": "estate", "kind": "catalog-unclassified", "severity": "high", "message": "tools/bms3270/demo.keys matches no artifact signature: the sweep cannot say what it is", "request": "What is this member (language / artifact type), or may it be excluded from the estate?", "evidence": ["tools/bms3270/demo.keys"]}, {"scope": "CARDSVC", "kind": "dynamic-call-evidence", "severity": "high", "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBBIL04J step RENDER runs CBBIL04 (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]", "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:331", "app/cardsvc/cbl/CBCRD90.cbl:306", "app/cardsvc/cbl/CBCRD90.cbl:339"]}, {"scope": "CARDSVC", "kind": "dynamic-call-evidence", "severity": "high", "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBBIL04J step RENDER runs CBBIL04 (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]", "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:331", "app/cardsvc/cbl/CBCRD90.cbl:306", "app/cardsvc/cbl/CBCRD90.cbl:339"]}, {"scope": "CARDSVC", "kind": "dynamic-call-evidence", "severity": "high", "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD05A step STEP010 runs CBCRD05A (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]", "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:331", "app/cardsvc/cbl/CBCRD90.cbl:306", "app/cardsvc/cbl/CBCRD90.cbl:339"]}, {"scope": "CARDSVC", "kind": "dynamic-call-evidence", "severity": "high", "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD05A step STEP010 runs CBCRD05A (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]", "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:331", "app/cardsvc/cbl/CBCRD90.cbl:306", "app/cardsvc/cbl/CBCRD90.cbl:339"]}, {"scope": "CARDSVC", "kind": "dynamic-call-evidence", "severity": "high", "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD06J step STEP030 runs CBCRD06B (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]", "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:331", "app/cardsvc/cbl/CBCRD90.cbl:306", "app/cardsvc/cbl/CBCRD90.cbl:339"]}, {"scope": "CARDSVC", "kind": "dynamic-call-evidence", "severity": "high", "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD06J step STEP030 runs CBCRD06B (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]", "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:297", "app/cardsvc/cbl/CBCRD90.cbl:331", "app/cardsvc/cbl/CBCRD90.cbl:306", "app/cardsvc/cbl/CBCRD90.cbl:339"]}, {"scope": "CARDSVC", "kind": "file-dd-missing", "severity": "high", "message": "job CBBIL04J step RENDER runs CBBIL04 \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT", "request": "Provide the DD PGMROUT allocation for job CBBIL04J step RENDER (or the PROC/override that supplies it)", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:23", "app/jcl/cardsvc/CBBIL04J.jcl:25"]}, {"scope": "CARDSVC", "kind": "file-dd-missing", "severity": "high", "message": "job CBCRD05A step STEP010 runs CBCRD05A \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT", "request": "Provide the DD PGMROUT allocation for job CBCRD05A step STEP010 (or the PROC/override that supplies it)", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:23", "app/jcl/proc/CARDDB2.jcl:32"]}, {"scope": "CARDSVC", "kind": "file-dd-missing", "severity": "high", "message": "job CBCRD06J step STEP030 runs CBCRD06B \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT", "request": "Provide the DD PGMROUT allocation for job CBCRD06J step STEP030 (or the PROC/override that supplies it)", "evidence": ["app/cardsvc/cbl/CBCRD90.cbl:23", "app/jcl/proc/CARDDB2.jcl:32"]}, {"scope": "CARDSVC", "kind": "missing-copybook", "severity": "high", "message": "copy CARDSET is included by 8 program(s) (CACRD00, CACRD01, CACRD02, CACRD03, CACRD04, CACRD10, CACRD17, CACRD91) but no scanned copybook defines it", "request": "Provide copybook member 'CARDSET' from the production copybook library (SYSLIB)", "evidence": ["app/cardsvc/cbl/CACRD00.cbl:86", "app/cardsvc/cbl/CACRD01.cbl:60", "app/cardsvc/cbl/CACRD02.cbl:120", "app/cardsvc/cbl/CACRD03.cbl:75"]}, {"scope": "CARDSVC", "kind": "missing-copybook", "severity": "high", "message": "copy CARDST2 is included by 6 program(s) (CACRD11, CACRD12, CACRD13, CACRD14, CACRD15, CACRD16) but no scanned copybook defines it", "request": "Provide copybook member 'CARDST2' from the production copybook library (SYSLIB)", "evidence": ["app/cardsvc/cbl/CACRD11.cbl:176", "app/cardsvc/cbl/CACRD12.cbl:143", "app/cardsvc/cbl/CACRD13.cbl:195", "app/cardsvc/cbl/CACRD14.cbl:192"]}, {"scope": "CARDSVC", "kind": "proc-header-break", "severity": "high", "message": "PROC COBASM: the PROC statement at app/jcl/build/COBASM.proc:4 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 3 parameter line(s) that follow (ASMHLQ, LEHLQ, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one", "request": "Provide the production copy of PROC COBASM (or confirm the intended defaults for ASMHLQ, LEHLQ, WORK)", "evidence": ["app/jcl/build/COBASM.proc:4", "app/jcl/build/COBASM.proc:5", "app/jcl/build/COBASM.proc:6", "app/jcl/build/COBASM.proc:7"]}, {"scope": "CARDSVC", "kind": "proc-header-break", "severity": "high", "message": "PROC COBBATCH: the PROC statement at app/jcl/build/COBBATCH.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one", "request": "Provide the production copy of PROC COBBATCH (or confirm the intended defaults for CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK)", "evidence": ["app/jcl/build/COBBATCH.proc:5", "app/jcl/build/COBBATCH.proc:6", "app/jcl/build/COBBATCH.proc:7", "app/jcl/build/COBBATCH.proc:8"]}, {"scope": "CARDSVC", "kind": "proc-header-break", "severity": "high", "message": "PROC COBCICS: the PROC statement at app/jcl/build/COBCICS.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one", "request": "Provide the production copy of PROC COBCICS (or confirm the intended defaults for CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK)", "evidence": ["app/jcl/build/COBCICS.proc:5", "app/jcl/build/COBCICS.proc:6", "app/jcl/build/COBCICS.proc:7", "app/jcl/build/COBCICS.proc:8"]}, {"scope": "CARDSVC", "kind": "profile-environment-topology", "severity": "high", "message": "CARDSVC profile: environment_topology is not in the store \u2014 which LPARs and environments (production / test / DR) the estate has \u2014 the scanned JCL allocates datasets under the high-level qualifier(s) ASM, CARD, CICS, CICSTS, DSN, DSN910, PRTY, SYS1: a naming observation, which is not proof of which LPAR or environment runs them", "request": "State the LPARs and environments, how a dataset or job name says which one it belongs to, and which sysplex they sit in: the scan can only list the qualifiers it saw", "evidence": ["app/jcl/build/BINDCARD.jcl:30", "app/jcl/build/BINDPRTY.jcl:17", "app/jcl/cardsvc/CBBIL01J.jcl:27", "app/jcl/cardsvc/CBBIL02J.jcl:45"]}, {"scope": "CARDSVC", "kind": "profile-masking-policy", "severity": "high", "message": "CARDSVC profile: masking_policy is not in the store \u2014 what may leave the estate, and in what shape", "request": "State the data-masking policy for extracted test data (which fields must be masked, whether production data may leave the estate at all)", "evidence": []}, {"scope": "CARDSVC", "kind": "profile-test-lpar", "severity": "high", "message": "CARDSVC profile: test_lpar is not in the store \u2014 whether a test LPAR is available to run the migrated code against", "request": "Confirm whether a test LPAR (or a sandbox subsystem) is available for parallel runs, and who can grant access", "evidence": []}, {"scope": "CARDSVC", "kind": "unresolved-symbolic", "severity": "high", "message": "29 steps of PROC COBCICS use (job BUILDALL step ONL0010; job BUILDALL step ONL0020; job BUILDALL step ONL0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBCICS.proc:7 is orphaned by the PROC header break at app/jcl/build/COBCICS.proc:5, so this is a JCL defect in the repo copy, not a scheduler value", "request": "Provide the production copy of PROC COBCICS so the default for &CALLOPT is known", "evidence": ["app/jcl/build/COBCICS.proc:87", "app/jcl/build/COBCICS.proc:87", "app/jcl/build/COBCICS.proc:87", "app/jcl/build/COBCICS.proc:87"]}, {"scope": "CARDSVC", "kind": "unresolved-symbolic", "severity": "high", "message": "39 steps of PROC COBBATCH use (job BUILDALL step BAT0010; job BUILDALL step BAT0020; job BUILDALL step BAT0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBBATCH.proc:7 is orphaned by the PROC header break at app/jcl/build/COBBATCH.proc:5, so this is a JCL defect in the repo copy, not a scheduler value", "request": "Provide the production copy of PROC COBBATCH so the default for &CALLOPT is known", "evidence": ["app/jcl/build/COBBATCH.proc:71", "app/jcl/build/COBBATCH.proc:71", "app/jcl/build/COBBATCH.proc:71", "app/jcl/build/COBBATCH.proc:71"]}, {"scope": "PARTYRSK", "kind": "db2-dclgen-ddl-mismatch", "severity": "high", "message": "DCLGEN for PARTYRSK.CUSTOMER in PRKYC01 (inline) disagrees with the scanned DDL: declares 8 of 28 DDL columns; not declared: TITLE, FIRST_NAME, MIDDLE_INIT, LEGAL_NAME, DOB, NATIONAL_ID, TAX_ID, ADDR_LINE1, ADDR_LINE2, CITY, STATE_CD, POSTAL_CD, DOMICILE_CTRY, CITIZENSHIP_CTRY, PHONE_HOME, PHONE_MOBILE, EMAIL, SEGMENT_CD, PEP_FLG, VIP_FLG", "request": "Confirm which is current: regenerate the DCLGEN from the live catalog (DSNTIAD/DCLGEN TABLE(PARTYRSK.CUSTOMER)) or provide the DDL version the program was last bound against", "evidence": ["app/partyrsk/cbl/PRKYC01.cbl:96-105", "db2/ddl/11_PARTYDB_TABLES.sql:9"]}, {"scope": "PARTYRSK", "kind": "proc-header-break", "severity": "high", "message": "PROC COBASM: the PROC statement at app/jcl/build/COBASM.proc:4 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 3 parameter line(s) that follow (ASMHLQ, LEHLQ, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one", "request": "Provide the production copy of PROC COBASM (or confirm the intended defaults for ASMHLQ, LEHLQ, WORK)", "evidence": ["app/jcl/build/COBASM.proc:4", "app/jcl/build/COBASM.proc:5", "app/jcl/build/COBASM.proc:6", "app/jcl/build/COBASM.proc:7"]}, {"scope": "PARTYRSK", "kind": "proc-header-break", "severity": "high", "message": "PROC COBBATCH: the PROC statement at app/jcl/build/COBBATCH.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one", "request": "Provide the production copy of PROC COBBATCH (or confirm the intended defaults for CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK)", "evidence": ["app/jcl/build/COBBATCH.proc:5", "app/jcl/build/COBBATCH.proc:6", "app/jcl/build/COBBATCH.proc:7", "app/jcl/build/COBBATCH.proc:8"]}, {"scope": "PARTYRSK", "kind": "proc-header-break", "severity": "high", "message": "PROC COBCICS: the PROC statement at app/jcl/build/COBCICS.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one", "request": "Provide the production copy of PROC COBCICS (or confirm the intended defaults for CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK)", "evidence": ["app/jcl/build/COBCICS.proc:5", "app/jcl/build/COBCICS.proc:6", "app/jcl/build/COBCICS.proc:7", "app/jcl/build/COBCICS.proc:8"]}, {"scope": "PARTYRSK", "kind": "profile-environment-topology", "severity": "high", "message": "PARTYRSK profile: environment_topology is not in the store \u2014 which LPARs and environments (production / test / DR) the estate has \u2014 the scanned JCL allocates datasets under the high-level qualifier(s) ASM, CARD, CICS, CICSTS, DSN, PRTY, SYS1, SYS2: a naming observation, which is not proof of which LPAR or environment runs them", "request": "State the LPARs and environments, how a dataset or job name says which one it belongs to, and which sysplex they sit in: the scan can only list the qualifiers it saw", "evidence": ["app/jcl/build/BINDCARD.jcl:30", "app/jcl/build/BINDCARD.jcl:31", "app/jcl/build/BINDPRTY.jcl:17", "app/jcl/build/BUILDALL.jcl:61"]}, {"scope": "PARTYRSK", "kind": "profile-masking-policy", "severity": "high", "message": "PARTYRSK profile: masking_policy is not in the store \u2014 what may leave the estate, and in what shape", "request": "State the data-masking policy for extracted test data (which fields must be masked, whether production data may leave the estate at all)", "evidence": []}, {"scope": "PARTYRSK", "kind": "profile-shared-code-boundary", "severity": "high", "message": "PARTYRSK profile: shared_code_boundary is not in the store \u2014 which code the module uses but does not own", "request": "Confirm which copybooks and called modules are shared estate code rather than the module's own, and which library owns them", "evidence": []}, {"scope": "PARTYRSK", "kind": "profile-test-lpar", "severity": "high", "message": "PARTYRSK profile: test_lpar is not in the store \u2014 whether a test LPAR is available to run the migrated code against", "request": "Confirm whether a test LPAR (or a sandbox subsystem) is available for parallel runs, and who can grant access", "evidence": []}, {"scope": "PARTYRSK", "kind": "unresolved-symbolic", "severity": "high", "message": "29 steps of PROC COBCICS use (job BUILDALL step ONL0010; job BUILDALL step ONL0020; job BUILDALL step ONL0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBCICS.proc:7 is orphaned by the PROC header break at app/jcl/build/COBCICS.proc:5, so this is a JCL defect in the repo copy, not a scheduler value", "request": "Provide the production copy of PROC COBCICS so the default for &CALLOPT is known", "evidence": ["app/jcl/build/COBCICS.proc:87", "app/jcl/build/COBCICS.proc:87", "app/jcl/build/COBCICS.proc:87", "app/jcl/build/COBCICS.proc:87"]}, {"scope": "PARTYRSK", "kind": "unresolved-symbolic", "severity": "high", "message": "39 steps of PROC COBBATCH use (job BUILDALL step BAT0010; job BUILDALL step BAT0020; job BUILDALL step BAT0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBBATCH.proc:7 is orphaned by the PROC header break at app/jcl/build/COBBATCH.proc:5, so this is a JCL defect in the repo copy, not a scheduler value", "request": "Provide the production copy of PROC COBBATCH so the default for &CALLOPT is known", "evidence": ["app/jcl/build/COBBATCH.proc:71", "app/jcl/build/COBBATCH.proc:71", "app/jcl/build/COBBATCH.proc:71", "app/jcl/build/COBBATCH.proc:71"]}]};
+
+function el(tag, attrs, ...children) {
+  const e = document.createElementNS(attrs && attrs.ns ? attrs.ns : 'http://www.w3.org/1999/xhtml', tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === 'ns') continue;
+    if (k === 'class') e.setAttribute('class', v); else if (v != null) e.setAttribute(k, v);
+  }
+  for (const c of children) {
+    if (c == null) continue;
+    e.append(c.nodeType ? c : document.createTextNode(String(c)));
+  }
+  return e;
+}
+const SVG = 'http://www.w3.org/2000/svg';
+const svg = (tag, attrs, ...kids) => el(tag, Object.assign({ns: SVG}, attrs || {}), ...kids);
+const badge = (text, cls) => el('span', {class: 'badge ' + (cls || '')}, text);
+function table(headers, rows) {
+  if (!rows.length) return el('div', {class: 'empty'}, 'Nothing to show.');
+  return el('table', {},
+    el('thead', {}, el('tr', {}, ...headers.map(h =>
+      el('th', typeof h === 'object' ? {class: 'num'} : {}, typeof h === 'object' ? h.n : h)))),
+    el('tbody', {}, ...rows));
+}
+const num = v => el('td', {class: 'num'}, v == null ? '\u2014' : v);
+// A text filter over a table: the whole row is the haystack, and the count is
+// what survives, so a filtered page never lies about how much there is.
+function filterBar(barId, boxId, label) {
+  const bar = document.getElementById(barId), box = document.getElementById(boxId);
+  const q = el('input', {placeholder: 'Filter...'});
+  const count = el('span', {class: 'count'});
+  bar.append(q, count);
+  const apply = () => {
+    const text = q.value.trim().toLowerCase();
+    const rows = [...box.querySelectorAll('tbody tr')];
+    let shown = 0;
+    for (const r of rows) {
+      const hit = !text || r.textContent.toLowerCase().includes(text);
+      r.style.display = hit ? '' : 'none';
+      if (hit) shown++;
+    }
+    count.textContent = shown + ' of ' + rows.length + ' ' + label;
+  };
+  q.addEventListener('input', apply);
+  apply();
+}
+
+const S = DATA.summary;
+document.getElementById('meta').textContent =
+  (DATA.meta.tool || 'mftb') + ' | generated ' + (DATA.meta.generated_at || '') +
+  ' | catalog store/catalog.json, map store/modules.json';
+const cards = [
+  ['Files', S.files, S.catalogued + ' catalogued, ' + S.excluded + ' excluded', false],
+  ['Artifacts', S.placeable, 'members, jobs, tables — the placeable estate', false],
+  ['Modules', S.modules, S.scanned_modules + ' scanned', false],
+  ['Shared', S.shared, 'owned by more than one module', false],
+  ['Unplaced', S.unplaced, 'artifacts in no module', S.unplaced > 0],
+  ['Unclassified', S.unclassified + S.unsupported,
+   S.unclassified + ' unclassified, ' + S.unsupported + ' unsupported language',
+   (S.unclassified + S.unsupported) > 0],
+];
+document.getElementById('cards').append(...cards.map(([k, n, s, alert]) =>
+  el('div', {class: 'card' + (alert ? ' alert' : '')},
+     el('div', {class: 'k'}, k), el('div', {class: 'n'}, n), el('div', {class: 's'}, s))));
+document.getElementById('lead').textContent =
+  'Every file under the estate roots sits in exactly one row of the catalog.';
+
+// ---- site & environment ----------------------------------------------------
+const siteRows = DATA.site.map(f => {
+  const answers = Object.entries(f.answers);
+  const label = f.field.replace(/_/g, ' ').replace(/^./, c => c.toUpperCase());
+  const value = f.agreed
+    ? el('span', {}, f.value === 'None' ? el('span', {class: 'note'}, 'not answered') : f.value)
+    : el('div', {}, ...answers.map(([m, a]) =>
+        el('div', {}, el('span', {class: 'mono'}, m), ': ', a.value == null ? 'not answered' : a.value)));
+  const cites = answers.flatMap(([, a]) => a.evidence).slice(0, 4);
+  return el('tr', {},
+    el('td', {}, el('strong', {}, label)),
+    el('td', {}, value, f.agreed ? null : el('div', {class: 'request'},
+      'the modules do not agree: settle this at estate level')),
+    el('td', {}, badge(f.source, f.source), f.assumed ? ' ' : null,
+       f.assumed ? badge('ASSUMED', 'high') : null),
+    el('td', {}, answers.length + ' module' + (answers.length === 1 ? '' : 's')),
+    el('td', {class: 'note'}, cites.length
+      ? el('ul', {class: 'cites'}, ...cites.map(c => el('li', {}, c)))
+      : (f.assumed ? 'none — an assumption is never evidence' : '\u2014')));
+});
+document.getElementById('site').append(
+  siteRows.length ? table(['Field', 'Value', 'Source', 'Answered by', 'Read from'], siteRows)
+                  : el('div', {class: 'empty'}, 'No module has been through scan-profile yet.'));
+
+// ---- the module cloud ------------------------------------------------------
+// Area is the count, so the radius is its square root: a module with four
+// times the files is twice as wide, not four times.
+const bubbles = DATA.modules.map(m => ({
+  id: m.id, files: m.files, cls: m.scanned ? '' : 'unscanned',
+  sub: m.files + ' files' + (m.scanned ? '' : ' · not scanned'), href: m.id + '/' + m.id + '-report.html',
+  title: (m.name || m.id) + (m.what_it_does ? ' — ' + m.what_it_does : '')}));
+if (S.shared) bubbles.push({id: 'shared', files: S.shared, cls: 'shared',
+  sub: S.shared + ' files · copied by more than one module', href: null,
+  title: 'artifacts more than one module uses'});
+if (S.unplaced) bubbles.push({id: 'unplaced', files: S.unplaced, cls: 'unplaced',
+  sub: S.unplaced + ' files · owner unknown', href: null,
+  title: 'catalogued artifacts no module claims'});
+const maxFiles = Math.max(1, ...bubbles.map(b => b.files));
+const R = b => 34 + 78 * Math.sqrt(b.files / maxFiles);
+// A bubble too small to hold its own caption puts it underneath, and the row
+// reserves the width of whichever is wider -- a legible small module beats a
+// tight picture.
+const CH = 5.6;
+let x = 20, rowY = 20, rowH = 0;
+const WIDTH = 1080;
+const placed = [];
+for (const b of bubbles.sort((p, q) => q.files - p.files)) {
+  const r = R(b), inside = 2 * r > b.sub.length * CH + 16;
+  const w = Math.max(2 * r, inside ? 0 : b.sub.length * CH);
+  if (x + w > WIDTH && placed.length) { x = 20; rowY += rowH + 34; rowH = 0; }
+  placed.push({b: b, cx: x + w / 2, cy: rowY + r, r: r, inside: inside});
+  x += w + 26;
+  rowH = Math.max(rowH, 2 * r + (inside ? 0 : 18));
+}
+const height = rowY + rowH + 20;
+const cloud = svg('svg', {viewBox: '0 0 ' + WIDTH + ' ' + height, width: '100%',
+                          height: Math.min(height, 460), class: 'cloudsvg'});
+for (const p of placed) {
+  const circle = svg('circle', {class: 'bub ' + p.b.cls, cx: p.cx, cy: p.cy, r: p.r});
+  const g = svg('g', {}, circle,
+    svg('title', {}, p.b.title),
+    svg('text', {class: 'lb', x: p.cx, y: p.cy + (p.inside ? -2 : 5)}, p.b.id),
+    svg('text', {class: 'ls', x: p.cx, y: p.inside ? p.cy + 15 : p.cy + p.r + 15}, p.b.sub));
+  cloud.append(p.b.href ? svg('a', {href: p.b.href}, g) : g);
+}
+document.getElementById('cloud').append(cloud);
+document.getElementById('cloud-legend').append(
+  el('span', {}, 'Area = catalogued files.'),
+  el('span', {}, 'Dashed purple = shared.'), el('span', {}, 'Dashed red = unplaced.'),
+  el('span', {}, 'Grey = named by the map, never scanned.'));
+
+const KINDS = ks => Object.entries(ks).map(([k, n]) => k + ' ' + n).join(', ');
+document.getElementById('modules').append(table(
+  ['Module', 'What it does', 'Naming', {n: 'Files'}, 'Made of', {n: 'Programs'}, {n: 'Jobs'},
+   {n: 'Open findings'}, 'Talks to'],
+  DATA.modules.map(m => el('tr', {},
+    el('td', {}, el('a', {href: m.id + '/' + m.id + '-report.html', class: 'mono'}, m.id),
+       el('div', {class: 'note'}, m.name || '')),
+    el('td', {class: 'note'}, m.what_it_does || '\u2014'),
+    el('td', {}, badge(m.naming || 'proposed', m.naming === 'confirmed' ? 'confirmed' : 'proposed'),
+       m.confidence ? ' ' : null, m.confidence ? badge(m.confidence, m.confidence) : null),
+    num(m.files),
+    el('td', {class: 'note'}, KINDS(m.kinds)),
+    num(m.scanned ? m.programs : null), num(m.scanned ? m.jobs : null),
+    el('td', {class: 'num'}, m.scanned
+      ? el('span', {}, m.findings.open, m.findings.high ? ' ' : null,
+           m.findings.high ? badge(m.findings.high + ' high', 'high') : null)
+      : badge('not scanned', 'medium')),
+    el('td', {class: 'mono note'}, (m.counterparts || []).join(', ') || '\u2014')))));
+
+// ---- inventory -------------------------------------------------------------
+const moduleIds = DATA.modules.map(m => m.id);
+const columns = [...moduleIds, 'shared', 'unplaced', 'not-an-artifact'];
+document.getElementById('inventory').append(table(
+  ['Kind', {n: 'Files'}, ...columns.map(c => ({n: c}))],
+  DATA.inventory.map(row => el('tr', {},
+    el('td', {}, el('span', {class: 'mono'}, row.kind),
+       row.placeable ? null : el('div', {class: 'note'}, 'not an estate artifact')),
+    num(row.files),
+    ...columns.map(c => num(row.by_module[c] || null))))));
+filterBar('t-inventory', 'inventory', 'kinds');
+
+// ---- connections -----------------------------------------------------------
+document.getElementById('conn-intro').textContent =
+  DATA.connections.length
+    ? 'Where one module meets another, with the store row that proved it. CANDIDATE narrows the ' +
+      'possibilities; it does not prove the call.'
+    : 'No module store proves a connection to another module yet.';
+document.getElementById('connections').append(table(
+  ['Between', 'Kind', 'What', 'Seen by', 'Evidence'],
+  DATA.connections.map(c => el('tr', {},
+    el('td', {class: 'mono'}, c.between.join(' \u2194 ')),
+    el('td', {}, badge(c.kind, c.kind), ' ',
+       c.certainty === 'candidate' ? badge('candidate', 'medium') : null),
+    el('td', {}, c.detail),
+    el('td', {class: 'mono note'}, (c.seen_by || []).join(', ') || 'the map'),
+    el('td', {class: 'note'}, (c.evidence || []).length
+      ? el('ul', {class: 'cites'}, ...c.evidence.slice(0, 3).map(e => el('li', {}, e)))
+      : '\u2014')))));
+filterBar('t-connections', 'connections', 'connections');
+
+// ---- what each closed section holds, so the page reads as a contents list ---
+const counts = {
+  'n-modules': S.modules + ' module' + (S.modules === 1 ? '' : 's') + ', ' +
+               S.shared + ' shared, ' + S.unplaced + ' unplaced',
+  'n-site': DATA.site.length + ' field' + (DATA.site.length === 1 ? '' : 's'),
+  'n-inventory': DATA.inventory.length + ' kind' + (DATA.inventory.length === 1 ? '' : 's') +
+                 ' over ' + S.catalogued + ' catalogued files',
+  'n-connections': DATA.connections.length + ' connection' +
+                   (DATA.connections.length === 1 ? '' : 's'),
+};
+for (const [id, text] of Object.entries(counts)) document.getElementById(id).textContent = text;
+</script>
+</body>
+</html>

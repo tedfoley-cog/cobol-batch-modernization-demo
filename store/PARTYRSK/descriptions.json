@@ -1,0 +1,442 @@
+{
+  "meta": {
+    "module": "PARTYRSK",
+    "generated_at": "2026-09-28T13:40:01Z",
+    "tool": "mftb 0.2.1",
+    "inputs": [
+      "programs.json",
+      "jobs.json",
+      "schedule.json"
+    ]
+  },
+  "author": "agent",
+  "summary": {
+    "subjects": 33,
+    "written": 33,
+    "unknown": 0,
+    "by_kind": {
+      "program": 19,
+      "jcl": 11,
+      "proc": 3
+    },
+    "with_key_points": 2,
+    "overviews": 5,
+    "overviews_written": 1
+  },
+  "overviews": [
+    {
+      "kind": "module",
+      "name": "PARTYRSK",
+      "key_points": [
+        "Maintains the party view behind customer accounts - KYC reviews, sanctions screening, exposure and risk scores - in PARTYDB.",
+        "Serves card servicing online as a risk service (PRKYC01 for authorisations, PRKYC03 for inquiries) and in batch through PRBRSK1 recalculation, writing a regulatory audit row for every assessment or look.",
+        "Runs the weekly PARTYWK cycle: KYC due selection, sanctions feed load and watch-list rebuild, full portfolio rescore and the regulatory audit pack."
+      ],
+      "basis": [
+        "README.md:1-11",
+        "app/partyrsk/cbl/PRKYC01.cbl:1-20",
+        "app/partyrsk/cbl/PRKYC03.cbl:1-20",
+        "app/partyrsk/cbl/PRBRSK1.cbl:1-20",
+        "sched/PARTYWK.sched:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    },
+    {
+      "kind": "chain",
+      "name": "",
+      "key_points": [],
+      "basis": [],
+      "written_by": "agent"
+    }
+  ],
+  "descriptions": [
+    {
+      "kind": "program",
+      "name": "CBPRT01",
+      "path": "app/partyrsk/cbl/CBPRT01.cbl",
+      "description": "PARTYWK step 1: raises pending KYC review rows for parties whose review is due by KYC level and writes the review work list.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/CBPRT01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBPRT02A",
+      "path": "app/partyrsk/cbl/CBPRT02A.cbl",
+      "description": "PARTYWK: loads the weekly vendor sanctions feed into PARTYRSK.PARTY_SANCTION after balancing the trailer count.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/CBPRT02A.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBPRT02B",
+      "path": "app/partyrsk/cbl/CBPRT02B.cbl",
+      "description": "PARTYWK: unloads active sanctions rows as the watch-list file for the WATCHLST VSAM rebuild.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/CBPRT02B.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBPRT03",
+      "path": "app/partyrsk/cbl/CBPRT03.cbl",
+      "description": "PARTYWK step 3: drives every active party through the PRBRSK1 recalculation entry point with checkpoint restart.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/CBPRT03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "CBPRT04",
+      "path": "app/partyrsk/cbl/CBPRT04.cbl",
+      "description": "PARTYWK step 4: prints the weekly regulatory risk audit pack from PARTY_RISK_AUDIT and supporting tables.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/CBPRT04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRBRSK1",
+      "path": "app/partyrsk/cbl/PRBRSK1.cbl",
+      "description": "Batch risk recalculation entry point for one party (KYC/sanctions, exposure, rescore, persist); owns the DB2 unit of work.",
+      "key_points": [
+        "Called by the CARDSVC batch dispatcher on route XMOD/RSKRECAL and by CBPRT03; online callers are rejected with RC 12."
+      ],
+      "basis": [
+        "app/partyrsk/cbl/PRBRSK1.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRBRSK2",
+      "path": "app/partyrsk/cbl/PRBRSK2.cbl",
+      "description": "Batch recalculation step 2: decides whether the KYC review is due and re-screens the party against the watch list.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRBRSK2.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRBRSK3",
+      "path": "app/partyrsk/cbl/PRBRSK3.cbl",
+      "description": "Batch recalculation step 3: rebuilds party exposure from PARTY_EXPOSURE plus live CARDSVC.ACCOUNT and CARD_LIMIT balances.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRBRSK3.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRBRSK4",
+      "path": "app/partyrsk/cbl/PRBRSK4.cbl",
+      "description": "Batch recalculation step 4: rescores the party against the model parameters held on VSAM RSKPARM.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRBRSK4.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRBRSK5",
+      "path": "app/partyrsk/cbl/PRBRSK5.cbl",
+      "description": "Batch recalculation step 5: writes the score, exposure and RCAL audit rows; commits nothing itself.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRBRSK5.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRERR01",
+      "path": "app/partyrsk/cbl/PRERR01.cbl",
+      "description": "PARTYRSK online error handler: formats the diagnostic to TDQ PRER and a per-task TS queue.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRERR01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRKYC01",
+      "path": "app/partyrsk/cbl/PRKYC01.cbl",
+      "description": "Online risk-service entry point for card authorisations: validates CV-RISK-AREA, resolves the party and drives the assessment chain.",
+      "key_points": [
+        "Reached from CARDSVC only through route XMOD/RISKSVC in CARDSVC.PGM_ROUTE; the card side never names it."
+      ],
+      "basis": [
+        "app/partyrsk/cbl/PRKYC01.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRKYC02",
+      "path": "app/partyrsk/cbl/PRKYC02.cbl",
+      "description": "Online KYC status and sanctions screening against the watch list name path.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRKYC02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRKYC03",
+      "path": "app/partyrsk/cbl/PRKYC03.cbl",
+      "description": "Online read-only party/KYC inquiry entry point reached from CARDSVC route XMOD/KYCINQ; audits every look.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRKYC03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRKYC04",
+      "path": "app/partyrsk/cbl/PRKYC04.cbl",
+      "description": "Online inquiry: assembles the party record, linked customer numbers and last five KYC reviews for the summary.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRKYC04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRRSK02",
+      "path": "app/partyrsk/cbl/PRRSK02.cbl",
+      "description": "Online exposure aggregation across product systems, falling back to live CARDSVC.ACCOUNT when the card feed row is absent or stale.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRRSK02.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRRSK03",
+      "path": "app/partyrsk/cbl/PRRSK03.cbl",
+      "description": "Online risk scoring with model parameters cached from the RSKPARM KSDS per load-module residency.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRRSK03.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRRSK04",
+      "path": "app/partyrsk/cbl/PRRSK04.cbl",
+      "description": "Online risk decision: turns score, band, KYC and sanctions into advice and writes score and audit rows under the caller's unit of work.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRRSK04.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "program",
+      "name": "PRRSK05",
+      "path": "app/partyrsk/cbl/PRRSK05.cbl",
+      "description": "Online inquiry bottom: returns the latest risk score and exposure totals and records the regulatory access row.",
+      "key_points": [],
+      "basis": [
+        "app/partyrsk/cbl/PRRSK05.cbl:1-30"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "BINDCARD",
+      "path": "app/jcl/build/BINDCARD.jcl",
+      "description": "Binds every CARDSVC package into collection CARDCOLL and the four card application plans.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/BINDCARD.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "BINDPRTY",
+      "path": "app/jcl/build/BINDPRTY.jcl",
+      "description": "Binds every PARTYRSK package into collection PRTYCOLL and the two Party & Risk plans; must run before BINDCARD.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/BINDPRTY.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "BUILDALL",
+      "path": "app/jcl/build/BUILDALL.jcl",
+      "description": "Full rebuild of the card estate from source: assembler, CICS and batch COBOL members of both modules.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/BUILDALL.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBPRT01J",
+      "path": "app/jcl/partyrsk/CBPRT01J.jcl",
+      "description": "PARTYWK job 1 of 4: runs CBPRT01 KYC review due selection.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/partyrsk/CBPRT01J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBPRT02J",
+      "path": "app/jcl/partyrsk/CBPRT02J.jcl",
+      "description": "PARTYWK job 2 of 4: loads the sanctions feed (CBPRT02A) and rebuilds the WATCHLST VSAM from it (CBPRT02B, sort, repro, BLDINDEX).",
+      "key_points": [],
+      "basis": [
+        "app/jcl/partyrsk/CBPRT02J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBPRT03J",
+      "path": "app/jcl/partyrsk/CBPRT03J.jcl",
+      "description": "PARTYWK job 3 of 4: runs CBPRT03 full portfolio rescore.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/partyrsk/CBPRT03J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CBPRT04J",
+      "path": "app/jcl/partyrsk/CBPRT04J.jcl",
+      "description": "PARTYWK job 4 of 4: prints the weekly regulatory risk audit pack.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/partyrsk/CBPRT04J.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "CSDUPCRD",
+      "path": "app/cics/DFHCSDUP.jcl",
+      "description": "Applies the card servicing CICS resource definitions to the CSD of production region CICSCARD via DFHCSDUP.",
+      "key_points": [],
+      "basis": [
+        "app/cics/DFHCSDUP.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "DEFCARD",
+      "path": "app/jcl/vsam/DEFCARD.jcl",
+      "description": "Install job that defines the CARDSVC VSAM clusters.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/vsam/DEFCARD.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "DEFPARTY",
+      "path": "app/jcl/vsam/DEFPARTY.jcl",
+      "description": "Install job that defines the PARTYRSK VSAM clusters under their own HLQ.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/vsam/DEFPARTY.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "jcl",
+      "name": "DEFPWCTL",
+      "path": "app/jcl/partyrsk/DEFPWCTL.jcl",
+      "description": "Install job that defines the PARTYWK cycle control VSAM cluster.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/partyrsk/DEFPWCTL.jcl:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "proc",
+      "name": "COBASM",
+      "path": "app/jcl/build/COBASM.proc",
+      "description": "PROC that assembles and links the HLASM subroutine as a separate load module for static inclusion by COBOL link edits.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/COBASM.proc:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "proc",
+      "name": "COBBATCH",
+      "path": "app/jcl/build/COBBATCH.proc",
+      "description": "PROC that precompiles, compiles and link-edits batch COBOL programs (no CICS translate), CALLOPT selecting DYNAM or NODYNAM.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/COBBATCH.proc:1-25"
+      ],
+      "written_by": "agent"
+    },
+    {
+      "kind": "proc",
+      "name": "COBCICS",
+      "path": "app/jcl/build/COBCICS.proc",
+      "description": "PROC that translates, precompiles, compiles and link-edits CICS/DB2 online COBOL programs.",
+      "key_points": [],
+      "basis": [
+        "app/jcl/build/COBCICS.proc:1-25"
+      ],
+      "written_by": "agent"
+    }
+  ]
+}

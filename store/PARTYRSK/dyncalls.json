@@ -1,0 +1,602 @@
+{
+  "meta": {
+    "module": "PARTYRSK",
+    "generated_at": "2026-09-28T13:34:12Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {}
+  },
+  "summary": {
+    "sites": 14,
+    "resolved": 14
+  },
+  "sites": [
+    {
+      "program": "PRKYC01",
+      "path": "app/partyrsk/cbl/PRKYC01.cbl",
+      "line": 441,
+      "construct": "CICS-LINK",
+      "variable": "WS-NEXT-PGM",
+      "source": "app/partyrsk/cbl/PRKYC01.cbl:441",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRKYC02",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC01.cbl:34",
+              "how": "VALUE clause of WS-NEXT-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC01",
+          "item": "WS-NEXT-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-NEXT-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC01.cbl:34"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC01",
+          "item": "WS-NEXT-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRKYC02 '",
+          "source": "app/partyrsk/cbl/PRKYC01.cbl:34"
+        }
+      ]
+    },
+    {
+      "program": "PRKYC01",
+      "path": "app/partyrsk/cbl/PRKYC01.cbl",
+      "line": 613,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRKYC01.cbl:613",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC01.cbl:35",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC01",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC01.cbl:35"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC01",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRKYC01.cbl:35"
+        }
+      ]
+    },
+    {
+      "program": "PRKYC02",
+      "path": "app/partyrsk/cbl/PRKYC02.cbl",
+      "line": 731,
+      "construct": "CICS-LINK",
+      "variable": "WS-NEXT-PGM",
+      "source": "app/partyrsk/cbl/PRKYC02.cbl:731",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRRSK02",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC02.cbl:37",
+              "how": "VALUE clause of WS-NEXT-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC02",
+          "item": "WS-NEXT-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-NEXT-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC02.cbl:37"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC02",
+          "item": "WS-NEXT-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRRSK02 '",
+          "source": "app/partyrsk/cbl/PRKYC02.cbl:37"
+        }
+      ]
+    },
+    {
+      "program": "PRKYC02",
+      "path": "app/partyrsk/cbl/PRKYC02.cbl",
+      "line": 825,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRKYC02.cbl:825",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC02.cbl:38",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC02",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC02.cbl:38"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC02",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRKYC02.cbl:38"
+        }
+      ]
+    },
+    {
+      "program": "PRKYC03",
+      "path": "app/partyrsk/cbl/PRKYC03.cbl",
+      "line": 304,
+      "construct": "CICS-LINK",
+      "variable": "WS-NEXT-PGM",
+      "source": "app/partyrsk/cbl/PRKYC03.cbl:304",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRKYC04",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC03.cbl:30",
+              "how": "VALUE clause of WS-NEXT-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC03",
+          "item": "WS-NEXT-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-NEXT-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC03.cbl:30"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC03",
+          "item": "WS-NEXT-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRKYC04 '",
+          "source": "app/partyrsk/cbl/PRKYC03.cbl:30"
+        }
+      ]
+    },
+    {
+      "program": "PRKYC03",
+      "path": "app/partyrsk/cbl/PRKYC03.cbl",
+      "line": 418,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRKYC03.cbl:418",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC03.cbl:31",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC03",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC03.cbl:31"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC03",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRKYC03.cbl:31"
+        }
+      ]
+    },
+    {
+      "program": "PRKYC04",
+      "path": "app/partyrsk/cbl/PRKYC04.cbl",
+      "line": 687,
+      "construct": "CICS-LINK",
+      "variable": "WS-NEXT-PGM",
+      "source": "app/partyrsk/cbl/PRKYC04.cbl:687",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRRSK05",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC04.cbl:30",
+              "how": "VALUE clause of WS-NEXT-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC04",
+          "item": "WS-NEXT-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-NEXT-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC04.cbl:30"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC04",
+          "item": "WS-NEXT-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRRSK05 '",
+          "source": "app/partyrsk/cbl/PRKYC04.cbl:30"
+        }
+      ]
+    },
+    {
+      "program": "PRKYC04",
+      "path": "app/partyrsk/cbl/PRKYC04.cbl",
+      "line": 761,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRKYC04.cbl:761",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRKYC04.cbl:31",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRKYC04",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRKYC04.cbl:31"
+        },
+        {
+          "depth": 1,
+          "program": "PRKYC04",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRKYC04.cbl:31"
+        }
+      ]
+    },
+    {
+      "program": "PRRSK02",
+      "path": "app/partyrsk/cbl/PRRSK02.cbl",
+      "line": 638,
+      "construct": "CICS-LINK",
+      "variable": "WS-NEXT-PGM",
+      "source": "app/partyrsk/cbl/PRRSK02.cbl:638",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRRSK03",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRRSK02.cbl:39",
+              "how": "VALUE clause of WS-NEXT-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRRSK02",
+          "item": "WS-NEXT-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-NEXT-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRRSK02.cbl:39"
+        },
+        {
+          "depth": 1,
+          "program": "PRRSK02",
+          "item": "WS-NEXT-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRRSK03 '",
+          "source": "app/partyrsk/cbl/PRRSK02.cbl:39"
+        }
+      ]
+    },
+    {
+      "program": "PRRSK02",
+      "path": "app/partyrsk/cbl/PRRSK02.cbl",
+      "line": 710,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRRSK02.cbl:710",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRRSK02.cbl:40",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRRSK02",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRRSK02.cbl:40"
+        },
+        {
+          "depth": 1,
+          "program": "PRRSK02",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRRSK02.cbl:40"
+        }
+      ]
+    },
+    {
+      "program": "PRRSK03",
+      "path": "app/partyrsk/cbl/PRRSK03.cbl",
+      "line": 892,
+      "construct": "CICS-LINK",
+      "variable": "WS-NEXT-PGM",
+      "source": "app/partyrsk/cbl/PRRSK03.cbl:892",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRRSK04",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRRSK03.cbl:36",
+              "how": "VALUE clause of WS-NEXT-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRRSK03",
+          "item": "WS-NEXT-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-NEXT-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRRSK03.cbl:36"
+        },
+        {
+          "depth": 1,
+          "program": "PRRSK03",
+          "item": "WS-NEXT-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRRSK04 '",
+          "source": "app/partyrsk/cbl/PRRSK03.cbl:36"
+        }
+      ]
+    },
+    {
+      "program": "PRRSK03",
+      "path": "app/partyrsk/cbl/PRRSK03.cbl",
+      "line": 975,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRRSK03.cbl:975",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRRSK03.cbl:37",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRRSK03",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRRSK03.cbl:37"
+        },
+        {
+          "depth": 1,
+          "program": "PRRSK03",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRRSK03.cbl:37"
+        }
+      ]
+    },
+    {
+      "program": "PRRSK04",
+      "path": "app/partyrsk/cbl/PRRSK04.cbl",
+      "line": 632,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRRSK04.cbl:632",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRRSK04.cbl:34",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRRSK04",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRRSK04.cbl:34"
+        },
+        {
+          "depth": 1,
+          "program": "PRRSK04",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRRSK04.cbl:34"
+        }
+      ]
+    },
+    {
+      "program": "PRRSK05",
+      "path": "app/partyrsk/cbl/PRRSK05.cbl",
+      "line": 548,
+      "construct": "CICS-LINK",
+      "variable": "WS-ERROR-PGM",
+      "source": "app/partyrsk/cbl/PRRSK05.cbl:548",
+      "status": "resolved",
+      "candidates": [
+        {
+          "name": "PRERR01",
+          "in_inventory": true,
+          "evidence": [
+            {
+              "source": "app/partyrsk/cbl/PRRSK05.cbl:32",
+              "how": "VALUE clause of WS-ERROR-PGM"
+            }
+          ]
+        }
+      ],
+      "open_ends": [],
+      "trace": [
+        {
+          "depth": 0,
+          "program": "PRRSK05",
+          "item": "WS-ERROR-PGM",
+          "kind": "definition",
+          "class": "DET",
+          "detail": "01 WS-ERROR-PGM PIC X(8) \u2014 WORKING-STORAGE",
+          "source": "app/partyrsk/cbl/PRRSK05.cbl:32"
+        },
+        {
+          "depth": 1,
+          "program": "PRRSK05",
+          "item": "WS-ERROR-PGM",
+          "kind": "value-clause",
+          "class": "DET",
+          "detail": "VALUE 'PRERR01 '",
+          "source": "app/partyrsk/cbl/PRRSK05.cbl:32"
+        }
+      ]
+    }
+  ]
+}

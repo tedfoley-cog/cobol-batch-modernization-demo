@@ -1,0 +1,1439 @@
+{
+  "meta": {
+    "module": "PARTYRSK",
+    "generated_at": "2026-09-28T13:40:01Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {}
+  },
+  "findings": [
+    {
+      "kind": "db2-dclgen-ddl-mismatch",
+      "severity": "high",
+      "message": "DCLGEN for PARTYRSK.CUSTOMER in PRKYC01 (inline) disagrees with the scanned DDL: declares 8 of 28 DDL columns; not declared: TITLE, FIRST_NAME, MIDDLE_INIT, LEGAL_NAME, DOB, NATIONAL_ID, TAX_ID, ADDR_LINE1, ADDR_LINE2, CITY, STATE_CD, POSTAL_CD, DOMICILE_CTRY, CITIZENSHIP_CTRY, PHONE_HOME, PHONE_MOBILE, EMAIL, SEGMENT_CD, PEP_FLG, VIP_FLG",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl:96-105",
+        "db2/ddl/11_PARTYDB_TABLES.sql:9"
+      ],
+      "request": "Confirm which is current: regenerate the DCLGEN from the live catalog (DSNTIAD/DCLGEN TABLE(PARTYRSK.CUSTOMER)) or provide the DDL version the program was last bound against",
+      "status": "open",
+      "id": "F0001",
+      "owner": "human"
+    },
+    {
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBASM: the PROC statement at app/jcl/build/COBASM.proc:4 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 3 parameter line(s) that follow (ASMHLQ, LEHLQ, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:4",
+        "app/jcl/build/COBASM.proc:5",
+        "app/jcl/build/COBASM.proc:6",
+        "app/jcl/build/COBASM.proc:7"
+      ],
+      "request": "Provide the production copy of PROC COBASM (or confirm the intended defaults for ASMHLQ, LEHLQ, WORK)",
+      "status": "open",
+      "id": "F0002",
+      "owner": "human"
+    },
+    {
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBBATCH: the PROC statement at app/jcl/build/COBBATCH.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:5",
+        "app/jcl/build/COBBATCH.proc:6",
+        "app/jcl/build/COBBATCH.proc:7",
+        "app/jcl/build/COBBATCH.proc:8",
+        "app/jcl/build/COBBATCH.proc:9",
+        "app/jcl/build/COBBATCH.proc:10",
+        "app/jcl/build/COBBATCH.proc:11",
+        "app/jcl/build/COBBATCH.proc:12",
+        "app/jcl/build/COBBATCH.proc:13"
+      ],
+      "request": "Provide the production copy of PROC COBBATCH (or confirm the intended defaults for CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK)",
+      "status": "open",
+      "id": "F0003",
+      "owner": "human"
+    },
+    {
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBCICS: the PROC statement at app/jcl/build/COBCICS.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:5",
+        "app/jcl/build/COBCICS.proc:6",
+        "app/jcl/build/COBCICS.proc:7",
+        "app/jcl/build/COBCICS.proc:8",
+        "app/jcl/build/COBCICS.proc:9",
+        "app/jcl/build/COBCICS.proc:10",
+        "app/jcl/build/COBCICS.proc:11",
+        "app/jcl/build/COBCICS.proc:12",
+        "app/jcl/build/COBCICS.proc:13"
+      ],
+      "request": "Provide the production copy of PROC COBCICS (or confirm the intended defaults for CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK)",
+      "status": "open",
+      "id": "F0004",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-environment-topology",
+      "severity": "high",
+      "message": "PARTYRSK profile: environment_topology is not in the store \u2014 which LPARs and environments (production / test / DR) the estate has \u2014 the scanned JCL allocates datasets under the high-level qualifier(s) ASM, CARD, CICS, CICSTS, DSN, PRTY, SYS1, SYS2: a naming observation, which is not proof of which LPAR or environment runs them",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDCARD.jcl:31",
+        "app/jcl/build/BINDPRTY.jcl:17",
+        "app/jcl/build/BUILDALL.jcl:61",
+        "app/jcl/build/BUILDALL.jcl:62",
+        "app/jcl/build/COBASM.proc:35",
+        "app/jcl/build/COBASM.proc:36",
+        "app/jcl/build/COBASM.proc:60"
+      ],
+      "request": "State the LPARs and environments, how a dataset or job name says which one it belongs to, and which sysplex they sit in: the scan can only list the qualifiers it saw",
+      "status": "open",
+      "id": "F0005",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-masking-policy",
+      "severity": "high",
+      "message": "PARTYRSK profile: masking_policy is not in the store \u2014 what may leave the estate, and in what shape",
+      "evidence": [],
+      "request": "State the data-masking policy for extracted test data (which fields must be masked, whether production data may leave the estate at all)",
+      "status": "open",
+      "id": "F0006",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-shared-code-boundary",
+      "severity": "high",
+      "message": "PARTYRSK profile: shared_code_boundary is not in the store \u2014 which code the module uses but does not own",
+      "evidence": [],
+      "request": "Confirm which copybooks and called modules are shared estate code rather than the module's own, and which library owns them",
+      "status": "open",
+      "id": "F0007",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-test-lpar",
+      "severity": "high",
+      "message": "PARTYRSK profile: test_lpar is not in the store \u2014 whether a test LPAR is available to run the migrated code against",
+      "evidence": [],
+      "request": "Confirm whether a test LPAR (or a sandbox subsystem) is available for parallel runs, and who can grant access",
+      "status": "open",
+      "id": "F0008",
+      "owner": "human"
+    },
+    {
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "29 steps of PROC COBCICS use (job BUILDALL step ONL0010; job BUILDALL step ONL0020; job BUILDALL step ONL0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBCICS.proc:7 is orphaned by the PROC header break at app/jcl/build/COBCICS.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87"
+      ],
+      "request": "Provide the production copy of PROC COBCICS so the default for &CALLOPT is known",
+      "status": "open",
+      "count": 29,
+      "id": "F0009",
+      "owner": "human"
+    },
+    {
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "39 steps of PROC COBBATCH use (job BUILDALL step BAT0010; job BUILDALL step BAT0020; job BUILDALL step BAT0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBBATCH.proc:7 is orphaned by the PROC header break at app/jcl/build/COBBATCH.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71"
+      ],
+      "request": "Provide the production copy of PROC COBBATCH so the default for &CALLOPT is known",
+      "status": "open",
+      "count": 39,
+      "id": "F0010",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 11 job(s) but the export states no frequency for 11 of them, window for 11 of them, deadline for 10 of them, runtime for 11 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/CARDNITE.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0011",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 4 job(s) but the export states no frequency for 4 of them, window for 4 of them, deadline for 3 of them, runtime for 4 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/PARTYWK.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0012",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 5 job(s) but the export states no frequency for 5 of them, window for 5 of them, deadline for 4 of them, runtime for 5 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/CARDREF.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0013",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 6 job(s) but the export states no frequency for 6 of them, window for 6 of them, deadline for 5 of them, runtime for 6 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/CARDBILL.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0014",
+      "owner": "human"
+    },
+    {
+      "kind": "cics-file-undefined",
+      "severity": "medium",
+      "message": "CICS FILE WATCHNM is used by PRKYC02 but no DEFINE FILE(WATCHNM) exists in the scanned CSD input",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC02.cbl:425",
+        "app/partyrsk/cbl/PRKYC02.cbl:472",
+        "app/partyrsk/cbl/PRKYC02.cbl:521"
+      ],
+      "request": "Provide the CSD definition (CEDA VIEW FILE(WATCHNM)) or confirm the resource is remote/defined elsewhere",
+      "status": "open",
+      "id": "F0015",
+      "owner": "human"
+    },
+    {
+      "kind": "cics-resource-variable",
+      "severity": "medium",
+      "message": "program PRERR01: EXEC CICS WRITEQ TS names its ts-queue through data item WS-TSQ-NAME; WS-TSQ-NAME is written at app/partyrsk/cbl/PRERR01.cbl:245, app/partyrsk/cbl/PRERR01.cbl:246, app/partyrsk/cbl/PRERR01.cbl:247 (value is run-time data)",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl:251"
+      ],
+      "request": "Determine the value(s) WS-TSQ-NAME holds when PRERR01 runs EXEC CICS WRITEQ TS (trace its writers; it may come from a COMMAREA, a table or a control file)",
+      "status": "open",
+      "id": "F0016",
+      "owner": "agent"
+    },
+    {
+      "kind": "cics-tdqueue-undefined",
+      "severity": "medium",
+      "message": "CICS TDQUEUE PRER is used by PRERR01 but no DEFINE TDQUEUE(PRER) exists in the scanned CSD input",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl:174",
+        "app/partyrsk/cbl/PRERR01.cbl:231"
+      ],
+      "request": "Provide the CSD definition (CEDA VIEW TDQUEUE(PRER)) or confirm the resource is remote/defined elsewhere",
+      "status": "open",
+      "id": "F0017",
+      "owner": "human"
+    },
+    {
+      "kind": "db2-cics-plan-missing",
+      "severity": "medium",
+      "message": "8 online program(s) (PRKYC01, PRKYC02, PRKYC03, PRKYC04, PRRSK02 \u2026) have embedded SQL but the scanned CSD has no DB2CONN/DB2ENTRY, so their plan and thread limits are unknown",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl:320-333",
+        "app/partyrsk/cbl/PRKYC01.cbl:377-385",
+        "app/partyrsk/cbl/PRKYC01.cbl:94",
+        "app/partyrsk/cbl/PRKYC01.cbl:96-105"
+      ],
+      "request": "Provide the DB2CONN and DB2ENTRY/DB2TRAN definitions (CEDA or DFHCSDUP EXTRACT) for the region",
+      "status": "open",
+      "id": "F0018",
+      "owner": "human"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.CARD_LIMIT in PRBRSK3: 3 host variable(s) do not match the DDL column type \u2014 LIMIT_AMT DECIMAL(13,2) vs :DCL-CL-LIMIT-AMT PIC S9(13)V99 COMP-3; USED_AMT DECIMAL(13,2) vs :DCL-CL-USED-AMT PIC S9(13)V99 COMP-3; AVAIL_AMT DECIMAL(13,2) vs :DCL-CL-AVAIL-AMT PIC S9(13)V99 COMP-3",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK3.cbl:119",
+        "app/partyrsk/cbl/PRBRSK3.cbl:120",
+        "app/partyrsk/cbl/PRBRSK3.cbl:121",
+        "app/partyrsk/cbl/PRBRSK3.cbl:497-510"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0019",
+      "owner": "agent"
+    },
+    {
+      "kind": "parser-residue",
+      "severity": "medium",
+      "message": "811 scheduler card(s) are not CTMBLT parameters (e.g. CALENDAR; TYPE=REGULAR; DESC=BANK) \u2014 not in the detection contract, must be classified before trusting the job chains",
+      "evidence": [
+        "sched/CALENDARS.sched:13",
+        "sched/CALENDARS.sched:14",
+        "sched/CALENDARS.sched:15",
+        "sched/CALENDARS.sched:16",
+        "sched/CALENDARS.sched:17",
+        "sched/CALENDARS.sched:18",
+        "sched/CALENDARS.sched:19",
+        "sched/CALENDARS.sched:20",
+        "sched/CALENDARS.sched:21",
+        "sched/CALENDARS.sched:22"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0020",
+      "owner": "toolbox"
+    },
+    {
+      "kind": "profile-database-managers",
+      "severity": "medium",
+      "message": "PARTYRSK profile: database_managers reads IBM Db2 for z/OS from this module's store, which is what this module proves and not what the estate has \u2014 which database systems the estate runs, and at which level",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:36",
+        "app/jcl/build/BINDPRTY.jcl:23",
+        "app/jcl/partyrsk/CBPRT01J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:64",
+        "app/jcl/partyrsk/CBPRT02J.jcl:87",
+        "app/jcl/partyrsk/CBPRT03J.jcl:79",
+        "app/jcl/partyrsk/CBPRT04J.jcl:48",
+        "app/partyrsk/cbl/CBPRT01.cbl:1"
+      ],
+      "request": "List the database systems installed (Db2, IMS DL/I, IDMS, Adabas, ...) with their versions: the scan proves only what this module touches, which is a lower bound",
+      "status": "open",
+      "id": "F0021",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-db2-library-level",
+      "severity": "medium",
+      "message": "PARTYRSK profile: db2_library_level is not in the store \u2014 which DB2 level the module is built and run against",
+      "evidence": [],
+      "request": "Provide the DB2 library concatenation (SDSNLOAD / SDSNEXIT) of the module's steps, which names the DB2 level",
+      "status": "open",
+      "id": "F0022",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-file-transfer",
+      "severity": "medium",
+      "message": "PARTYRSK profile: file_transfer is not in the store \u2014 how files cross the boundary of the estate \u2014 assumed 'IBM Connect:Direct' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the file-transfer product (Connect:Direct, FTP/SFTP, XCOM, MFT) used to move datasets in and out",
+      "status": "open",
+      "id": "F0023",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-interfaces",
+      "severity": "medium",
+      "message": "PARTYRSK profile: interfaces is not in the store \u2014 what the module exchanges with the world outside it",
+      "evidence": [],
+      "request": "Confirm the module's interfaces (modules it calls but does not own, MQ, remote systems, transfers) and who owns the other side",
+      "status": "open",
+      "id": "F0024",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-library-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: library_manager is not in the store \u2014 which source / change manager holds the members \u2014 assumed 'Broadcom Endevor' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the source library manager (Endevor, ChangeMan, Panvalet, Librarian, plain PDS) and how a member is promoted to production",
+      "status": "open",
+      "id": "F0025",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-online-monitors",
+      "severity": "medium",
+      "message": "PARTYRSK profile: online_monitors reads IBM CICS Transaction Server from this module's store, which is what this module proves and not what the estate has \u2014 which transaction monitors the estate runs, and at which level",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:441",
+        "app/partyrsk/cbl/PRKYC01.cbl:613",
+        "app/partyrsk/cbl/PRKYC02.cbl:1",
+        "app/partyrsk/cbl/PRKYC02.cbl:731",
+        "app/partyrsk/cbl/PRKYC02.cbl:825",
+        "app/partyrsk/cbl/PRKYC03.cbl:1"
+      ],
+      "request": "List the online monitors installed (CICS TS, IMS TM, none) with their versions: the scan proves only what this module uses, which is a lower bound",
+      "status": "open",
+      "id": "F0026",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-output-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: output_manager is not in the store \u2014 which product owns the printed output once it leaves the spool \u2014 76 DD(s) write to SYSOUT: the jobs print, but a spool class never names the product that archives or delivers the output \u2014 assumed 'Broadcom CA View' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:104",
+        "app/cics/DFHCSDUP.jcl:111",
+        "app/cics/DFHCSDUP.jcl:25",
+        "app/cics/DFHCSDUP.jcl:46",
+        "app/cics/DFHCSDUP.jcl:87",
+        "app/jcl/build/BINDCARD.jcl:32",
+        "app/jcl/build/BINDCARD.jcl:33",
+        "app/jcl/build/BINDCARD.jcl:34"
+      ],
+      "request": "State the output / report manager (CA View, CA Deliver, Control-D, CA Spool) and what it does with each SYSOUT class the jobs write to",
+      "status": "open",
+      "id": "F0027",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-security-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: security_manager is not in the store \u2014 which external security manager guards the datasets \u2014 assumed 'IBM RACF' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the security manager (RACF, CA ACF2, CA Top Secret) and who owns the dataset profiles",
+      "status": "open",
+      "id": "F0028",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-sort-product",
+      "severity": "medium",
+      "message": "PARTYRSK profile: sort_product is not in the store \u2014 which sort product PGM=SORT resolves to \u2014 3 step(s) run PGM=SORT, the site linkage alias: a sort runs, the product is unnamed \u2014 assumed 'IBM DFSORT' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [
+        "app/jcl/partyrsk/CBPRT01J.jcl:66",
+        "app/jcl/partyrsk/CBPRT02J.jcl:99",
+        "app/jcl/partyrsk/CBPRT03J.jcl:91"
+      ],
+      "request": "State the sort product installed (IBM DFSORT or Syncsort MFX): PGM=SORT is a linkage alias and does not say which one runs",
+      "status": "open",
+      "id": "F0029",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-standard-compiler",
+      "severity": "medium",
+      "message": "PARTYRSK profile: standard_compiler is not in the store \u2014 which compiler the shop builds production code with \u2014 assumed 'IBM Enterprise COBOL for z/OS 6.3' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the shop-standard compiler and release (Enterprise COBOL 6.x, ...); a single module's compile step is that module's, not the estate's",
+      "status": "open",
+      "id": "F0030",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-standard-compiler-options",
+      "severity": "medium",
+      "message": "PARTYRSK profile: standard_compiler_options is not in the store \u2014 which compile options the shop builds production code with \u2014 assumed 'RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the shop-standard compile options (NUMPROC, TRUNC, ARCH, RENT, SSRANGE, ...) a module is expected to be built with",
+      "status": "open",
+      "id": "F0031",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-tape-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: tape_manager is not in the store \u2014 which tape manager owns the volumes the jobs allocate \u2014 assumed 'Broadcom CA 1' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the tape / removable-media manager (CA 1, CA TLMS, DFSMSrmm) and the retention rules it applies: UNIT=TAPE proves tape is used, never which catalogue owns it",
+      "status": "open",
+      "id": "F0032",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-volumes",
+      "severity": "medium",
+      "message": "PARTYRSK profile: volumes is not in the store \u2014 how much data the module moves per run",
+      "evidence": [],
+      "request": "Provide the production volumes (records in / out per run, DB2 row counts, file sizes) the module handles",
+      "status": "open",
+      "id": "F0033",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-zos-version",
+      "severity": "medium",
+      "message": "PARTYRSK profile: zos_version is not in the store \u2014 which z/OS release the estate runs \u2014 assumed 'IBM z/OS 2.5' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the z/OS release of the production LPAR (D IPLINFO, or the release the shop is on)",
+      "status": "open",
+      "id": "F0034",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job BINDCARD appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders BINDCARD, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0035",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job BINDPRTY appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/build/BINDPRTY.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders BINDPRTY, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0036",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job BUILDALL appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders BUILDALL, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0037",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job CSDUPCRD appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders CSDUPCRD, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0038",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job DEFCARD appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders DEFCARD, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0039",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job DEFPARTY appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders DEFPARTY, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0040",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job DEFPWCTL appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/partyrsk/DEFPWCTL.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders DEFPWCTL, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0041",
+      "owner": "human"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.ACCOUNT: PRBRSK3, PRRSK02 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 4 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK3.cbl:163-177",
+        "app/partyrsk/cbl/PRBRSK3.cbl:397-407",
+        "app/partyrsk/cbl/PRRSK02.cbl:446-462"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0042",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.CARD_LIMIT: PRBRSK3 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 2 ok / 3 mismatch / 0 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK3.cbl:497-510"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0043",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table PARTYRSK.CUSTOMER: CBPRT01, CBPRT03, CBPRT04, PRBRSK1, PRKYC02, PRKYC03, PRKYC04, PRRSK03 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 55 ok / 0 mismatch / 4 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/CBPRT01.cbl:166-200",
+        "app/partyrsk/cbl/CBPRT01.cbl:295-314",
+        "app/partyrsk/cbl/CBPRT03.cbl:174-185",
+        "app/partyrsk/cbl/CBPRT03.cbl:436-442",
+        "app/partyrsk/cbl/CBPRT04.cbl:393-409",
+        "app/partyrsk/cbl/CBPRT04.cbl:414-434"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0044",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table PARTYRSK.PARTY_EXPOSURE: PRBRSK3, PRBRSK5, PRRSK02, PRRSK03, PRRSK05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 61 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK3.cbl:140-156",
+        "app/partyrsk/cbl/PRBRSK3.cbl:304-314",
+        "app/partyrsk/cbl/PRBRSK5.cbl:446-465",
+        "app/partyrsk/cbl/PRBRSK5.cbl:482-518",
+        "app/partyrsk/cbl/PRRSK02.cbl:128-148",
+        "app/partyrsk/cbl/PRRSK02.cbl:249-254"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0045",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table PARTYRSK.PARTY_KYC: CBPRT01, CBPRT04, PRBRSK2, PRKYC02, PRKYC04, PRRSK03 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 53 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/CBPRT01.cbl:166-200",
+        "app/partyrsk/cbl/CBPRT01.cbl:295-314",
+        "app/partyrsk/cbl/CBPRT01.cbl:365-370",
+        "app/partyrsk/cbl/CBPRT01.cbl:399-433",
+        "app/partyrsk/cbl/CBPRT04.cbl:414-434",
+        "app/partyrsk/cbl/CBPRT04.cbl:982-990"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0046",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table PARTYRSK.PARTY_RISK_AUDIT: CBPRT04, PRBRSK5, PRRSK04, PRRSK05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 59 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/CBPRT04.cbl:348-369",
+        "app/partyrsk/cbl/CBPRT04.cbl:393-409",
+        "app/partyrsk/cbl/CBPRT04.cbl:539-553",
+        "app/partyrsk/cbl/CBPRT04.cbl:882-889",
+        "app/partyrsk/cbl/PRBRSK5.cbl:557-591",
+        "app/partyrsk/cbl/PRRSK04.cbl:534-570"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0047",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table PARTYRSK.PARTY_RISK_SCORE: CBPRT04, PRBRSK5, PRRSK04, PRRSK05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 43 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/CBPRT04.cbl:374-388",
+        "app/partyrsk/cbl/CBPRT04.cbl:750-757",
+        "app/partyrsk/cbl/CBPRT04.cbl:799-804",
+        "app/partyrsk/cbl/PRBRSK5.cbl:283-292",
+        "app/partyrsk/cbl/PRBRSK5.cbl:335-369",
+        "app/partyrsk/cbl/PRRSK04.cbl:240-249"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0048",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table PARTYRSK.PARTY_SANCTION: CBPRT02A, CBPRT02B access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 37 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/partyrsk/cbl/CBPRT02A.cbl:262-268",
+        "app/partyrsk/cbl/CBPRT02A.cbl:496-510",
+        "app/partyrsk/cbl/CBPRT02A.cbl:512-529",
+        "app/partyrsk/cbl/CBPRT02A.cbl:554-578",
+        "app/partyrsk/cbl/CBPRT02B.cbl:168-182",
+        "app/partyrsk/cbl/CBPRT02B.cbl:235-246"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0049",
+      "owner": "informational"
+    },
+    {
+      "kind": "descriptions-unwritten",
+      "severity": "info",
+      "message": "4 of 5 business-logic summary(ies) are unwritten \u2014 the report renders them blank, which is not evidence that the artifacts have no business logic",
+      "evidence": [
+        "descriptions.json"
+      ],
+      "request": "Run the description pass of the inventory-analysis skill (it reads each artifact and writes descriptions.json with cited basis), or say descriptions are not wanted",
+      "status": "open",
+      "id": "F0050",
+      "owner": "agent"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRERR01 contains 9 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl:113",
+        "app/partyrsk/cbl/PRERR01.cbl:125",
+        "app/partyrsk/cbl/PRERR01.cbl:133",
+        "app/partyrsk/cbl/PRERR01.cbl:138",
+        "app/partyrsk/cbl/PRERR01.cbl:174"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0051",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRKYC01 contains 7 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl:155",
+        "app/partyrsk/cbl/PRKYC01.cbl:168",
+        "app/partyrsk/cbl/PRKYC01.cbl:173",
+        "app/partyrsk/cbl/PRKYC01.cbl:191",
+        "app/partyrsk/cbl/PRKYC01.cbl:196"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0052",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRKYC02 contains 9 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC02.cbl:161",
+        "app/partyrsk/cbl/PRKYC02.cbl:195",
+        "app/partyrsk/cbl/PRKYC02.cbl:227",
+        "app/partyrsk/cbl/PRKYC02.cbl:232",
+        "app/partyrsk/cbl/PRKYC02.cbl:425"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0053",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRKYC03 contains 6 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC03.cbl:78",
+        "app/partyrsk/cbl/PRKYC03.cbl:110",
+        "app/partyrsk/cbl/PRKYC03.cbl:123",
+        "app/partyrsk/cbl/PRKYC03.cbl:128",
+        "app/partyrsk/cbl/PRKYC03.cbl:304"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0054",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRKYC04 contains 6 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC04.cbl:176",
+        "app/partyrsk/cbl/PRKYC04.cbl:198",
+        "app/partyrsk/cbl/PRKYC04.cbl:212",
+        "app/partyrsk/cbl/PRKYC04.cbl:217",
+        "app/partyrsk/cbl/PRKYC04.cbl:687"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0055",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRRSK02 contains 6 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK02.cbl:164",
+        "app/partyrsk/cbl/PRRSK02.cbl:188",
+        "app/partyrsk/cbl/PRRSK02.cbl:206",
+        "app/partyrsk/cbl/PRRSK02.cbl:211",
+        "app/partyrsk/cbl/PRRSK02.cbl:638"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0056",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRRSK03 contains 10 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK03.cbl:218",
+        "app/partyrsk/cbl/PRRSK03.cbl:244",
+        "app/partyrsk/cbl/PRRSK03.cbl:258",
+        "app/partyrsk/cbl/PRRSK03.cbl:263",
+        "app/partyrsk/cbl/PRRSK03.cbl:303"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0057",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRRSK04 contains 5 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK04.cbl:147",
+        "app/partyrsk/cbl/PRRSK04.cbl:169",
+        "app/partyrsk/cbl/PRRSK04.cbl:183",
+        "app/partyrsk/cbl/PRRSK04.cbl:188",
+        "app/partyrsk/cbl/PRRSK04.cbl:632"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0058",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program PRRSK05 contains 5 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK05.cbl:150",
+        "app/partyrsk/cbl/PRRSK05.cbl:163",
+        "app/partyrsk/cbl/PRRSK05.cbl:178",
+        "app/partyrsk/cbl/PRRSK05.cbl:183",
+        "app/partyrsk/cbl/PRRSK05.cbl:548"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0059",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRBRSK1 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK1.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0060",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRBRSK2 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK2.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0061",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRBRSK3 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK3.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0062",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRBRSK4 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK4.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0063",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRBRSK5 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK5.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0064",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRERR01 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0065",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRKYC01 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0066",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRKYC02 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC02.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0067",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRKYC03 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC03.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0068",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRKYC04 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC04.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0069",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRRSK02 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK02.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0070",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRRSK03 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK03.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0071",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRRSK04 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK04.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0072",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program PRRSK05 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK05.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0073",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC01 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRKYC01.cbl:613) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl:613"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC01.cbl:613",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC01.cbl:35"
+        ]
+      },
+      "id": "F0074",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC01 CICS-LINK WS-NEXT-PGM (app/partyrsk/cbl/PRKYC01.cbl:441) resolves to PRKYC02",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl:441"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC01.cbl:441",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC01.cbl:34"
+        ]
+      },
+      "id": "F0075",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC02 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRKYC02.cbl:825) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC02.cbl:825"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC02.cbl:825",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC02.cbl:38"
+        ]
+      },
+      "id": "F0076",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC02 CICS-LINK WS-NEXT-PGM (app/partyrsk/cbl/PRKYC02.cbl:731) resolves to PRRSK02",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC02.cbl:731"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC02.cbl:731",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC02.cbl:37"
+        ]
+      },
+      "id": "F0077",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC03 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRKYC03.cbl:418) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC03.cbl:418"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC03.cbl:418",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC03.cbl:31"
+        ]
+      },
+      "id": "F0078",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC03 CICS-LINK WS-NEXT-PGM (app/partyrsk/cbl/PRKYC03.cbl:304) resolves to PRKYC04",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC03.cbl:304"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC03.cbl:304",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC03.cbl:30"
+        ]
+      },
+      "id": "F0079",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC04 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRKYC04.cbl:761) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC04.cbl:761"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC04.cbl:761",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC04.cbl:31"
+        ]
+      },
+      "id": "F0080",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRKYC04 CICS-LINK WS-NEXT-PGM (app/partyrsk/cbl/PRKYC04.cbl:687) resolves to PRRSK05",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC04.cbl:687"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRKYC04.cbl:687",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRKYC04.cbl:30"
+        ]
+      },
+      "id": "F0081",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRRSK02 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRRSK02.cbl:710) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK02.cbl:710"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRRSK02.cbl:710",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRRSK02.cbl:40"
+        ]
+      },
+      "id": "F0082",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRRSK02 CICS-LINK WS-NEXT-PGM (app/partyrsk/cbl/PRRSK02.cbl:638) resolves to PRRSK03",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK02.cbl:638"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRRSK02.cbl:638",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRRSK02.cbl:39"
+        ]
+      },
+      "id": "F0083",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRRSK03 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRRSK03.cbl:975) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK03.cbl:975"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRRSK03.cbl:975",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRRSK03.cbl:37"
+        ]
+      },
+      "id": "F0084",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRRSK03 CICS-LINK WS-NEXT-PGM (app/partyrsk/cbl/PRRSK03.cbl:892) resolves to PRRSK04",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK03.cbl:892"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRRSK03.cbl:892",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRRSK03.cbl:36"
+        ]
+      },
+      "id": "F0085",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRRSK04 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRRSK04.cbl:632) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK04.cbl:632"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRRSK04.cbl:632",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRRSK04.cbl:34"
+        ]
+      },
+      "id": "F0086",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "PRRSK05 CICS-LINK WS-ERROR-PGM (app/partyrsk/cbl/PRRSK05.cbl:548) resolves to PRERR01",
+      "evidence": [
+        "app/partyrsk/cbl/PRRSK05.cbl:548"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/partyrsk/cbl/PRRSK05.cbl:548",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM -> value-clause WS-ERROR-PGM",
+        "evidence": [
+          "app/partyrsk/cbl/PRRSK05.cbl:32"
+        ]
+      },
+      "id": "F0087",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBPRT01J step KYCDUE runs launcher IKJEFT01 -> program CBPRT01 (plan PARTYWKP)",
+      "evidence": [
+        "app/jcl/partyrsk/CBPRT01J.jcl:43"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBPRT01) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/partyrsk/CBPRT01J.jcl:43"
+        ]
+      },
+      "id": "F0088",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBPRT02J step SANCLOAD runs launcher IKJEFT01 -> program CBPRT02A (plan PARTYWKP)",
+      "evidence": [
+        "app/jcl/partyrsk/CBPRT02J.jcl:54"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBPRT02A) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/partyrsk/CBPRT02J.jcl:54"
+        ]
+      },
+      "id": "F0089",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBPRT02J step WATCHEXT runs launcher IKJEFT01 -> program CBPRT02B (plan PARTYWKP)",
+      "evidence": [
+        "app/jcl/partyrsk/CBPRT02J.jcl:75"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBPRT02B) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/partyrsk/CBPRT02J.jcl:75"
+        ]
+      },
+      "id": "F0090",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBPRT03J step RESCORE runs launcher IKJEFT01 -> program CBPRT03 (plan PARTYWKP)",
+      "evidence": [
+        "app/jcl/partyrsk/CBPRT03J.jcl:64"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBPRT03) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/partyrsk/CBPRT03J.jcl:64"
+        ]
+      },
+      "id": "F0091",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBPRT04J step RPTAUD runs launcher IKJEFT01 -> program CBPRT04 (plan PARTYWKP)",
+      "evidence": [
+        "app/jcl/partyrsk/CBPRT04J.jcl:36"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBPRT04) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/partyrsk/CBPRT04J.jcl:36"
+        ]
+      },
+      "id": "F0092",
+      "owner": "informational"
+    }
+  ]
+}

@@ -1,0 +1,3033 @@
+{
+  "meta": {
+    "module": "CARDSVC",
+    "generated_at": "2026-09-28T13:40:01Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {
+      "estate": [
+        "PARTYRSK"
+      ]
+    }
+  },
+  "summary": {
+    "connections": 146,
+    "by_category": {
+      "data": 123,
+      "online": 15,
+      "code": 8
+    },
+    "by_status": {
+      "unknown": 12,
+      "must-establish": 98,
+      "satisfied-in-drop": 36
+    },
+    "by_direction": {
+      "both": 81,
+      "in": 45,
+      "out": 20
+    },
+    "counterpart_modules": [
+      "PARTYRSK"
+    ],
+    "estate_modules": [
+      "PARTYRSK"
+    ]
+  },
+  "slots": [
+    {
+      "category": "data",
+      "provider": "db2",
+      "detector": true,
+      "present": true,
+      "entries": 30
+    },
+    {
+      "category": "data",
+      "provider": "ims-dli",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "data",
+      "provider": "idms",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "detector": true,
+      "present": true,
+      "entries": 93
+    },
+    {
+      "category": "data",
+      "provider": "adabas",
+      "detector": false,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "data",
+      "provider": "datacom",
+      "detector": false,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "detector": true,
+      "present": true,
+      "entries": 15
+    },
+    {
+      "category": "online",
+      "provider": "ims-tm",
+      "detector": false,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "online",
+      "provider": "idms-dc",
+      "detector": false,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "interface",
+      "provider": "mq",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "interface",
+      "provider": "cics-external",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "interface",
+      "provider": "file-transfer",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "detector": true,
+      "present": true,
+      "entries": 8
+    },
+    {
+      "category": "code",
+      "provider": "runtime",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "code",
+      "provider": "pli",
+      "detector": false,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "code",
+      "provider": "coolgen",
+      "detector": false,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "schedule",
+      "provider": "control-m",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "schedule",
+      "provider": "ca7",
+      "detector": true,
+      "present": false,
+      "entries": 0
+    },
+    {
+      "category": "schedule",
+      "provider": "tws-opc",
+      "detector": false,
+      "present": false,
+      "entries": 0
+    }
+  ],
+  "connections": [
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "&&FRAUSRT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "unknown",
+      "detail": "referenced only: named by a step, with no DISP or OPEN saying which way data flows",
+      "evidence": []
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "&&MRCHSRT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "unknown",
+      "detail": "referenced only: named by a step, with no DISP or OPEN saying which way data flows",
+      "evidence": []
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "&&ROUTSRT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "unknown",
+      "detail": "referenced only: named by a step, with no DISP or OPEN saying which way data flows",
+      "evidence": []
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "&&RSNSRT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "unknown",
+      "detail": "referenced only: named by a step, with no DISP or OPEN saying which way data flows",
+      "evidence": []
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&ASMHLQ..SASMMOD1",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:34"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&CICSHLQ..SDFHCOB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:48",
+        "app/jcl/build/COBCICS.proc:96"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&CICSHLQ..SDFHLOAD",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:126",
+        "app/jcl/build/COBCICS.proc:44"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&COBHLQ..SIGYCOMP",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:75",
+        "app/jcl/build/COBCICS.proc:91"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&DB2HLQ..SDSNLOAD",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:104",
+        "app/jcl/build/COBBATCH.proc:55",
+        "app/jcl/build/COBCICS.proc:127",
+        "app/jcl/build/COBCICS.proc:63"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&DBRMLIB.",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:56",
+        "app/jcl/build/COBCICS.proc:64"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&LEHLQ..SCEELKED",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:54",
+        "app/jcl/build/COBBATCH.proc:105",
+        "app/jcl/build/COBCICS.proc:128"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&LEHLQ..SCEERUN",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:76",
+        "app/jcl/build/COBCICS.proc:92"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "&SORTHLQ..SORTLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:106"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "ASM.SASMMOD1",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:100",
+        "app/jcl/build/BUILDALL.jcl:58",
+        "app/jcl/build/BUILDALL.jcl:68",
+        "app/jcl/build/BUILDALL.jcl:90"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.ASM",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:35"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.AUTHCLN",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD02.cbl:49",
+        "app/jcl/cardsvc/CBCRD02J.jcl:41",
+        "app/jcl/cardsvc/CBCRD03J.jcl:38"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.AUTHENR",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD03.cbl:52",
+        "app/cardsvc/cbl/CBCRD04.cbl:68",
+        "app/jcl/cardsvc/CBCRD03J.jcl:75",
+        "app/jcl/cardsvc/CBCRD04J.jcl:48"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.AUTHEXTR",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD01.cbl:53",
+        "app/cardsvc/cbl/CBCRD02.cbl:45",
+        "app/jcl/cardsvc/CBCRD01J.jcl:39",
+        "app/jcl/cardsvc/CBCRD01J.jcl:57",
+        "app/jcl/cardsvc/CBCRD02J.jcl:39"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.AUTHLOG",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "ESDS: created and read inside this module",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD01.cbl:48",
+        "app/cardsvc/cbl/CBCRD09.cbl:58",
+        "app/jcl/cardsvc/CBCRD01J.jcl:37",
+        "app/jcl/cardsvc/CBCRD09J.jcl:120",
+        "app/jcl/cardsvc/CBCRD09J.jcl:55",
+        "app/jcl/vsam/DEFCARD.jcl:37"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.AUTHREJ",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD02.cbl:53",
+        "app/jcl/cardsvc/CBCRD02J.jcl:46",
+        "app/jcl/cardsvc/CBCRD02J.jcl:64"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.AUTHSRT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD03.cbl:48",
+        "app/jcl/cardsvc/CBCRD03J.jcl:39",
+        "app/jcl/cardsvc/CBCRD03J.jcl:72"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.BILLSNAP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL06.cbl:35",
+        "app/jcl/cardsvc/CBBIL01J.jcl:62",
+        "app/jcl/cardsvc/CBBIL06J.jcl:24"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.BILLWRK",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL01.cbl:37",
+        "app/jcl/cardsvc/CBBIL01J.jcl:29",
+        "app/jcl/cardsvc/CBBIL01J.jcl:61",
+        "app/jcl/cardsvc/CBBIL02J.jcl:26"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.RECONRPT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL06.cbl:45",
+        "app/jcl/cardsvc/CBBIL06J.jcl:26",
+        "app/jcl/cardsvc/CBBIL06J.jcl:53"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.STMTARC",
+        "module": null
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "sequential (QSAM by DD DCB): created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL05.cbl:36",
+        "app/jcl/cardsvc/CBBIL05J.jcl:28"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.STMTEXT",
+        "module": null
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "sequential (QSAM by DD DCB): created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/cardsvc/cbl/CBSTM02.cbl:50",
+        "app/jcl/cardsvc/CBBIL04J.jcl:38"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.STMTPRT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBSTM01.cbl:37",
+        "app/jcl/cardsvc/CBBIL04J.jcl:34",
+        "app/jcl/cardsvc/CBBIL04J.jcl:70"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.STMTWK2",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL03.cbl:37",
+        "app/cardsvc/cbl/CBBIL04.cbl:36",
+        "app/jcl/cardsvc/CBBIL03J.jcl:25",
+        "app/jcl/cardsvc/CBBIL04J.jcl:28"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.STMTWK3",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL04.cbl:40",
+        "app/cardsvc/cbl/CBBIL05.cbl:32",
+        "app/jcl/cardsvc/CBBIL04J.jcl:29",
+        "app/jcl/cardsvc/CBBIL05J.jcl:27"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BILL.STMTWRK",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL02.cbl:37",
+        "app/cardsvc/cbl/CBBIL03.cbl:33",
+        "app/jcl/cardsvc/CBBIL02J.jcl:47",
+        "app/jcl/cardsvc/CBBIL03J.jcl:24"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BKP.AUTHLOG",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD09.cbl:54",
+        "app/jcl/cardsvc/CBCRD09J.jcl:119",
+        "app/jcl/cardsvc/CBCRD09J.jcl:66"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BKP.CARDXREF",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD09.cbl:46",
+        "app/jcl/cardsvc/CBCRD09J.jcl:117",
+        "app/jcl/cardsvc/CBCRD09J.jcl:56"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.BKP.CYCLCTL",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD09.cbl:50",
+        "app/jcl/cardsvc/CBCRD09J.jcl:118",
+        "app/jcl/cardsvc/CBCRD09J.jcl:61"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.BMS",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:103",
+        "app/jcl/build/BUILDALL.jcl:61",
+        "app/jcl/build/BUILDALL.jcl:71",
+        "app/jcl/build/BUILDALL.jcl:93"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.CARDXREF",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "KSDS: created and read inside this module",
+      "evidence": [
+        "app/jcl/cardsvc/CBCRD09J.jcl:53",
+        "app/jcl/vsam/DEFCARD.jcl:15"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.CARDXREF.AIX1",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "AIX: created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:171"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.CARDXREF.PATH1",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "PATH: created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:180"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.CBL",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/jcl/build/COBCICS.proc:45"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.CICS",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:47",
+        "app/cics/DFHCSDUP.jcl:48",
+        "app/cics/DFHCSDUP.jcl:49",
+        "app/cics/DFHCSDUP.jcl:50"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.CICS.AUDIT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "unknown",
+      "detail": "referenced only: named by a step, with no DISP or OPEN saying which way data flows",
+      "evidence": []
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.CICS.EXTRACT",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "sequential (QSAM by DD DCB): created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:88"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.CICS.OPSLOG",
+        "module": null
+      },
+      "direction": "both",
+      "status": "unknown",
+      "detail": "referenced only: named by a step, with no DISP or OPEN saying which way data flows",
+      "evidence": []
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.COLLECT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD08.cbl:60",
+        "app/jcl/cardsvc/CBCRD08J.jcl:44",
+        "app/jcl/cardsvc/CBCRD08J.jcl:64"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.COMMON.LOADLIB",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): read here, produced outside the module",
+      "evidence": [
+        "app/jcl/cardsvc/CBCRD01J.jcl:36",
+        "app/jcl/cardsvc/CBCRD02J.jcl:38",
+        "app/jcl/cardsvc/CBCRD06J.jcl:54",
+        "app/jcl/cardsvc/CBCRD06J.jcl:81",
+        "app/jcl/cardsvc/CBCRD09J.jcl:116",
+        "app/jcl/proc/CARDDB2L.jcl:16"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.CPY",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:62",
+        "app/jcl/build/BUILDALL.jcl:94",
+        "app/jcl/build/COBBATCH.proc:60",
+        "app/jcl/build/COBBATCH.proc:78",
+        "app/jcl/build/COBCICS.proc:46",
+        "app/jcl/build/COBCICS.proc:68",
+        "app/jcl/build/COBCICS.proc:94"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.CTLRPT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/jcl/cardsvc/CBCRD10J.jcl:56",
+        "app/jcl/cardsvc/CBCRD10J.jcl:57"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.CUSTPREF",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "KSDS: created and read inside this module",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL04.cbl:44",
+        "app/jcl/cardsvc/CBBIL04J.jcl:33",
+        "app/jcl/vsam/DEFCARD.jcl:92"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.CYCLCTL",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "KSDS: created and read inside this module",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL01.cbl:31",
+        "app/cardsvc/cbl/CBBIL06.cbl:39",
+        "app/cardsvc/cbl/CBCRD01.cbl:57",
+        "app/cardsvc/cbl/CBCRD02.cbl:57",
+        "app/cardsvc/cbl/CBCRD03.cbl:62",
+        "app/cardsvc/cbl/CBCRD04.cbl:76",
+        "app/cardsvc/cbl/CBCRD05A.cbl:52",
+        "app/cardsvc/cbl/CBCRD05B.cbl:61",
+        "app/cardsvc/cbl/CBCRD06A.cbl:51",
+        "app/cardsvc/cbl/CBCRD06C.cbl:55",
+        "app/cardsvc/cbl/CBCRD06W.cbl:50",
+        "app/cardsvc/cbl/CBCRD07.cbl:70",
+        "app/cardsvc/cbl/CBCRD08.cbl:64",
+        "app/cardsvc/cbl/CBCRD09.cbl:62",
+        "app/cardsvc/cbl/CBCRD10.cbl:68",
+        "app/jcl/cardsvc/CBBIL01J.jcl:28",
+        "app/jcl/cardsvc/CBBIL01J.jcl:77",
+        "app/jcl/cardsvc/CBBIL06J.jcl:25",
+        "app/jcl/cardsvc/CBCRD01J.jcl:38",
+        "app/jcl/cardsvc/CBCRD02J.jcl:40",
+        "app/jcl/cardsvc/CBCRD03J.jcl:74",
+        "app/jcl/cardsvc/CBCRD04J.jcl:49",
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:50",
+        "app/jcl/cardsvc/CBCRD05BJ.jcl:43",
+        "app/jcl/cardsvc/CBCRD06J.jcl:147",
+        "app/jcl/cardsvc/CBCRD06J.jcl:55",
+        "app/jcl/cardsvc/CBCRD06J.jcl:69",
+        "app/jcl/cardsvc/CBCRD07J.jcl:50",
+        "app/jcl/cardsvc/CBCRD08J.jcl:41",
+        "app/jcl/cardsvc/CBCRD09J.jcl:121",
+        "app/jcl/cardsvc/CBCRD09J.jcl:54",
+        "app/jcl/cardsvc/CBCRD10J.jcl:43",
+        "app/jcl/vsam/DEFCARD.jcl:132"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.DBRMLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:31"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.EXPORT.CYCLCTL",
+        "module": null
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "GDG (by relative generation): created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/jcl/cardsvc/CBCRD09J.jcl:36"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.FEEAUDIT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD05A.cbl:58",
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:51",
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:64"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.FIXLIB",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): read here, produced outside the module",
+      "evidence": [
+        "app/jcl/cardsvc/CBCRD01J.jcl:34",
+        "app/jcl/cardsvc/CBCRD02J.jcl:36",
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:37",
+        "app/jcl/cardsvc/CBCRD06J.jcl:103",
+        "app/jcl/cardsvc/CBCRD06J.jcl:52",
+        "app/jcl/cardsvc/CBCRD06J.jcl:79",
+        "app/jcl/cardsvc/CBCRD09J.jcl:114",
+        "app/jcl/proc/CARDDB2L.jcl:14"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.FRAUDRUL",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "KSDS: created and read inside this module",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:56",
+        "app/jcl/cardsvc/CBREF03J.jcl:130",
+        "app/jcl/vsam/DEFCARD.jcl:73"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.JCLLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:293"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.LOADLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:116",
+        "app/jcl/build/BUILDALL.jcl:84",
+        "app/jcl/build/COBASM.proc:60",
+        "app/jcl/build/COBBATCH.proc:107",
+        "app/jcl/build/COBBATCH.proc:114",
+        "app/jcl/build/COBCICS.proc:129",
+        "app/jcl/build/COBCICS.proc:138",
+        "app/jcl/cardsvc/CBBIL01J.jcl:26",
+        "app/jcl/cardsvc/CBBIL02J.jcl:44",
+        "app/jcl/cardsvc/CBBIL03J.jcl:22",
+        "app/jcl/cardsvc/CBBIL04J.jcl:26",
+        "app/jcl/cardsvc/CBBIL05J.jcl:25",
+        "app/jcl/cardsvc/CBBIL06J.jcl:22",
+        "app/jcl/cardsvc/CBCRD01J.jcl:35",
+        "app/jcl/cardsvc/CBCRD02J.jcl:37",
+        "app/jcl/cardsvc/CBCRD06J.jcl:53",
+        "app/jcl/cardsvc/CBCRD06J.jcl:80",
+        "app/jcl/cardsvc/CBCRD09J.jcl:115",
+        "app/jcl/cardsvc/CBREF01J.jcl:43",
+        "app/jcl/cardsvc/CBREF02J.jcl:24",
+        "app/jcl/cardsvc/CBREF02J.jcl:95",
+        "app/jcl/cardsvc/CBREF03J.jcl:128",
+        "app/jcl/cardsvc/CBREF03J.jcl:25",
+        "app/jcl/cardsvc/CBREF04J.jcl:101",
+        "app/jcl/cardsvc/CBREF04J.jcl:30",
+        "app/jcl/cardsvc/CBREF05J.jcl:25",
+        "app/jcl/proc/CARDDB2L.jcl:15"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CARD.PROD.MACLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:36"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.MERCH.FEED",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "GDG (by relative generation): read here, produced outside the module",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF01J.jcl:26"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.MERCHRTE",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "KSDS: created and read inside this module",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD03.cbl:56",
+        "app/cardsvc/cbl/CBREF02.cbl:46",
+        "app/cardsvc/cbl/CBREF05.cbl:46",
+        "app/jcl/cardsvc/CBCRD03J.jcl:73",
+        "app/jcl/cardsvc/CBREF02J.jcl:97",
+        "app/jcl/cardsvc/CBREF05J.jcl:27",
+        "app/jcl/vsam/DEFCARD.jcl:53"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.PARTYACC",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD06B.cbl:66",
+        "app/cardsvc/cbl/CBCRD06C.cbl:47",
+        "app/jcl/cardsvc/CBCRD06J.jcl:117",
+        "app/jcl/cardsvc/CBCRD06J.jcl:146"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.PARTYRVW",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD06B.cbl:70",
+        "app/jcl/cardsvc/CBCRD06J.jcl:122",
+        "app/jcl/cardsvc/CBCRD06J.jcl:159"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.PARTYSRT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD06B.cbl:62",
+        "app/cardsvc/cbl/CBCRD06X.cbl:48",
+        "app/jcl/cardsvc/CBCRD06J.jcl:116",
+        "app/jcl/cardsvc/CBCRD06J.jcl:83"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.PARTYWK",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD06A.cbl:47",
+        "app/cardsvc/cbl/CBCRD06X.cbl:44",
+        "app/jcl/cardsvc/CBCRD06J.jcl:70",
+        "app/jcl/cardsvc/CBCRD06J.jcl:82"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.PGMROUT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "KSDS: created and read inside this module",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF04.cbl:51",
+        "app/cardsvc/cbl/CBREF05.cbl:52",
+        "app/jcl/cardsvc/CBREF04J.jcl:103",
+        "app/jcl/cardsvc/CBREF05J.jcl:28",
+        "app/jcl/vsam/DEFCARD.jcl:152"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.POSTREJ",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD04.cbl:72",
+        "app/jcl/cardsvc/CBCRD04J.jcl:50",
+        "app/jcl/cardsvc/CBCRD04J.jcl:64"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.REF.MERCHCTL",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF02.cbl:42",
+        "app/jcl/cardsvc/CBREF02J.jcl:29",
+        "app/jcl/cardsvc/CBREF02J.jcl:98"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.REF.MERCHRPT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF01.cbl:46",
+        "app/jcl/cardsvc/CBREF01J.jcl:46",
+        "app/jcl/cardsvc/CBREF01J.jcl:80"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.REF.REFCTL",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:52",
+        "app/jcl/cardsvc/CBREF03J.jcl:132",
+        "app/jcl/cardsvc/CBREF03J.jcl:34"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.REF.REFRPT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF05.cbl:42",
+        "app/jcl/cardsvc/CBREF05J.jcl:29",
+        "app/jcl/cardsvc/CBREF05J.jcl:58"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.REF.ROUTCTL",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "sequential (QSAM by DD DCB): created and read inside this module, and retained past the run, so a consumer outside the scan is not ruled out",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF04.cbl:47",
+        "app/jcl/cardsvc/CBREF04J.jcl:104",
+        "app/jcl/cardsvc/CBREF04J.jcl:35"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.REF.RSNFEED",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "GDG (by relative generation): read here, produced outside the module",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:44",
+        "app/jcl/cardsvc/CBREF03J.jcl:30"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "internal",
+        "kind": "dataset",
+        "name": "CARD.PROD.RSNCODE",
+        "module": null
+      },
+      "direction": "both",
+      "status": "satisfied-in-drop",
+      "detail": "KSDS: created and read inside this module",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:62",
+        "app/jcl/cardsvc/CBREF03J.jcl:131",
+        "app/jcl/vsam/DEFCARD.jcl:112"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "CARD.PROD.STGSTAT",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): read here, produced outside the module",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD10.cbl:60",
+        "app/jcl/cardsvc/CBCRD10J.jcl:44"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CICS.CARD.DFHCSD",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:26",
+        "app/cics/DFHCSDUP.jcl:45",
+        "app/cics/DFHCSDUP.jcl:86"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CICS.CARD.DFHCSD.BACKUP",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "sequential (QSAM by DD DCB): created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:27"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CICSTS.SDFHLOAD",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:44",
+        "app/cics/DFHCSDUP.jcl:85"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "CICSTS.SDFHMAC",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:101",
+        "app/jcl/build/BUILDALL.jcl:59",
+        "app/jcl/build/BUILDALL.jcl:69",
+        "app/jcl/build/BUILDALL.jcl:91"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "DSN.SDSNLOAD",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDPRTY.jcl:17"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "DSN.V12R1.SDSNLOAD",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): read here, produced outside the module",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL01J.jcl:27",
+        "app/jcl/cardsvc/CBBIL02J.jcl:45",
+        "app/jcl/cardsvc/CBBIL03J.jcl:23",
+        "app/jcl/cardsvc/CBBIL04J.jcl:27",
+        "app/jcl/cardsvc/CBBIL05J.jcl:26",
+        "app/jcl/cardsvc/CBBIL06J.jcl:23",
+        "app/jcl/cardsvc/CBREF01J.jcl:44",
+        "app/jcl/cardsvc/CBREF02J.jcl:25",
+        "app/jcl/cardsvc/CBREF02J.jcl:96",
+        "app/jcl/cardsvc/CBREF03J.jcl:129",
+        "app/jcl/cardsvc/CBREF03J.jcl:26",
+        "app/jcl/cardsvc/CBREF04J.jcl:102",
+        "app/jcl/cardsvc/CBREF04J.jcl:31",
+        "app/jcl/cardsvc/CBREF05J.jcl:26"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "DSN910.RUNLIB.LOAD",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): read here, produced outside the module",
+      "evidence": [
+        "app/jcl/proc/CARDDB2L.jcl:19"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "DSN910.SDSNEXIT",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): read here, produced outside the module",
+      "evidence": [
+        "app/jcl/proc/CARDDB2L.jcl:18"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "estate",
+        "kind": "dataset",
+        "name": "DSN910.SDSNLOAD",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): read here, produced outside the module",
+      "evidence": [
+        "app/jcl/proc/CARDDB2L.jcl:17"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.CBL",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/jcl/build/COBCICS.proc:45"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.CICS",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:51"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.CPY",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:61",
+        "app/jcl/build/COBBATCH.proc:79",
+        "app/jcl/build/COBCICS.proc:47",
+        "app/jcl/build/COBCICS.proc:69",
+        "app/jcl/build/COBCICS.proc:95"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.DBRMLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BINDPRTY.jcl:18",
+        "app/jcl/build/COBBATCH.proc:56",
+        "app/jcl/build/COBCICS.proc:64"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.JCLLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "PDS member: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:292"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.LOADLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:107",
+        "app/jcl/build/COBBATCH.proc:114",
+        "app/jcl/build/COBCICS.proc:129",
+        "app/jcl/build/COBCICS.proc:138"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.RSKPARM",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "KSDS: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:16"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.WATCHLST",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "KSDS: created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:37"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.WATCHLST.AIX1",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "AIX: created here; who consumes it is outside the scan",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:58"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "PRTY.PROD.WATCHLST.PATH1",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "PATH: created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:67"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "SYS1.MACLIB",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:102",
+        "app/jcl/build/BUILDALL.jcl:60",
+        "app/jcl/build/BUILDALL.jcl:70",
+        "app/jcl/build/BUILDALL.jcl:92",
+        "app/jcl/build/COBASM.proc:37"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "dataset",
+      "counterpart": {
+        "level": "module",
+        "kind": "dataset",
+        "name": "SYS1.MODGEN",
+        "module": "PARTYRSK"
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "sequential (no catalog evidence): created here and read by PARTYRSK",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:38"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDBILP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL01J.jcl:25"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDBILP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL02J.jcl:43"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDBILP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL03J.jcl:21"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDBILP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL04J.jcl:25"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDBILP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL05J.jcl:24"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDBILP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL06J.jcl:21"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDNITP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF01J.jcl:42"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF02J.jcl:23"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF02J.jcl:93"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF03J.jcl:127"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF03J.jcl:24"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF04J.jcl:100"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF04J.jcl:29"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "plan",
+        "name": "CARDREFP",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "the plan the module runs under has to be bound in the subsystem",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF05J.jcl:24"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "subsystem",
+        "name": "DB2P",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "DB2 subsystem the module runs against",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:36",
+        "app/jcl/build/BINDPRTY.jcl:23",
+        "app/jcl/cardsvc/CBBIL01J.jcl:38",
+        "app/jcl/cardsvc/CBBIL02J.jcl:56",
+        "app/jcl/cardsvc/CBBIL03J.jcl:34",
+        "app/jcl/cardsvc/CBBIL04J.jcl:47",
+        "app/jcl/cardsvc/CBBIL05J.jcl:38",
+        "app/jcl/cardsvc/CBBIL06J.jcl:35",
+        "app/jcl/cardsvc/CBCRD03J.jcl:67",
+        "app/jcl/cardsvc/CBCRD04J.jcl:43",
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:45",
+        "app/jcl/cardsvc/CBCRD05BJ.jcl:38",
+        "app/jcl/cardsvc/CBCRD06J.jcl:111",
+        "app/jcl/cardsvc/CBCRD06J.jcl:141",
+        "app/jcl/cardsvc/CBCRD06J.jcl:64",
+        "app/jcl/cardsvc/CBCRD07J.jcl:45",
+        "app/jcl/cardsvc/CBCRD08J.jcl:36",
+        "app/jcl/cardsvc/CBCRD10J.jcl:38",
+        "app/jcl/cardsvc/CBREF01J.jcl:55",
+        "app/jcl/cardsvc/CBREF02J.jcl:104",
+        "app/jcl/cardsvc/CBREF02J.jcl:38",
+        "app/jcl/cardsvc/CBREF03J.jcl:138",
+        "app/jcl/cardsvc/CBREF03J.jcl:43",
+        "app/jcl/cardsvc/CBREF04J.jcl:110",
+        "app/jcl/cardsvc/CBREF04J.jcl:44",
+        "app/jcl/cardsvc/CBREF05J.jcl:38"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.ACCOUNT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "23 read(s), 13 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl:251-294",
+        "app/cardsvc/cbl/CACRD06.cbl:238-255",
+        "app/cardsvc/cbl/CACRD08.cbl:179-192",
+        "app/cardsvc/cbl/CACRD10.cbl:476-485",
+        "app/cardsvc/cbl/CACRD11.cbl:577-586",
+        "app/cardsvc/cbl/CACRD12.cbl:421-436",
+        "app/cardsvc/cbl/CACRD13.cbl:1384-1390",
+        "app/cardsvc/cbl/CACRD13.cbl:510-519",
+        "app/cardsvc/cbl/CACRD14.cbl:1205-1212",
+        "app/cardsvc/cbl/CACRD14.cbl:493-514",
+        "app/cardsvc/cbl/CACRD14.cbl:861-872",
+        "app/cardsvc/cbl/CACRD15.cbl:351-378",
+        "app/cardsvc/cbl/CACRD15.cbl:403-433",
+        "app/cardsvc/cbl/CBBIL01.cbl:193-227",
+        "app/cardsvc/cbl/CBBIL01.cbl:493-513",
+        "app/cardsvc/cbl/CBBIL03.cbl:321-338",
+        "app/cardsvc/cbl/CBBIL03.cbl:500-511",
+        "app/cardsvc/cbl/CBBIL06.cbl:366-373",
+        "app/cardsvc/cbl/CBBIL06.cbl:415-425",
+        "app/cardsvc/cbl/CBCRD04.cbl:443-463",
+        "app/cardsvc/cbl/CBCRD04.cbl:815-823",
+        "app/cardsvc/cbl/CBCRD05A.cbl:234-251",
+        "app/cardsvc/cbl/CBCRD05A.cbl:341-351",
+        "app/cardsvc/cbl/CBCRD05A.cbl:646-652",
+        "app/cardsvc/cbl/CBCRD05B.cbl:241-254",
+        "app/cardsvc/cbl/CBCRD05B.cbl:414-425",
+        "app/cardsvc/cbl/CBCRD05B.cbl:722-728",
+        "app/cardsvc/cbl/CBCRD06A.cbl:140-164",
+        "app/cardsvc/cbl/CBCRD06A.cbl:241-252",
+        "app/cardsvc/cbl/CBCRD06C.cbl:213-240",
+        "app/cardsvc/cbl/CBCRD06C.cbl:408-418",
+        "app/cardsvc/cbl/CBCRD07.cbl:269-286",
+        "app/cardsvc/cbl/CBCRD07.cbl:467-474",
+        "app/cardsvc/cbl/CBCRD08.cbl:277-303",
+        "app/cardsvc/cbl/CBCRD08.cbl:418-432",
+        "app/cardsvc/cbl/CBCRD08.cbl:549-556",
+        "app/cardsvc/cbl/CBCRD10.cbl:591-596",
+        "app/cardsvc/cbl/CBFEE01.cbl:701-707",
+        "app/cardsvc/cbl/CBFEE02.cbl:580-586",
+        "app/cardsvc/cbl/CBFEE02.cbl:596-601",
+        "app/cardsvc/cbl/CBFEE03.cbl:638-644",
+        "app/cardsvc/cbl/CBREF05.cbl:238-248",
+        "app/cardsvc/cbl/CBREF05.cbl:263-273",
+        "app/cardsvc/cbl/CBREF05.cbl:461-465",
+        "app/cardsvc/cbl/CBREF05.cbl:558-562",
+        "db2/ddl/10_CARDDB_TABLES.sql:9"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.AUTHORIZATION",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "9 read(s), 2 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD08.cbl:433-442",
+        "app/cardsvc/cbl/CACRD10.cbl:291-297",
+        "app/cardsvc/cbl/CACRD10.cbl:412-451",
+        "app/cardsvc/cbl/CAFRD01.cbl:260-268",
+        "app/cardsvc/cbl/CAFRD01.cbl:305-309",
+        "app/cardsvc/cbl/CAFRD01.cbl:349-357",
+        "app/cardsvc/cbl/CAFRD01.cbl:393-397",
+        "app/cardsvc/cbl/CAFRD01.cbl:437-445",
+        "app/cardsvc/cbl/CAFRD02.cbl:256-272",
+        "app/cardsvc/cbl/CAFRD03.cbl:182-191",
+        "app/cardsvc/cbl/CAFRD03.cbl:212-219",
+        "app/cardsvc/cbl/CAFRD04.cbl:289-299",
+        "app/cardsvc/cbl/CBCRD04.cbl:849-856",
+        "db2/ddl/10_CARDDB_TABLES.sql:98"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.CARD",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "15 read(s), 5 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl:269-298",
+        "app/cardsvc/cbl/CACRD06.cbl:170-187",
+        "app/cardsvc/cbl/CACRD10.cbl:623-628",
+        "app/cardsvc/cbl/CACRD11.cbl:451-482",
+        "app/cardsvc/cbl/CACRD11.cbl:843-851",
+        "app/cardsvc/cbl/CACRD11.cbl:854-863",
+        "app/cardsvc/cbl/CACRD11.cbl:865-871",
+        "app/cardsvc/cbl/CACRD11.cbl:960-991",
+        "app/cardsvc/cbl/CACRD12.cbl:421-436",
+        "app/cardsvc/cbl/CACRD14.cbl:562-569",
+        "app/cardsvc/cbl/CACRD14.cbl:595-604",
+        "app/cardsvc/cbl/CACRD15.cbl:351-378",
+        "app/cardsvc/cbl/CACRD15.cbl:403-433",
+        "app/cardsvc/cbl/CBBIL01.cbl:193-227",
+        "app/cardsvc/cbl/CBBIL01.cbl:493-513",
+        "app/cardsvc/cbl/CBCRD05A.cbl:389-401",
+        "app/cardsvc/cbl/CBCRD05B.cbl:480-495",
+        "app/cardsvc/cbl/CBCRD06A.cbl:321-335",
+        "app/cardsvc/cbl/CBCRD06C.cbl:213-240",
+        "app/cardsvc/cbl/CBCRD06C.cbl:408-418",
+        "app/cardsvc/cbl/CBREF05.cbl:238-248",
+        "app/cardsvc/cbl/CBREF05.cbl:250-261",
+        "app/cardsvc/cbl/CBREF05.cbl:461-465",
+        "app/cardsvc/cbl/CBREF05.cbl:508-512",
+        "db2/ddl/10_CARDDB_TABLES.sql:44"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.CARD_LIMIT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "11 read(s), 7 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl:113-125",
+        "app/cardsvc/cbl/CACRD03.cbl:353-362",
+        "app/cardsvc/cbl/CACRD08.cbl:235-256",
+        "app/cardsvc/cbl/CACRD10.cbl:519-528",
+        "app/cardsvc/cbl/CACRD12.cbl:474-499",
+        "app/cardsvc/cbl/CACRD12.cbl:797-804",
+        "app/cardsvc/cbl/CACRD12.cbl:815-849",
+        "app/cardsvc/cbl/CACRD14.cbl:1233-1244",
+        "app/cardsvc/cbl/CACRD14.cbl:895-910",
+        "app/cardsvc/cbl/CACRD15.cbl:458-467",
+        "app/cardsvc/cbl/CAFRD01.cbl:207-214",
+        "app/cardsvc/cbl/CBBIL01.cbl:193-227",
+        "app/cardsvc/cbl/CBBIL01.cbl:493-513",
+        "app/cardsvc/cbl/CBCRD05A.cbl:389-401",
+        "app/cardsvc/cbl/CBCRD05B.cbl:480-495",
+        "app/cardsvc/cbl/CBCRD06A.cbl:321-335",
+        "app/cardsvc/cbl/CBCRD06C.cbl:213-240",
+        "app/cardsvc/cbl/CBCRD06C.cbl:408-418",
+        "app/cardsvc/cbl/CBCRD06C.cbl:441-448",
+        "app/cardsvc/cbl/CBCRD06C.cbl:451-458",
+        "app/cardsvc/cbl/CBREF05.cbl:250-261",
+        "app/cardsvc/cbl/CBREF05.cbl:508-512",
+        "db2/ddl/10_CARDDB_TABLES.sql:71"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.DISPUTE",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "1 read(s), 1 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:1100-1106",
+        "app/cardsvc/cbl/CACRD13.cbl:1201-1233",
+        "db2/ddl/10_CARDDB_TABLES.sql:304"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.FEE_SCHEDULE",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "4 read(s), 0 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD05A.cbl:254-267",
+        "app/cardsvc/cbl/CBCRD05A.cbl:424-433",
+        "app/cardsvc/cbl/CBFEE01.cbl:340-361",
+        "app/cardsvc/cbl/CBFEE02.cbl:306-325",
+        "app/cardsvc/cbl/CBFEE03.cbl:329-348",
+        "db2/ddl/10_CARDDB_TABLES.sql:181"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.FRAUD_RULE",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "7 read(s), 0 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:146-161",
+        "app/cardsvc/cbl/CACRD07.cbl:341-352",
+        "app/cardsvc/cbl/CAFRD01.cbl:473-490",
+        "app/cardsvc/cbl/CAFRD01.cbl:524-535",
+        "app/cardsvc/cbl/CAFRD02.cbl:299-314",
+        "app/cardsvc/cbl/CAFRD02.cbl:345-355",
+        "app/cardsvc/cbl/CAFRD03.cbl:243-258",
+        "app/cardsvc/cbl/CAFRD03.cbl:287-297",
+        "app/cardsvc/cbl/CAFRD04.cbl:324-339",
+        "app/cardsvc/cbl/CAFRD04.cbl:367-377",
+        "app/cardsvc/cbl/CBREF03.cbl:227-247",
+        "app/cardsvc/cbl/CBREF03.cbl:316-322",
+        "app/cardsvc/cbl/CBREF03.cbl:370-387",
+        "db2/ddl/10_CARDDB_TABLES.sql:203"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.GL_POSTING",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "1 read(s), 1 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD07.cbl:597-623",
+        "app/cardsvc/cbl/CBCRD10.cbl:557-568",
+        "db2/ddl/10_CARDDB_TABLES.sql:247"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.MERCHANT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "13 read(s), 4 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:232-247",
+        "app/cardsvc/cbl/CACRD13.cbl:828-833",
+        "app/cardsvc/cbl/CACRD16.cbl:819-837",
+        "app/cardsvc/cbl/CACRD16.cbl:869-880",
+        "app/cardsvc/cbl/CAFRD02.cbl:206-213",
+        "app/cardsvc/cbl/CAFRD02.cbl:256-272",
+        "app/cardsvc/cbl/CAFRD04.cbl:193-211",
+        "app/cardsvc/cbl/CAFRD04.cbl:252-261",
+        "app/cardsvc/cbl/CBCRD03.cbl:374-391",
+        "app/cardsvc/cbl/CBFEE03.cbl:399-405",
+        "app/cardsvc/cbl/CBREF01.cbl:438-464",
+        "app/cardsvc/cbl/CBREF01.cbl:478-491",
+        "app/cardsvc/cbl/CBREF01.cbl:516-522",
+        "app/cardsvc/cbl/CBREF01.cbl:537-543",
+        "app/cardsvc/cbl/CBREF02.cbl:147-163",
+        "app/cardsvc/cbl/CBREF02.cbl:285-291",
+        "app/cardsvc/cbl/CBREF02.cbl:303-316",
+        "app/cardsvc/cbl/CBREF05.cbl:275-287",
+        "app/cardsvc/cbl/CBREF05.cbl:604-608",
+        "app/cardsvc/cbl/CBREF05.cbl:809-815",
+        "db2/ddl/10_CARDDB_TABLES.sql:161"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.PGM_ROUTE",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "6 read(s), 0 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:190-199",
+        "app/cardsvc/cbl/CACRD90.cbl:52-66",
+        "app/cardsvc/cbl/CACRD90.cbl:79-91",
+        "app/cardsvc/cbl/CBCRD90.cbl:166-175",
+        "app/cardsvc/cbl/CBCRD90.cbl:70-82",
+        "app/cardsvc/cbl/CBREF04.cbl:154-174",
+        "app/cardsvc/cbl/CBREF04.cbl:311-319",
+        "app/cardsvc/cbl/CBREF04.cbl:331-344",
+        "app/cardsvc/cbl/CBREF05.cbl:293-305",
+        "app/cardsvc/cbl/CBREF05.cbl:671-678",
+        "app/cardsvc/cbl/CBREF05.cbl:824-832",
+        "db2/ddl/10_CARDDB_TABLES.sql:332"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.REWARDS",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "2 read(s), 2 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL02.cbl:537-543",
+        "app/cardsvc/cbl/CBCRD05B.cbl:797-809",
+        "app/cardsvc/cbl/CBCRD05B.cbl:829-839",
+        "app/cardsvc/cbl/CBCRD05B.cbl:851-875",
+        "db2/ddl/10_CARDDB_TABLES.sql:227"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.ROUTE_AUDIT",
+        "module": null
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "0 read(s), 3 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:427-453",
+        "app/cardsvc/cbl/CBCRD06B.cbl:532-556",
+        "app/cardsvc/cbl/CBCRD90.cbl:344-370",
+        "db2/ddl/10_CARDDB_TABLES.sql:356"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.STATEMENT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "2 read(s), 2 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL05.cbl:302-352",
+        "app/cardsvc/cbl/CBBIL05.cbl:372-397",
+        "app/cardsvc/cbl/CBBIL06.cbl:334-345",
+        "app/cardsvc/cbl/CBBIL06.cbl:415-425",
+        "db2/ddl/10_CARDDB_TABLES.sql:272"
+      ]
+    },
+    {
+      "category": "data",
+      "provider": "db2",
+      "counterpart": {
+        "level": "estate",
+        "kind": "table",
+        "name": "CARDSVC.TRANSACTION",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "18 read(s), 12 write(s); DDL in the scan, the table itself is in the subsystem",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:1252-1257",
+        "app/cardsvc/cbl/CACRD13.cbl:1329-1365",
+        "app/cardsvc/cbl/CACRD13.cbl:273-297",
+        "app/cardsvc/cbl/CACRD13.cbl:758-771",
+        "app/cardsvc/cbl/CACRD13.cbl:851-864",
+        "app/cardsvc/cbl/CACRD14.cbl:1003-1015",
+        "app/cardsvc/cbl/CACRD14.cbl:1039-1045",
+        "app/cardsvc/cbl/CACRD14.cbl:1072-1078",
+        "app/cardsvc/cbl/CACRD14.cbl:1135-1171",
+        "app/cardsvc/cbl/CACRD14.cbl:1183-1188",
+        "app/cardsvc/cbl/CACRD14.cbl:806-842",
+        "app/cardsvc/cbl/CBBIL02.cbl:184-202",
+        "app/cardsvc/cbl/CBBIL02.cbl:415-428",
+        "app/cardsvc/cbl/CBCRD04.cbl:729-771",
+        "app/cardsvc/cbl/CBCRD05A.cbl:234-251",
+        "app/cardsvc/cbl/CBCRD05A.cbl:341-351",
+        "app/cardsvc/cbl/CBCRD05A.cbl:600-636",
+        "app/cardsvc/cbl/CBCRD05B.cbl:529-548",
+        "app/cardsvc/cbl/CBCRD05B.cbl:675-711",
+        "app/cardsvc/cbl/CBCRD05B.cbl:754-761",
+        "app/cardsvc/cbl/CBCRD06A.cbl:140-164",
+        "app/cardsvc/cbl/CBCRD06A.cbl:241-252",
+        "app/cardsvc/cbl/CBCRD07.cbl:269-286",
+        "app/cardsvc/cbl/CBCRD07.cbl:467-474",
+        "app/cardsvc/cbl/CBCRD07.cbl:646-657",
+        "app/cardsvc/cbl/CBCRD10.cbl:524-529",
+        "app/cardsvc/cbl/CBCRD10.cbl:540-546",
+        "app/cardsvc/cbl/CBFEE01.cbl:474-484",
+        "app/cardsvc/cbl/CBFEE01.cbl:561-571",
+        "app/cardsvc/cbl/CBFEE01.cbl:652-684",
+        "app/cardsvc/cbl/CBFEE02.cbl:393-401",
+        "app/cardsvc/cbl/CBFEE02.cbl:530-564",
+        "app/cardsvc/cbl/CBFEE03.cbl:477-484",
+        "app/cardsvc/cbl/CBFEE03.cbl:588-622",
+        "app/cardsvc/cbl/CBREF05.cbl:263-273",
+        "app/cardsvc/cbl/CBREF05.cbl:275-287",
+        "app/cardsvc/cbl/CBREF05.cbl:558-562",
+        "app/cardsvc/cbl/CBREF05.cbl:604-608",
+        "db2/ddl/10_CARDDB_TABLES.sql:130"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "file",
+        "name": "AUTHLOG",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS file: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD10.cbl:572"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "file",
+        "name": "CARDXREF",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS file: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:1033",
+        "app/cardsvc/cbl/CACRD11.cbl:1071",
+        "app/cardsvc/cbl/CACRD11.cbl:1114"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "file",
+        "name": "CARDXRP1",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS file: used by the module, DEFINEd nowhere in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD02.cbl:385",
+        "app/cardsvc/cbl/CACRD02.cbl:432",
+        "app/cardsvc/cbl/CACRD02.cbl:467",
+        "app/cardsvc/cbl/CACRD02.cbl:490",
+        "app/cardsvc/cbl/CACRD02.cbl:519",
+        "app/cardsvc/cbl/CACRD02.cbl:563"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "file",
+        "name": "CUSTPREF",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS file: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl:489"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "file",
+        "name": "FRAUDRUL",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS file: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:435"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "file",
+        "name": "PGMROUT",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS file: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:249",
+        "app/cardsvc/cbl/CACRD90.cbl:264",
+        "app/cardsvc/cbl/CACRD90.cbl:291"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "file",
+        "name": "RSNCODE",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS file: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:410",
+        "app/cardsvc/cbl/CACRD13.cbl:1022",
+        "app/cardsvc/cbl/CACRD16.cbl:423",
+        "app/cardsvc/cbl/CACRD16.cbl:445",
+        "app/cardsvc/cbl/CACRD16.cbl:478",
+        "app/cardsvc/cbl/CACRD16.cbl:509"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "map",
+        "name": "CARDSET",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS map: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:200",
+        "app/cardsvc/cbl/CACRD00.cbl:360",
+        "app/cardsvc/cbl/CACRD00.cbl:371",
+        "app/cardsvc/cbl/CACRD01.cbl:191",
+        "app/cardsvc/cbl/CACRD01.cbl:436",
+        "app/cardsvc/cbl/CACRD01.cbl:446",
+        "app/cardsvc/cbl/CACRD02.cbl:322",
+        "app/cardsvc/cbl/CACRD02.cbl:625",
+        "app/cardsvc/cbl/CACRD02.cbl:636",
+        "app/cardsvc/cbl/CACRD03.cbl:217",
+        "app/cardsvc/cbl/CACRD03.cbl:537",
+        "app/cardsvc/cbl/CACRD03.cbl:548",
+        "app/cardsvc/cbl/CACRD04.cbl:225",
+        "app/cardsvc/cbl/CACRD04.cbl:671",
+        "app/cardsvc/cbl/CACRD04.cbl:682",
+        "app/cardsvc/cbl/CACRD10.cbl:716",
+        "app/cardsvc/cbl/CACRD17.cbl:346",
+        "app/cardsvc/cbl/CACRD91.cbl:367"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "map",
+        "name": "CARDST2",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS map: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:1143",
+        "app/cardsvc/cbl/CACRD11.cbl:1240",
+        "app/cardsvc/cbl/CACRD11.cbl:1278",
+        "app/cardsvc/cbl/CACRD11.cbl:305",
+        "app/cardsvc/cbl/CACRD12.cbl:280",
+        "app/cardsvc/cbl/CACRD12.cbl:907",
+        "app/cardsvc/cbl/CACRD13.cbl:1446",
+        "app/cardsvc/cbl/CACRD13.cbl:1532",
+        "app/cardsvc/cbl/CACRD13.cbl:393",
+        "app/cardsvc/cbl/CACRD13.cbl:903",
+        "app/cardsvc/cbl/CACRD14.cbl:1364",
+        "app/cardsvc/cbl/CACRD14.cbl:334",
+        "app/cardsvc/cbl/CACRD15.cbl:256",
+        "app/cardsvc/cbl/CACRD15.cbl:842",
+        "app/cardsvc/cbl/CACRD16.cbl:1024",
+        "app/cardsvc/cbl/CACRD16.cbl:1047",
+        "app/cardsvc/cbl/CACRD16.cbl:269",
+        "app/cardsvc/cbl/CACRD16.cbl:714"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "td-queue",
+        "name": "CAUD",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS td-queue: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD17.cbl:185",
+        "app/cardsvc/cbl/CACRD17.cbl:250"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "td-queue",
+        "name": "CERR",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS td-queue: used by the module, DEFINEd nowhere in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD91.cbl:272",
+        "app/cardsvc/cbl/CACRD91.cbl:314",
+        "app/cardsvc/cbl/CACRD92.cbl:209"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "transaction",
+        "name": "CA00",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "TRANSID CA00 is defined onto CACRD00, so something outside the module starts it",
+      "evidence": [
+        "app/cics/CSDCARD.csd:22"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "transaction",
+        "name": "CA99",
+        "module": null
+      },
+      "direction": "in",
+      "status": "must-establish",
+      "detail": "TRANSID CA99 is defined onto CACRD16, so something outside the module starts it",
+      "evidence": [
+        "app/cics/CSDCARD.csd:42"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "ts-queue",
+        "name": "CARDAUTQ",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS ts-queue: used by the module, DEFINEd nowhere in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD04.cbl:614",
+        "app/cardsvc/cbl/CACRD04.cbl:621",
+        "app/cardsvc/cbl/CACRD10.cbl:210",
+        "app/cardsvc/cbl/CACRD10.cbl:649",
+        "app/cardsvc/cbl/CACRD17.cbl:298"
+      ]
+    },
+    {
+      "category": "online",
+      "provider": "cics",
+      "counterpart": {
+        "level": "estate",
+        "kind": "ts-queue",
+        "name": "CARDRTQ",
+        "module": null
+      },
+      "direction": "both",
+      "status": "must-establish",
+      "detail": "CICS ts-queue: defined in the scanned CSD",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD17.cbl:277",
+        "app/cardsvc/cbl/CACRD90.cbl:164",
+        "app/cardsvc/cbl/CACRD90.cbl:304"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "module",
+        "kind": "module",
+        "name": "PARTYRSK",
+        "module": "PARTYRSK"
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "3 program(s) owned by PARTYRSK: PRBRSK1, PRKYC01, PRKYC03 (via dynamic CALL, dynamic CANCEL, dynamic CICS-LINK)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "estate",
+        "kind": "program",
+        "name": "CBCRD91",
+        "module": null
+      },
+      "direction": "out",
+      "status": "must-establish",
+      "detail": "CBCRD91: COBOL subprogram CALLed by 26 program(s), DB2 (has a package) (via CALL)",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL01.cbl:754",
+        "app/cardsvc/cbl/CBBIL02.cbl:744",
+        "app/cardsvc/cbl/CBBIL03.cbl:602",
+        "app/cardsvc/cbl/CBBIL04.cbl:478",
+        "app/cardsvc/cbl/CBBIL05.cbl:494",
+        "app/cardsvc/cbl/CBBIL06.cbl:683",
+        "app/cardsvc/cbl/CBCRD01.cbl:529",
+        "app/cardsvc/cbl/CBCRD02.cbl:658",
+        "app/cardsvc/cbl/CBCRD03.cbl:556",
+        "app/cardsvc/cbl/CBCRD04.cbl:1027",
+        "app/cardsvc/cbl/CBCRD05A.cbl:770",
+        "app/cardsvc/cbl/CBCRD05B.cbl:1000",
+        "app/cardsvc/cbl/CBCRD06A.cbl:405",
+        "app/cardsvc/cbl/CBCRD06B.cbl:615",
+        "app/cardsvc/cbl/CBCRD06C.cbl:594",
+        "app/cardsvc/cbl/CBCRD06W.cbl:262",
+        "app/cardsvc/cbl/CBCRD06X.cbl:318",
+        "app/cardsvc/cbl/CBCRD07.cbl:821",
+        "app/cardsvc/cbl/CBCRD08.cbl:719",
+        "app/cardsvc/cbl/CBCRD09.cbl:540",
+        "app/cardsvc/cbl/CBCRD10.cbl:804",
+        "app/cardsvc/cbl/CBREF01.cbl:718",
+        "app/cardsvc/cbl/CBREF02.cbl:524",
+        "app/cardsvc/cbl/CBREF03.cbl:806",
+        "app/cardsvc/cbl/CBREF04.cbl:578",
+        "app/cardsvc/cbl/CBREF05.cbl:1067"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "unknown",
+        "kind": "program",
+        "name": null,
+        "module": null
+      },
+      "direction": "out",
+      "status": "unknown",
+      "detail": "CALL WS-PGM-NAME in CBCRD90: the target is computed, so what it reaches is unresolved",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "unknown",
+        "kind": "program",
+        "name": null,
+        "module": null
+      },
+      "direction": "out",
+      "status": "unknown",
+      "detail": "CALL WS-PGM-NAME in CBCRD90: the target is computed, so what it reaches is unresolved",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:331"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "unknown",
+        "kind": "program",
+        "name": null,
+        "module": null
+      },
+      "direction": "out",
+      "status": "unknown",
+      "detail": "CANCEL WS-PGM-NAME in CBCRD90: the target is computed, so what it reaches is unresolved",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "unknown",
+        "kind": "program",
+        "name": null,
+        "module": null
+      },
+      "direction": "out",
+      "status": "unknown",
+      "detail": "CANCEL WS-PGM-NAME in CBCRD90: the target is computed, so what it reaches is unresolved",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "unknown",
+        "kind": "program",
+        "name": null,
+        "module": null
+      },
+      "direction": "out",
+      "status": "unknown",
+      "detail": "CICS-LINK WS-PGM-NAME in CACRD90: the target is computed, so what it reaches is unresolved",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ]
+    },
+    {
+      "category": "code",
+      "provider": "module",
+      "counterpart": {
+        "level": "unknown",
+        "kind": "program",
+        "name": null,
+        "module": null
+      },
+      "direction": "out",
+      "status": "unknown",
+      "detail": "CICS-XCTL WS-PGM-NAME in CACRD90: the target is computed, so what it reaches is unresolved",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ]
+    }
+  ]
+}

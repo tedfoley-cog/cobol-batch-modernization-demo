@@ -1,0 +1,2780 @@
+{
+  "meta": {
+    "estate": [
+      "."
+    ],
+    "generated_at": "2026-09-28T13:32:09Z",
+    "tool": "mftb 0.2.1",
+    "exclude": [],
+    "view": "estate"
+  },
+  "summary": {
+    "estate": "tedfoley-cog/cobol-batch-modernization-demo",
+    "files": 229,
+    "catalogued": 203,
+    "excluded": 26,
+    "placeable": 162,
+    "modules": 2,
+    "scanned_modules": 2,
+    "shared": 12,
+    "unplaced": 0,
+    "unclassified": 2,
+    "unsupported": 0,
+    "asks": 34
+  },
+  "site": [
+    {
+      "field": "database_managers",
+      "answers": {
+        "CARDSVC": {
+          "value": "IBM Db2 for z/OS",
+          "source": "detected",
+          "confidence": "derived",
+          "evidence": [
+            "app/cardsvc/cbl/CACRD01.cbl:1",
+            "app/cardsvc/cbl/CACRD03.cbl:1",
+            "app/cardsvc/cbl/CACRD06.cbl:1",
+            "app/cardsvc/cbl/CACRD07.cbl:1"
+          ]
+        },
+        "PARTYRSK": {
+          "value": "IBM Db2 for z/OS",
+          "source": "detected",
+          "confidence": "derived",
+          "evidence": [
+            "app/jcl/build/BINDCARD.jcl:36",
+            "app/jcl/build/BINDPRTY.jcl:23",
+            "app/jcl/partyrsk/CBPRT01J.jcl:55",
+            "app/jcl/partyrsk/CBPRT02J.jcl:64"
+          ]
+        }
+      },
+      "agreed": true,
+      "value": "IBM Db2 for z/OS",
+      "assumed": false,
+      "source": "detected"
+    },
+    {
+      "field": "environment_topology",
+      "answers": {
+        "CARDSVC": {
+          "value": null,
+          "source": null,
+          "confidence": "unknown",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": null,
+          "source": null,
+          "confidence": "unknown",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "None",
+      "assumed": false,
+      "source": null
+    },
+    {
+      "field": "file_transfer",
+      "answers": {
+        "CARDSVC": {
+          "value": "IBM Connect:Direct",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "IBM Connect:Direct",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "IBM Connect:Direct",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "library_manager",
+      "answers": {
+        "CARDSVC": {
+          "value": "Broadcom Endevor",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "Broadcom Endevor",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "Broadcom Endevor",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "masking_policy",
+      "answers": {
+        "CARDSVC": {
+          "value": null,
+          "source": null,
+          "confidence": "unknown",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": null,
+          "source": null,
+          "confidence": "unknown",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "None",
+      "assumed": false,
+      "source": null
+    },
+    {
+      "field": "online_monitors",
+      "answers": {
+        "CARDSVC": {
+          "value": "IBM CICS Transaction Server",
+          "source": "detected",
+          "confidence": "derived",
+          "evidence": [
+            "app/cardsvc/cbl/CACRD00.cbl:1",
+            "app/cardsvc/cbl/CACRD00.cbl:422",
+            "app/cardsvc/cbl/CACRD00.cbl:462",
+            "app/cardsvc/cbl/CACRD01.cbl:1"
+          ]
+        },
+        "PARTYRSK": {
+          "value": "IBM CICS Transaction Server",
+          "source": "detected",
+          "confidence": "derived",
+          "evidence": [
+            "app/partyrsk/cbl/PRERR01.cbl:1",
+            "app/partyrsk/cbl/PRKYC01.cbl:1",
+            "app/partyrsk/cbl/PRKYC01.cbl:441",
+            "app/partyrsk/cbl/PRKYC01.cbl:613"
+          ]
+        }
+      },
+      "agreed": true,
+      "value": "IBM CICS Transaction Server",
+      "assumed": false,
+      "source": "detected"
+    },
+    {
+      "field": "output_manager",
+      "answers": {
+        "CARDSVC": {
+          "value": "Broadcom CA View",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "Broadcom CA View",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "Broadcom CA View",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "scheduler_product",
+      "answers": {
+        "CARDSVC": {
+          "value": "BMC Control-M",
+          "source": "detected",
+          "confidence": "proven",
+          "evidence": [
+            "sched/CARDBILL.sched:1",
+            "sched/CARDNITE.sched:1",
+            "sched/CARDREF.sched:1",
+            "sched/PARTYWK.sched:1"
+          ]
+        },
+        "PARTYRSK": {
+          "value": "BMC Control-M",
+          "source": "detected",
+          "confidence": "proven",
+          "evidence": [
+            "sched/CARDBILL.sched:1",
+            "sched/CARDNITE.sched:1",
+            "sched/CARDREF.sched:1",
+            "sched/PARTYWK.sched:1"
+          ]
+        }
+      },
+      "agreed": true,
+      "value": "BMC Control-M",
+      "assumed": false,
+      "source": "detected"
+    },
+    {
+      "field": "security_manager",
+      "answers": {
+        "CARDSVC": {
+          "value": "IBM RACF",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "IBM RACF",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "IBM RACF",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "sort_product",
+      "answers": {
+        "CARDSVC": {
+          "value": "IBM DFSORT",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "IBM DFSORT",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "IBM DFSORT",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "standard_compiler",
+      "answers": {
+        "CARDSVC": {
+          "value": "IBM Enterprise COBOL for z/OS 6.3",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "IBM Enterprise COBOL for z/OS 6.3",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "IBM Enterprise COBOL for z/OS 6.3",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "standard_compiler_options",
+      "answers": {
+        "CARDSVC": {
+          "value": "RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "tape_manager",
+      "answers": {
+        "CARDSVC": {
+          "value": "Broadcom CA 1",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "Broadcom CA 1",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "Broadcom CA 1",
+      "assumed": true,
+      "source": "default"
+    },
+    {
+      "field": "test_lpar",
+      "answers": {
+        "CARDSVC": {
+          "value": null,
+          "source": null,
+          "confidence": "unknown",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": null,
+          "source": null,
+          "confidence": "unknown",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "None",
+      "assumed": false,
+      "source": null
+    },
+    {
+      "field": "zos_version",
+      "answers": {
+        "CARDSVC": {
+          "value": "IBM z/OS 2.5",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        },
+        "PARTYRSK": {
+          "value": "IBM z/OS 2.5",
+          "source": "default",
+          "confidence": "assumed",
+          "evidence": []
+        }
+      },
+      "agreed": true,
+      "value": "IBM z/OS 2.5",
+      "assumed": true,
+      "source": "default"
+    }
+  ],
+  "modules": [
+    {
+      "id": "CARDSVC",
+      "name": "Card Services",
+      "what_it_does": "issues and services card accounts: the CA00 online dialogue (inquiry, maintenance, authorisation, fraud screens) and the CARDNITE, CARDBILL and CARDREF batch cycles over CARDDB",
+      "naming": "proposed",
+      "confidence": "derived",
+      "confirmed": null,
+      "evidence": [
+        "README.md:9",
+        "app/cardsvc/cbl/",
+        "app/jcl/cardsvc/",
+        "app/cics/CSDCARD.csd:22",
+        "sched/CARDNITE.sched:32"
+      ],
+      "files": 115,
+      "kinds": {
+        "bms-mapset": 2,
+        "cics-csd": 3,
+        "cobol-copybook": 19,
+        "cobol-program": 57,
+        "jcl-fragment": 1,
+        "jcl-job": 24,
+        "jcl-proc": 2,
+        "scheduler-table": 3,
+        "sql-ddl": 3,
+        "sql-seed": 1
+      },
+      "scanned": true,
+      "programs": 80,
+      "jobs": 28,
+      "tables": 4,
+      "db2_tables": 14,
+      "datasets": 93,
+      "cics_commands": 237,
+      "boundary": {
+        "unknown": 12,
+        "must-establish": 98,
+        "satisfied-in-drop": 36
+      },
+      "counterparts": [
+        "PARTYRSK"
+      ],
+      "findings": {
+        "open": 159,
+        "high": 19
+      }
+    },
+    {
+      "id": "PARTYRSK",
+      "name": "Party & Risk",
+      "what_it_does": "maintains party KYC, sanctions/watch-list screening and credit-exposure risk scores: PRKYC/PRRSK online services reached from CA00 and the weekly PARTYWK batch over PARTYDB",
+      "naming": "proposed",
+      "confidence": "derived",
+      "confirmed": null,
+      "evidence": [
+        "README.md:10",
+        "app/partyrsk/cbl/",
+        "app/jcl/partyrsk/",
+        "app/cics/CSDPRTY.csd:16",
+        "sched/PARTYWK.sched:31"
+      ],
+      "files": 35,
+      "kinds": {
+        "cics-csd": 1,
+        "cobol-copybook": 5,
+        "cobol-program": 19,
+        "jcl-job": 7,
+        "scheduler-table": 1,
+        "sql-ddl": 2
+      },
+      "scanned": true,
+      "programs": 36,
+      "jobs": 11,
+      "tables": 4,
+      "db2_tables": 8,
+      "datasets": 60,
+      "cics_commands": 63,
+      "boundary": {
+        "unknown": 5,
+        "must-establish": 66,
+        "satisfied-in-drop": 9
+      },
+      "counterparts": [
+        "CARDSVC"
+      ],
+      "findings": {
+        "open": 73,
+        "high": 10
+      }
+    }
+  ],
+  "shared": [
+    {
+      "name": "CARDCHK",
+      "artifact": "assembler program",
+      "path": "app/asm/CARDCHK.asm",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:111",
+        "app/jcl/build/COBCICS.proc:134",
+        "app/jcl/build/BUILDALL.jcl:18",
+        "app/cics/CSDCARD.csd:272"
+      ],
+      "why": "HLASM subroutine INCLUDEd statically by the COBCICS and COBBATCH link-edit steps, which BUILDALL uses for both modules; CSD-defined in CARDGRP. Only its names are known: mftb has no assembler analyser (catalog-assembler ask), and no scanned COBOL source CALLs it by literal"
+    },
+    {
+      "name": "CARDXREF",
+      "artifact": "csd",
+      "path": "app/cics/CSDFILE.csd",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/cics/CSDFILE.csd:22",
+        "app/cics/CSDFILE.csd:277"
+      ],
+      "why": "group CARDFILE defines the region FCTs for both CARD.PROD.* and PRTY.PROD.* (RSKPARM, WATCHLST) datasets in the one CICSCARD region"
+    },
+    {
+      "name": "CSDUPCRD",
+      "artifact": "job",
+      "path": "app/cics/DFHCSDUP.jcl",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:67",
+        "app/cics/DFHCSDUP.jcl:71"
+      ],
+      "why": "installs CARDFILE/CARDMAP/CARDTDQ/CARDGRP and PRTYGRP into the single CARDLIST group list of region CICSCARD"
+    },
+    {
+      "name": "CVCONSTY",
+      "artifact": "copybook",
+      "path": "app/cpy/CVCONSTY.cpy",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:83",
+        "app/partyrsk/cbl/CBPRT01.cbl:158"
+      ],
+      "why": "estate copybook library (README.md:15) copied by programs of both modules"
+    },
+    {
+      "name": "CVCTRL01Y",
+      "artifact": "copybook",
+      "path": "app/cpy/CVCTRL01Y.cpy",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL01.cbl:137",
+        "app/partyrsk/cbl/CBPRT03.cbl:161"
+      ],
+      "why": "estate copybook library (README.md:15) copied by programs of both modules"
+    },
+    {
+      "name": "CVERRS01Y",
+      "artifact": "copybook",
+      "path": "app/cpy/CVERRS01Y.cpy",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:82",
+        "app/partyrsk/cbl/CBPRT01.cbl:156"
+      ],
+      "why": "estate copybook library (README.md:15) copied by programs of both modules"
+    },
+    {
+      "name": "CVRISK01Y",
+      "artifact": "copybook",
+      "path": "app/cpy/CVRISK01Y.cpy",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/cardsvc/cbl/CACRD05.cbl:55",
+        "app/partyrsk/cbl/CBPRT03.cbl:159"
+      ],
+      "why": "estate copybook library (README.md:15) copied by programs of both modules"
+    },
+    {
+      "name": "BUILDALL",
+      "artifact": "job",
+      "path": "app/jcl/build/BUILDALL.jcl",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:123",
+        "app/jcl/build/BUILDALL.jcl:204"
+      ],
+      "why": "full estate rebuild: compiles CARDSVC (ONL/OND/BAT/BDY steps) and PARTYRSK (PRO/PRB steps)"
+    },
+    {
+      "name": "COBBATCH",
+      "artifact": "proc",
+      "path": "app/jcl/build/COBBATCH.proc",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:159",
+        "app/jcl/build/BUILDALL.jcl:241"
+      ],
+      "why": "batch compile/link PROC used by BUILDALL for both CARDSVC and PARTYRSK batch programs"
+    },
+    {
+      "name": "COBCICS",
+      "artifact": "proc",
+      "path": "app/jcl/build/COBCICS.proc",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:123",
+        "app/jcl/build/BUILDALL.jcl:204"
+      ],
+      "why": "CICS compile/link PROC used by BUILDALL for both CARDSVC and PARTYRSK online programs"
+    },
+    {
+      "name": "20_INDEXES",
+      "artifact": "sql ddl",
+      "path": "db2/ddl/20_INDEXES.sql",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "db2/ddl/20_INDEXES.sql:6",
+        "db2/ddl/20_INDEXES.sql:119"
+      ],
+      "why": "CREATE INDEX for both CARDSVC.* and PARTYRSK.* tables in one member"
+    },
+    {
+      "name": "50_GRANTS",
+      "artifact": "sql script",
+      "path": "db2/ddl/50_GRANTS.sql",
+      "used_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "evidence": [
+        "db2/ddl/50_GRANTS.sql:25",
+        "db2/ddl/50_GRANTS.sql:42"
+      ],
+      "why": "grants for both collections and schemas, including the legacy cross-database grants of CARDSVC.ACCOUNT/CARD_LIMIT to PRTYONL/PRTYBAT"
+    }
+  ],
+  "unplaced": [],
+  "inventory": [
+    {
+      "kind": "assembler-program",
+      "files": 1,
+      "by_module": {
+        "shared": 1
+      },
+      "placeable": true
+    },
+    {
+      "kind": "binary",
+      "files": 6,
+      "by_module": {
+        "not-an-artifact": 6
+      },
+      "placeable": false
+    },
+    {
+      "kind": "bms-mapset",
+      "files": 2,
+      "by_module": {
+        "CARDSVC": 2
+      },
+      "placeable": true
+    },
+    {
+      "kind": "cics-csd",
+      "files": 5,
+      "by_module": {
+        "CARDSVC": 3,
+        "shared": 1,
+        "PARTYRSK": 1
+      },
+      "placeable": true
+    },
+    {
+      "kind": "cobol-copybook",
+      "files": 28,
+      "by_module": {
+        "CARDSVC": 19,
+        "shared": 4,
+        "PARTYRSK": 5
+      },
+      "placeable": true
+    },
+    {
+      "kind": "cobol-program",
+      "files": 76,
+      "by_module": {
+        "CARDSVC": 57,
+        "PARTYRSK": 19
+      },
+      "placeable": true
+    },
+    {
+      "kind": "data",
+      "files": 10,
+      "by_module": {
+        "not-an-artifact": 10
+      },
+      "placeable": false
+    },
+    {
+      "kind": "document",
+      "files": 12,
+      "by_module": {
+        "not-an-artifact": 12
+      },
+      "placeable": false
+    },
+    {
+      "kind": "empty",
+      "files": 2,
+      "by_module": {
+        "not-an-artifact": 2
+      },
+      "placeable": false
+    },
+    {
+      "kind": "jcl-fragment",
+      "files": 1,
+      "by_module": {
+        "CARDSVC": 1
+      },
+      "placeable": true
+    },
+    {
+      "kind": "jcl-job",
+      "files": 33,
+      "by_module": {
+        "shared": 2,
+        "CARDSVC": 24,
+        "PARTYRSK": 7
+      },
+      "placeable": true
+    },
+    {
+      "kind": "jcl-proc",
+      "files": 4,
+      "by_module": {
+        "CARDSVC": 2,
+        "shared": 2
+      },
+      "placeable": true
+    },
+    {
+      "kind": "scheduler-table",
+      "files": 4,
+      "by_module": {
+        "CARDSVC": 3,
+        "PARTYRSK": 1
+      },
+      "placeable": true
+    },
+    {
+      "kind": "sql-ddl",
+      "files": 6,
+      "by_module": {
+        "CARDSVC": 3,
+        "PARTYRSK": 2,
+        "shared": 1
+      },
+      "placeable": true
+    },
+    {
+      "kind": "sql-script",
+      "files": 1,
+      "by_module": {
+        "shared": 1
+      },
+      "placeable": true
+    },
+    {
+      "kind": "sql-seed",
+      "files": 1,
+      "by_module": {
+        "CARDSVC": 1
+      },
+      "placeable": true
+    },
+    {
+      "kind": "tooling",
+      "files": 9,
+      "by_module": {
+        "not-an-artifact": 9
+      },
+      "placeable": false
+    },
+    {
+      "kind": "unclassified",
+      "files": 2,
+      "by_module": {
+        "not-an-artifact": 2
+      },
+      "placeable": false
+    }
+  ],
+  "connections": [
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy 20_INDEXES",
+      "certainty": "proven",
+      "evidence": [
+        "db2/ddl/20_INDEXES.sql"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy 50_GRANTS",
+      "certainty": "proven",
+      "evidence": [
+        "db2/ddl/50_GRANTS.sql"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy BUILDALL",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy CARDCHK",
+      "certainty": "proven",
+      "evidence": [
+        "app/asm/CARDCHK.asm"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy CARDXREF",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/CSDFILE.csd"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy COBBATCH",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy COBCICS",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy CSDUPCRD",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy CVCONSTY",
+      "certainty": "proven",
+      "evidence": [
+        "app/cpy/CVCONSTY.cpy"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy CVCTRL01Y",
+      "certainty": "proven",
+      "evidence": [
+        "app/cpy/CVCTRL01Y.cpy"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy CVERRS01Y",
+      "certainty": "proven",
+      "evidence": [
+        "app/cpy/CVERRS01Y.cpy"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both copy CVRISK01Y",
+      "certainty": "proven",
+      "evidence": [
+        "app/cpy/CVRISK01Y.cpy"
+      ],
+      "seen_by": []
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "calls PRBRSK1, which PARTYRSK declares",
+      "certainty": "proven",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "calls PRKYC01, which PARTYRSK declares",
+      "certainty": "proven",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "calls PRKYC03, which PARTYRSK declares",
+      "certainty": "proven",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "code",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "module PARTYRSK: 3 program(s) owned by PARTYRSK: PRBRSK1, PRKYC01, PRKYC03 (via dynamic CALL, dynamic CANCEL, dynamic CICS-LINK)",
+      "certainty": "proven",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both use dataset CARD.PROD.CICS.AUDIT",
+      "certainty": "proven",
+      "evidence": [],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "both use dataset CARD.PROD.CICS.OPSLOG",
+      "certainty": "proven",
+      "evidence": [],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &ASMHLQ..SASMMOD1: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:34"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &ASMHLQ..SASMMOD1: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:34"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &CICSHLQ..SDFHCOB: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:48",
+        "app/jcl/build/COBCICS.proc:96"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &CICSHLQ..SDFHCOB: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:48",
+        "app/jcl/build/COBCICS.proc:96"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &CICSHLQ..SDFHLOAD: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:126",
+        "app/jcl/build/COBCICS.proc:44"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &CICSHLQ..SDFHLOAD: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:126",
+        "app/jcl/build/COBCICS.proc:44"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &COBHLQ..SIGYCOMP: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:75",
+        "app/jcl/build/COBCICS.proc:91"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &COBHLQ..SIGYCOMP: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:75",
+        "app/jcl/build/COBCICS.proc:91"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &DB2HLQ..SDSNLOAD: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:104",
+        "app/jcl/build/COBBATCH.proc:55",
+        "app/jcl/build/COBCICS.proc:127",
+        "app/jcl/build/COBCICS.proc:63"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &DB2HLQ..SDSNLOAD: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:104",
+        "app/jcl/build/COBBATCH.proc:55",
+        "app/jcl/build/COBCICS.proc:127",
+        "app/jcl/build/COBCICS.proc:63"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &DBRMLIB.: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:56",
+        "app/jcl/build/COBCICS.proc:64"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &DBRMLIB.: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:56",
+        "app/jcl/build/COBCICS.proc:64"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &LEHLQ..SCEELKED: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:54",
+        "app/jcl/build/COBBATCH.proc:105",
+        "app/jcl/build/COBCICS.proc:128"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &LEHLQ..SCEELKED: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:54",
+        "app/jcl/build/COBBATCH.proc:105",
+        "app/jcl/build/COBCICS.proc:128"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &LEHLQ..SCEERUN: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:76",
+        "app/jcl/build/COBCICS.proc:92"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &LEHLQ..SCEERUN: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:76",
+        "app/jcl/build/COBCICS.proc:92"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &SORTHLQ..SORTLIB: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:106"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset &SORTHLQ..SORTLIB: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:106"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset ASM.SASMMOD1: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:100",
+        "app/jcl/build/BUILDALL.jcl:58",
+        "app/jcl/build/BUILDALL.jcl:68",
+        "app/jcl/build/BUILDALL.jcl:90"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset ASM.SASMMOD1: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:100",
+        "app/jcl/build/BUILDALL.jcl:58",
+        "app/jcl/build/BUILDALL.jcl:68",
+        "app/jcl/build/BUILDALL.jcl:90"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.ASM: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:35"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.ASM: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:35"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.AUTHLOG: ESDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:37"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.BMS: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:103",
+        "app/jcl/build/BUILDALL.jcl:61",
+        "app/jcl/build/BUILDALL.jcl:71",
+        "app/jcl/build/BUILDALL.jcl:93"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.BMS: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:103",
+        "app/jcl/build/BUILDALL.jcl:61",
+        "app/jcl/build/BUILDALL.jcl:71",
+        "app/jcl/build/BUILDALL.jcl:93"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CARDXREF.AIX1: AIX: created here; who consumes it is outside the scan",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:171"
+      ],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CARDXREF.PATH1: PATH: created here; who consumes it is outside the scan",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:180"
+      ],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CARDXREF: KSDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:15"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CBL: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/jcl/build/COBCICS.proc:45"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CBL: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/jcl/build/COBCICS.proc:45"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CICS.EXTRACT: sequential (QSAM by DD DCB): created here; who consumes it is outside the scan",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:88"
+      ],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CICS: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:47",
+        "app/cics/DFHCSDUP.jcl:48",
+        "app/cics/DFHCSDUP.jcl:49",
+        "app/cics/DFHCSDUP.jcl:50"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CICS: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:47",
+        "app/cics/DFHCSDUP.jcl:48",
+        "app/cics/DFHCSDUP.jcl:49",
+        "app/cics/DFHCSDUP.jcl:50"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CPY: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:62",
+        "app/jcl/build/BUILDALL.jcl:94",
+        "app/jcl/build/COBBATCH.proc:60",
+        "app/jcl/build/COBBATCH.proc:78",
+        "app/jcl/build/COBCICS.proc:46",
+        "app/jcl/build/COBCICS.proc:68",
+        "app/jcl/build/COBCICS.proc:94"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CPY: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:62",
+        "app/jcl/build/BUILDALL.jcl:94",
+        "app/jcl/build/COBBATCH.proc:60",
+        "app/jcl/build/COBBATCH.proc:78",
+        "app/jcl/build/COBCICS.proc:46",
+        "app/jcl/build/COBCICS.proc:68",
+        "app/jcl/build/COBCICS.proc:94"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CUSTPREF: KSDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:92"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.CYCLCTL: KSDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:132"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.DBRMLIB: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:31"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.DBRMLIB: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:31"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.FRAUDRUL: KSDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:73"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.JCLLIB: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:293"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.JCLLIB: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:293"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.LOADLIB: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:116",
+        "app/jcl/build/BUILDALL.jcl:84",
+        "app/jcl/build/COBASM.proc:60",
+        "app/jcl/build/COBBATCH.proc:107",
+        "app/jcl/build/COBBATCH.proc:114",
+        "app/jcl/build/COBCICS.proc:129",
+        "app/jcl/build/COBCICS.proc:138"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.LOADLIB: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:116",
+        "app/jcl/build/BUILDALL.jcl:84",
+        "app/jcl/build/COBASM.proc:60",
+        "app/jcl/build/COBBATCH.proc:107",
+        "app/jcl/build/COBBATCH.proc:114",
+        "app/jcl/build/COBCICS.proc:129",
+        "app/jcl/build/COBCICS.proc:138",
+        "app/jcl/cardsvc/CBBIL01J.jcl:26",
+        "app/jcl/cardsvc/CBBIL02J.jcl:44",
+        "app/jcl/cardsvc/CBBIL03J.jcl:22",
+        "app/jcl/cardsvc/CBBIL04J.jcl:26",
+        "app/jcl/cardsvc/CBBIL05J.jcl:25",
+        "app/jcl/cardsvc/CBBIL06J.jcl:22",
+        "app/jcl/cardsvc/CBCRD01J.jcl:35",
+        "app/jcl/cardsvc/CBCRD02J.jcl:37",
+        "app/jcl/cardsvc/CBCRD06J.jcl:53",
+        "app/jcl/cardsvc/CBCRD06J.jcl:80",
+        "app/jcl/cardsvc/CBCRD09J.jcl:115",
+        "app/jcl/cardsvc/CBREF01J.jcl:43",
+        "app/jcl/cardsvc/CBREF02J.jcl:24",
+        "app/jcl/cardsvc/CBREF02J.jcl:95",
+        "app/jcl/cardsvc/CBREF03J.jcl:128",
+        "app/jcl/cardsvc/CBREF03J.jcl:25",
+        "app/jcl/cardsvc/CBREF04J.jcl:101",
+        "app/jcl/cardsvc/CBREF04J.jcl:30",
+        "app/jcl/cardsvc/CBREF05J.jcl:25",
+        "app/jcl/proc/CARDDB2L.jcl:15"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.MACLIB: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:36"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.MACLIB: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:36"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.MERCHRTE: KSDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:53"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.PGMROUT: KSDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:152"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CARD.PROD.RSNCODE: KSDS: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl:112"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CICS.CARD.DFHCSD.BACKUP: sequential (QSAM by DD DCB): created here; who consumes it is outside the scan",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:27"
+      ],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CICS.CARD.DFHCSD: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:26",
+        "app/cics/DFHCSDUP.jcl:45",
+        "app/cics/DFHCSDUP.jcl:86"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CICS.CARD.DFHCSD: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:26",
+        "app/cics/DFHCSDUP.jcl:45",
+        "app/cics/DFHCSDUP.jcl:86"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CICSTS.SDFHLOAD: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:44",
+        "app/cics/DFHCSDUP.jcl:85"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CICSTS.SDFHLOAD: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:44",
+        "app/cics/DFHCSDUP.jcl:85"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CICSTS.SDFHMAC: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:101",
+        "app/jcl/build/BUILDALL.jcl:59",
+        "app/jcl/build/BUILDALL.jcl:69",
+        "app/jcl/build/BUILDALL.jcl:91"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset CICSTS.SDFHMAC: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:101",
+        "app/jcl/build/BUILDALL.jcl:59",
+        "app/jcl/build/BUILDALL.jcl:69",
+        "app/jcl/build/BUILDALL.jcl:91"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset DSN.SDSNLOAD: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDPRTY.jcl:17"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset DSN.SDSNLOAD: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDPRTY.jcl:17"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.CBL: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/jcl/build/COBCICS.proc:45"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.CBL: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/jcl/build/COBCICS.proc:45"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.CICS: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:51"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.CICS: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:51"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.CPY: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:61",
+        "app/jcl/build/COBBATCH.proc:79",
+        "app/jcl/build/COBCICS.proc:47",
+        "app/jcl/build/COBCICS.proc:69",
+        "app/jcl/build/COBCICS.proc:95"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.CPY: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:61",
+        "app/jcl/build/COBBATCH.proc:79",
+        "app/jcl/build/COBCICS.proc:47",
+        "app/jcl/build/COBCICS.proc:69",
+        "app/jcl/build/COBCICS.proc:95"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.DBRMLIB: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BINDPRTY.jcl:18",
+        "app/jcl/build/COBBATCH.proc:56",
+        "app/jcl/build/COBCICS.proc:64"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.DBRMLIB: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BINDPRTY.jcl:18",
+        "app/jcl/build/COBBATCH.proc:56",
+        "app/jcl/build/COBCICS.proc:64"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.JCLLIB: PDS member: created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:292"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.JCLLIB: PDS member: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:292"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.LOADLIB: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:107",
+        "app/jcl/build/COBBATCH.proc:114",
+        "app/jcl/build/COBCICS.proc:129",
+        "app/jcl/build/COBCICS.proc:138",
+        "app/jcl/partyrsk/CBPRT01J.jcl:44",
+        "app/jcl/partyrsk/CBPRT02J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:76",
+        "app/jcl/partyrsk/CBPRT03J.jcl:65",
+        "app/jcl/partyrsk/CBPRT04J.jcl:37"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.LOADLIB: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:107",
+        "app/jcl/build/COBBATCH.proc:114",
+        "app/jcl/build/COBCICS.proc:129",
+        "app/jcl/build/COBCICS.proc:138"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.RSKPARM: KSDS: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:16"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.WATCHLST.AIX1: AIX: created here; who consumes it is outside the scan",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:58"
+      ],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.WATCHLST.PATH1: PATH: created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:67"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset PRTY.PROD.WATCHLST: KSDS: created here; who consumes it is outside the scan",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl:37"
+      ],
+      "seen_by": [
+        "CARDSVC",
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset SYS1.MACLIB: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:102",
+        "app/jcl/build/BUILDALL.jcl:60",
+        "app/jcl/build/BUILDALL.jcl:70",
+        "app/jcl/build/BUILDALL.jcl:92",
+        "app/jcl/build/COBASM.proc:37"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset SYS1.MACLIB: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl:102",
+        "app/jcl/build/BUILDALL.jcl:60",
+        "app/jcl/build/BUILDALL.jcl:70",
+        "app/jcl/build/BUILDALL.jcl:92",
+        "app/jcl/build/COBASM.proc:37"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset SYS1.MODGEN: sequential (no catalog evidence): created here and read by CARDSVC",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:38"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "dataset SYS1.MODGEN: sequential (no catalog evidence): created here and read by PARTYRSK",
+      "certainty": "proven",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:38"
+      ],
+      "seen_by": [
+        "CARDSVC"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "db2 CARDSVC.ACCOUNT: 2 read(s), 0 write(s); DDL in the scan, the table itself is in the subsystem",
+      "certainty": "proven",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK3.cbl:163-177",
+        "app/partyrsk/cbl/PRBRSK3.cbl:397-407",
+        "app/partyrsk/cbl/PRRSK02.cbl:446-462",
+        "db2/ddl/10_CARDDB_TABLES.sql:9"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    },
+    {
+      "kind": "data",
+      "between": [
+        "CARDSVC",
+        "PARTYRSK"
+      ],
+      "detail": "db2 CARDSVC.CARD_LIMIT: 1 read(s), 0 write(s); DDL in the scan, the table itself is in the subsystem",
+      "certainty": "proven",
+      "evidence": [
+        "app/partyrsk/cbl/PRBRSK3.cbl:497-510",
+        "db2/ddl/10_CARDDB_TABLES.sql:71"
+      ],
+      "seen_by": [
+        "PARTYRSK"
+      ]
+    }
+  ],
+  "asks": [
+    {
+      "scope": "estate",
+      "kind": "catalog-assembler",
+      "severity": "medium",
+      "message": "app/asm/CARDCHK.asm is HLASM: the sweep has its sections, its entry points and the names it reaches, but mftb has no assembler analyser, so its logic is not inventoried",
+      "request": "Is this member in scope for the migration, and who can read it? Its behaviour (and any transfer the sweep listed as unresolved) needs a human.",
+      "evidence": [
+        "app/asm/CARDCHK.asm:75"
+      ]
+    },
+    {
+      "scope": "estate",
+      "kind": "catalog-untranslated",
+      "severity": "medium",
+      "message": "app/data/cardmast.ebc does not decode as UTF-8: EBCDIC data or a binary carried in the estate",
+      "request": "Is this data in scope? If so, supply it translated (or its record layout) \u2014 the sweep lists it but cannot read it.",
+      "evidence": [
+        "app/data/cardmast.ebc"
+      ]
+    },
+    {
+      "scope": "estate",
+      "kind": "catalog-untranslated",
+      "severity": "medium",
+      "message": "app/data/glpost.ebc does not decode as UTF-8: EBCDIC data or a binary carried in the estate",
+      "request": "Is this data in scope? If so, supply it translated (or its record layout) \u2014 the sweep lists it but cannot read it.",
+      "evidence": [
+        "app/data/glpost.ebc"
+      ]
+    },
+    {
+      "scope": "estate",
+      "kind": "catalog-unclassified",
+      "severity": "high",
+      "message": "sched/CALENDARS.sched matches no artifact signature: the sweep cannot say what it is",
+      "request": "What is this member (language / artifact type), or may it be excluded from the estate?",
+      "evidence": [
+        "sched/CALENDARS.sched"
+      ]
+    },
+    {
+      "scope": "estate",
+      "kind": "catalog-unclassified",
+      "severity": "high",
+      "message": "tools/bms3270/demo.keys matches no artifact signature: the sweep cannot say what it is",
+      "request": "What is this member (language / artifact type), or may it be excluded from the estate?",
+      "evidence": [
+        "tools/bms3270/demo.keys"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBBIL04J step RENDER runs CBBIL04 (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]",
+      "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBBIL04J step RENDER runs CBBIL04 (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]",
+      "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD05A step STEP010 runs CBCRD05A (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]",
+      "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD05A step STEP010 runs CBCRD05A (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]",
+      "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD06J step STEP030 runs CBCRD06B (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]",
+      "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD06J step STEP030 runs CBCRD06B (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]",
+      "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "file-dd-missing",
+      "severity": "high",
+      "message": "job CBBIL04J step RENDER runs CBBIL04 \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT",
+      "request": "Provide the DD PGMROUT allocation for job CBBIL04J step RENDER (or the PROC/override that supplies it)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:23",
+        "app/jcl/cardsvc/CBBIL04J.jcl:25"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "file-dd-missing",
+      "severity": "high",
+      "message": "job CBCRD05A step STEP010 runs CBCRD05A \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT",
+      "request": "Provide the DD PGMROUT allocation for job CBCRD05A step STEP010 (or the PROC/override that supplies it)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:23",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "file-dd-missing",
+      "severity": "high",
+      "message": "job CBCRD06J step STEP030 runs CBCRD06B \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT",
+      "request": "Provide the DD PGMROUT allocation for job CBCRD06J step STEP030 (or the PROC/override that supplies it)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:23",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "missing-copybook",
+      "severity": "high",
+      "message": "copy CARDSET is included by 8 program(s) (CACRD00, CACRD01, CACRD02, CACRD03, CACRD04, CACRD10, CACRD17, CACRD91) but no scanned copybook defines it",
+      "request": "Provide copybook member 'CARDSET' from the production copybook library (SYSLIB)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:86",
+        "app/cardsvc/cbl/CACRD01.cbl:60",
+        "app/cardsvc/cbl/CACRD02.cbl:120",
+        "app/cardsvc/cbl/CACRD03.cbl:75"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "missing-copybook",
+      "severity": "high",
+      "message": "copy CARDST2 is included by 6 program(s) (CACRD11, CACRD12, CACRD13, CACRD14, CACRD15, CACRD16) but no scanned copybook defines it",
+      "request": "Provide copybook member 'CARDST2' from the production copybook library (SYSLIB)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:176",
+        "app/cardsvc/cbl/CACRD12.cbl:143",
+        "app/cardsvc/cbl/CACRD13.cbl:195",
+        "app/cardsvc/cbl/CACRD14.cbl:192"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBASM: the PROC statement at app/jcl/build/COBASM.proc:4 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 3 parameter line(s) that follow (ASMHLQ, LEHLQ, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "request": "Provide the production copy of PROC COBASM (or confirm the intended defaults for ASMHLQ, LEHLQ, WORK)",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:4",
+        "app/jcl/build/COBASM.proc:5",
+        "app/jcl/build/COBASM.proc:6",
+        "app/jcl/build/COBASM.proc:7"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBBATCH: the PROC statement at app/jcl/build/COBBATCH.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "request": "Provide the production copy of PROC COBBATCH (or confirm the intended defaults for CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK)",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:5",
+        "app/jcl/build/COBBATCH.proc:6",
+        "app/jcl/build/COBBATCH.proc:7",
+        "app/jcl/build/COBBATCH.proc:8"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBCICS: the PROC statement at app/jcl/build/COBCICS.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "request": "Provide the production copy of PROC COBCICS (or confirm the intended defaults for CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK)",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:5",
+        "app/jcl/build/COBCICS.proc:6",
+        "app/jcl/build/COBCICS.proc:7",
+        "app/jcl/build/COBCICS.proc:8"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "profile-environment-topology",
+      "severity": "high",
+      "message": "CARDSVC profile: environment_topology is not in the store \u2014 which LPARs and environments (production / test / DR) the estate has \u2014 the scanned JCL allocates datasets under the high-level qualifier(s) ASM, CARD, CICS, CICSTS, DSN, DSN910, PRTY, SYS1: a naming observation, which is not proof of which LPAR or environment runs them",
+      "request": "State the LPARs and environments, how a dataset or job name says which one it belongs to, and which sysplex they sit in: the scan can only list the qualifiers it saw",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDPRTY.jcl:17",
+        "app/jcl/cardsvc/CBBIL01J.jcl:27",
+        "app/jcl/cardsvc/CBBIL02J.jcl:45"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "profile-masking-policy",
+      "severity": "high",
+      "message": "CARDSVC profile: masking_policy is not in the store \u2014 what may leave the estate, and in what shape",
+      "request": "State the data-masking policy for extracted test data (which fields must be masked, whether production data may leave the estate at all)",
+      "evidence": []
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "profile-test-lpar",
+      "severity": "high",
+      "message": "CARDSVC profile: test_lpar is not in the store \u2014 whether a test LPAR is available to run the migrated code against",
+      "request": "Confirm whether a test LPAR (or a sandbox subsystem) is available for parallel runs, and who can grant access",
+      "evidence": []
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "29 steps of PROC COBCICS use (job BUILDALL step ONL0010; job BUILDALL step ONL0020; job BUILDALL step ONL0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBCICS.proc:7 is orphaned by the PROC header break at app/jcl/build/COBCICS.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "request": "Provide the production copy of PROC COBCICS so the default for &CALLOPT is known",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87"
+      ]
+    },
+    {
+      "scope": "CARDSVC",
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "39 steps of PROC COBBATCH use (job BUILDALL step BAT0010; job BUILDALL step BAT0020; job BUILDALL step BAT0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBBATCH.proc:7 is orphaned by the PROC header break at app/jcl/build/COBBATCH.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "request": "Provide the production copy of PROC COBBATCH so the default for &CALLOPT is known",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71"
+      ]
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "db2-dclgen-ddl-mismatch",
+      "severity": "high",
+      "message": "DCLGEN for PARTYRSK.CUSTOMER in PRKYC01 (inline) disagrees with the scanned DDL: declares 8 of 28 DDL columns; not declared: TITLE, FIRST_NAME, MIDDLE_INIT, LEGAL_NAME, DOB, NATIONAL_ID, TAX_ID, ADDR_LINE1, ADDR_LINE2, CITY, STATE_CD, POSTAL_CD, DOMICILE_CTRY, CITIZENSHIP_CTRY, PHONE_HOME, PHONE_MOBILE, EMAIL, SEGMENT_CD, PEP_FLG, VIP_FLG",
+      "request": "Confirm which is current: regenerate the DCLGEN from the live catalog (DSNTIAD/DCLGEN TABLE(PARTYRSK.CUSTOMER)) or provide the DDL version the program was last bound against",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl:96-105",
+        "db2/ddl/11_PARTYDB_TABLES.sql:9"
+      ]
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBASM: the PROC statement at app/jcl/build/COBASM.proc:4 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 3 parameter line(s) that follow (ASMHLQ, LEHLQ, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "request": "Provide the production copy of PROC COBASM (or confirm the intended defaults for ASMHLQ, LEHLQ, WORK)",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:4",
+        "app/jcl/build/COBASM.proc:5",
+        "app/jcl/build/COBASM.proc:6",
+        "app/jcl/build/COBASM.proc:7"
+      ]
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBBATCH: the PROC statement at app/jcl/build/COBBATCH.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "request": "Provide the production copy of PROC COBBATCH (or confirm the intended defaults for CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK)",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:5",
+        "app/jcl/build/COBBATCH.proc:6",
+        "app/jcl/build/COBBATCH.proc:7",
+        "app/jcl/build/COBBATCH.proc:8"
+      ]
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBCICS: the PROC statement at app/jcl/build/COBCICS.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "request": "Provide the production copy of PROC COBCICS (or confirm the intended defaults for CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK)",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:5",
+        "app/jcl/build/COBCICS.proc:6",
+        "app/jcl/build/COBCICS.proc:7",
+        "app/jcl/build/COBCICS.proc:8"
+      ]
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "profile-environment-topology",
+      "severity": "high",
+      "message": "PARTYRSK profile: environment_topology is not in the store \u2014 which LPARs and environments (production / test / DR) the estate has \u2014 the scanned JCL allocates datasets under the high-level qualifier(s) ASM, CARD, CICS, CICSTS, DSN, PRTY, SYS1, SYS2: a naming observation, which is not proof of which LPAR or environment runs them",
+      "request": "State the LPARs and environments, how a dataset or job name says which one it belongs to, and which sysplex they sit in: the scan can only list the qualifiers it saw",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDCARD.jcl:31",
+        "app/jcl/build/BINDPRTY.jcl:17",
+        "app/jcl/build/BUILDALL.jcl:61"
+      ]
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "profile-masking-policy",
+      "severity": "high",
+      "message": "PARTYRSK profile: masking_policy is not in the store \u2014 what may leave the estate, and in what shape",
+      "request": "State the data-masking policy for extracted test data (which fields must be masked, whether production data may leave the estate at all)",
+      "evidence": []
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "profile-shared-code-boundary",
+      "severity": "high",
+      "message": "PARTYRSK profile: shared_code_boundary is not in the store \u2014 which code the module uses but does not own",
+      "request": "Confirm which copybooks and called modules are shared estate code rather than the module's own, and which library owns them",
+      "evidence": []
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "profile-test-lpar",
+      "severity": "high",
+      "message": "PARTYRSK profile: test_lpar is not in the store \u2014 whether a test LPAR is available to run the migrated code against",
+      "request": "Confirm whether a test LPAR (or a sandbox subsystem) is available for parallel runs, and who can grant access",
+      "evidence": []
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "29 steps of PROC COBCICS use (job BUILDALL step ONL0010; job BUILDALL step ONL0020; job BUILDALL step ONL0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBCICS.proc:7 is orphaned by the PROC header break at app/jcl/build/COBCICS.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "request": "Provide the production copy of PROC COBCICS so the default for &CALLOPT is known",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87"
+      ]
+    },
+    {
+      "scope": "PARTYRSK",
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "39 steps of PROC COBBATCH use (job BUILDALL step BAT0010; job BUILDALL step BAT0020; job BUILDALL step BAT0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBBATCH.proc:7 is orphaned by the PROC header break at app/jcl/build/COBBATCH.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "request": "Provide the production copy of PROC COBBATCH so the default for &CALLOPT is known",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,2251 @@
+{
+ "meta": {
+  "estate": "tedfoley-cog/cobol-batch-modernization-demo",
+  "skill": "module-classification",
+  "updated_at": "2026-09-28T13:39:45Z"
+ },
+ "modules": [
+  {
+   "id": "CARDSVC",
+   "name": "Card Services",
+   "naming": "proposed",
+   "what_it_does": "issues and services card accounts: the CA00 online dialogue (inquiry, maintenance, authorisation, fraud screens) and the CARDNITE, CARDBILL and CARDREF batch cycles over CARDDB",
+   "confidence": "derived",
+   "confirmed": null,
+   "evidence": [
+    "README.md:9",
+    "app/cardsvc/cbl/",
+    "app/jcl/cardsvc/",
+    "app/cics/CSDCARD.csd:22",
+    "sched/CARDNITE.sched:32"
+   ],
+   "reasoning": "module id and name are the customer own (README.md:7-10 module table), membership not yet confirmed by a person; its own COBOL, copybook, BMS and JCL directories, CICS groups CARDGRP/CARDMAP/CARDTDQ, three scheduler tables, the CARDDB DDL and the CARDCOLL bind",
+   "roots": {
+    "bms": [
+     "app/cardsvc/bms"
+    ],
+    "copybooks": [
+     "app/cardsvc/cpy",
+     "app/cpy"
+    ],
+    "csd": [
+     "app/cics"
+    ],
+    "jcl": [
+     "app/cics",
+     "app/jcl/build",
+     "app/jcl/cardsvc",
+     "app/jcl/vsam"
+    ],
+    "procs": [
+     "app/jcl/build",
+     "app/jcl/proc"
+    ],
+    "sched": [
+     "sched"
+    ],
+    "sql": [
+     "db2/ddl"
+    ],
+    "src": [
+     "app/asm",
+     "app/cardsvc/cbl"
+    ]
+   },
+   "scan": "python3 -m mftb scan --module CARDSVC --from-catalog",
+   "members": [
+    {
+     "name": "CARDSET",
+     "artifact": "bms mapset",
+     "path": "app/cardsvc/bms/CARDMAP.bms",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/bms/CARDMAP.bms:18"
+     ],
+     "reasoning": "in the module's own BMS directory app/cardsvc/bms/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CARDST2",
+     "artifact": "bms mapset",
+     "path": "app/cardsvc/bms/CARDMP2.bms",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/bms/CARDMP2.bms:19"
+     ],
+     "reasoning": "in the module's own BMS directory app/cardsvc/bms/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD00",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD00.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD00.cbl:19",
+      "app/cics/CSDCARD.csd:22"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD01",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD01.cbl:15",
+      "app/cics/CSDCARD.csd:82"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD02",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD02.cbl:20",
+      "app/cics/CSDCARD.csd:88"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD03",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD03.cbl:19",
+      "app/cics/CSDCARD.csd:94"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD04",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD04.cbl:20",
+      "app/cics/CSDCARD.csd:100"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD05",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD05.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD05.cbl:24",
+      "app/cics/CSDCARD.csd:106"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD06",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD06.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD06.cbl:31",
+      "app/cics/CSDCARD.csd:112"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD07",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD07.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD07.cbl:38",
+      "app/cics/CSDCARD.csd:118"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD08",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD08.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD08.cbl:37",
+      "app/cics/CSDCARD.csd:124"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD09",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD09.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD09.cbl:31",
+      "app/cics/CSDCARD.csd:130"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD10",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD10.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD10.cbl:37",
+      "app/cics/CSDCARD.csd:136"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD11",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD11.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD11.cbl:20",
+      "app/cics/CSDCARD.csd:142"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD12",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD12.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD12.cbl:25",
+      "app/cics/CSDCARD.csd:148"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD13",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD13.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD13.cbl:27",
+      "app/cics/CSDCARD.csd:154"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD14",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD14.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD14.cbl:21",
+      "app/cics/CSDCARD.csd:160"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD15",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD15.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD15.cbl:23",
+      "app/cics/CSDCARD.csd:166"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD16",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD16.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD16.cbl:21",
+      "app/cics/CSDCARD.csd:42"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD17",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD17.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD17.cbl:31",
+      "app/cics/CSDCARD.csd:178"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD90",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD90.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD90.cbl:17",
+      "app/cics/CSDCARD.csd:192"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD91",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD91.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD91.cbl:32",
+      "app/cics/CSDCARD.csd:206"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CACRD92",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CACRD92.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD92.cbl:36",
+      "app/cics/CSDCARD.csd:216"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CAFRD01",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CAFRD01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CAFRD01.cbl:26",
+      "app/cics/CSDCARD.csd:233"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CAFRD02",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CAFRD02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CAFRD02.cbl:24",
+      "app/cics/CSDCARD.csd:239"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CAFRD03",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CAFRD03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CAFRD03.cbl:26",
+      "app/cics/CSDCARD.csd:245"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CAFRD04",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CAFRD04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CAFRD04.cbl:24",
+      "app/cics/CSDCARD.csd:251"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/; CSD-defined in CSDCARD.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL01",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBBIL01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBBIL01.cbl:25"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL02",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBBIL02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBBIL02.cbl:27"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL03",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBBIL03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBBIL03.cbl:27"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL04",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBBIL04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBBIL04.cbl:30"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL05",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBBIL05.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBBIL05.cbl:26"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL06",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBBIL06.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBBIL06.cbl:29"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD01",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD01.cbl:30"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD02",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD02.cbl:33"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD03",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD03.cbl:36"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD04",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD04.cbl:51"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD05A",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD05A.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD05A.cbl:38"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD05B",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD05B.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD05B.cbl:47"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD06A",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD06A.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD06A.cbl:34"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD06B",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD06B.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD06B.cbl:47"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD06C",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD06C.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD06C.cbl:34"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD06W",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD06W.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD06W.cbl:36"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD06X",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD06X.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD06X.cbl:32"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD07",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD07.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD07.cbl:50"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD08",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD08.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD08.cbl:43"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD09",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD09.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD09.cbl:34"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD10",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD10.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD10.cbl:47"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD90",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBCRD90.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD90.cbl:17"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBFEE01",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBFEE01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBFEE01.cbl:37"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBFEE02",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBFEE02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBFEE02.cbl:35"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBFEE03",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBFEE03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBFEE03.cbl:43"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF01",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBREF01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBREF01.cbl:32"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF02",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBREF02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBREF02.cbl:32"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF03",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBREF03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBREF03.cbl:34"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF04",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBREF04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBREF04.cbl:37"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF05",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBREF05.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBREF05.cbl:32"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBSTM01",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBSTM01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBSTM01.cbl:31"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBSTM02",
+     "artifact": "program",
+     "path": "app/cardsvc/cbl/CBSTM02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cbl/CBSTM02.cbl:44"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/cardsvc/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVAXTR01Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVAXTR01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVAXTR01Y.cpy:12"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVBRTN1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVBRTN1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVBRTN1Y.cpy:12"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVBWRK1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVBWRK1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVBWRK1Y.cpy:9"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVCPRF1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVCPRF1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVCPRF1Y.cpy:10"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVFEEW1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVFEEW1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVFEEW1Y.cpy:14"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVFRAU1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVFRAU1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVFRAU1Y.cpy:14"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVMRTE1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVMRTE1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVMRTE1Y.cpy:11"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVPWRK01Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVPWRK01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVPWRK01Y.cpy:9"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVRJCT01Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVRJCT01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVRJCT01Y.cpy:8"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVRSNC1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVRSNC1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVRSNC1Y.cpy:10"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVXREF1Y",
+     "artifact": "copybook",
+     "path": "app/cardsvc/cpy/CVXREF1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cardsvc/cpy/CVXREF1Y.cpy:12"
+     ],
+     "reasoning": "in the module's own copybook directory app/cardsvc/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CA00",
+     "artifact": "csd",
+     "path": "app/cics/CSDCARD.csd",
+     "confidence": "derived",
+     "evidence": [
+      "app/cics/CSDCARD.csd:22",
+      "app/cics/CSDCARD.csd:59"
+     ],
+     "reasoning": "CICS group CARDGRP: defines CA00/CA99 and every CACRD/CAFRD program",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CARDSET",
+     "artifact": "csd",
+     "path": "app/cics/CSDMAP.csd",
+     "confidence": "derived",
+     "evidence": [
+      "app/cics/CSDMAP.csd:17"
+     ],
+     "reasoning": "CICS group CARDMAP: defines the CARDSVC mapsets CARDSET/CARDST2 (app/cardsvc/bms)",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CLOG",
+     "artifact": "csd",
+     "path": "app/cics/CSDTDQ.csd",
+     "confidence": "derived",
+     "evidence": [
+      "app/cics/CSDTDQ.csd:22",
+      "app/cardsvc/cbl/CACRD17.cbl"
+     ],
+     "reasoning": "CICS group CARDTDQ: the CLOG/CAUD/CREF/CARDRTQ/CARDBRQ queues the CARDSVC online programs write; PARTYRSK error handler writes its own PRER queue, which this group does not define",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVACCT01Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVACCT01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVACCT01Y.cpy:5",
+      "app/cardsvc/cbl/CACRD01.cbl:56"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (3 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "CVAUTH01Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVAUTH01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVAUTH01Y.cpy:11",
+      "app/cardsvc/cbl/CACRD04.cbl:107"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (11 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "CVAUTHW1Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVAUTHW1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVAUTHW1Y.cpy:18",
+      "app/cardsvc/cbl/CACRD00.cbl:80"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (12 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "CVCARD01Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVCARD01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVCARD01Y.cpy:5",
+      "app/cardsvc/cbl/CACRD03.cbl:71"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (3 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "CVCUST01Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVCUST01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVCUST01Y.cpy:7",
+      "app/cardsvc/cbl/CACRD15.cbl:119"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (1 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "CVROUT01Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVROUT01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVROUT01Y.cpy:7",
+      "app/cardsvc/cbl/CACRD00.cbl:81"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (14 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "CVSTMT01Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVSTMT01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVSTMT01Y.cpy:5",
+      "app/cardsvc/cbl/CBBIL02.cbl:149"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (6 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "CVTRAN01Y",
+     "artifact": "copybook",
+     "path": "app/cpy/CVTRAN01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/cpy/CVTRAN01Y.cpy:7",
+      "app/cardsvc/cbl/CACRD13.cbl:189"
+     ],
+     "reasoning": "in the estate copybook library (README.md:15) but copied only by CARDSVC programs (3 member(s)); no PARTYRSK source copies it",
+     "confirmed": null,
+     "alternatives": [
+      {
+       "value": "shared",
+       "why": "README.md:15 calls app/cpy the copybooks shared across the estate"
+      }
+     ]
+    },
+    {
+     "name": "BINDCARD",
+     "artifact": "job",
+     "path": "app/jcl/build/BINDCARD.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/build/BINDCARD.jcl:251"
+     ],
+     "reasoning": "binds the CARDCOLL packages and the CARD plans (CARDONLP/CARDNITP/CARDBILP/CARDREFP), qualifier CARDSVC",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "COBASM",
+     "artifact": "proc",
+     "path": "app/jcl/build/COBASM.proc",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/build/BUILDALL.jcl:48",
+      "app/jcl/build/BUILDALL.jcl:57"
+     ],
+     "reasoning": "assembles CARDCHK and the CARDSVC BMS maps in BUILDALL; no PARTYRSK step uses it",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL01J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBBIL01J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBBIL01J.jcl:1",
+      "sched/CARDBILL.sched:45"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDBILL",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL02J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBBIL02J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBBIL02J.jcl:1",
+      "sched/CARDBILL.sched:84"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDBILL",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL03J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBBIL03J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBBIL03J.jcl:1",
+      "sched/CARDBILL.sched:120"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDBILL",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL04J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBBIL04J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBBIL04J.jcl:1",
+      "sched/CARDBILL.sched:152"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDBILL",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL05J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBBIL05J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBBIL05J.jcl:1",
+      "sched/CARDBILL.sched:187"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDBILL",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL06J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBBIL06J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBBIL06J.jcl:1",
+      "sched/CARDBILL.sched:231"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDBILL",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD01J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD01J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD01J.jcl:1",
+      "sched/CARDNITE.sched:32"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD02J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD02J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD02J.jcl:1",
+      "sched/CARDNITE.sched:61"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD03J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD03J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD03J.jcl:1",
+      "sched/CARDNITE.sched:93"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD04J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD04J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD04J.jcl:1",
+      "sched/CARDNITE.sched:119"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD05A",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD05AJ.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD05AJ.jcl:1"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD05B",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD05BJ.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD05BJ.jcl:1"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD06J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD06J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD06J.jcl:1",
+      "sched/CARDNITE.sched:229"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD07J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD07J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD07J.jcl:1",
+      "sched/CARDNITE.sched:269"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD08J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD08J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD08J.jcl:1",
+      "sched/CARDNITE.sched:300"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD09J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD09J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD09J.jcl:1",
+      "sched/CARDNITE.sched:336"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD10J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBCRD10J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBCRD10J.jcl:1",
+      "sched/CARDNITE.sched:363"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDNITE",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF01J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBREF01J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBREF01J.jcl:1",
+      "sched/CARDREF.sched:31"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDREF",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF02J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBREF02J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBREF02J.jcl:1",
+      "sched/CARDREF.sched:60"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDREF",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF03J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBREF03J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBREF03J.jcl:1",
+      "sched/CARDREF.sched:95"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDREF",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF04J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBREF04J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBREF04J.jcl:1",
+      "sched/CARDREF.sched:122"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDREF",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF05J",
+     "artifact": "job",
+     "path": "app/jcl/cardsvc/CBREF05J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/cardsvc/CBREF05J.jcl:1",
+      "sched/CARDREF.sched:166"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/cardsvc/; ordered by scheduler table CARDREF",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CARDDB2",
+     "artifact": "proc",
+     "path": "app/jcl/proc/CARDDB2.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/proc/CARDDB2.jcl:7"
+     ],
+     "reasoning": "PROC header: 'RUN A CARDSVC DB2 BATCH PROGRAM UNDER TSO'; executed only by CARDSVC jobs",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CARDDB2L",
+     "artifact": "jcl fragment",
+     "path": "app/jcl/proc/CARDDB2L.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/proc/CARDDB2.jcl:33",
+      "app/jcl/proc/CARDDB2L.jcl:1"
+     ],
+     "reasoning": "INCLUDE member of CARDDB2: 'COMMON STEPLIB CONCATENATION FOR CARDSVC DB2 BATCH'",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "DEFCARD",
+     "artifact": "job",
+     "path": "app/jcl/vsam/DEFCARD.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/vsam/DEFCARD.jcl:16"
+     ],
+     "reasoning": "IDCAMS job defining the CARD.PROD.* VSAM clusters (CARDXREF, AUTHLOG, CYCLCTL, PGMROUT, ...)",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "00_CARDDB",
+     "artifact": "sql ddl",
+     "path": "db2/ddl/00_CARDDB.sql",
+     "confidence": "derived",
+     "evidence": [
+      "README.md:9",
+      "db2/ddl/00_CARDDB.sql:1"
+     ],
+     "reasoning": "storage group, database and tablespaces of CARDDB, the CARDSVC database (README module table)",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "10_CARDDB_TABLES",
+     "artifact": "sql ddl",
+     "path": "db2/ddl/10_CARDDB_TABLES.sql",
+     "confidence": "derived",
+     "evidence": [
+      "db2/ddl/10_CARDDB_TABLES.sql:1"
+     ],
+     "reasoning": "CREATE TABLE for the CARDSVC.* tables only",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "30_FOREIGN_KEYS",
+     "artifact": "sql ddl",
+     "path": "db2/ddl/30_FOREIGN_KEYS.sql",
+     "confidence": "derived",
+     "evidence": [
+      "db2/ddl/30_FOREIGN_KEYS.sql:13"
+     ],
+     "reasoning": "every ALTER TABLE / REFERENCES is between CARDSVC.* tables",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "40_SEED_PGM_ROUTE",
+     "artifact": "sql seed",
+     "path": "db2/ddl/40_SEED_PGM_ROUTE.sql",
+     "confidence": "derived",
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:36"
+     ],
+     "reasoning": "seeds CARDSVC.PGM_ROUTE, the CA00 dispatch table read by CACRD90/CBCRD90",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBBIL01J",
+     "artifact": "scheduler table",
+     "path": "sched/CARDBILL.sched",
+     "confidence": "derived",
+     "evidence": [
+      "sched/CARDBILL.sched:45",
+      "README.md:9"
+     ],
+     "reasoning": "scheduler table of CARDSVC jobs CBBIL01J..CBBIL06J",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBCRD01J",
+     "artifact": "scheduler table",
+     "path": "sched/CARDNITE.sched",
+     "confidence": "derived",
+     "evidence": [
+      "sched/CARDNITE.sched:32",
+      "README.md:9"
+     ],
+     "reasoning": "scheduler table of CARDSVC jobs CBCRD01J..CBCRD10J (README names CARDNITE as a CARDSVC batch)",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBREF01J",
+     "artifact": "scheduler table",
+     "path": "sched/CARDREF.sched",
+     "confidence": "derived",
+     "evidence": [
+      "sched/CARDREF.sched:31",
+      "README.md:9"
+     ],
+     "reasoning": "scheduler table of CARDSVC jobs CBREF01J..CBREF05J",
+     "confirmed": null,
+     "alternatives": []
+    }
+   ]
+  },
+  {
+   "id": "PARTYRSK",
+   "name": "Party & Risk",
+   "naming": "proposed",
+   "what_it_does": "maintains party KYC, sanctions/watch-list screening and credit-exposure risk scores: PRKYC/PRRSK online services reached from CA00 and the weekly PARTYWK batch over PARTYDB",
+   "confidence": "derived",
+   "confirmed": null,
+   "evidence": [
+    "README.md:10",
+    "app/partyrsk/cbl/",
+    "app/jcl/partyrsk/",
+    "app/cics/CSDPRTY.csd:16",
+    "sched/PARTYWK.sched:31"
+   ],
+   "reasoning": "module id and name are the customer own (README.md:7-10 module table), membership not yet confirmed by a person; its own COBOL, copybook and JCL directories, CICS group PRTYGRP, the PARTYWK table, the PARTYDB DDL and the PRTYCOLL bind",
+   "roots": {
+    "copybooks": [
+     "app/cpy",
+     "app/partyrsk/cpy"
+    ],
+    "csd": [
+     "app/cics"
+    ],
+    "jcl": [
+     "app/cics",
+     "app/jcl/build",
+     "app/jcl/partyrsk",
+     "app/jcl/vsam"
+    ],
+    "procs": [
+     "app/jcl/build"
+    ],
+    "sched": [
+     "sched"
+    ],
+    "sql": [
+     "db2/ddl"
+    ],
+    "src": [
+     "app/asm",
+     "app/partyrsk/cbl"
+    ]
+   },
+   "scan": "python3 -m mftb scan --module PARTYRSK --from-catalog",
+   "members": [
+    {
+     "name": "PRKYC01",
+     "artifact": "csd",
+     "path": "app/cics/CSDPRTY.csd",
+     "confidence": "derived",
+     "evidence": [
+      "app/cics/CSDPRTY.csd:16"
+     ],
+     "reasoning": "CICS group PRTYGRP: defines the PRKYC/PRRSK/PRERR online programs",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "BINDPRTY",
+     "artifact": "job",
+     "path": "app/jcl/build/BINDPRTY.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/build/BINDPRTY.jcl:107"
+     ],
+     "reasoning": "binds the PRTYCOLL packages and the PARTYRSK plans (PRTYONLP/PARTYWKP), qualifier PARTYRSK",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT01J",
+     "artifact": "job",
+     "path": "app/jcl/partyrsk/CBPRT01J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/partyrsk/CBPRT01J.jcl:1",
+      "sched/PARTYWK.sched:31"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/partyrsk/; ordered by scheduler table PARTYWK",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT02J",
+     "artifact": "job",
+     "path": "app/jcl/partyrsk/CBPRT02J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/partyrsk/CBPRT02J.jcl:1",
+      "sched/PARTYWK.sched:68"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/partyrsk/; ordered by scheduler table PARTYWK",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT03J",
+     "artifact": "job",
+     "path": "app/jcl/partyrsk/CBPRT03J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/partyrsk/CBPRT03J.jcl:1",
+      "sched/PARTYWK.sched:109"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/partyrsk/; ordered by scheduler table PARTYWK",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT04J",
+     "artifact": "job",
+     "path": "app/jcl/partyrsk/CBPRT04J.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/partyrsk/CBPRT04J.jcl:1",
+      "sched/PARTYWK.sched:145"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/partyrsk/; ordered by scheduler table PARTYWK",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "DEFPWCTL",
+     "artifact": "job",
+     "path": "app/jcl/partyrsk/DEFPWCTL.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/partyrsk/DEFPWCTL.jcl:1"
+     ],
+     "reasoning": "in the module's own JCL directory app/jcl/partyrsk/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "DEFPARTY",
+     "artifact": "job",
+     "path": "app/jcl/vsam/DEFPARTY.jcl",
+     "confidence": "derived",
+     "evidence": [
+      "app/jcl/vsam/DEFPARTY.jcl:17"
+     ],
+     "reasoning": "IDCAMS job defining the PRTY.PROD.* VSAM clusters (RSKPARM, WATCHLST + AIX/PATH)",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT01",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/CBPRT01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/CBPRT01.cbl:29"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT02A",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/CBPRT02A.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/CBPRT02A.cbl:38"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT02B",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/CBPRT02B.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/CBPRT02B.cbl:32"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT03",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/CBPRT03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/CBPRT03.cbl:38"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT04",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/CBPRT04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/CBPRT04.cbl:35"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRBRSK1",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRBRSK1.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRBRSK1.cbl:39"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRBRSK2",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRBRSK2.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRBRSK2.cbl:25"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRBRSK3",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRBRSK3.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRBRSK3.cbl:32"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRBRSK4",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRBRSK4.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRBRSK4.cbl:25"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRBRSK5",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRBRSK5.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRBRSK5.cbl:23"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRERR01",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRERR01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRERR01.cbl:25",
+      "app/cics/CSDPRTY.csd:116"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRKYC01",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRKYC01.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRKYC01.cbl:26",
+      "app/cics/CSDPRTY.csd:25"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRKYC02",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRKYC02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRKYC02.cbl:28",
+      "app/cics/CSDPRTY.csd:39"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRKYC03",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRKYC03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRKYC03.cbl:22",
+      "app/cics/CSDPRTY.csd:49"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRKYC04",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRKYC04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRKYC04.cbl:22",
+      "app/cics/CSDPRTY.csd:60"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRRSK02",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRRSK02.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRRSK02.cbl:31",
+      "app/cics/CSDPRTY.csd:73"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRRSK03",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRRSK03.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRRSK03.cbl:27",
+      "app/cics/CSDPRTY.csd:83"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRRSK04",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRRSK04.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRRSK04.cbl:26",
+      "app/cics/CSDPRTY.csd:93"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "PRRSK05",
+     "artifact": "program",
+     "path": "app/partyrsk/cbl/PRRSK05.cbl",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cbl/PRRSK05.cbl:24",
+      "app/cics/CSDPRTY.csd:103"
+     ],
+     "reasoning": "in the module's own COBOL source directory app/partyrsk/cbl/; CSD-defined in CSDPRTY.csd",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVEXPO01Y",
+     "artifact": "copybook",
+     "path": "app/partyrsk/cpy/CVEXPO01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cpy/CVEXPO01Y.cpy:4"
+     ],
+     "reasoning": "in the module's own copybook directory app/partyrsk/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVPARTY1Y",
+     "artifact": "copybook",
+     "path": "app/partyrsk/cpy/CVPARTY1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cpy/CVPARTY1Y.cpy:8"
+     ],
+     "reasoning": "in the module's own copybook directory app/partyrsk/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVSANC01Y",
+     "artifact": "copybook",
+     "path": "app/partyrsk/cpy/CVSANC01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cpy/CVSANC01Y.cpy:5"
+     ],
+     "reasoning": "in the module's own copybook directory app/partyrsk/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVSCOR01Y",
+     "artifact": "copybook",
+     "path": "app/partyrsk/cpy/CVSCOR01Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cpy/CVSCOR01Y.cpy:5"
+     ],
+     "reasoning": "in the module's own copybook directory app/partyrsk/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CVWATC1Y",
+     "artifact": "copybook",
+     "path": "app/partyrsk/cpy/CVWATC1Y.cpy",
+     "confidence": "derived",
+     "evidence": [
+      "app/partyrsk/cpy/CVWATC1Y.cpy:13"
+     ],
+     "reasoning": "in the module's own copybook directory app/partyrsk/cpy/",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "01_PARTYDB",
+     "artifact": "sql ddl",
+     "path": "db2/ddl/01_PARTYDB.sql",
+     "confidence": "derived",
+     "evidence": [
+      "README.md:10",
+      "db2/ddl/01_PARTYDB.sql:3"
+     ],
+     "reasoning": "storage group, database and tablespaces of PARTYDB, the PARTYRSK database (README module table)",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "11_PARTYDB_TABLES",
+     "artifact": "sql ddl",
+     "path": "db2/ddl/11_PARTYDB_TABLES.sql",
+     "confidence": "derived",
+     "evidence": [
+      "db2/ddl/11_PARTYDB_TABLES.sql:1"
+     ],
+     "reasoning": "CREATE TABLE for the PARTYRSK.* tables only",
+     "confirmed": null,
+     "alternatives": []
+    },
+    {
+     "name": "CBPRT01J",
+     "artifact": "scheduler table",
+     "path": "sched/PARTYWK.sched",
+     "confidence": "derived",
+     "evidence": [
+      "sched/PARTYWK.sched:31",
+      "README.md:10"
+     ],
+     "reasoning": "scheduler table of PARTYRSK jobs CBPRT01J..CBPRT04J (README names PARTYWK as the PARTYRSK batch)",
+     "confirmed": null,
+     "alternatives": []
+    }
+   ]
+  }
+ ],
+ "shared": [
+  {
+   "name": "CARDCHK",
+   "artifact": "assembler program",
+   "path": "app/asm/CARDCHK.asm",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/jcl/build/COBBATCH.proc:111",
+    "app/jcl/build/COBCICS.proc:134",
+    "app/jcl/build/BUILDALL.jcl:18",
+    "app/cics/CSDCARD.csd:272"
+   ],
+   "why": "HLASM subroutine INCLUDEd statically by the COBCICS and COBBATCH link-edit steps, which BUILDALL uses for both modules; CSD-defined in CARDGRP. Only its names are known: mftb has no assembler analyser (catalog-assembler ask), and no scanned COBOL source CALLs it by literal"
+  },
+  {
+   "name": "CARDXREF",
+   "artifact": "csd",
+   "path": "app/cics/CSDFILE.csd",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/cics/CSDFILE.csd:22",
+    "app/cics/CSDFILE.csd:277"
+   ],
+   "why": "group CARDFILE defines the region FCTs for both CARD.PROD.* and PRTY.PROD.* (RSKPARM, WATCHLST) datasets in the one CICSCARD region"
+  },
+  {
+   "name": "CSDUPCRD",
+   "artifact": "job",
+   "path": "app/cics/DFHCSDUP.jcl",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/cics/DFHCSDUP.jcl:67",
+    "app/cics/DFHCSDUP.jcl:71"
+   ],
+   "why": "installs CARDFILE/CARDMAP/CARDTDQ/CARDGRP and PRTYGRP into the single CARDLIST group list of region CICSCARD"
+  },
+  {
+   "name": "CVCONSTY",
+   "artifact": "copybook",
+   "path": "app/cpy/CVCONSTY.cpy",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/cardsvc/cbl/CACRD00.cbl:83",
+    "app/partyrsk/cbl/CBPRT01.cbl:158"
+   ],
+   "why": "estate copybook library (README.md:15) copied by programs of both modules"
+  },
+  {
+   "name": "CVCTRL01Y",
+   "artifact": "copybook",
+   "path": "app/cpy/CVCTRL01Y.cpy",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/cardsvc/cbl/CBBIL01.cbl:137",
+    "app/partyrsk/cbl/CBPRT03.cbl:161"
+   ],
+   "why": "estate copybook library (README.md:15) copied by programs of both modules"
+  },
+  {
+   "name": "CVERRS01Y",
+   "artifact": "copybook",
+   "path": "app/cpy/CVERRS01Y.cpy",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/cardsvc/cbl/CACRD00.cbl:82",
+    "app/partyrsk/cbl/CBPRT01.cbl:156"
+   ],
+   "why": "estate copybook library (README.md:15) copied by programs of both modules"
+  },
+  {
+   "name": "CVRISK01Y",
+   "artifact": "copybook",
+   "path": "app/cpy/CVRISK01Y.cpy",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/cardsvc/cbl/CACRD05.cbl:55",
+    "app/partyrsk/cbl/CBPRT03.cbl:159"
+   ],
+   "why": "estate copybook library (README.md:15) copied by programs of both modules"
+  },
+  {
+   "name": "BUILDALL",
+   "artifact": "job",
+   "path": "app/jcl/build/BUILDALL.jcl",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/jcl/build/BUILDALL.jcl:123",
+    "app/jcl/build/BUILDALL.jcl:204"
+   ],
+   "why": "full estate rebuild: compiles CARDSVC (ONL/OND/BAT/BDY steps) and PARTYRSK (PRO/PRB steps)"
+  },
+  {
+   "name": "COBBATCH",
+   "artifact": "proc",
+   "path": "app/jcl/build/COBBATCH.proc",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/jcl/build/BUILDALL.jcl:159",
+    "app/jcl/build/BUILDALL.jcl:241"
+   ],
+   "why": "batch compile/link PROC used by BUILDALL for both CARDSVC and PARTYRSK batch programs"
+  },
+  {
+   "name": "COBCICS",
+   "artifact": "proc",
+   "path": "app/jcl/build/COBCICS.proc",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "app/jcl/build/BUILDALL.jcl:123",
+    "app/jcl/build/BUILDALL.jcl:204"
+   ],
+   "why": "CICS compile/link PROC used by BUILDALL for both CARDSVC and PARTYRSK online programs"
+  },
+  {
+   "name": "20_INDEXES",
+   "artifact": "sql ddl",
+   "path": "db2/ddl/20_INDEXES.sql",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "db2/ddl/20_INDEXES.sql:6",
+    "db2/ddl/20_INDEXES.sql:119"
+   ],
+   "why": "CREATE INDEX for both CARDSVC.* and PARTYRSK.* tables in one member"
+  },
+  {
+   "name": "50_GRANTS",
+   "artifact": "sql script",
+   "path": "db2/ddl/50_GRANTS.sql",
+   "used_by": [
+    "CARDSVC",
+    "PARTYRSK"
+   ],
+   "evidence": [
+    "db2/ddl/50_GRANTS.sql:25",
+    "db2/ddl/50_GRANTS.sql:42"
+   ],
+   "why": "grants for both collections and schemas, including the legacy cross-database grants of CARDSVC.ACCOUNT/CARD_LIMIT to PRTYONL/PRTYBAT"
+  }
+ ],
+ "unplaced": [],
+ "cross_module": [
+  {
+   "from": "CARDSVC",
+   "to": "PARTYRSK",
+   "how": "EXEC CICS LINK via CARDSVC.PGM_ROUTE row XMOD/RISKSVC -> PRKYC01 (CALL_TYPE 'L', fallback CACRD92), issued by the CACRD90 dispatcher",
+   "evidence": [
+    "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+    "app/cardsvc/cbl/CACRD90.cbl:348"
+   ],
+   "why": "authorisation risk assessment crosses into PARTYRSK at run time; no CARDSVC source names the target, only the seeded control table does (db2/ddl/40_SEED_PGM_ROUTE.sql:33)"
+  },
+  {
+   "from": "CARDSVC",
+   "to": "PARTYRSK",
+   "how": "EXEC CICS LINK via CARDSVC.PGM_ROUTE row XMOD/KYCINQ -> PRKYC03 (CALL_TYPE 'L', fallback CACRD92)",
+   "evidence": [
+    "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+    "app/cardsvc/cbl/CACRD90.cbl:348"
+   ],
+   "why": "the party/KYC inquiry screen of CA00 is served by PARTYRSK code"
+  },
+  {
+   "from": "CARDSVC",
+   "to": "PARTYRSK",
+   "how": "dynamic CALL via CARDSVC.PGM_ROUTE row XMOD/RSKRECAL -> PRBRSK1 (CALL_TYPE 'D')",
+   "evidence": [
+    "db2/ddl/40_SEED_PGM_ROUTE.sql:42"
+   ],
+   "why": "batch exposure recalculation entry point; which CARDSVC batch step reaches it is for dynamic-call-resolution to prove (BINDCARD.jcl:264 keeps PRTYCOLL in the CARDNITP PKLIST for one CARDNITE step)"
+  },
+  {
+   "from": "PARTYRSK",
+   "to": "CARDSVC",
+   "how": "EXEC SQL SELECT FROM CARDSVC.ACCOUNT / CARDSVC.CARD_LIMIT",
+   "evidence": [
+    "app/partyrsk/cbl/PRRSK02.cbl:459",
+    "app/partyrsk/cbl/PRBRSK3.cbl:172",
+    "app/partyrsk/cbl/PRBRSK3.cbl:506",
+    "db2/ddl/50_GRANTS.sql:50"
+   ],
+   "why": "PARTYRSK reads the live card balances and limits in CARDDB directly (legacy cross-database grants); the two databases cannot move separately"
+  },
+  {
+   "from": "CARDSVC",
+   "to": "PARTYRSK",
+   "how": "DB2 plans bind both collections: CARDONLP/CARDNITP PKLIST(CARDCOLL.*, PRTYCOLL.*), PRTYONLP/PARTYWKP PKLIST(PRTYCOLL.*, CARDCOLL.*)",
+   "evidence": [
+    "app/jcl/build/BINDCARD.jcl:252",
+    "app/jcl/build/BINDCARD.jcl:271",
+    "app/jcl/build/BINDPRTY.jcl:108",
+    "app/jcl/build/BINDPRTY.jcl:117"
+   ],
+   "why": "each module runs the other's packages under its own plans"
+  }
+ ]
+}
