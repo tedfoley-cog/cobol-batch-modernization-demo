@@ -1,0 +1,730 @@
+{
+  "meta": {
+    "module": "PARTYRSK",
+    "generated_at": "2026-09-28T13:39:18Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {
+      "answers": false,
+      "defaults": true
+    }
+  },
+  "summary": {
+    "fields": 29,
+    "detected": 13,
+    "answered": 0,
+    "inherited": 0,
+    "defaulted": 9,
+    "unanswered": 7,
+    "contradicted": 0,
+    "build_paths": 1,
+    "steps_without_library_evidence": 0,
+    "asks": 18
+  },
+  "site": {
+    "database_managers": {
+      "value": "IBM Db2 for z/OS",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:36",
+        "app/jcl/build/BINDPRTY.jcl:23",
+        "app/jcl/partyrsk/CBPRT01J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:64",
+        "app/jcl/partyrsk/CBPRT02J.jcl:87",
+        "app/jcl/partyrsk/CBPRT03J.jcl:79",
+        "app/jcl/partyrsk/CBPRT04J.jcl:48",
+        "app/partyrsk/cbl/CBPRT01.cbl:1",
+        "app/partyrsk/cbl/CBPRT02A.cbl:1",
+        "app/partyrsk/cbl/CBPRT02B.cbl:1",
+        "app/partyrsk/cbl/CBPRT03.cbl:1",
+        "app/partyrsk/cbl/CBPRT04.cbl:1",
+        "app/partyrsk/cbl/PRBRSK1.cbl:1",
+        "app/partyrsk/cbl/PRBRSK2.cbl:1",
+        "app/partyrsk/cbl/PRBRSK3.cbl:1",
+        "app/partyrsk/cbl/PRBRSK5.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:1",
+        "app/partyrsk/cbl/PRKYC02.cbl:1",
+        "app/partyrsk/cbl/PRKYC03.cbl:1",
+        "app/partyrsk/cbl/PRKYC04.cbl:1",
+        "app/partyrsk/cbl/PRRSK02.cbl:1",
+        "app/partyrsk/cbl/PRRSK03.cbl:1",
+        "app/partyrsk/cbl/PRRSK04.cbl:1",
+        "app/partyrsk/cbl/PRRSK05.cbl:1"
+      ],
+      "confidence": "derived",
+      "basis": "database systems this module connects to (connections.json dbms roster); a lower bound on what the estate runs",
+      "products": [
+        {
+          "product": "IBM Db2 for z/OS",
+          "version": null,
+          "version_source": null
+        }
+      ]
+    },
+    "environment_topology": {
+      "value": null,
+      "source": null,
+      "evidence": [],
+      "confidence": "unknown",
+      "basis": null
+    },
+    "file_transfer": {
+      "value": "IBM Connect:Direct",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "IBM Connect:Direct",
+          "version": null,
+          "version_source": "default"
+        }
+      ]
+    },
+    "library_manager": {
+      "value": "Broadcom Endevor",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "Broadcom Endevor",
+          "version": null,
+          "version_source": "default"
+        }
+      ]
+    },
+    "masking_policy": {
+      "value": null,
+      "source": null,
+      "evidence": [],
+      "confidence": "unknown",
+      "basis": null
+    },
+    "online_monitors": {
+      "value": "IBM CICS Transaction Server",
+      "source": "detected",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:441",
+        "app/partyrsk/cbl/PRKYC01.cbl:613",
+        "app/partyrsk/cbl/PRKYC02.cbl:1",
+        "app/partyrsk/cbl/PRKYC02.cbl:731",
+        "app/partyrsk/cbl/PRKYC02.cbl:825",
+        "app/partyrsk/cbl/PRKYC03.cbl:1",
+        "app/partyrsk/cbl/PRKYC03.cbl:304",
+        "app/partyrsk/cbl/PRKYC03.cbl:418",
+        "app/partyrsk/cbl/PRKYC04.cbl:1",
+        "app/partyrsk/cbl/PRKYC04.cbl:687",
+        "app/partyrsk/cbl/PRKYC04.cbl:761",
+        "app/partyrsk/cbl/PRRSK02.cbl:1",
+        "app/partyrsk/cbl/PRRSK02.cbl:638",
+        "app/partyrsk/cbl/PRRSK02.cbl:710",
+        "app/partyrsk/cbl/PRRSK03.cbl:1",
+        "app/partyrsk/cbl/PRRSK03.cbl:892",
+        "app/partyrsk/cbl/PRRSK03.cbl:975",
+        "app/partyrsk/cbl/PRRSK04.cbl:1",
+        "app/partyrsk/cbl/PRRSK04.cbl:632",
+        "app/partyrsk/cbl/PRRSK05.cbl:1",
+        "app/partyrsk/cbl/PRRSK05.cbl:548"
+      ],
+      "confidence": "derived",
+      "basis": "EXEC CICS evidence and IMS message/batch-message regions in connections.json; a lower bound on what the estate runs",
+      "products": [
+        {
+          "product": "IBM CICS Transaction Server",
+          "version": null,
+          "version_source": null
+        }
+      ]
+    },
+    "output_manager": {
+      "value": "Broadcom CA View",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "Broadcom CA View",
+          "version": null,
+          "version_source": "default"
+        }
+      ]
+    },
+    "scheduler_product": {
+      "value": "BMC Control-M",
+      "source": "detected",
+      "evidence": [
+        "sched/CARDBILL.sched:1",
+        "sched/CARDNITE.sched:1",
+        "sched/CARDREF.sched:1",
+        "sched/PARTYWK.sched:1"
+      ],
+      "confidence": "proven",
+      "basis": "scheduler export dialect matched by scan-schedule (SCHEDULER_PRODUCTS)"
+    },
+    "security_manager": {
+      "value": "IBM RACF",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "IBM RACF",
+          "version": null,
+          "version_source": "default"
+        }
+      ]
+    },
+    "sort_product": {
+      "value": "IBM DFSORT",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "IBM DFSORT",
+          "version": null,
+          "version_source": "default"
+        }
+      ]
+    },
+    "standard_compiler": {
+      "value": "IBM Enterprise COBOL for z/OS 6.3",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "IBM Enterprise COBOL for z/OS",
+          "version": "6.3",
+          "version_source": "default"
+        }
+      ]
+    },
+    "standard_compiler_options": {
+      "value": "RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true
+    },
+    "tape_manager": {
+      "value": "Broadcom CA 1",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "Broadcom CA 1",
+          "version": null,
+          "version_source": "default"
+        }
+      ]
+    },
+    "test_lpar": {
+      "value": null,
+      "source": null,
+      "evidence": [],
+      "confidence": "unknown",
+      "basis": null
+    },
+    "zos_version": {
+      "value": "IBM z/OS 2.5",
+      "source": "default",
+      "evidence": [],
+      "confidence": "assumed",
+      "basis": "no evidence and no answer: mftb's typical-z/OS-shop default (mftb/knowledge/site.py SITE_DEFAULTS), nobody confirmed it",
+      "assumption": true,
+      "products": [
+        {
+          "product": "IBM z/OS",
+          "version": "2.5",
+          "version_source": "default"
+        }
+      ]
+    }
+  },
+  "module": {
+    "batch_window": {
+      "value": "CBBIL05J: due out 07:00; CBCRD10J: due out 06:00; CBPRT04J: due out 23:59; CBREF05J: due out 20:00",
+      "source": "detected",
+      "evidence": [
+        "sched/CARDBILL.sched:1",
+        "sched/CARDNITE.sched:1",
+        "sched/CARDREF.sched:1",
+        "sched/PARTYWK.sched:1"
+      ],
+      "confidence": "derived",
+      "basis": "TIMEFROM / TIMEUNTIL / DUE OUT of the scheduler definitions (scheduling times, not measured elapsed)"
+    },
+    "compiler": {
+      "value": "DB2 precompiler",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:53",
+        "app/jcl/partyrsk/CBPRT01J.jcl:44",
+        "app/jcl/partyrsk/CBPRT01J.jcl:45",
+        "app/jcl/partyrsk/CBPRT01J.jcl:54",
+        "app/jcl/partyrsk/CBPRT02J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:56",
+        "app/jcl/partyrsk/CBPRT02J.jcl:63",
+        "app/jcl/partyrsk/CBPRT02J.jcl:76",
+        "app/jcl/partyrsk/CBPRT02J.jcl:77",
+        "app/jcl/partyrsk/CBPRT02J.jcl:86",
+        "app/jcl/partyrsk/CBPRT03J.jcl:65",
+        "app/jcl/partyrsk/CBPRT03J.jcl:66",
+        "app/jcl/partyrsk/CBPRT03J.jcl:78",
+        "app/jcl/partyrsk/CBPRT04J.jcl:37",
+        "app/jcl/partyrsk/CBPRT04J.jcl:38",
+        "app/jcl/partyrsk/CBPRT04J.jcl:47"
+      ],
+      "confidence": "proven",
+      "basis": "build tool of the module's compile steps (BUILD_TOOLS)"
+    },
+    "compiler_options": {
+      "value": "HOST(IBMCOB),APOST,SOURCE,XREF,STDSQL(NO)",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:53",
+        "app/jcl/partyrsk/CBPRT01J.jcl:44",
+        "app/jcl/partyrsk/CBPRT01J.jcl:45",
+        "app/jcl/partyrsk/CBPRT01J.jcl:54",
+        "app/jcl/partyrsk/CBPRT02J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:56",
+        "app/jcl/partyrsk/CBPRT02J.jcl:63",
+        "app/jcl/partyrsk/CBPRT02J.jcl:76",
+        "app/jcl/partyrsk/CBPRT02J.jcl:77",
+        "app/jcl/partyrsk/CBPRT02J.jcl:86",
+        "app/jcl/partyrsk/CBPRT03J.jcl:65",
+        "app/jcl/partyrsk/CBPRT03J.jcl:66",
+        "app/jcl/partyrsk/CBPRT03J.jcl:78",
+        "app/jcl/partyrsk/CBPRT04J.jcl:37",
+        "app/jcl/partyrsk/CBPRT04J.jcl:38",
+        "app/jcl/partyrsk/CBPRT04J.jcl:47"
+      ],
+      "confidence": "proven",
+      "basis": "PARM= of the module's compile steps"
+    },
+    "copybook_library_concatenation": {
+      "value": "CARD.PROD.CPY > PRTY.PROD.CPY",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:53",
+        "app/jcl/partyrsk/CBPRT01J.jcl:44",
+        "app/jcl/partyrsk/CBPRT01J.jcl:45",
+        "app/jcl/partyrsk/CBPRT01J.jcl:54",
+        "app/jcl/partyrsk/CBPRT02J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:56",
+        "app/jcl/partyrsk/CBPRT02J.jcl:63",
+        "app/jcl/partyrsk/CBPRT02J.jcl:76",
+        "app/jcl/partyrsk/CBPRT02J.jcl:77",
+        "app/jcl/partyrsk/CBPRT02J.jcl:86",
+        "app/jcl/partyrsk/CBPRT03J.jcl:65",
+        "app/jcl/partyrsk/CBPRT03J.jcl:66",
+        "app/jcl/partyrsk/CBPRT03J.jcl:78",
+        "app/jcl/partyrsk/CBPRT04J.jcl:37",
+        "app/jcl/partyrsk/CBPRT04J.jcl:38",
+        "app/jcl/partyrsk/CBPRT04J.jcl:47"
+      ],
+      "confidence": "proven",
+      "basis": "SYSLIB concatenation of the module's compile steps"
+    },
+    "db2_library_level": {
+      "value": null,
+      "source": null,
+      "evidence": [],
+      "confidence": "unknown",
+      "basis": null
+    },
+    "db2_plans": {
+      "value": "CARDONLP, PARTYWKP, PRTYONLP",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:29",
+        "app/jcl/build/BINDPRTY.jcl:16",
+        "app/jcl/partyrsk/CBPRT01J.jcl:43",
+        "app/jcl/partyrsk/CBPRT02J.jcl:54",
+        "app/jcl/partyrsk/CBPRT02J.jcl:75",
+        "app/jcl/partyrsk/CBPRT03J.jcl:64",
+        "app/jcl/partyrsk/CBPRT04J.jcl:36"
+      ],
+      "confidence": "proven",
+      "basis": "RUN PROGRAM(...) PLAN(...) cards and BIND statements in the scanned JCL"
+    },
+    "db2_subsystem": {
+      "value": "DB2P",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:36",
+        "app/jcl/build/BINDPRTY.jcl:23",
+        "app/jcl/partyrsk/CBPRT01J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:64",
+        "app/jcl/partyrsk/CBPRT02J.jcl:87",
+        "app/jcl/partyrsk/CBPRT03J.jcl:79",
+        "app/jcl/partyrsk/CBPRT04J.jcl:48"
+      ],
+      "confidence": "proven",
+      "basis": "DSN SYSTEM(...) / SSID in the scanned JCL (connections.json db2.subsystems)"
+    },
+    "dynamic_call_convention": {
+      "value": "14 dynamic call site(s) (CICS-LINK), 14 resolved by literal assignment, 0 open",
+      "source": "detected",
+      "evidence": [
+        "app/partyrsk/cbl/PRKYC01.cbl:441",
+        "app/partyrsk/cbl/PRKYC01.cbl:613",
+        "app/partyrsk/cbl/PRKYC02.cbl:731",
+        "app/partyrsk/cbl/PRKYC02.cbl:825",
+        "app/partyrsk/cbl/PRKYC03.cbl:304",
+        "app/partyrsk/cbl/PRKYC03.cbl:418",
+        "app/partyrsk/cbl/PRKYC04.cbl:687",
+        "app/partyrsk/cbl/PRKYC04.cbl:761",
+        "app/partyrsk/cbl/PRRSK02.cbl:638",
+        "app/partyrsk/cbl/PRRSK02.cbl:710",
+        "app/partyrsk/cbl/PRRSK03.cbl:892",
+        "app/partyrsk/cbl/PRRSK03.cbl:975",
+        "app/partyrsk/cbl/PRRSK04.cbl:632",
+        "app/partyrsk/cbl/PRRSK05.cbl:548"
+      ],
+      "confidence": "derived",
+      "basis": "dyncalls.json: the call-name ladder the dynamic-call pass walked"
+    },
+    "interfaces": {
+      "value": null,
+      "source": null,
+      "evidence": [],
+      "confidence": "unknown",
+      "basis": null
+    },
+    "load_library_concatenation": {
+      "value": "PRTY.PROD.LOADLIB > PRTY.PROD.LOADLIB",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:53",
+        "app/jcl/partyrsk/CBPRT01J.jcl:44",
+        "app/jcl/partyrsk/CBPRT01J.jcl:45",
+        "app/jcl/partyrsk/CBPRT01J.jcl:54",
+        "app/jcl/partyrsk/CBPRT02J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:56",
+        "app/jcl/partyrsk/CBPRT02J.jcl:63",
+        "app/jcl/partyrsk/CBPRT02J.jcl:76",
+        "app/jcl/partyrsk/CBPRT02J.jcl:77",
+        "app/jcl/partyrsk/CBPRT02J.jcl:86",
+        "app/jcl/partyrsk/CBPRT03J.jcl:65",
+        "app/jcl/partyrsk/CBPRT03J.jcl:66",
+        "app/jcl/partyrsk/CBPRT03J.jcl:78",
+        "app/jcl/partyrsk/CBPRT04J.jcl:37",
+        "app/jcl/partyrsk/CBPRT04J.jcl:38",
+        "app/jcl/partyrsk/CBPRT04J.jcl:47"
+      ],
+      "confidence": "proven",
+      "basis": "STEPLIB / JOBLIB / DSN RUN LIB concatenation of the module's steps"
+    },
+    "non_relational_stores": {
+      "value": "VSAM (11 cluster(s)), sequential datasets (30)",
+      "source": "detected",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:34",
+        "app/jcl/build/COBCICS.proc:44",
+        "app/jcl/build/COBCICS.proc:48",
+        "app/jcl/build/COBCICS.proc:91",
+        "app/jcl/partyrsk/DEFPWCTL.jcl:23",
+        "app/jcl/vsam/DEFCARD.jcl:112",
+        "app/jcl/vsam/DEFCARD.jcl:132",
+        "app/jcl/vsam/DEFCARD.jcl:15",
+        "app/jcl/vsam/DEFCARD.jcl:152",
+        "app/jcl/vsam/DEFCARD.jcl:37",
+        "app/jcl/vsam/DEFCARD.jcl:53",
+        "app/jcl/vsam/DEFCARD.jcl:73",
+        "app/jcl/vsam/DEFCARD.jcl:92",
+        "app/jcl/vsam/DEFPARTY.jcl:16",
+        "app/jcl/vsam/DEFPARTY.jcl:37"
+      ],
+      "confidence": "derived",
+      "basis": "dataset classification and DL/I / IDMS evidence in connections.json"
+    },
+    "shared_code_boundary": {
+      "value": null,
+      "source": null,
+      "evidence": [],
+      "confidence": "unknown",
+      "basis": null
+    },
+    "transaction_monitor": {
+      "value": "CICS (9 program(s) issue EXEC CICS)",
+      "source": "detected",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:441",
+        "app/partyrsk/cbl/PRKYC01.cbl:613",
+        "app/partyrsk/cbl/PRKYC02.cbl:1",
+        "app/partyrsk/cbl/PRKYC02.cbl:731",
+        "app/partyrsk/cbl/PRKYC02.cbl:825",
+        "app/partyrsk/cbl/PRKYC03.cbl:1",
+        "app/partyrsk/cbl/PRKYC03.cbl:304",
+        "app/partyrsk/cbl/PRKYC03.cbl:418",
+        "app/partyrsk/cbl/PRKYC04.cbl:1",
+        "app/partyrsk/cbl/PRKYC04.cbl:687",
+        "app/partyrsk/cbl/PRKYC04.cbl:761",
+        "app/partyrsk/cbl/PRRSK02.cbl:1",
+        "app/partyrsk/cbl/PRRSK02.cbl:638",
+        "app/partyrsk/cbl/PRRSK02.cbl:710",
+        "app/partyrsk/cbl/PRRSK03.cbl:1",
+        "app/partyrsk/cbl/PRRSK03.cbl:892",
+        "app/partyrsk/cbl/PRRSK03.cbl:975",
+        "app/partyrsk/cbl/PRRSK04.cbl:1",
+        "app/partyrsk/cbl/PRRSK04.cbl:632",
+        "app/partyrsk/cbl/PRRSK05.cbl:1",
+        "app/partyrsk/cbl/PRRSK05.cbl:548"
+      ],
+      "confidence": "proven",
+      "basis": "EXEC CICS / DL/I evidence in connections.json (batch-only modules have none)"
+    },
+    "volumes": {
+      "value": null,
+      "source": null,
+      "evidence": [],
+      "confidence": "unknown",
+      "basis": null
+    }
+  },
+  "build_paths": [
+    {
+      "id": "BP01",
+      "load_libraries": [
+        "PRTY.PROD.LOADLIB",
+        "PRTY.PROD.LOADLIB"
+      ],
+      "db2_libraries": [
+        "SYS2.DB2P.SDSNLOAD"
+      ],
+      "db2_library_level": null,
+      "db2_subsystem": "DB2P",
+      "compiler": "DB2 precompiler",
+      "compiler_options": "HOST(IBMCOB),APOST,SOURCE,XREF,STDSQL(NO)",
+      "copybook_libraries": [
+        "CARD.PROD.CPY",
+        "PRTY.PROD.CPY"
+      ],
+      "built_by": [
+        "BUILDALL.PRB0060"
+      ],
+      "programs": [
+        "CBPRT01",
+        "CBPRT02A",
+        "CBPRT02B",
+        "CBPRT03",
+        "CBPRT04"
+      ],
+      "steps": [
+        "CBPRT01J.KYCDUE",
+        "CBPRT02J.SANCLOAD",
+        "CBPRT02J.WATCHEXT",
+        "CBPRT03J.RESCORE",
+        "CBPRT04J.RPTAUD"
+      ],
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:53",
+        "app/jcl/partyrsk/CBPRT01J.jcl:44",
+        "app/jcl/partyrsk/CBPRT01J.jcl:45",
+        "app/jcl/partyrsk/CBPRT01J.jcl:54",
+        "app/jcl/partyrsk/CBPRT02J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:56",
+        "app/jcl/partyrsk/CBPRT02J.jcl:63",
+        "app/jcl/partyrsk/CBPRT02J.jcl:76",
+        "app/jcl/partyrsk/CBPRT02J.jcl:77",
+        "app/jcl/partyrsk/CBPRT02J.jcl:86",
+        "app/jcl/partyrsk/CBPRT03J.jcl:65",
+        "app/jcl/partyrsk/CBPRT03J.jcl:66",
+        "app/jcl/partyrsk/CBPRT03J.jcl:78",
+        "app/jcl/partyrsk/CBPRT04J.jcl:37",
+        "app/jcl/partyrsk/CBPRT04J.jcl:38",
+        "app/jcl/partyrsk/CBPRT04J.jcl:47"
+      ]
+    }
+  ],
+  "asks": [
+    {
+      "kind": "profile-database-managers",
+      "severity": "medium",
+      "message": "PARTYRSK profile: database_managers reads IBM Db2 for z/OS from this module's store, which is what this module proves and not what the estate has \u2014 which database systems the estate runs, and at which level",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:36",
+        "app/jcl/build/BINDPRTY.jcl:23",
+        "app/jcl/partyrsk/CBPRT01J.jcl:55",
+        "app/jcl/partyrsk/CBPRT02J.jcl:64",
+        "app/jcl/partyrsk/CBPRT02J.jcl:87",
+        "app/jcl/partyrsk/CBPRT03J.jcl:79",
+        "app/jcl/partyrsk/CBPRT04J.jcl:48",
+        "app/partyrsk/cbl/CBPRT01.cbl:1"
+      ],
+      "request": "List the database systems installed (Db2, IMS DL/I, IDMS, Adabas, ...) with their versions: the scan proves only what this module touches, which is a lower bound"
+    },
+    {
+      "kind": "profile-db2-library-level",
+      "severity": "medium",
+      "message": "PARTYRSK profile: db2_library_level is not in the store \u2014 which DB2 level the module is built and run against",
+      "evidence": [],
+      "request": "Provide the DB2 library concatenation (SDSNLOAD / SDSNEXIT) of the module's steps, which names the DB2 level"
+    },
+    {
+      "kind": "profile-environment-topology",
+      "severity": "high",
+      "message": "PARTYRSK profile: environment_topology is not in the store \u2014 which LPARs and environments (production / test / DR) the estate has \u2014 the scanned JCL allocates datasets under the high-level qualifier(s) ASM, CARD, CICS, CICSTS, DSN, PRTY, SYS1, SYS2: a naming observation, which is not proof of which LPAR or environment runs them",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDCARD.jcl:31",
+        "app/jcl/build/BINDPRTY.jcl:17",
+        "app/jcl/build/BUILDALL.jcl:61",
+        "app/jcl/build/BUILDALL.jcl:62",
+        "app/jcl/build/COBASM.proc:35",
+        "app/jcl/build/COBASM.proc:36",
+        "app/jcl/build/COBASM.proc:60"
+      ],
+      "request": "State the LPARs and environments, how a dataset or job name says which one it belongs to, and which sysplex they sit in: the scan can only list the qualifiers it saw"
+    },
+    {
+      "kind": "profile-file-transfer",
+      "severity": "medium",
+      "message": "PARTYRSK profile: file_transfer is not in the store \u2014 how files cross the boundary of the estate \u2014 assumed 'IBM Connect:Direct' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the file-transfer product (Connect:Direct, FTP/SFTP, XCOM, MFT) used to move datasets in and out"
+    },
+    {
+      "kind": "profile-interfaces",
+      "severity": "medium",
+      "message": "PARTYRSK profile: interfaces is not in the store \u2014 what the module exchanges with the world outside it",
+      "evidence": [],
+      "request": "Confirm the module's interfaces (modules it calls but does not own, MQ, remote systems, transfers) and who owns the other side"
+    },
+    {
+      "kind": "profile-library-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: library_manager is not in the store \u2014 which source / change manager holds the members \u2014 assumed 'Broadcom Endevor' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the source library manager (Endevor, ChangeMan, Panvalet, Librarian, plain PDS) and how a member is promoted to production"
+    },
+    {
+      "kind": "profile-masking-policy",
+      "severity": "high",
+      "message": "PARTYRSK profile: masking_policy is not in the store \u2014 what may leave the estate, and in what shape",
+      "evidence": [],
+      "request": "State the data-masking policy for extracted test data (which fields must be masked, whether production data may leave the estate at all)"
+    },
+    {
+      "kind": "profile-online-monitors",
+      "severity": "medium",
+      "message": "PARTYRSK profile: online_monitors reads IBM CICS Transaction Server from this module's store, which is what this module proves and not what the estate has \u2014 which transaction monitors the estate runs, and at which level",
+      "evidence": [
+        "app/partyrsk/cbl/PRERR01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:1",
+        "app/partyrsk/cbl/PRKYC01.cbl:441",
+        "app/partyrsk/cbl/PRKYC01.cbl:613",
+        "app/partyrsk/cbl/PRKYC02.cbl:1",
+        "app/partyrsk/cbl/PRKYC02.cbl:731",
+        "app/partyrsk/cbl/PRKYC02.cbl:825",
+        "app/partyrsk/cbl/PRKYC03.cbl:1"
+      ],
+      "request": "List the online monitors installed (CICS TS, IMS TM, none) with their versions: the scan proves only what this module uses, which is a lower bound"
+    },
+    {
+      "kind": "profile-output-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: output_manager is not in the store \u2014 which product owns the printed output once it leaves the spool \u2014 76 DD(s) write to SYSOUT: the jobs print, but a spool class never names the product that archives or delivers the output \u2014 assumed 'Broadcom CA View' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:104",
+        "app/cics/DFHCSDUP.jcl:111",
+        "app/cics/DFHCSDUP.jcl:25",
+        "app/cics/DFHCSDUP.jcl:46",
+        "app/cics/DFHCSDUP.jcl:87",
+        "app/jcl/build/BINDCARD.jcl:32",
+        "app/jcl/build/BINDCARD.jcl:33",
+        "app/jcl/build/BINDCARD.jcl:34"
+      ],
+      "request": "State the output / report manager (CA View, CA Deliver, Control-D, CA Spool) and what it does with each SYSOUT class the jobs write to"
+    },
+    {
+      "kind": "profile-security-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: security_manager is not in the store \u2014 which external security manager guards the datasets \u2014 assumed 'IBM RACF' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the security manager (RACF, CA ACF2, CA Top Secret) and who owns the dataset profiles"
+    },
+    {
+      "kind": "profile-shared-code-boundary",
+      "severity": "high",
+      "message": "PARTYRSK profile: shared_code_boundary is not in the store \u2014 which code the module uses but does not own",
+      "evidence": [],
+      "request": "Confirm which copybooks and called modules are shared estate code rather than the module's own, and which library owns them"
+    },
+    {
+      "kind": "profile-sort-product",
+      "severity": "medium",
+      "message": "PARTYRSK profile: sort_product is not in the store \u2014 which sort product PGM=SORT resolves to \u2014 3 step(s) run PGM=SORT, the site linkage alias: a sort runs, the product is unnamed \u2014 assumed 'IBM DFSORT' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [
+        "app/jcl/partyrsk/CBPRT01J.jcl:66",
+        "app/jcl/partyrsk/CBPRT02J.jcl:99",
+        "app/jcl/partyrsk/CBPRT03J.jcl:91"
+      ],
+      "request": "State the sort product installed (IBM DFSORT or Syncsort MFX): PGM=SORT is a linkage alias and does not say which one runs"
+    },
+    {
+      "kind": "profile-standard-compiler",
+      "severity": "medium",
+      "message": "PARTYRSK profile: standard_compiler is not in the store \u2014 which compiler the shop builds production code with \u2014 assumed 'IBM Enterprise COBOL for z/OS 6.3' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the shop-standard compiler and release (Enterprise COBOL 6.x, ...); a single module's compile step is that module's, not the estate's"
+    },
+    {
+      "kind": "profile-standard-compiler-options",
+      "severity": "medium",
+      "message": "PARTYRSK profile: standard_compiler_options is not in the store \u2014 which compile options the shop builds production code with \u2014 assumed 'RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the shop-standard compile options (NUMPROC, TRUNC, ARCH, RENT, SSRANGE, ...) a module is expected to be built with"
+    },
+    {
+      "kind": "profile-tape-manager",
+      "severity": "medium",
+      "message": "PARTYRSK profile: tape_manager is not in the store \u2014 which tape manager owns the volumes the jobs allocate \u2014 assumed 'Broadcom CA 1' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the tape / removable-media manager (CA 1, CA TLMS, DFSMSrmm) and the retention rules it applies: UNIT=TAPE proves tape is used, never which catalogue owns it"
+    },
+    {
+      "kind": "profile-test-lpar",
+      "severity": "high",
+      "message": "PARTYRSK profile: test_lpar is not in the store \u2014 whether a test LPAR is available to run the migrated code against",
+      "evidence": [],
+      "request": "Confirm whether a test LPAR (or a sandbox subsystem) is available for parallel runs, and who can grant access"
+    },
+    {
+      "kind": "profile-volumes",
+      "severity": "medium",
+      "message": "PARTYRSK profile: volumes is not in the store \u2014 how much data the module moves per run",
+      "evidence": [],
+      "request": "Provide the production volumes (records in / out per run, DB2 row counts, file sizes) the module handles"
+    },
+    {
+      "kind": "profile-zos-version",
+      "severity": "medium",
+      "message": "PARTYRSK profile: zos_version is not in the store \u2014 which z/OS release the estate runs \u2014 assumed 'IBM z/OS 2.5' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the z/OS release of the production LPAR (D IPLINFO, or the release the shop is on)"
+    }
+  ]
+}

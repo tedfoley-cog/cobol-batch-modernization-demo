@@ -1,0 +1,858 @@
+{
+ "meta": {
+  "module": "CARDSVC",
+  "skill": "dynamic-call-resolution",
+  "updated_at": "2026-09-28T13:36:35Z"
+ },
+ "dynamic_calls": [
+  {
+   "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+   "program": "CACRD90",
+   "construct": "CICS-LINK",
+   "variable": "WS-PGM-NAME",
+   "status": "partial",
+   "targets": [
+    {
+     "name": "PRKYC01",
+     "basis": "derived",
+     "in_inventory": false,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+      "app/cardsvc/cbl/CACRD90.cbl:347",
+      "app/cardsvc/cbl/CACRD05.cbl:153-155",
+      "app/cpy/CVCONSTY.cpy:23"
+     ],
+     "reasoning": "XMOD/RISKSVC row, CALL_TYPE 'L' -> 3100-DO-LINK; only CACRD05 sets route XMOD with WS-ROUTE-RISKSVC VALUE 'RISKSVC'",
+     "reached_from": [
+      "CACRD05"
+     ]
+    },
+    {
+     "name": "PRKYC03",
+     "basis": "derived",
+     "in_inventory": false,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+      "app/cardsvc/cbl/CACRD90.cbl:347",
+      "app/cardsvc/cbl/CACRD12.cbl:703-705",
+      "app/cardsvc/cbl/CACRD15.cbl:616-618",
+      "app/cpy/CVCONSTY.cpy:24"
+     ],
+     "reasoning": "XMOD/KYCINQ row, CALL_TYPE 'L'; CACRD12 and CACRD15 set route XMOD with WS-ROUTE-KYCINQ VALUE 'KYCINQ'",
+     "reached_from": [
+      "CACRD12",
+      "CACRD15"
+     ]
+    },
+    {
+     "name": "CACRD92",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+      "app/cardsvc/cbl/CACRD90.cbl:363-376"
+     ],
+     "reasoning": "FALLBACK_PGM of both 'L' rows; 3100-DO-LINK on PGMIDERR switches to the fallback and re-issues the LINK once",
+     "reached_from": [
+      "CACRD05",
+      "CACRD12",
+      "CACRD15"
+     ]
+    }
+   ],
+   "traversal": [
+    "app/cardsvc/cbl/CACRD90.cbl:360 EXEC CICS LINK PROGRAM(WS-PGM-NAME)",
+    "app/cardsvc/cbl/CACRD90.cbl:343 MOVE RQ-RESOLVED-PGM TO WS-PGM-NAME; 347 WHEN 'L' PERFORM 3100-DO-LINK",
+    "app/cardsvc/cbl/CACRD90.cbl:317-332 2000-RESOLVE-ROUTE: RC-PGM-NAME(n) of the cache row matching RQ-ROUTE-TYPE/KEY/SEQ",
+    "app/cardsvc/cbl/CACRD90.cbl:196-235 1200-READ-DB2: FETCH ROUTECSR INTO DCL-PGM-NAME -> RC-PGM-NAME",
+    "app/cardsvc/cbl/CACRD90.cbl:88-89 cursor WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE",
+    "app/cardsvc/cbl/CACRD90.cbl:264-285 1300-READ-VSAM fallback: READNEXT PGMROUT INTO ROUTE-RECORD, RT-ACTIVE rows only",
+    "db2/ddl/40_SEED_PGM_ROUTE.sql seed rows with CALL_TYPE 'L': db2/ddl/40_SEED_PGM_ROUTE.sql:40, db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+    "app/cardsvc/cbl/CACRD05.cbl:153-161 caller route XMOD/RISKSVC",
+    "app/cardsvc/cbl/CACRD12.cbl:703-711 and CACRD15.cbl:616-627 caller route XMOD/KYCINQ",
+    "app/cardsvc/cbl/CACRD90.cbl:363-376 PGMIDERR -> 3300-SWITCH-TO-FALLBACK (FALLBACK_PGM CACRD92)"
+   ],
+   "excluded_candidates": {
+    "names": [
+     "CACRD01",
+     "CACRD02",
+     "CACRD03",
+     "CACRD04",
+     "CACRD11",
+     "CACRD12",
+     "CACRD13",
+     "CACRD14",
+     "CACRD15",
+     "CACRD16",
+     "CACRD17",
+     "CACRD91",
+     "CAFRD01",
+     "CAFRD02",
+     "CAFRD03",
+     "CAFRD04",
+     "CBFEE01",
+     "CBFEE02",
+     "CBFEE03",
+     "CBSTM01",
+     "CBSTM02",
+     "PRBRSK1",
+     "CACRD07X"
+    ],
+    "evidence": [
+     "app/cardsvc/cbl/CACRD90.cbl:342-356",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:51",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:79",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:42"
+    ],
+    "reasoning": "3000-DISPATCH only LINKs rows whose CALL_TYPE is 'L'. MENU rows are 'X' (XCTL site) and CACRD91 is only their fallback; FRAU/*, FEEC/*, STMT/* and XMOD/RSKRECAL rows carry CALL_TYPE 'D', which 3000-DISPATCH rejects WHEN OTHER with RQ-RC 0008 'CALL TYPE NOT VALID FOR ONLINE DISPATCH'. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only"
+   },
+   "closed_by_reasoning": [
+    {
+     "kinds": [
+      "no-writer"
+     ],
+     "tracer_open_end": "no-writer RT-PGM-NAME / RT-FALLBACK-PGM (app/cpy/CVROUT01Y.cpy:17, :30)",
+     "reasoning": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor",
+     "residual": "the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD90.cbl:264-285",
+      "app/cardsvc/cbl/CACRD90.cbl:140-150",
+      "app/cardsvc/cbl/CBREF04.cbl:1-12"
+     ]
+    },
+    {
+     "kinds": [],
+     "tracer_open_end": "none - observation",
+     "reasoning": "CACRD07 LINKs CACRD90 with route FRAU/STANDARD or FRAU/HIGHRISK (CACRD07.cbl:569-571, :582), but every FRAU seed row is CALL_TYPE 'D', which CACRD90 3000-DISPATCH does not dispatch online: in the seeded route set the fraud handlers CAFRD01-04 are not reached by this site and CACRD07 ends its pipeline on RQ-RC 0008 (CACRD07.cbl:601-608)",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD07.cbl:569-582",
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:51",
+      "app/cardsvc/cbl/CACRD90.cbl:351-356"
+     ],
+     "residual": "whether the live table carries FRAU rows with CALL_TYPE 'L' is part of the PGM_ROUTE evidence request"
+    }
+   ],
+   "open_ends": [
+    {
+     "kind": "db2-seed-snapshot",
+     "class": "EVR",
+     "request": "Confirm that production CARDSVC.PGM_ROUTE holds no rows beyond those seeded in db2/ddl/40_SEED_PGM_ROUTE.sql (or provide SELECT ROUTE_TYPE, ROUTE_KEY, SEQ_NBR, PGM_NAME, CALL_TYPE, FALLBACK_PGM, ACTIVE_FLG, EFF_DATE, EXP_DATE FROM CARDSVC.PGM_ROUTE); every target below is derived from the seed, not the live table"
+    }
+   ]
+  },
+  {
+   "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+   "program": "CACRD90",
+   "construct": "CICS-XCTL",
+   "variable": "WS-PGM-NAME",
+   "status": "partial",
+   "targets": [
+    {
+     "name": "CACRD01",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT01 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT01 is set by CACRD00 WS-ROUTE-TABLE entry OPT01"
+    },
+    {
+     "name": "CACRD02",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:19",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT02 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT02 is set by CACRD00 WS-ROUTE-TABLE entry OPT02"
+    },
+    {
+     "name": "CACRD03",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:20",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT03 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT03 is set by CACRD00 WS-ROUTE-TABLE entry OPT03"
+    },
+    {
+     "name": "CACRD04",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:21",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT04 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT04 is set by CACRD00 WS-ROUTE-TABLE entry OPT04"
+    },
+    {
+     "name": "CACRD11",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:22",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT05 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT05 is set by CACRD00 WS-ROUTE-TABLE entry OPT05"
+    },
+    {
+     "name": "CACRD12",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:23",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT06 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT06 is set by CACRD00 WS-ROUTE-TABLE entry OPT06"
+    },
+    {
+     "name": "CACRD13",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:24",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT07 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT07 is set by CACRD00 WS-ROUTE-TABLE entry OPT07"
+    },
+    {
+     "name": "CACRD14",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:25",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT08 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT08 is set by CACRD00 WS-ROUTE-TABLE entry OPT08"
+    },
+    {
+     "name": "CACRD15",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:26",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT09 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT09 is set by CACRD00 WS-ROUTE-TABLE entry OPT09"
+    },
+    {
+     "name": "CACRD16",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:27",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:285"
+     ],
+     "reasoning": "MENU/OPT10 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT10 is set by CACRD00 WS-ROUTE-TABLE entry OPT10"
+    },
+    {
+     "name": "CACRD17",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:28",
+      "app/cardsvc/cbl/CACRD90.cbl:349",
+      "app/cardsvc/cbl/CACRD00.cbl:261"
+     ],
+     "reasoning": "MENU/OPTX row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPTX is set by CACRD00/CACRD01/CACRD02/CACRD03 MOVE 'OPTX'"
+    },
+    {
+     "name": "CACRD91",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+      "app/cardsvc/cbl/CACRD90.cbl:400-405",
+      "app/cardsvc/cbl/CACRD90.cbl:408-420"
+     ],
+     "reasoning": "FALLBACK_PGM of every MENU row; 3200-DO-XCTL on PGMIDERR performs 3300-SWITCH-TO-FALLBACK and re-issues the XCTL once"
+    }
+   ],
+   "traversal": [
+    "app/cardsvc/cbl/CACRD90.cbl:388 EXEC CICS XCTL PROGRAM(WS-PGM-NAME)",
+    "app/cardsvc/cbl/CACRD90.cbl:343 MOVE RQ-RESOLVED-PGM TO WS-PGM-NAME; 349 WHEN 'X' PERFORM 3200-DO-XCTL",
+    "app/cardsvc/cbl/CACRD90.cbl:317-332 2000-RESOLVE-ROUTE",
+    "app/cardsvc/cbl/CACRD90.cbl:88-89 active/in-date filter",
+    "db2/ddl/40_SEED_PGM_ROUTE.sql MENU rows (CALL_TYPE 'X') db2/ddl/40_SEED_PGM_ROUTE.sql:18..db2/ddl/40_SEED_PGM_ROUTE.sql:28",
+    "app/cardsvc/cbl/CACRD00.cbl:47-59 WS-ROUTE-TABLE OPT01..OPT10, :285 MOVE WS-ROUTE-ENTRY(WS-OPTION-N) TO CAW-ROUTE-KEY, :413-415 route MENU/key/1",
+    "app/cardsvc/cbl/CACRD00.cbl:261, CACRD01.cbl:484, CACRD02.cbl:668,677, CACRD03.cbl:580 OPTX / OPT03 keys",
+    "app/cardsvc/cbl/CACRD90.cbl:400-420 PGMIDERR -> 3300-SWITCH-TO-FALLBACK (FALLBACK_PGM CACRD91)"
+   ],
+   "excluded_candidates": {
+    "names": [
+     "PRKYC01",
+     "PRKYC03",
+     "CACRD92",
+     "CAFRD01",
+     "CAFRD02",
+     "CAFRD03",
+     "CAFRD04",
+     "CBFEE01",
+     "CBFEE02",
+     "CBFEE03",
+     "CBSTM01",
+     "CBSTM02",
+     "PRBRSK1",
+     "CACRD07X"
+    ],
+    "evidence": [
+     "app/cardsvc/cbl/CACRD90.cbl:342-356",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:51",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:79"
+    ],
+    "reasoning": "3000-DISPATCH only XCTLs rows whose CALL_TYPE is 'X' (the MENU rows). XMOD/RISKSVC and XMOD/KYCINQ are 'L' (LINK site) and CACRD92 is only their fallback; FRAU/*, FEEC/*, STMT/* and XMOD/RSKRECAL rows carry CALL_TYPE 'D' and are rejected online. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only"
+   },
+   "closed_by_reasoning": [
+    {
+     "kinds": [
+      "no-writer"
+     ],
+     "tracer_open_end": "no-writer RT-PGM-NAME / RT-FALLBACK-PGM (app/cpy/CVROUT01Y.cpy:17, :30)",
+     "reasoning": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor",
+     "residual": "the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+     "evidence": [
+      "app/cardsvc/cbl/CACRD90.cbl:264-285",
+      "app/cardsvc/cbl/CACRD90.cbl:140-150",
+      "app/cardsvc/cbl/CBREF04.cbl:1-12"
+     ]
+    }
+   ],
+   "open_ends": [
+    {
+     "kind": "db2-seed-snapshot",
+     "class": "EVR",
+     "request": "Confirm that production CARDSVC.PGM_ROUTE holds no rows beyond those seeded in db2/ddl/40_SEED_PGM_ROUTE.sql (or provide SELECT ROUTE_TYPE, ROUTE_KEY, SEQ_NBR, PGM_NAME, CALL_TYPE, FALLBACK_PGM, ACTIVE_FLG, EFF_DATE, EXP_DATE FROM CARDSVC.PGM_ROUTE); every target below is derived from the seed, not the live table"
+    }
+   ]
+  },
+  {
+   "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+   "program": "CBCRD90",
+   "construct": "CALL",
+   "variable": "WS-PGM-NAME",
+   "status": "partial",
+   "targets": [
+    {
+     "name": "CBFEE01",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:67",
+      "app/cardsvc/cbl/CBCRD05A.cbl:499-501",
+      "app/cardsvc/cbl/CBCRD05A.cbl:255-262"
+     ],
+     "reasoning": "FEEC/ANNU and FEEC/LATE rows; CBCRD05A sets route FEEC with DCL-FEE-TYPE fetched from CARDSVC.FEE_SCHEDULE",
+     "reached_from": [
+      "CBCRD05A"
+     ]
+    },
+    {
+     "name": "CBFEE02",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:68",
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:69",
+      "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+     ],
+     "reasoning": "FEEC/OVLM and FEEC/CASH rows, same CBCRD05A caller",
+     "reached_from": [
+      "CBCRD05A"
+     ]
+    },
+    {
+     "name": "CBFEE03",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:70",
+      "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+     ],
+     "reasoning": "FEEC/FRGN row, same CBCRD05A caller",
+     "reached_from": [
+      "CBCRD05A"
+     ]
+    },
+    {
+     "name": "CBSTM01",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:79",
+      "app/cardsvc/cbl/CBBIL04.cbl:310",
+      "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+      "app/cardsvc/cbl/CBBIL04.cbl:408"
+     ],
+     "reasoning": "STMT/PAPR row; CBBIL04 builds WS-DELIVERY-KEY 'PAPR'/'ELEC' + spaces and routes STMT",
+     "reached_from": [
+      "CBBIL04"
+     ]
+    },
+    {
+     "name": "CBSTM02",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+      "app/cardsvc/cbl/CBBIL04.cbl:308",
+      "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+      "app/cardsvc/cbl/CBBIL04.cbl:414"
+     ],
+     "reasoning": "STMT/ELEC row (active, EFF 2020-01-01), same CBBIL04 caller",
+     "reached_from": [
+      "CBBIL04"
+     ]
+    },
+    {
+     "name": "PRBRSK1",
+     "basis": "derived",
+     "in_inventory": false,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+      "app/cardsvc/cbl/CBCRD06B.cbl:350-352",
+      "app/cardsvc/cbl/CBCRD06B.cbl:359"
+     ],
+     "reasoning": "XMOD/RSKRECAL row (MODULE_ID PARTYRSK); CBCRD06B sets route XMOD/RSKRECAL/1 and calls CBCRD90. The source is in PARTYRSK, not in this module's scan",
+     "reached_from": [
+      "CBCRD06B"
+     ]
+    }
+   ],
+   "traversal": [
+    "app/cardsvc/cbl/CBCRD90.cbl:297 CALL WS-PGM-NAME USING LK-PARM-AREA LK-RETURN-AREA",
+    "app/cardsvc/cbl/CBCRD90.cbl:295 MOVE RQ-RESOLVED-PGM TO WS-PGM-NAME (no CALL_TYPE test)",
+    "app/cardsvc/cbl/CBCRD90.cbl:266-285 2000-RESOLVE-ROUTE",
+    "app/cardsvc/cbl/CBCRD90.cbl:79-80 active/in-date filter",
+    "app/cardsvc/cbl/CBCRD90.cbl:136-150 DB2 first, VSAM PGMROUT fallback",
+    "app/cardsvc/cbl/CBCRD90.cbl:231-251 READ PGMROUT INTO ROUTE-RECORD, RT-ACTIVE rows",
+    "app/cardsvc/cbl/CBCRD05A.cbl:499-508 FEEC/DCL-FEE-TYPE (FEE_SCHEDULE.FEE_TYPE)",
+    "app/cardsvc/cbl/CBBIL04.cbl:344-348, :423-427 STMT/WS-DELIVERY-KEY (PAPR|ELEC)",
+    "app/cardsvc/cbl/CBCRD06B.cbl:350-359 XMOD/RSKRECAL",
+    "db2/ddl/40_SEED_PGM_ROUTE.sql FEEC db2/ddl/40_SEED_PGM_ROUTE.sql:66..db2/ddl/40_SEED_PGM_ROUTE.sql:70, STMT db2/ddl/40_SEED_PGM_ROUTE.sql:79,db2/ddl/40_SEED_PGM_ROUTE.sql:80, XMOD/RSKRECAL db2/ddl/40_SEED_PGM_ROUTE.sql:42"
+   ],
+   "excluded_candidates": {
+    "names": [
+     "CACRD01",
+     "CACRD02",
+     "CACRD03",
+     "CACRD04",
+     "CACRD11",
+     "CACRD12",
+     "CACRD13",
+     "CACRD14",
+     "CACRD15",
+     "CACRD16",
+     "CACRD17",
+     "CACRD91",
+     "CACRD92",
+     "CAFRD01",
+     "CAFRD02",
+     "CAFRD03",
+     "CAFRD04",
+     "PRKYC01",
+     "PRKYC03",
+     "CACRD07X"
+    ],
+    "evidence": [
+     "app/cardsvc/cbl/CBCRD05A.cbl:499",
+     "app/cardsvc/cbl/CBBIL04.cbl:344",
+     "app/cardsvc/cbl/CBBIL04.cbl:423",
+     "app/cardsvc/cbl/CBCRD06B.cbl:350",
+     "app/cardsvc/cbl/CBREF04.cbl:578",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:51"
+    ],
+    "reasoning": "the only scanned CALLs of CBCRD90 are from CBCRD05A (route type FEEC), CBBIL04 (STMT) and CBCRD06B (XMOD/RSKRECAL); CBREF04's header lists CBCRD90 but its code only calls CBCRD91. No batch caller sets route type MENU or FRAU or the XMOD keys RISKSVC/KYCINQ, so those rows are not selected. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only"
+   },
+   "closed_by_reasoning": [
+    {
+     "kinds": [
+      "no-writer"
+     ],
+     "tracer_open_end": "no-writer RT-PGM-NAME / RT-FALLBACK-PGM (app/cpy/CVROUT01Y.cpy:17, :30)",
+     "reasoning": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor",
+     "residual": "the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD90.cbl:231-251",
+      "app/cardsvc/cbl/CBCRD90.cbl:136-150",
+      "app/cardsvc/cbl/CBREF04.cbl:1-12"
+     ]
+    },
+    {
+     "kinds": [],
+     "tracer_open_end": "none - observation",
+     "reasoning": "FEE_SCHEDULE.FEE_TYPE also admits 'RETN' and 'REPL' (db2/ddl/10_CARDDB_TABLES.sql:195-196) for which no FEEC route is seeded: such a fee type would end in 'ROUTE NOT FOUND' (CBCRD90.cbl:113-118)",
+     "evidence": [
+      "db2/ddl/10_CARDDB_TABLES.sql:195-196",
+      "app/cardsvc/cbl/CBCRD90.cbl:113-118"
+     ],
+     "residual": "whether RETN/REPL fees are ever scheduled is a data question"
+    }
+   ],
+   "open_ends": [
+    {
+     "kind": "db2-seed-snapshot",
+     "class": "EVR",
+     "request": "Confirm that production CARDSVC.PGM_ROUTE holds no rows beyond those seeded in db2/ddl/40_SEED_PGM_ROUTE.sql (or provide SELECT ROUTE_TYPE, ROUTE_KEY, SEQ_NBR, PGM_NAME, CALL_TYPE, FALLBACK_PGM, ACTIVE_FLG, EFF_DATE, EXP_DATE FROM CARDSVC.PGM_ROUTE); every target below is derived from the seed, not the live table"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER (app/jcl/cardsvc/CBBIL04J.jcl:25) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    }
+   ]
+  },
+  {
+   "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+   "program": "CBCRD90",
+   "construct": "CANCEL",
+   "variable": "WS-PGM-NAME",
+   "status": "partial",
+   "same_as": "app/cardsvc/cbl/CBCRD90.cbl:297",
+   "targets": [
+    {
+     "name": "CBFEE01",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:67",
+      "app/cardsvc/cbl/CBCRD05A.cbl:499-501",
+      "app/cardsvc/cbl/CBCRD05A.cbl:255-262"
+     ],
+     "reasoning": "FEEC/ANNU and FEEC/LATE rows; CBCRD05A sets route FEEC with DCL-FEE-TYPE fetched from CARDSVC.FEE_SCHEDULE",
+     "reached_from": [
+      "CBCRD05A"
+     ]
+    },
+    {
+     "name": "CBFEE02",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:68",
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:69",
+      "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+     ],
+     "reasoning": "FEEC/OVLM and FEEC/CASH rows, same CBCRD05A caller",
+     "reached_from": [
+      "CBCRD05A"
+     ]
+    },
+    {
+     "name": "CBFEE03",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:70",
+      "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+     ],
+     "reasoning": "FEEC/FRGN row, same CBCRD05A caller",
+     "reached_from": [
+      "CBCRD05A"
+     ]
+    },
+    {
+     "name": "CBSTM01",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:79",
+      "app/cardsvc/cbl/CBBIL04.cbl:310",
+      "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+      "app/cardsvc/cbl/CBBIL04.cbl:408"
+     ],
+     "reasoning": "STMT/PAPR row; CBBIL04 builds WS-DELIVERY-KEY 'PAPR'/'ELEC' + spaces and routes STMT",
+     "reached_from": [
+      "CBBIL04"
+     ]
+    },
+    {
+     "name": "CBSTM02",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+      "app/cardsvc/cbl/CBBIL04.cbl:308",
+      "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+      "app/cardsvc/cbl/CBBIL04.cbl:414"
+     ],
+     "reasoning": "STMT/ELEC row (active, EFF 2020-01-01), same CBBIL04 caller",
+     "reached_from": [
+      "CBBIL04"
+     ]
+    },
+    {
+     "name": "PRBRSK1",
+     "basis": "derived",
+     "in_inventory": false,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+      "app/cardsvc/cbl/CBCRD06B.cbl:350-352",
+      "app/cardsvc/cbl/CBCRD06B.cbl:359"
+     ],
+     "reasoning": "XMOD/RSKRECAL row (MODULE_ID PARTYRSK); CBCRD06B sets route XMOD/RSKRECAL/1 and calls CBCRD90. The source is in PARTYRSK, not in this module's scan",
+     "reached_from": [
+      "CBCRD06B"
+     ]
+    }
+   ],
+   "traversal": [
+    "app/cardsvc/cbl/CBCRD90.cbl:306 CANCEL WS-PGM-NAME - same operand, unchanged since the CALL at :297"
+   ],
+   "excluded_candidates": {
+    "names": [
+     "CACRD01",
+     "CACRD02",
+     "CACRD03",
+     "CACRD04",
+     "CACRD11",
+     "CACRD12",
+     "CACRD13",
+     "CACRD14",
+     "CACRD15",
+     "CACRD16",
+     "CACRD17",
+     "CACRD91",
+     "CACRD92",
+     "CAFRD01",
+     "CAFRD02",
+     "CAFRD03",
+     "CAFRD04",
+     "PRKYC01",
+     "PRKYC03",
+     "CACRD07X"
+    ],
+    "evidence": [
+     "app/cardsvc/cbl/CBCRD05A.cbl:499",
+     "app/cardsvc/cbl/CBBIL04.cbl:344",
+     "app/cardsvc/cbl/CBBIL04.cbl:423",
+     "app/cardsvc/cbl/CBCRD06B.cbl:350",
+     "app/cardsvc/cbl/CBREF04.cbl:578",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:51"
+    ],
+    "reasoning": "the only scanned CALLs of CBCRD90 are from CBCRD05A (route type FEEC), CBBIL04 (STMT) and CBCRD06B (XMOD/RSKRECAL); CBREF04's header lists CBCRD90 but its code only calls CBCRD91. No batch caller sets route type MENU or FRAU or the XMOD keys RISKSVC/KYCINQ, so those rows are not selected. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only"
+   },
+   "closed_by_reasoning": [
+    {
+     "kinds": [
+      "no-writer"
+     ],
+     "tracer_open_end": "no-writer RT-PGM-NAME / RT-FALLBACK-PGM (app/cpy/CVROUT01Y.cpy:17, :30)",
+     "reasoning": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor",
+     "residual": "the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD90.cbl:231-251",
+      "app/cardsvc/cbl/CBCRD90.cbl:136-150"
+     ]
+    }
+   ],
+   "open_ends": [
+    {
+     "kind": "db2-seed-snapshot",
+     "class": "EVR",
+     "request": "Confirm that production CARDSVC.PGM_ROUTE holds no rows beyond those seeded in db2/ddl/40_SEED_PGM_ROUTE.sql (or provide SELECT ROUTE_TYPE, ROUTE_KEY, SEQ_NBR, PGM_NAME, CALL_TYPE, FALLBACK_PGM, ACTIVE_FLG, EFF_DATE, EXP_DATE FROM CARDSVC.PGM_ROUTE); every target below is derived from the seed, not the live table"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER (app/jcl/cardsvc/CBBIL04J.jcl:25) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    }
+   ]
+  },
+  {
+   "site": "app/cardsvc/cbl/CBCRD90.cbl:331",
+   "program": "CBCRD90",
+   "construct": "CALL",
+   "variable": "WS-PGM-NAME",
+   "status": "partial",
+   "targets": [
+    {
+     "name": "CBSTM01",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+      "app/cardsvc/cbl/CBCRD90.cbl:311-331",
+      "app/cardsvc/cbl/CBBIL04.cbl:414"
+     ],
+     "reasoning": "FALLBACK_PGM of STMT/ELEC; 3100-TRY-FALLBACK runs when the CALL of CBSTM02 raises ON EXCEPTION. The FEEC rows and XMOD/RSKRECAL have blank FALLBACK_PGM, so for them the step ends RC 12 'TARGET NOT LOADABLE AND NO FALLBACK'",
+     "reached_from": [
+      "CBBIL04"
+     ]
+    }
+   ],
+   "traversal": [
+    "app/cardsvc/cbl/CBCRD90.cbl:331 CALL WS-PGM-NAME (fallback)",
+    "app/cardsvc/cbl/CBCRD90.cbl:311-323 3100-TRY-FALLBACK: MOVE RC-FALLBACK-PGM(n) TO WS-PGM-NAME for the matching row",
+    "app/cardsvc/cbl/CBCRD90.cbl:325-329 blank fallback -> RC 12",
+    "db2/ddl/40_SEED_PGM_ROUTE.sql non-blank FALLBACK_PGM among batch-selectable rows: STMT/ELEC -> CBSTM01 db2/ddl/40_SEED_PGM_ROUTE.sql:80"
+   ],
+   "excluded_candidates": {
+    "names": [
+     "CACRD91",
+     "CACRD92"
+    ],
+    "evidence": [
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+     "app/cardsvc/cbl/CBCRD90.cbl:311-331"
+    ],
+    "reasoning": "CACRD91/CACRD92 are FALLBACK_PGM only on MENU and XMOD RISKSVC/KYCINQ rows, which no batch caller routes to"
+   },
+   "closed_by_reasoning": [
+    {
+     "kinds": [
+      "no-writer"
+     ],
+     "tracer_open_end": "no-writer RT-PGM-NAME / RT-FALLBACK-PGM (app/cpy/CVROUT01Y.cpy:17, :30)",
+     "reasoning": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor",
+     "residual": "the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD90.cbl:231-251",
+      "app/cardsvc/cbl/CBCRD90.cbl:136-150"
+     ]
+    }
+   ],
+   "open_ends": [
+    {
+     "kind": "db2-seed-snapshot",
+     "class": "EVR",
+     "request": "Confirm that production CARDSVC.PGM_ROUTE holds no rows beyond those seeded in db2/ddl/40_SEED_PGM_ROUTE.sql (or provide SELECT ROUTE_TYPE, ROUTE_KEY, SEQ_NBR, PGM_NAME, CALL_TYPE, FALLBACK_PGM, ACTIVE_FLG, EFF_DATE, EXP_DATE FROM CARDSVC.PGM_ROUTE); every target below is derived from the seed, not the live table"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER (app/jcl/cardsvc/CBBIL04J.jcl:25) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    }
+   ]
+  },
+  {
+   "site": "app/cardsvc/cbl/CBCRD90.cbl:339",
+   "program": "CBCRD90",
+   "construct": "CANCEL",
+   "variable": "WS-PGM-NAME",
+   "status": "partial",
+   "targets": [
+    {
+     "name": "CBSTM01",
+     "basis": "derived",
+     "in_inventory": true,
+     "evidence": [
+      "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+      "app/cardsvc/cbl/CBCRD90.cbl:311-331",
+      "app/cardsvc/cbl/CBBIL04.cbl:414"
+     ],
+     "reasoning": "FALLBACK_PGM of STMT/ELEC; 3100-TRY-FALLBACK runs when the CALL of CBSTM02 raises ON EXCEPTION. The FEEC rows and XMOD/RSKRECAL have blank FALLBACK_PGM, so for them the step ends RC 12 'TARGET NOT LOADABLE AND NO FALLBACK'",
+     "reached_from": [
+      "CBBIL04"
+     ]
+    }
+   ],
+   "traversal": [
+    "app/cardsvc/cbl/CBCRD90.cbl:339 CANCEL WS-PGM-NAME - same operand as :331",
+    "app/cardsvc/cbl/CBCRD90.cbl:311-323 3100-TRY-FALLBACK: MOVE RC-FALLBACK-PGM(n) TO WS-PGM-NAME for the matching row",
+    "app/cardsvc/cbl/CBCRD90.cbl:325-329 blank fallback -> RC 12",
+    "db2/ddl/40_SEED_PGM_ROUTE.sql non-blank FALLBACK_PGM among batch-selectable rows: STMT/ELEC -> CBSTM01 db2/ddl/40_SEED_PGM_ROUTE.sql:80"
+   ],
+   "excluded_candidates": {
+    "names": [
+     "CACRD91",
+     "CACRD92"
+    ],
+    "evidence": [
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+     "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+     "app/cardsvc/cbl/CBCRD90.cbl:311-331"
+    ],
+    "reasoning": "CACRD91/CACRD92 are FALLBACK_PGM only on MENU and XMOD RISKSVC/KYCINQ rows, which no batch caller routes to"
+   },
+   "closed_by_reasoning": [
+    {
+     "kinds": [
+      "no-writer"
+     ],
+     "tracer_open_end": "no-writer RT-PGM-NAME / RT-FALLBACK-PGM (app/cpy/CVROUT01Y.cpy:17, :30)",
+     "reasoning": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor",
+     "residual": "the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+     "evidence": [
+      "app/cardsvc/cbl/CBCRD90.cbl:231-251",
+      "app/cardsvc/cbl/CBCRD90.cbl:136-150"
+     ]
+    }
+   ],
+   "open_ends": [
+    {
+     "kind": "db2-seed-snapshot",
+     "class": "EVR",
+     "request": "Confirm that production CARDSVC.PGM_ROUTE holds no rows beyond those seeded in db2/ddl/40_SEED_PGM_ROUTE.sql (or provide SELECT ROUTE_TYPE, ROUTE_KEY, SEQ_NBR, PGM_NAME, CALL_TYPE, FALLBACK_PGM, ACTIVE_FLG, EFF_DATE, EXP_DATE FROM CARDSVC.PGM_ROUTE); every target below is derived from the seed, not the live table"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER (app/jcl/cardsvc/CBBIL04J.jcl:25) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    },
+    {
+     "kind": "dd-missing",
+     "class": "EVR",
+     "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030 (app/jcl/proc/CARDDB2.jcl:32) (or confirm it is deliberately absent). CBCRD90 opens PGMROUT only when the DB2 route load returns no rows (CBCRD90.cbl:136-150); without the DD that fallback fails and the step ends RC 12 'ROUTE TABLE UNAVAILABLE'"
+    }
+   ],
+   "same_as": "app/cardsvc/cbl/CBCRD90.cbl:331"
+  }
+ ]
+}

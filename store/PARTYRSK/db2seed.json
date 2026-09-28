@@ -1,0 +1,2116 @@
+{
+  "meta": {
+    "module": "PARTYRSK",
+    "generated_at": "2026-09-28T13:34:12Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {
+      "sql": [
+        "db2/ddl"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "path": "db2/ddl/00_CARDDB.sql",
+      "kind": "sql",
+      "lines": 69,
+      "code_lines": 50
+    },
+    {
+      "path": "db2/ddl/01_PARTYDB.sql",
+      "kind": "sql",
+      "lines": 44,
+      "code_lines": 32
+    },
+    {
+      "path": "db2/ddl/10_CARDDB_TABLES.sql",
+      "kind": "sql",
+      "lines": 374,
+      "code_lines": 310
+    },
+    {
+      "path": "db2/ddl/11_PARTYDB_TABLES.sql",
+      "kind": "sql",
+      "lines": 172,
+      "code_lines": 144
+    },
+    {
+      "path": "db2/ddl/20_INDEXES.sql",
+      "kind": "sql",
+      "lines": 170,
+      "code_lines": 123
+    },
+    {
+      "path": "db2/ddl/30_FOREIGN_KEYS.sql",
+      "kind": "sql",
+      "lines": 54,
+      "code_lines": 28
+    },
+    {
+      "path": "db2/ddl/40_SEED_PGM_ROUTE.sql",
+      "kind": "sql",
+      "lines": 93,
+      "code_lines": 56
+    },
+    {
+      "path": "db2/ddl/50_GRANTS.sql",
+      "kind": "sql",
+      "lines": 55,
+      "code_lines": 32
+    }
+  ],
+  "tables": [
+    {
+      "name": "CARDSVC.ACCOUNT",
+      "columns": [
+        {
+          "name": "ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CUST_ID",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "PARTY_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "PRODUCT_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "ACCT_STATUS",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "OPEN_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "CLOSE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "CURRENCY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "CURR_BAL",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "STMT_BAL",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "PENDING_AUTH_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "CASH_BAL",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "MIN_PAY_DUE",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "LAST_PAY_AMT",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "LAST_PAY_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "CYCLE_DAY",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "LAST_CYCLE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "NEXT_CYCLE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "PAY_DUE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "DELQ_BUCKET",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "DELQ_AMT",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "STMT_COUNT",
+          "type": "INTEGER"
+        },
+        {
+          "name": "BRANCH_CD",
+          "type": "CHAR(5)"
+        },
+        {
+          "name": "LAST_MAINT_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:9"
+      ]
+    },
+    {
+      "name": "CARDSVC.AUTHORIZATION",
+      "columns": [
+        {
+          "name": "CARD_NUM",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "AUTH_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "AUTH_SEQ_NUM",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CUST_ID",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "AUTH_TIME",
+          "type": "TIME"
+        },
+        {
+          "name": "AUTH_TYPE",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "AUTH_STATUS",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "RESP_CODE",
+          "type": "CHAR(2)"
+        },
+        {
+          "name": "REASON_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "RISK_SCORE",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "RISK_BAND",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "SETTLED_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "POSTED_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "AUTH_DETAIL",
+          "type": "CHAR(60)"
+        },
+        {
+          "name": "ORIG_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "TERM_ID",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "OPER_ID",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "CREATE_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:98"
+      ]
+    },
+    {
+      "name": "CARDSVC.CARD",
+      "columns": [
+        {
+          "name": "CARD_NUM",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CUST_ID",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "EMBOSSED_NAME",
+          "type": "CHAR(26)"
+        },
+        {
+          "name": "PRODUCT_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "CARD_STATUS",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "EXPIRY_YYMM",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "ISSUE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "ACTIVATION_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "LAST_USED_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "CVV_IND",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "PIN_TRIES",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "REISSUE_CNT",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "PREV_CARD_NUM",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "BLOCK_REASON",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "BLOCK_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "LAST_MAINT_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:44"
+      ]
+    },
+    {
+      "name": "CARDSVC.CARD_LIMIT",
+      "columns": [
+        {
+          "name": "CARD_NUM",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "LIMIT_TYPE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "LIMIT_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "USED_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "AVAIL_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "DAILY_CNT_LIMIT",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "DAILY_CNT_USED",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "VELOCITY_WINDOW_MIN",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "VELOCITY_MAX_CNT",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "APR_PCT",
+          "type": "DECIMAL(8,5)"
+        },
+        {
+          "name": "CASH_APR_PCT",
+          "type": "DECIMAL(8,5)"
+        },
+        {
+          "name": "RISK_BAND",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "LAST_REVIEW_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "EFF_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "EXP_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:71"
+      ]
+    },
+    {
+      "name": "CARDSVC.DISPUTE",
+      "columns": [
+        {
+          "name": "DISPUTE_ID",
+          "type": "CHAR(12)"
+        },
+        {
+          "name": "TXN_ID",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "POST_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CARD_NUM",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "RAISED_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "REASON_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "DISPUTE_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "CURRENCY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "STATUS",
+          "type": "CHAR(2)"
+        },
+        {
+          "name": "PROV_CREDIT_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "PROV_CREDIT_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "CHARGEBACK_REF",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "REPRESENTMENT_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "RESOLVED_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "RESOLUTION_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "RAISED_BY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:304"
+      ]
+    },
+    {
+      "name": "CARDSVC.FEE_SCHEDULE",
+      "columns": [
+        {
+          "name": "PRODUCT_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "FEE_TYPE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "EFF_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "EXP_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "FLAT_AMT",
+          "type": "DECIMAL(9,2)"
+        },
+        {
+          "name": "PCT_RATE",
+          "type": "DECIMAL(8,5)"
+        },
+        {
+          "name": "MIN_AMT",
+          "type": "DECIMAL(9,2)"
+        },
+        {
+          "name": "MAX_AMT",
+          "type": "DECIMAL(9,2)"
+        },
+        {
+          "name": "WAIVER_RULE_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "HANDLER_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "CURRENCY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "CHAR(40)"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:181"
+      ]
+    },
+    {
+      "name": "CARDSVC.FRAUD_RULE",
+      "columns": [
+        {
+          "name": "RULE_ID",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "RULE_CLASS",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "RULE_SEQ",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "HANDLER_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "THRESHOLD_AMT",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "THRESHOLD_CNT",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "THRESHOLD_PCT",
+          "type": "DECIMAL(5,2)"
+        },
+        {
+          "name": "SCORE_POINTS",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "ACTION_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "MCC_LIST",
+          "type": "VARCHAR(200)"
+        },
+        {
+          "name": "COUNTRY_LIST",
+          "type": "VARCHAR(120)"
+        },
+        {
+          "name": "EFF_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "EXP_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "ACTIVE_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "CHAR(60)"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:203"
+      ]
+    },
+    {
+      "name": "CARDSVC.GL_POSTING",
+      "columns": [
+        {
+          "name": "GL_BATCH_ID",
+          "type": "CHAR(12)"
+        },
+        {
+          "name": "GL_SEQ_NUM",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "POST_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "VALUE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "GL_ACCOUNT",
+          "type": "CHAR(10)"
+        },
+        {
+          "name": "COST_CENTRE",
+          "type": "CHAR(6)"
+        },
+        {
+          "name": "DR_CR_IND",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "AMOUNT",
+          "type": "DECIMAL(15,2)"
+        },
+        {
+          "name": "CURRENCY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "SOURCE_TXN_ID",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "SOURCE_ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "NARRATIVE",
+          "type": "CHAR(40)"
+        },
+        {
+          "name": "CYCLE_ID",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "REVERSAL_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "POSTED_BY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "POSTED_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:247"
+      ]
+    },
+    {
+      "name": "CARDSVC.MERCHANT",
+      "columns": [
+        {
+          "name": "MERCHANT_ID",
+          "type": "CHAR(15)"
+        },
+        {
+          "name": "MERCHANT_NAME",
+          "type": "CHAR(40)"
+        },
+        {
+          "name": "MCC",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "ACQUIRER_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "COUNTRY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "CITY",
+          "type": "CHAR(25)"
+        },
+        {
+          "name": "HIGH_RISK_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "CHARGEBACK_RATE",
+          "type": "DECIMAL(5,2)"
+        },
+        {
+          "name": "SETTLE_ROUTE_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "STATUS",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "ONBOARD_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:161"
+      ]
+    },
+    {
+      "name": "CARDSVC.PGM_ROUTE",
+      "columns": [
+        {
+          "name": "ROUTE_TYPE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "ROUTE_KEY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "SEQ_NBR",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "PGM_NAME",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "CALL_TYPE",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "MODULE_ID",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "EFF_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "EXP_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "ACTIVE_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "FALLBACK_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "DESCRIPTION",
+          "type": "CHAR(40)"
+        },
+        {
+          "name": "LAST_MAINT_BY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT01   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD01 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "ACCOUNT INQUIRY                         ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:18"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT02   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD02 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "CARD LIST / CROSS REFERENCE             ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:19"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT03   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD03 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "CARD DETAIL AND STATUS                  ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:20"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT04   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD04 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "AUTHORIZATION REQUEST ENTRY             ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:21"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT05   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD11 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "CARD MAINTENANCE BLOCK / REISSUE        ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:22"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT06   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD12 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "CREDIT LIMIT CHANGE REQUEST             ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:23"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT07   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD13 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2020-06-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "DISPUTE / CHARGEBACK ENTRY              ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:24"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT08   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD14 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "ONLINE PAYMENT POSTING                  ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:25"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT09   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD15 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "CUSTOMER / KYC INQUIRY                  ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:26"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT10   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD16 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "REFERENCE / REASON CODE LOOKUP          ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:27"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPTX    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD17 ",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "EXIT AND SESSION AUDIT                  ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:28"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "XMOD",
+            "ROUTE_KEY": "RISKSVC ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "PRKYC01 ",
+            "CALL_TYPE": "L",
+            "MODULE_ID": "PARTYRSK",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD92 ",
+            "DESCRIPTION": "AUTH RISK ASSESSMENT ENTRY POINT        ",
+            "LAST_MAINT_BY": "PRTYADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:40"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "XMOD",
+            "ROUTE_KEY": "KYCINQ  ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "PRKYC03 ",
+            "CALL_TYPE": "L",
+            "MODULE_ID": "PARTYRSK",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CACRD92 ",
+            "DESCRIPTION": "PARTY / KYC INQUIRY ENTRY POINT         ",
+            "LAST_MAINT_BY": "PRTYADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:41"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "XMOD",
+            "ROUTE_KEY": "RSKRECAL",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "PRBRSK1 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "PARTYRSK",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "BATCH EXPOSURE RECALC ENTRY POINT       ",
+            "LAST_MAINT_BY": "PRTYADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:42"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FRAU",
+            "ROUTE_KEY": "STANDARD",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CAFRD01 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "VELOCITY RULES                          ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:51"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FRAU",
+            "ROUTE_KEY": "STANDARD",
+            "SEQ_NBR": "2",
+            "PGM_NAME": "CAFRD02 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "GEOGRAPHY AND MCC RULES                 ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:52"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FRAU",
+            "ROUTE_KEY": "STANDARD",
+            "SEQ_NBR": "3",
+            "PGM_NAME": "CAFRD03 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2021-04-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "AMOUNT PATTERN RULES                    ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:53"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FRAU",
+            "ROUTE_KEY": "STANDARD",
+            "SEQ_NBR": "4",
+            "PGM_NAME": "CAFRD04 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2022-09-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "MERCHANT REPUTATION RULES               ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:54"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FRAU",
+            "ROUTE_KEY": "HIGHRISK",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CAFRD01 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "VELOCITY RULES                          ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:55"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FRAU",
+            "ROUTE_KEY": "HIGHRISK",
+            "SEQ_NBR": "2",
+            "PGM_NAME": "CAFRD02 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "GEOGRAPHY AND MCC RULES                 ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:56"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FRAU",
+            "ROUTE_KEY": "HIGHRISK",
+            "SEQ_NBR": "3",
+            "PGM_NAME": "CAFRD04 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2022-09-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "MERCHANT REPUTATION RULES               ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:57"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FEEC",
+            "ROUTE_KEY": "ANNU    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBFEE01 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "ANNUAL FEE HANDLER                      ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:66"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FEEC",
+            "ROUTE_KEY": "LATE    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBFEE01 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "LATE PAYMENT FEE HANDLER                ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:67"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FEEC",
+            "ROUTE_KEY": "OVLM    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBFEE02 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "OVER LIMIT FEE HANDLER                  ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:68"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FEEC",
+            "ROUTE_KEY": "CASH    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBFEE02 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "CASH ADVANCE FEE HANDLER                ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:69"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "FEEC",
+            "ROUTE_KEY": "FRGN    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBFEE03 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "FOREIGN TRANSACTION FEE HANDLER         ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:70"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "STMT",
+            "ROUTE_KEY": "PAPR    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBSTM01 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "PAPER STATEMENT FORMATTER               ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:79"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "STMT",
+            "ROUTE_KEY": "ELEC    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBSTM02 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2020-01-01",
+            "ACTIVE_FLG": "Y",
+            "FALLBACK_PGM": "CBSTM01 ",
+            "DESCRIPTION": "ELECTRONIC STATEMENT FORMATTER          ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:80"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "MENU",
+            "ROUTE_KEY": "OPT07   ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CACRD07X",
+            "CALL_TYPE": "X",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "EXP_DATE": "2020-05-31",
+            "ACTIVE_FLG": "N",
+            "FALLBACK_PGM": "CACRD91 ",
+            "DESCRIPTION": "OLD DISPUTE ENTRY - REPLACED BY CACRD13 ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+        },
+        {
+          "values": {
+            "ROUTE_TYPE": "STMT",
+            "ROUTE_KEY": "ELEC    ",
+            "SEQ_NBR": "1",
+            "PGM_NAME": "CBSTM01 ",
+            "CALL_TYPE": "D",
+            "MODULE_ID": "CARDSVC ",
+            "EFF_DATE": "2019-01-01",
+            "EXP_DATE": "2019-12-31",
+            "ACTIVE_FLG": "N",
+            "FALLBACK_PGM": "        ",
+            "DESCRIPTION": "ELEC STATEMENTS PRINTED AS PAPER        ",
+            "LAST_MAINT_BY": "CARDADM "
+          },
+          "source": "db2/ddl/40_SEED_PGM_ROUTE.sql:91"
+        }
+      ],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:332"
+      ]
+    },
+    {
+      "name": "CARDSVC.REWARDS",
+      "columns": [
+        {
+          "name": "ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CYCLE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "PROGRAM_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "OPEN_POINTS",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "EARNED_POINTS",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "REDEEMED_POINTS",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "EXPIRED_POINTS",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CLOSE_POINTS",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "EARN_RATE",
+          "type": "DECIMAL(8,5)"
+        },
+        {
+          "name": "BONUS_AMT",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "CALC_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "CALC_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:227"
+      ]
+    },
+    {
+      "name": "CARDSVC.ROUTE_AUDIT",
+      "columns": [
+        {
+          "name": "AUDIT_TS",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "CORREL_ID",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "CALLER_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "ROUTE_TYPE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "ROUTE_KEY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "SEQ_NBR",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "RESOLVED_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "RESOLVED_MODULE",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "CALL_TYPE",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "USED_FALLBACK",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "ROUTE_SOURCE",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "RETURN_CD",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "ELAPSED_MS",
+          "type": "INTEGER"
+        },
+        {
+          "name": "TRAN_ID",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "JOB_NAME",
+          "type": "CHAR(8)"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:356"
+      ]
+    },
+    {
+      "name": "CARDSVC.STATEMENT",
+      "columns": [
+        {
+          "name": "ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CYCLE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "STMT_NUMBER",
+          "type": "DECIMAL(6,0)"
+        },
+        {
+          "name": "CUST_ID",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "FORMAT_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "PERIOD_FROM",
+          "type": "DATE"
+        },
+        {
+          "name": "PERIOD_TO",
+          "type": "DATE"
+        },
+        {
+          "name": "DUE_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "OPEN_BAL",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "CLOSE_BAL",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "PURCHASES_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "CASH_ADV_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "PAYMENTS_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "FEES_AMT",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "INTEREST_AMT",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "MIN_PAY_AMT",
+          "type": "DECIMAL(11,2)"
+        },
+        {
+          "name": "CREDIT_LIMIT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "AVAIL_CREDIT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "APR_PCT",
+          "type": "DECIMAL(8,5)"
+        },
+        {
+          "name": "REWARD_POINTS",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "LINE_CNT",
+          "type": "INTEGER"
+        },
+        {
+          "name": "PAGE_CNT",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "GEN_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "GEN_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:272"
+      ]
+    },
+    {
+      "name": "CARDSVC.TRANSACTION",
+      "columns": [
+        {
+          "name": "TXN_ID",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "POST_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "ACCT_ID",
+          "type": "DECIMAL(11,0)"
+        },
+        {
+          "name": "CARD_NUM",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "AUTH_SEQ_NUM",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "TXN_TYPE_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "TXN_SOURCE",
+          "type": "CHAR(2)"
+        },
+        {
+          "name": "TXN_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "CURRENCY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "BILLING_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "FX_RATE",
+          "type": "DECIMAL(8,5)"
+        },
+        {
+          "name": "MERCHANT_ID",
+          "type": "CHAR(15)"
+        },
+        {
+          "name": "MCC",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "TXN_DESC",
+          "type": "CHAR(40)"
+        },
+        {
+          "name": "TXN_LEG_CNT",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "TXN_LEG_DATA",
+          "type": "VARCHAR(400)"
+        },
+        {
+          "name": "CYCLE_ID",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "GL_POSTED_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "DISPUTE_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "POSTED_BY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "POSTED_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/10_CARDDB_TABLES.sql:130"
+      ]
+    },
+    {
+      "name": "PARTYRSK.CUSTOMER",
+      "columns": [
+        {
+          "name": "CUST_ID",
+          "type": "DECIMAL(9,0)"
+        },
+        {
+          "name": "PARTY_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "PARTY_TYPE",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "TITLE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "FIRST_NAME",
+          "type": "CHAR(20)"
+        },
+        {
+          "name": "MIDDLE_INIT",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "LAST_NAME",
+          "type": "CHAR(25)"
+        },
+        {
+          "name": "LEGAL_NAME",
+          "type": "CHAR(60)"
+        },
+        {
+          "name": "DOB",
+          "type": "DATE"
+        },
+        {
+          "name": "NATIONAL_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "TAX_ID",
+          "type": "CHAR(15)"
+        },
+        {
+          "name": "ADDR_LINE1",
+          "type": "CHAR(30)"
+        },
+        {
+          "name": "ADDR_LINE2",
+          "type": "CHAR(30)"
+        },
+        {
+          "name": "CITY",
+          "type": "CHAR(25)"
+        },
+        {
+          "name": "STATE_CD",
+          "type": "CHAR(2)"
+        },
+        {
+          "name": "POSTAL_CD",
+          "type": "CHAR(10)"
+        },
+        {
+          "name": "COUNTRY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "DOMICILE_CTRY",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "CITIZENSHIP_CTRY",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "PHONE_HOME",
+          "type": "CHAR(15)"
+        },
+        {
+          "name": "PHONE_MOBILE",
+          "type": "CHAR(15)"
+        },
+        {
+          "name": "EMAIL",
+          "type": "CHAR(50)"
+        },
+        {
+          "name": "SEGMENT_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "PEP_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "VIP_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "CUST_STATUS",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "ONBOARD_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/11_PARTYDB_TABLES.sql:9"
+      ]
+    },
+    {
+      "name": "PARTYRSK.PARTY_EXPOSURE",
+      "columns": [
+        {
+          "name": "PARTY_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "AS_OF_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "PROD_SYSTEM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "PRODUCT_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "CURRENCY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "ACCT_CNT",
+          "type": "INTEGER"
+        },
+        {
+          "name": "TOTAL_LIMIT",
+          "type": "DECIMAL(15,2)"
+        },
+        {
+          "name": "TOTAL_DRAWN",
+          "type": "DECIMAL(15,2)"
+        },
+        {
+          "name": "TOTAL_AVAILABLE",
+          "type": "DECIMAL(15,2)"
+        },
+        {
+          "name": "UNSECURED_AMT",
+          "type": "DECIMAL(15,2)"
+        },
+        {
+          "name": "SECURED_AMT",
+          "type": "DECIMAL(15,2)"
+        },
+        {
+          "name": "PAST_DUE_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "WRITTEN_OFF_AMT",
+          "type": "DECIMAL(13,2)"
+        },
+        {
+          "name": "DELQ_BUCKET",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "UTILISATION_PCT",
+          "type": "DECIMAL(5,2)"
+        },
+        {
+          "name": "STALE_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "CALC_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "CALC_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/11_PARTYDB_TABLES.sql:94"
+      ]
+    },
+    {
+      "name": "PARTYRSK.PARTY_KYC",
+      "columns": [
+        {
+          "name": "PARTY_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "KYC_SEQ",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "KYC_STATUS",
+          "type": "CHAR(2)"
+        },
+        {
+          "name": "KYC_LEVEL",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "REVIEW_TYPE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "REVIEW_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "NEXT_REVIEW_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "EXPIRY_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "ID_DOC_TYPE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "ID_DOC_REF",
+          "type": "CHAR(20)"
+        },
+        {
+          "name": "ID_DOC_EXPIRY",
+          "type": "DATE"
+        },
+        {
+          "name": "ADDR_VERIFIED_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "SOURCE_OF_FUNDS_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "RISK_RATING",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "ENHANCED_DD_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "REVIEWED_BY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "REVIEW_NOTES",
+          "type": "VARCHAR(200)"
+        },
+        {
+          "name": "LAST_MAINT_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/11_PARTYDB_TABLES.sql:47"
+      ]
+    },
+    {
+      "name": "PARTYRSK.PARTY_RISK_AUDIT",
+      "columns": [
+        {
+          "name": "AUDIT_ID",
+          "type": "CHAR(20)"
+        },
+        {
+          "name": "PARTY_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "EVENT_TS",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "EVENT_TYPE",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "REQUESTING_MODULE",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "REQUESTING_PGM",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "CORREL_ID",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "CHANNEL",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "OLD_SCORE",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "NEW_SCORE",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "OLD_BAND",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "NEW_BAND",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "KYC_STATUS",
+          "type": "CHAR(2)"
+        },
+        {
+          "name": "SANCTION_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "ADVICE_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "REASON_TXT",
+          "type": "CHAR(60)"
+        },
+        {
+          "name": "HOP_TRACE",
+          "type": "VARCHAR(120)"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/11_PARTYDB_TABLES.sql:150"
+      ]
+    },
+    {
+      "name": "PARTYRSK.PARTY_RISK_SCORE",
+      "columns": [
+        {
+          "name": "PARTY_ID",
+          "type": "CHAR(11)"
+        },
+        {
+          "name": "SCORE_TS",
+          "type": "TIMESTAMP"
+        },
+        {
+          "name": "MODEL_ID",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "MODEL_VERSION",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "RISK_SCORE",
+          "type": "SMALLINT"
+        },
+        {
+          "name": "RISK_BAND",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "PD_PCT",
+          "type": "DECIMAL(8,5)"
+        },
+        {
+          "name": "EXPOSURE_AMT",
+          "type": "DECIMAL(15,2)"
+        },
+        {
+          "name": "ADVICE_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "REASON_CD",
+          "type": "CHAR(4)"
+        },
+        {
+          "name": "KYC_STATUS",
+          "type": "CHAR(2)"
+        },
+        {
+          "name": "SANCTION_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "COMPONENT_DATA",
+          "type": "VARCHAR(400)"
+        },
+        {
+          "name": "OVERRIDE_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "OVERRIDE_BY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "OVERRIDE_REASON",
+          "type": "CHAR(40)"
+        },
+        {
+          "name": "SCORED_BY",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "SOURCE_CHANNEL",
+          "type": "CHAR(1)"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/11_PARTYDB_TABLES.sql:120"
+      ]
+    },
+    {
+      "name": "PARTYRSK.PARTY_SANCTION",
+      "columns": [
+        {
+          "name": "LIST_CD",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "ENTRY_ID",
+          "type": "CHAR(16)"
+        },
+        {
+          "name": "ENTITY_NAME",
+          "type": "CHAR(60)"
+        },
+        {
+          "name": "ENTITY_TYPE",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "COUNTRY_CD",
+          "type": "CHAR(3)"
+        },
+        {
+          "name": "DOB",
+          "type": "DATE"
+        },
+        {
+          "name": "PROGRAM_CD",
+          "type": "CHAR(12)"
+        },
+        {
+          "name": "LISTED_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "DELISTED_DATE",
+          "type": "DATE"
+        },
+        {
+          "name": "ACTIVE_FLG",
+          "type": "CHAR(1)"
+        },
+        {
+          "name": "LOAD_JOB",
+          "type": "CHAR(8)"
+        },
+        {
+          "name": "LOAD_TS",
+          "type": "TIMESTAMP"
+        }
+      ],
+      "rows": [],
+      "sources": [
+        "db2/ddl/11_PARTYDB_TABLES.sql:74"
+      ]
+    }
+  ],
+  "unparsed": []
+}

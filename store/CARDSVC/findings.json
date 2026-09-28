@@ -1,0 +1,4660 @@
+{
+  "meta": {
+    "module": "CARDSVC",
+    "generated_at": "2026-09-28T13:40:01Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {}
+  },
+  "findings": [
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBBIL04J step RENDER runs CBBIL04 (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/jcl/cardsvc/CBBIL04J.jcl:25"
+      ],
+      "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "dd-missing",
+      "id": "F0001",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBBIL04J step RENDER runs CBBIL04 (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/jcl/cardsvc/CBBIL04J.jcl:25"
+      ],
+      "request": "Provide the DD PGMROUT allocation for CBBIL04J step RENDER",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "dd-missing",
+      "id": "F0002",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD05A step STEP010 runs CBCRD05A (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "dd-missing",
+      "id": "F0003",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD05A step STEP010 runs CBCRD05A (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": "Provide the DD PGMROUT allocation for CBCRD05A step STEP010",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "dd-missing",
+      "id": "F0004",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD06J step STEP030 runs CBCRD06B (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(1:8)]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "dd-missing",
+      "id": "F0005",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "high",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): job CBCRD06J step STEP030 runs CBCRD06B (calls CBCRD90) but allocates no DD PGMROUT [feeds PR-REST(35:8)]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": "Provide the DD PGMROUT allocation for CBCRD06J step STEP030",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "dd-missing",
+      "id": "F0006",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "high",
+      "message": "job CBBIL04J step RENDER runs CBBIL04 \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:23",
+        "app/jcl/cardsvc/CBBIL04J.jcl:25"
+      ],
+      "request": "Provide the DD PGMROUT allocation for job CBBIL04J step RENDER (or the PROC/override that supplies it)",
+      "status": "open",
+      "id": "F0007",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "high",
+      "message": "job CBCRD05A step STEP010 runs CBCRD05A \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:23",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": "Provide the DD PGMROUT allocation for job CBCRD05A step STEP010 (or the PROC/override that supplies it)",
+      "status": "open",
+      "id": "F0008",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "high",
+      "message": "job CBCRD06J step STEP030 runs CBCRD06B \u2192 CBCRD90, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:23",
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": "Provide the DD PGMROUT allocation for job CBCRD06J step STEP030 (or the PROC/override that supplies it)",
+      "status": "open",
+      "id": "F0009",
+      "owner": "human"
+    },
+    {
+      "kind": "missing-copybook",
+      "severity": "high",
+      "message": "copy CARDSET is included by 8 program(s) (CACRD00, CACRD01, CACRD02, CACRD03, CACRD04, CACRD10, CACRD17, CACRD91) but no scanned copybook defines it",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:86",
+        "app/cardsvc/cbl/CACRD01.cbl:60",
+        "app/cardsvc/cbl/CACRD02.cbl:120",
+        "app/cardsvc/cbl/CACRD03.cbl:75",
+        "app/cardsvc/cbl/CACRD04.cbl:110"
+      ],
+      "request": "Provide copybook member 'CARDSET' from the production copybook library (SYSLIB)",
+      "status": "open",
+      "id": "F0010",
+      "owner": "human"
+    },
+    {
+      "kind": "missing-copybook",
+      "severity": "high",
+      "message": "copy CARDST2 is included by 6 program(s) (CACRD11, CACRD12, CACRD13, CACRD14, CACRD15, CACRD16) but no scanned copybook defines it",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:176",
+        "app/cardsvc/cbl/CACRD12.cbl:143",
+        "app/cardsvc/cbl/CACRD13.cbl:195",
+        "app/cardsvc/cbl/CACRD14.cbl:192",
+        "app/cardsvc/cbl/CACRD15.cbl:134"
+      ],
+      "request": "Provide copybook member 'CARDST2' from the production copybook library (SYSLIB)",
+      "status": "open",
+      "id": "F0011",
+      "owner": "human"
+    },
+    {
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBASM: the PROC statement at app/jcl/build/COBASM.proc:4 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 3 parameter line(s) that follow (ASMHLQ, LEHLQ, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "evidence": [
+        "app/jcl/build/COBASM.proc:4",
+        "app/jcl/build/COBASM.proc:5",
+        "app/jcl/build/COBASM.proc:6",
+        "app/jcl/build/COBASM.proc:7"
+      ],
+      "request": "Provide the production copy of PROC COBASM (or confirm the intended defaults for ASMHLQ, LEHLQ, WORK)",
+      "status": "open",
+      "id": "F0012",
+      "owner": "human"
+    },
+    {
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBBATCH: the PROC statement at app/jcl/build/COBBATCH.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:5",
+        "app/jcl/build/COBBATCH.proc:6",
+        "app/jcl/build/COBBATCH.proc:7",
+        "app/jcl/build/COBBATCH.proc:8",
+        "app/jcl/build/COBBATCH.proc:9",
+        "app/jcl/build/COBBATCH.proc:10",
+        "app/jcl/build/COBBATCH.proc:11",
+        "app/jcl/build/COBBATCH.proc:12",
+        "app/jcl/build/COBBATCH.proc:13"
+      ],
+      "request": "Provide the production copy of PROC COBBATCH (or confirm the intended defaults for CALLOPT, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SORTHLQ, SSID, WORK)",
+      "status": "open",
+      "id": "F0013",
+      "owner": "human"
+    },
+    {
+      "kind": "proc-header-break",
+      "severity": "high",
+      "message": "PROC COBCICS: the PROC statement at app/jcl/build/COBCICS.proc:5 stops continuing \u2014 'TARGET' is glued to the last parameter (no blank before the comment), so the statement ends there; the 8 parameter line(s) that follow (CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK) are not part of it and their defaults never apply. z/OS would reject the member as written, so the production copy differs from this one",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:5",
+        "app/jcl/build/COBCICS.proc:6",
+        "app/jcl/build/COBCICS.proc:7",
+        "app/jcl/build/COBCICS.proc:8",
+        "app/jcl/build/COBCICS.proc:9",
+        "app/jcl/build/COBCICS.proc:10",
+        "app/jcl/build/COBCICS.proc:11",
+        "app/jcl/build/COBCICS.proc:12",
+        "app/jcl/build/COBCICS.proc:13"
+      ],
+      "request": "Provide the production copy of PROC COBCICS (or confirm the intended defaults for CALLOPT, CICSHLQ, COBHLQ, DB2HLQ, DBRMLIB, LEHLQ, SSID, WORK)",
+      "status": "open",
+      "id": "F0014",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-environment-topology",
+      "severity": "high",
+      "message": "CARDSVC profile: environment_topology is not in the store \u2014 which LPARs and environments (production / test / DR) the estate has \u2014 the scanned JCL allocates datasets under the high-level qualifier(s) ASM, CARD, CICS, CICSTS, DSN, DSN910, PRTY, SYS1: a naming observation, which is not proof of which LPAR or environment runs them",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl:30",
+        "app/jcl/build/BINDPRTY.jcl:17",
+        "app/jcl/cardsvc/CBBIL01J.jcl:27",
+        "app/jcl/cardsvc/CBBIL02J.jcl:45",
+        "app/jcl/cardsvc/CBBIL03J.jcl:23",
+        "app/jcl/cardsvc/CBBIL04J.jcl:27",
+        "app/jcl/cardsvc/CBBIL05J.jcl:26",
+        "app/jcl/cardsvc/CBBIL06J.jcl:23"
+      ],
+      "request": "State the LPARs and environments, how a dataset or job name says which one it belongs to, and which sysplex they sit in: the scan can only list the qualifiers it saw",
+      "status": "open",
+      "id": "F0015",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-masking-policy",
+      "severity": "high",
+      "message": "CARDSVC profile: masking_policy is not in the store \u2014 what may leave the estate, and in what shape",
+      "evidence": [],
+      "request": "State the data-masking policy for extracted test data (which fields must be masked, whether production data may leave the estate at all)",
+      "status": "open",
+      "id": "F0016",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-test-lpar",
+      "severity": "high",
+      "message": "CARDSVC profile: test_lpar is not in the store \u2014 whether a test LPAR is available to run the migrated code against",
+      "evidence": [],
+      "request": "Confirm whether a test LPAR (or a sandbox subsystem) is available for parallel runs, and who can grant access",
+      "status": "open",
+      "id": "F0017",
+      "owner": "human"
+    },
+    {
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "29 steps of PROC COBCICS use (job BUILDALL step ONL0010; job BUILDALL step ONL0020; job BUILDALL step ONL0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBCICS.proc:7 is orphaned by the PROC header break at app/jcl/build/COBCICS.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87",
+        "app/jcl/build/COBCICS.proc:87"
+      ],
+      "request": "Provide the production copy of PROC COBCICS so the default for &CALLOPT is known",
+      "status": "open",
+      "count": 29,
+      "id": "F0018",
+      "owner": "human"
+    },
+    {
+      "kind": "unresolved-symbolic",
+      "severity": "high",
+      "message": "39 steps of PROC COBBATCH use (job BUILDALL step BAT0010; job BUILDALL step BAT0020; job BUILDALL step BAT0030 \u2026) symbolic &CALLOPT with no default, SET, or override; its default at app/jcl/build/COBBATCH.proc:7 is orphaned by the PROC header break at app/jcl/build/COBBATCH.proc:5, so this is a JCL defect in the repo copy, not a scheduler value",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71",
+        "app/jcl/build/COBBATCH.proc:71"
+      ],
+      "request": "Provide the production copy of PROC COBBATCH so the default for &CALLOPT is known",
+      "status": "open",
+      "count": 39,
+      "id": "F0019",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 11 job(s) but the export states no frequency for 11 of them, window for 11 of them, deadline for 10 of them, runtime for 11 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/CARDNITE.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0020",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 4 job(s) but the export states no frequency for 4 of them, window for 4 of them, deadline for 3 of them, runtime for 4 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/PARTYWK.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0021",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 5 job(s) but the export states no frequency for 5 of them, window for 5 of them, deadline for 4 of them, runtime for 5 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/CARDREF.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0022",
+      "owner": "human"
+    },
+    {
+      "kind": "chain-schedule-unknown",
+      "severity": "medium",
+      "message": "scheduler table  orders 6 job(s) but the export states no frequency for 6 of them, window for 6 of them, deadline for 5 of them, runtime for 6 of them \u2014 unproven, and the table's name is not evidence",
+      "evidence": [
+        "sched/CARDBILL.sched"
+      ],
+      "request": "Provide, for : the calendar / run frequency (DAYS, WDAYS, a calendar member or a cyclic definition); the submission window (TIMEFROM/TIMETO, or the shift it runs in); the deadline the chain owes (DUE OUT / SLA); the expected CPU and elapsed time per job",
+      "status": "open",
+      "id": "F0023",
+      "owner": "human"
+    },
+    {
+      "kind": "cics-file-undefined",
+      "severity": "medium",
+      "message": "CICS FILE CARDXRP1 is used by CACRD02 but no DEFINE FILE(CARDXRP1) exists in the scanned CSD input",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD02.cbl:385",
+        "app/cardsvc/cbl/CACRD02.cbl:432",
+        "app/cardsvc/cbl/CACRD02.cbl:467",
+        "app/cardsvc/cbl/CACRD02.cbl:490",
+        "app/cardsvc/cbl/CACRD02.cbl:519",
+        "app/cardsvc/cbl/CACRD02.cbl:563"
+      ],
+      "request": "Provide the CSD definition (CEDA VIEW FILE(CARDXRP1)) or confirm the resource is remote/defined elsewhere",
+      "status": "open",
+      "id": "F0024",
+      "owner": "human"
+    },
+    {
+      "kind": "cics-tdqueue-undefined",
+      "severity": "medium",
+      "message": "CICS TDQUEUE CERR is used by CACRD91, CACRD92 but no DEFINE TDQUEUE(CERR) exists in the scanned CSD input",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD91.cbl:272",
+        "app/cardsvc/cbl/CACRD91.cbl:314",
+        "app/cardsvc/cbl/CACRD92.cbl:209"
+      ],
+      "request": "Provide the CSD definition (CEDA VIEW TDQUEUE(CERR)) or confirm the resource is remote/defined elsewhere",
+      "status": "open",
+      "id": "F0025",
+      "owner": "human"
+    },
+    {
+      "kind": "db2-cics-plan-missing",
+      "severity": "medium",
+      "message": "13 online program(s) (CACRD01, CACRD03, CACRD06, CACRD07, CACRD08 \u2026) have embedded SQL but the scanned CSD has no DB2CONN/DB2ENTRY, so their plan and thread limits are unknown",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl:251-294",
+        "app/cardsvc/cbl/CACRD01.cbl:65",
+        "app/cardsvc/cbl/CACRD03.cbl:113-125",
+        "app/cardsvc/cbl/CACRD03.cbl:269-298"
+      ],
+      "request": "Provide the DB2CONN and DB2ENTRY/DB2TRAN definitions (CEDA or DFHCSDUP EXTRACT) for the region",
+      "status": "open",
+      "id": "F0026",
+      "owner": "human"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.ACCOUNT in CACRD13: 1 host variable(s) do not match the DDL column type \u2014 CURR_BAL DECIMAL(13,2) vs :DCL-CURR-BAL PIC S9(13)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:219",
+        "app/cardsvc/cbl/CACRD13.cbl:510-519"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0027",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.ACCOUNT in CACRD14: 5 host variable(s) do not match the DDL column type \u2014 CURR_BAL DECIMAL(13,2) vs :DCL-CURR-BAL PIC S9(13)V99 COMP-3; MIN_PAY_DUE DECIMAL(11,2) vs :DCL-MIN-PAY-DUE PIC S9(11)V99 COMP-3; LAST_PAY_AMT DECIMAL(11,2) vs :DCL-LAST-PAY-AMT PIC S9(11)V99 COMP-3; DELQ_AMT DECIMAL(11,2) vs :DCL-DELQ-AMT PIC S9(11)V99 COMP-3 \u2026",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD14.cbl:204",
+        "app/cardsvc/cbl/CACRD14.cbl:205",
+        "app/cardsvc/cbl/CACRD14.cbl:206",
+        "app/cardsvc/cbl/CACRD14.cbl:209",
+        "app/cardsvc/cbl/CACRD14.cbl:493-514",
+        "app/cardsvc/cbl/CACRD14.cbl:56"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0028",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.ACCOUNT in CACRD15: 1 host variable(s) do not match the DDL column type \u2014 CURR_BAL DECIMAL(13,2) vs :DCL-CURR-BAL PIC S9(13)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl:155",
+        "app/cardsvc/cbl/CACRD15.cbl:351-378"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0029",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.CARD_LIMIT in CACRD12: 5 host variable(s) do not match the DDL column type \u2014 LIMIT_AMT DECIMAL(13,2) vs :DCL-LIMIT-AMT PIC S9(13)V99 COMP-3; USED_AMT DECIMAL(13,2) vs :DCL-USED-AMT PIC S9(13)V99 COMP-3; AVAIL_AMT DECIMAL(13,2) vs :DCL-AVAIL-AMT PIC S9(13)V99 COMP-3; LIMIT_AMT DECIMAL(13,2) vs :DCL-NEW-LIMIT-AMT PIC S9(13)V99 COMP-3 \u2026",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD12.cbl:168",
+        "app/cardsvc/cbl/CACRD12.cbl:169",
+        "app/cardsvc/cbl/CACRD12.cbl:170",
+        "app/cardsvc/cbl/CACRD12.cbl:179",
+        "app/cardsvc/cbl/CACRD12.cbl:180",
+        "app/cardsvc/cbl/CACRD12.cbl:474-499"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0030",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.CARD_LIMIT in CACRD15: 2 host variable(s) do not match the DDL column type \u2014 LIMIT_AMT DECIMAL(13,2) vs :DCL-LIMIT-AMT PIC S9(13)V99 COMP-3; AVAIL_AMT DECIMAL(13,2) vs :DCL-AVAIL-AMT PIC S9(13)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl:160",
+        "app/cardsvc/cbl/CACRD15.cbl:161",
+        "app/cardsvc/cbl/CACRD15.cbl:458-467"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0031",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.DISPUTE in CACRD13: 2 host variable(s) do not match the DDL column type \u2014 DISPUTE_AMT DECIMAL(13,2) vs :DCL-DISPUTE-AMT PIC S9(13)V99 COMP-3; PROV_CREDIT_AMT DECIMAL(13,2) vs :DCL-PROV-AMT PIC S9(13)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:1201-1233",
+        "app/cardsvc/cbl/CACRD13.cbl:243",
+        "app/cardsvc/cbl/CACRD13.cbl:245"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0032",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FEE_SCHEDULE in CBCRD05A: 3 host variable(s) do not match the DDL column type \u2014 FLAT_AMT DECIMAL(9,2) vs :DCL-FLAT-AMT PIC S9(9)V99 COMP-3; MIN_AMT DECIMAL(9,2) vs :DCL-MIN-AMT PIC S9(9)V99 COMP-3; MAX_AMT DECIMAL(9,2) vs :DCL-MAX-AMT PIC S9(9)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD05A.cbl:203",
+        "app/cardsvc/cbl/CBCRD05A.cbl:205",
+        "app/cardsvc/cbl/CBCRD05A.cbl:206",
+        "app/cardsvc/cbl/CBCRD05A.cbl:424-433"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0033",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FEE_SCHEDULE in CBFEE01: 3 host variable(s) do not match the DDL column type \u2014 FLAT_AMT DECIMAL(9,2) vs :DCL-FLAT-AMT PIC S9(9)V99 COMP-3; MIN_AMT DECIMAL(9,2) vs :DCL-MIN-AMT PIC S9(9)V99 COMP-3; MAX_AMT DECIMAL(9,2) vs :DCL-MAX-AMT PIC S9(9)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE01.cbl:153",
+        "app/cardsvc/cbl/CBFEE01.cbl:155",
+        "app/cardsvc/cbl/CBFEE01.cbl:156",
+        "app/cardsvc/cbl/CBFEE01.cbl:340-361"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0034",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FEE_SCHEDULE in CBFEE02: 3 host variable(s) do not match the DDL column type \u2014 FLAT_AMT DECIMAL(9,2) vs :DCL-FLAT-AMT PIC S9(9)V99 COMP-3; MIN_AMT DECIMAL(9,2) vs :DCL-MIN-AMT PIC S9(9)V99 COMP-3; MAX_AMT DECIMAL(9,2) vs :DCL-MAX-AMT PIC S9(9)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE02.cbl:138",
+        "app/cardsvc/cbl/CBFEE02.cbl:140",
+        "app/cardsvc/cbl/CBFEE02.cbl:141",
+        "app/cardsvc/cbl/CBFEE02.cbl:306-325"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0035",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FEE_SCHEDULE in CBFEE03: 3 host variable(s) do not match the DDL column type \u2014 FLAT_AMT DECIMAL(9,2) vs :DCL-FLAT-AMT PIC S9(9)V99 COMP-3; MIN_AMT DECIMAL(9,2) vs :DCL-MIN-AMT PIC S9(9)V99 COMP-3; MAX_AMT DECIMAL(9,2) vs :DCL-MAX-AMT PIC S9(9)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE03.cbl:142",
+        "app/cardsvc/cbl/CBFEE03.cbl:144",
+        "app/cardsvc/cbl/CBFEE03.cbl:145",
+        "app/cardsvc/cbl/CBFEE03.cbl:329-348"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0036",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FRAUD_RULE in CAFRD01: 1 host variable(s) do not match the DDL column type \u2014 THRESHOLD_AMT DECIMAL(11,2) vs :DCL-THRESH-AMT PIC S9(11)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CAFRD01.cbl:101",
+        "app/cardsvc/cbl/CAFRD01.cbl:524-535"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0037",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FRAUD_RULE in CAFRD03: 1 host variable(s) do not match the DDL column type \u2014 THRESHOLD_AMT DECIMAL(11,2) vs :DCL-THRESHOLD-AMT PIC S9(11)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CAFRD03.cbl:287-297",
+        "app/cardsvc/cbl/CAFRD03.cbl:74"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0038",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FRAUD_RULE in CAFRD04: 1 host variable(s) do not match the DDL column type \u2014 THRESHOLD_AMT DECIMAL(11,2) vs :DCL-THRESHOLD-AMT PIC S9(11)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CAFRD04.cbl:367-377",
+        "app/cardsvc/cbl/CAFRD04.cbl:84"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0039",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.FRAUD_RULE in CBREF03: 1 host variable(s) do not match the DDL column type \u2014 THRESHOLD_AMT DECIMAL(11,2) vs :DCL-THRESHOLD-AMT PIC S9(11)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:206",
+        "app/cardsvc/cbl/CBREF03.cbl:370-387"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0040",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.ROUTE_AUDIT in CACRD90: 2 host variable(s) do not match the DDL column type \u2014 SEQ_NBR SMALLINT vs :RQ-SEQ-NBR PIC 9(4); RETURN_CD SMALLINT vs :RQ-RC PIC 9(4)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:427-453",
+        "app/cpy/CVROUT01Y.cpy:56",
+        "app/cpy/CVROUT01Y.cpy:61"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0041",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.ROUTE_AUDIT in CBCRD90: 2 host variable(s) do not match the DDL column type \u2014 SEQ_NBR SMALLINT vs :RQ-SEQ-NBR PIC 9(4); RETURN_CD SMALLINT vs :RQ-RC PIC 9(4)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:344-370",
+        "app/cpy/CVROUT01Y.cpy:56",
+        "app/cpy/CVROUT01Y.cpy:61"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0042",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.STATEMENT in CBBIL05: 1 host variable(s) do not match the DDL column type \u2014 STMT_NUMBER DECIMAL(6,0) vs :DCL-STMT-NUMBER PIC S9(9) COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL05.cbl:128",
+        "app/cardsvc/cbl/CBBIL05.cbl:302-352"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0043",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.TRANSACTION in CACRD13: 3 host variable(s) do not match the DDL column type \u2014 TXN_AMT DECIMAL(13,2) vs :DCL-TXN-AMT PIC S9(13)V99 COMP-3; TXN_AMT DECIMAL(13,2) vs :DCL-CR-AMT PIC S9(13)V99 COMP-3; BILLING_AMT DECIMAL(13,2) vs :DCL-CR-AMT PIC S9(13)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:1329-1365",
+        "app/cardsvc/cbl/CACRD13.cbl:229",
+        "app/cardsvc/cbl/CACRD13.cbl:250",
+        "app/cardsvc/cbl/CACRD13.cbl:758-771"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0044",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.TRANSACTION in CACRD14: 3 host variable(s) do not match the DDL column type \u2014 TXN_AMT DECIMAL(13,2) vs :DCL-TXN-AMT PIC S9(13)V99 COMP-3; BILLING_AMT DECIMAL(13,2) vs :DCL-BILLING-AMT PIC S9(13)V99 COMP-3; TXN_AMT DECIMAL(13,2) vs :DCL-ORIG-AMT PIC S9(13)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD14.cbl:1003-1015",
+        "app/cardsvc/cbl/CACRD14.cbl:225",
+        "app/cardsvc/cbl/CACRD14.cbl:226",
+        "app/cardsvc/cbl/CACRD14.cbl:237",
+        "app/cardsvc/cbl/CACRD14.cbl:806-842"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0045",
+      "owner": "agent"
+    },
+    {
+      "kind": "db2-host-type-mismatch",
+      "severity": "medium",
+      "message": "CARDSVC.TRANSACTION in CBCRD05B: 2 host variable(s) do not match the DDL column type \u2014 TXN_AMT DECIMAL(13,2) vs :DCL-INT-AMT PIC S9(9)V99 COMP-3; BILLING_AMT DECIMAL(13,2) vs :DCL-INT-AMT PIC S9(9)V99 COMP-3",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD05B.cbl:220",
+        "app/cardsvc/cbl/CBCRD05B.cbl:675-711"
+      ],
+      "request": "Decide per column whether the truncation/padding/conversion is intended (DB2 pads and truncates CHAR silently, numeric overflow raises SQLCODE -304/-802) and record the target-side type in annotations.json",
+      "status": "open",
+      "id": "F0046",
+      "owner": "agent"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "medium",
+      "message": "2 sites (app/cardsvc/cbl/CACRD90.cbl:360, app/cardsvc/cbl/CACRD90.cbl:388): 24 distinct PGM_NAME value(s) come from the seed script(s) db2/ddl/40_SEED_PGM_ROUTE.sql, not from the live table; WHERE ACTIVE_FLG = 'Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE was not evaluated [feeds DCL-PGM-NAME]",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388",
+        "app/cardsvc/cbl/CACRD90.cbl:190"
+      ],
+      "request": "Confirm that production CARDSVC.PGM_ROUTE holds no PGM_NAME values beyond the 24 seeded in db2/ddl/40_SEED_PGM_ROUTE.sql",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "sites": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "end_kind": "db2-seed-snapshot",
+      "id": "F0047",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "medium",
+      "message": "2 sites (app/cardsvc/cbl/CACRD90.cbl:360, app/cardsvc/cbl/CACRD90.cbl:388): 3 distinct FALLBACK_PGM value(s) come from the seed script(s) db2/ddl/40_SEED_PGM_ROUTE.sql, not from the live table; WHERE ACTIVE_FLG = 'Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE was not evaluated [feeds DCL-FALLBACK-PGM]",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388",
+        "app/cardsvc/cbl/CACRD90.cbl:190"
+      ],
+      "request": "Confirm that production CARDSVC.PGM_ROUTE holds no FALLBACK_PGM values beyond the 3 seeded in db2/ddl/40_SEED_PGM_ROUTE.sql",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "sites": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "end_kind": "db2-seed-snapshot",
+      "id": "F0048",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "medium",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): 24 distinct PGM_NAME value(s) come from the seed script(s) db2/ddl/40_SEED_PGM_ROUTE.sql, not from the live table; WHERE ACTIVE_FLG = 'Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE was not evaluated [feeds DCL-PGM-NAME]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/cardsvc/cbl/CBCRD90.cbl:166"
+      ],
+      "request": "Confirm that production CARDSVC.PGM_ROUTE holds no PGM_NAME values beyond the 24 seeded in db2/ddl/40_SEED_PGM_ROUTE.sql",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "db2-seed-snapshot",
+      "id": "F0049",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-evidence",
+      "severity": "medium",
+      "message": "4 sites (app/cardsvc/cbl/CBCRD90.cbl:297, app/cardsvc/cbl/CBCRD90.cbl:331, app/cardsvc/cbl/CBCRD90.cbl:306, app/cardsvc/cbl/CBCRD90.cbl:339): 3 distinct FALLBACK_PGM value(s) come from the seed script(s) db2/ddl/40_SEED_PGM_ROUTE.sql, not from the live table; WHERE ACTIVE_FLG = 'Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE was not evaluated [feeds DCL-FALLBACK-PGM]",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "app/cardsvc/cbl/CBCRD90.cbl:166"
+      ],
+      "request": "Confirm that production CARDSVC.PGM_ROUTE holds no FALLBACK_PGM values beyond the 3 seeded in db2/ddl/40_SEED_PGM_ROUTE.sql",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "sites": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "end_kind": "db2-seed-snapshot",
+      "id": "F0050",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-unknown-target",
+      "severity": "medium",
+      "message": "CACRD90 CICS-LINK WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:360): candidate target(s) CACRD07X, PRBRSK1, PRKYC01, PRKYC03 are not in the scanned sources",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+      ],
+      "request": "Confirm ownership of CACRD07X, PRBRSK1, PRKYC01, PRKYC03 and provide the source if it belongs to this module",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "id": "F0051",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-unknown-target",
+      "severity": "medium",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): candidate target(s) CACRD07X, PRBRSK1, PRKYC01, PRKYC03 are not in the scanned sources",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+      ],
+      "request": "Confirm ownership of CACRD07X, PRBRSK1, PRKYC01, PRKYC03 and provide the source if it belongs to this module",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "id": "F0052",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-unknown-target",
+      "severity": "medium",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): candidate target(s) CACRD07X, PRBRSK1, PRKYC01, PRKYC03 are not in the scanned sources",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+      ],
+      "request": "Confirm ownership of CACRD07X, PRBRSK1, PRKYC01, PRKYC03 and provide the source if it belongs to this module",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "id": "F0053",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-unknown-target",
+      "severity": "medium",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:331): candidate target(s) CACRD07X, PRBRSK1, PRKYC01, PRKYC03 are not in the scanned sources",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:331",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+      ],
+      "request": "Confirm ownership of CACRD07X, PRBRSK1, PRKYC01, PRKYC03 and provide the source if it belongs to this module",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:331",
+      "id": "F0054",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-unknown-target",
+      "severity": "medium",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): candidate target(s) CACRD07X, PRBRSK1, PRKYC01, PRKYC03 are not in the scanned sources",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+      ],
+      "request": "Confirm ownership of CACRD07X, PRBRSK1, PRKYC01, PRKYC03 and provide the source if it belongs to this module",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "id": "F0055",
+      "owner": "human"
+    },
+    {
+      "kind": "dynamic-call-unknown-target",
+      "severity": "medium",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:339): candidate target(s) CACRD07X, PRBRSK1, PRKYC01, PRKYC03 are not in the scanned sources",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:339",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+        "db2/ddl/40_SEED_PGM_ROUTE.sql:90"
+      ],
+      "request": "Confirm ownership of CACRD07X, PRBRSK1, PRKYC01, PRKYC03 and provide the source if it belongs to this module",
+      "status": "open",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:339",
+      "id": "F0056",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBCRD05A step STEP010 runs CBCRD90 \u21e2 CBFEE01 (CBCRD90: CALL WS-PGM-NAME @ app/cardsvc/cbl/CBCRD90.cbl:297, CBFEE01 candidate), which opens file FEEPARM-FILE through DD FEEPARM, but the step allocates no DD FEEPARM \u2014 needed only if that dynamic call actually selects CBFEE01",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE01.cbl:43",
+        "app/jcl/proc/CARDDB2.jcl:32",
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": "Confirm whether CBCRD05A step STEP010 can reach CBFEE01; if so provide its DD FEEPARM allocation",
+      "status": "open",
+      "id": "F0057",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBCRD05A step STEP010 runs CBCRD90 \u21e2 CBFEE02 (CBCRD90: CALL WS-PGM-NAME @ app/cardsvc/cbl/CBCRD90.cbl:297, CBFEE02 candidate), which opens file FEEPARM-FILE through DD FEEPARM, but the step allocates no DD FEEPARM \u2014 needed only if that dynamic call actually selects CBFEE02",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE02.cbl:41",
+        "app/jcl/proc/CARDDB2.jcl:32",
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": "Confirm whether CBCRD05A step STEP010 can reach CBFEE02; if so provide its DD FEEPARM allocation",
+      "status": "open",
+      "id": "F0058",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBCRD05A step STEP010 runs CBCRD90 \u21e2 CBFEE03 (CBCRD90: CALL WS-PGM-NAME @ app/cardsvc/cbl/CBCRD90.cbl:297, CBFEE03 candidate), which opens file FEEPARM-FILE through DD FEEPARM, but the step allocates no DD FEEPARM \u2014 needed only if that dynamic call actually selects CBFEE03",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE03.cbl:49",
+        "app/jcl/proc/CARDDB2.jcl:32",
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": "Confirm whether CBCRD05A step STEP010 can reach CBFEE03; if so provide its DD FEEPARM allocation",
+      "status": "open",
+      "id": "F0059",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF02J step UNLDMRCH runs CBREF02, which opens file MERCHRTE-FILE through DD MERCHRTE, but the step allocates no DD MERCHRTE (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF02.cbl:46",
+        "app/jcl/cardsvc/CBREF02J.jcl:23"
+      ],
+      "request": "Confirm that CBREF02 never opens MERCHRTE-FILE in job CBREF02J step UNLDMRCH, or provide the DD MERCHRTE allocation",
+      "status": "open",
+      "id": "F0060",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF02J step VERFMRCH runs CBREF02, which opens file MERCHUNL-FILE through DD MERCHUNL, but the step allocates no DD MERCHUNL (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF02.cbl:38",
+        "app/jcl/cardsvc/CBREF02J.jcl:93"
+      ],
+      "request": "Confirm that CBREF02 never opens MERCHUNL-FILE in job CBREF02J step VERFMRCH, or provide the DD MERCHUNL allocation",
+      "status": "open",
+      "id": "F0061",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF03J step UNLDREF runs CBREF03, which opens file FRAUDRUL-FILE through DD FRAUDRUL, but the step allocates no DD FRAUDRUL (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:56",
+        "app/jcl/cardsvc/CBREF03J.jcl:24"
+      ],
+      "request": "Confirm that CBREF03 never opens FRAUDRUL-FILE in job CBREF03J step UNLDREF, or provide the DD FRAUDRUL allocation",
+      "status": "open",
+      "id": "F0062",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF03J step UNLDREF runs CBREF03, which opens file RSNCODE-FILE through DD RSNCODE, but the step allocates no DD RSNCODE (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:62",
+        "app/jcl/cardsvc/CBREF03J.jcl:24"
+      ],
+      "request": "Confirm that CBREF03 never opens RSNCODE-FILE in job CBREF03J step UNLDREF, or provide the DD RSNCODE allocation",
+      "status": "open",
+      "id": "F0063",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF03J step VERFREF runs CBREF03, which opens file FRAUUNL-FILE through DD FRAUUNL, but the step allocates no DD FRAUUNL (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:40",
+        "app/jcl/cardsvc/CBREF03J.jcl:127"
+      ],
+      "request": "Confirm that CBREF03 never opens FRAUUNL-FILE in job CBREF03J step VERFREF, or provide the DD FRAUUNL allocation",
+      "status": "open",
+      "id": "F0064",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF03J step VERFREF runs CBREF03, which opens file RSNFEED-FILE through DD RSNFEED, but the step allocates no DD RSNFEED (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:44",
+        "app/jcl/cardsvc/CBREF03J.jcl:127"
+      ],
+      "request": "Confirm that CBREF03 never opens RSNFEED-FILE in job CBREF03J step VERFREF, or provide the DD RSNFEED allocation",
+      "status": "open",
+      "id": "F0065",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF03J step VERFREF runs CBREF03, which opens file RSNUNL-FILE through DD RSNUNL, but the step allocates no DD RSNUNL (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF03.cbl:48",
+        "app/jcl/cardsvc/CBREF03J.jcl:127"
+      ],
+      "request": "Confirm that CBREF03 never opens RSNUNL-FILE in job CBREF03J step VERFREF, or provide the DD RSNUNL allocation",
+      "status": "open",
+      "id": "F0066",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF04J step UNLDROUT runs CBREF04, which opens file PGMROUT-FILE through DD PGMROUT, but the step allocates no DD PGMROUT (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF04.cbl:51",
+        "app/jcl/cardsvc/CBREF04J.jcl:29"
+      ],
+      "request": "Confirm that CBREF04 never opens PGMROUT-FILE in job CBREF04J step UNLDROUT, or provide the DD PGMROUT allocation",
+      "status": "open",
+      "id": "F0067",
+      "owner": "human"
+    },
+    {
+      "kind": "file-dd-missing",
+      "severity": "medium",
+      "message": "job CBREF04J step VERFROUT runs CBREF04, which opens file ROUTUNL-FILE through DD ROUTUNL, but the step allocates no DD ROUTUNL (another step does \u2014 the OPEN is probably conditional on PARM/control input)",
+      "evidence": [
+        "app/cardsvc/cbl/CBREF04.cbl:43",
+        "app/jcl/cardsvc/CBREF04J.jcl:100"
+      ],
+      "request": "Confirm that CBREF04 never opens ROUTUNL-FILE in job CBREF04J step VERFROUT, or provide the DD ROUTUNL allocation",
+      "status": "open",
+      "id": "F0068",
+      "owner": "human"
+    },
+    {
+      "kind": "module-source-unsupplied",
+      "severity": "medium",
+      "message": "module CBCRD91 (in-estate-built) is reached by CALL from CBBIL01, CBBIL02, CBBIL03, CBBIL04, CBBIL05, CBBIL06, CBCRD01, CBCRD02, CBCRD03, CBCRD04, CBCRD05A, CBCRD05B, CBCRD06A, CBCRD06B, CBCRD06C, CBCRD06W, CBCRD06X, CBCRD07, CBCRD08, CBCRD09, CBCRD10, CBREF01, CBREF02, CBREF03, CBREF04, CBREF05: its source member CARD.PROD.CBL(CBCRD91) is not in the scan",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/cardsvc/cbl/CBBIL01.cbl:754",
+        "app/cardsvc/cbl/CBBIL02.cbl:744",
+        "app/cardsvc/cbl/CBBIL03.cbl:602",
+        "app/cardsvc/cbl/CBBIL04.cbl:478",
+        "app/cardsvc/cbl/CBBIL05.cbl:494"
+      ],
+      "request": "Provide source member CARD.PROD.CBL(CBCRD91), which this estate's own build JCL compiles",
+      "status": "open",
+      "target": "CBCRD91",
+      "classification": "in-estate-built",
+      "impact": "conversion-blocked",
+      "id": "F0069",
+      "owner": "human"
+    },
+    {
+      "kind": "module-source-unsupplied",
+      "severity": "medium",
+      "message": "module PRBRSK1 (in-estate-built) is reached by dynamic CALL, dynamic CANCEL from CBCRD90: its source member PRTY.PROD.CBL(PRBRSK1) is not in the scan",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:62",
+        "app/cardsvc/cbl/CBCRD90.cbl:297",
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": "Provide source member PRTY.PROD.CBL(PRBRSK1), which this estate's own build JCL compiles",
+      "status": "open",
+      "target": "PRBRSK1",
+      "classification": "in-estate-built",
+      "impact": "conversion-blocked",
+      "id": "F0070",
+      "owner": "human"
+    },
+    {
+      "kind": "module-source-unsupplied",
+      "severity": "medium",
+      "message": "module PRKYC01 (in-estate-built) is reached by dynamic CICS-LINK from CACRD90: its source member PRTY.PROD.CBL(PRKYC01) is not in the scan",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:45",
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "request": "Provide source member PRTY.PROD.CBL(PRKYC01), which this estate's own build JCL compiles",
+      "status": "open",
+      "target": "PRKYC01",
+      "classification": "in-estate-built",
+      "impact": "conversion-blocked",
+      "id": "F0071",
+      "owner": "human"
+    },
+    {
+      "kind": "module-source-unsupplied",
+      "severity": "medium",
+      "message": "module PRKYC03 (in-estate-built) is reached by dynamic CICS-LINK from CACRD90: its source member PRTY.PROD.CBL(PRKYC03) is not in the scan",
+      "evidence": [
+        "app/jcl/build/COBCICS.proc:45",
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "request": "Provide source member PRTY.PROD.CBL(PRKYC03), which this estate's own build JCL compiles",
+      "status": "open",
+      "target": "PRKYC03",
+      "classification": "in-estate-built",
+      "impact": "conversion-blocked",
+      "id": "F0072",
+      "owner": "human"
+    },
+    {
+      "kind": "parser-residue",
+      "severity": "medium",
+      "message": "811 scheduler card(s) are not CTMBLT parameters (e.g. CALENDAR; TYPE=REGULAR; DESC=BANK) \u2014 not in the detection contract, must be classified before trusting the job chains",
+      "evidence": [
+        "sched/CALENDARS.sched:13",
+        "sched/CALENDARS.sched:14",
+        "sched/CALENDARS.sched:15",
+        "sched/CALENDARS.sched:16",
+        "sched/CALENDARS.sched:17",
+        "sched/CALENDARS.sched:18",
+        "sched/CALENDARS.sched:19",
+        "sched/CALENDARS.sched:20",
+        "sched/CALENDARS.sched:21",
+        "sched/CALENDARS.sched:22"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0073",
+      "owner": "toolbox"
+    },
+    {
+      "kind": "profile-database-managers",
+      "severity": "medium",
+      "message": "CARDSVC profile: database_managers reads IBM Db2 for z/OS from this module's store, which is what this module proves and not what the estate has \u2014 which database systems the estate runs, and at which level",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl:1",
+        "app/cardsvc/cbl/CACRD03.cbl:1",
+        "app/cardsvc/cbl/CACRD06.cbl:1",
+        "app/cardsvc/cbl/CACRD07.cbl:1",
+        "app/cardsvc/cbl/CACRD08.cbl:1",
+        "app/cardsvc/cbl/CACRD10.cbl:1",
+        "app/cardsvc/cbl/CACRD11.cbl:1",
+        "app/cardsvc/cbl/CACRD12.cbl:1"
+      ],
+      "request": "List the database systems installed (Db2, IMS DL/I, IDMS, Adabas, ...) with their versions: the scan proves only what this module touches, which is a lower bound",
+      "status": "open",
+      "id": "F0074",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-file-transfer",
+      "severity": "medium",
+      "message": "CARDSVC profile: file_transfer is not in the store \u2014 how files cross the boundary of the estate \u2014 assumed 'IBM Connect:Direct' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the file-transfer product (Connect:Direct, FTP/SFTP, XCOM, MFT) used to move datasets in and out",
+      "status": "open",
+      "id": "F0075",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-library-manager",
+      "severity": "medium",
+      "message": "CARDSVC profile: library_manager is not in the store \u2014 which source / change manager holds the members \u2014 assumed 'Broadcom Endevor' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the source library manager (Endevor, ChangeMan, Panvalet, Librarian, plain PDS) and how a member is promoted to production",
+      "status": "open",
+      "id": "F0076",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-online-monitors",
+      "severity": "medium",
+      "message": "CARDSVC profile: online_monitors reads IBM CICS Transaction Server from this module's store, which is what this module proves and not what the estate has \u2014 which transaction monitors the estate runs, and at which level",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:1",
+        "app/cardsvc/cbl/CACRD00.cbl:422",
+        "app/cardsvc/cbl/CACRD00.cbl:462",
+        "app/cardsvc/cbl/CACRD01.cbl:1",
+        "app/cardsvc/cbl/CACRD01.cbl:471",
+        "app/cardsvc/cbl/CACRD01.cbl:496",
+        "app/cardsvc/cbl/CACRD01.cbl:537",
+        "app/cardsvc/cbl/CACRD02.cbl:1"
+      ],
+      "request": "List the online monitors installed (CICS TS, IMS TM, none) with their versions: the scan proves only what this module uses, which is a lower bound",
+      "status": "open",
+      "id": "F0077",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-output-manager",
+      "severity": "medium",
+      "message": "CARDSVC profile: output_manager is not in the store \u2014 which product owns the printed output once it leaves the spool \u2014 178 DD(s) write to SYSOUT: the jobs print, but a spool class never names the product that archives or delivers the output \u2014 assumed 'Broadcom CA View' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl:104",
+        "app/cics/DFHCSDUP.jcl:111",
+        "app/cics/DFHCSDUP.jcl:25",
+        "app/cics/DFHCSDUP.jcl:46",
+        "app/cics/DFHCSDUP.jcl:87",
+        "app/jcl/build/BINDCARD.jcl:32",
+        "app/jcl/build/BINDCARD.jcl:33",
+        "app/jcl/build/BINDCARD.jcl:34"
+      ],
+      "request": "State the output / report manager (CA View, CA Deliver, Control-D, CA Spool) and what it does with each SYSOUT class the jobs write to",
+      "status": "open",
+      "id": "F0078",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-security-manager",
+      "severity": "medium",
+      "message": "CARDSVC profile: security_manager is not in the store \u2014 which external security manager guards the datasets \u2014 assumed 'IBM RACF' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the security manager (RACF, CA ACF2, CA Top Secret) and who owns the dataset profiles",
+      "status": "open",
+      "id": "F0079",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-sort-product",
+      "severity": "medium",
+      "message": "CARDSVC profile: sort_product is not in the store \u2014 which sort product PGM=SORT resolves to \u2014 7 step(s) run PGM=SORT, the site linkage alias: a sort runs, the product is unnamed \u2014 assumed 'IBM DFSORT' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL02J.jcl:25",
+        "app/jcl/cardsvc/CBCRD03J.jcl:37",
+        "app/jcl/cardsvc/CBREF01J.jcl:25",
+        "app/jcl/cardsvc/CBREF02J.jcl:48",
+        "app/jcl/cardsvc/CBREF03J.jcl:53",
+        "app/jcl/cardsvc/CBREF03J.jcl:65",
+        "app/jcl/cardsvc/CBREF04J.jcl:57"
+      ],
+      "request": "State the sort product installed (IBM DFSORT or Syncsort MFX): PGM=SORT is a linkage alias and does not say which one runs",
+      "status": "open",
+      "id": "F0080",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-standard-compiler",
+      "severity": "medium",
+      "message": "CARDSVC profile: standard_compiler is not in the store \u2014 which compiler the shop builds production code with \u2014 assumed 'IBM Enterprise COBOL for z/OS 6.3' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the shop-standard compiler and release (Enterprise COBOL 6.x, ...); a single module's compile step is that module's, not the estate's",
+      "status": "open",
+      "id": "F0081",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-standard-compiler-options",
+      "severity": "medium",
+      "message": "CARDSVC profile: standard_compiler_options is not in the store \u2014 which compile options the shop builds production code with \u2014 assumed 'RENT,NUMPROC(NOPFD),TRUNC(STD),ARCH(8),SSRANGE(NO)' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the shop-standard compile options (NUMPROC, TRUNC, ARCH, RENT, SSRANGE, ...) a module is expected to be built with",
+      "status": "open",
+      "id": "F0082",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-tape-manager",
+      "severity": "medium",
+      "message": "CARDSVC profile: tape_manager is not in the store \u2014 which tape manager owns the volumes the jobs allocate \u2014 assumed 'Broadcom CA 1' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the tape / removable-media manager (CA 1, CA TLMS, DFSMSrmm) and the retention rules it applies: UNIT=TAPE proves tape is used, never which catalogue owns it",
+      "status": "open",
+      "id": "F0083",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-volumes",
+      "severity": "medium",
+      "message": "CARDSVC profile: volumes is not in the store \u2014 how much data the module moves per run",
+      "evidence": [],
+      "request": "Provide the production volumes (records in / out per run, DB2 row counts, file sizes) the module handles",
+      "status": "open",
+      "id": "F0084",
+      "owner": "human"
+    },
+    {
+      "kind": "profile-zos-version",
+      "severity": "medium",
+      "message": "CARDSVC profile: zos_version is not in the store \u2014 which z/OS release the estate runs \u2014 assumed 'IBM z/OS 2.5' from mftb's typical-shop defaults until somebody confirms it",
+      "evidence": [],
+      "request": "State the z/OS release of the production LPAR (D IPLINFO, or the release the shop is on)",
+      "status": "open",
+      "id": "F0085",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job BINDCARD appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/build/BINDCARD.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders BINDCARD, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0086",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job BINDPRTY appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/build/BINDPRTY.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders BINDPRTY, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0087",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job BUILDALL appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/build/BUILDALL.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders BUILDALL, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0088",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job CSDUPCRD appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/cics/DFHCSDUP.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders CSDUPCRD, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0089",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job DEFCARD appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/vsam/DEFCARD.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders DEFCARD, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0090",
+      "owner": "human"
+    },
+    {
+      "kind": "unscheduled-job",
+      "severity": "medium",
+      "message": "job DEFPARTY appears in no provided scheduler table \u2014 its batch entry point is unproven (per the inventory contract, entry points need a runtime declaration)",
+      "evidence": [
+        "app/jcl/vsam/DEFPARTY.jcl"
+      ],
+      "request": "Provide the scheduler definition that orders DEFPARTY, or confirm how it is triggered",
+      "status": "open",
+      "id": "F0091",
+      "owner": "human"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.ACCOUNT: CACRD01, CACRD06, CACRD08, CACRD10, CACRD11, CACRD12, CACRD13, CACRD14, CACRD15, CBBIL01, CBBIL03, CBBIL06, CBCRD04, CBCRD05A, CBCRD05B, CBCRD06A, CBCRD06C, CBCRD07, CBCRD08, CBCRD10, CBFEE01, CBFEE02, CBFEE03, CBREF05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, undefined, so the precompiler never checked them against the table. Checked here against DDL: 141 ok / 8 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl:251-294",
+        "app/cardsvc/cbl/CACRD06.cbl:238-255",
+        "app/cardsvc/cbl/CACRD08.cbl:179-192",
+        "app/cardsvc/cbl/CACRD10.cbl:476-485",
+        "app/cardsvc/cbl/CACRD11.cbl:577-586",
+        "app/cardsvc/cbl/CACRD12.cbl:421-436"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0092",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.AUTHORIZATION: CACRD08, CACRD10, CAFRD01, CAFRD02, CAFRD03, CAFRD04, CBCRD04 access it without a DECLARE TABLE (DCLGEN); host variables come from copybook CVAUTH01Y, program, so the precompiler never checked them against the table. Checked here against DDL: 29 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD08.cbl:433-442",
+        "app/cardsvc/cbl/CACRD10.cbl:291-297",
+        "app/cardsvc/cbl/CACRD10.cbl:412-451",
+        "app/cardsvc/cbl/CAFRD01.cbl:260-268",
+        "app/cardsvc/cbl/CAFRD01.cbl:305-309",
+        "app/cardsvc/cbl/CAFRD01.cbl:349-357"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0093",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.CARD: CACRD03, CACRD06, CACRD10, CACRD11, CACRD12, CACRD14, CACRD15, CBBIL01, CBCRD05A, CBCRD05B, CBCRD06A, CBCRD06C, CBREF05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 73 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl:269-298",
+        "app/cardsvc/cbl/CACRD06.cbl:170-187",
+        "app/cardsvc/cbl/CACRD10.cbl:623-628",
+        "app/cardsvc/cbl/CACRD11.cbl:451-482",
+        "app/cardsvc/cbl/CACRD11.cbl:843-851",
+        "app/cardsvc/cbl/CACRD11.cbl:854-863"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0094",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.CARD_LIMIT: CACRD03, CACRD08, CACRD10, CACRD12, CACRD14, CACRD15, CAFRD01, CBBIL01, CBCRD05A, CBCRD05B, CBCRD06A, CBCRD06C, CBREF05 access it without a DECLARE TABLE (DCLGEN); host variables come from copybook CVPWRK01Y, program, so the precompiler never checked them against the table. Checked here against DDL: 55 ok / 8 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl:113-125",
+        "app/cardsvc/cbl/CACRD03.cbl:353-362",
+        "app/cardsvc/cbl/CACRD08.cbl:235-256",
+        "app/cardsvc/cbl/CACRD10.cbl:519-528",
+        "app/cardsvc/cbl/CACRD12.cbl:474-499",
+        "app/cardsvc/cbl/CACRD12.cbl:797-804"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0095",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.DISPUTE: CACRD13 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 9 ok / 2 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:1100-1106",
+        "app/cardsvc/cbl/CACRD13.cbl:1201-1233"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0096",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.FEE_SCHEDULE: CBCRD05A, CBFEE01, CBFEE02, CBFEE03 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 20 ok / 12 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD05A.cbl:254-267",
+        "app/cardsvc/cbl/CBCRD05A.cbl:424-433",
+        "app/cardsvc/cbl/CBFEE01.cbl:340-361",
+        "app/cardsvc/cbl/CBFEE02.cbl:306-325",
+        "app/cardsvc/cbl/CBFEE03.cbl:329-348"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0097",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.FRAUD_RULE: CACRD07, CAFRD01, CAFRD02, CAFRD03, CAFRD04, CBREF03 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 59 ok / 4 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:146-161",
+        "app/cardsvc/cbl/CACRD07.cbl:341-352",
+        "app/cardsvc/cbl/CAFRD01.cbl:473-490",
+        "app/cardsvc/cbl/CAFRD01.cbl:524-535",
+        "app/cardsvc/cbl/CAFRD02.cbl:299-314",
+        "app/cardsvc/cbl/CAFRD02.cbl:345-355"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0098",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.GL_POSTING: CBCRD07, CBCRD10 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 10 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD07.cbl:597-623",
+        "app/cardsvc/cbl/CBCRD10.cbl:557-568"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0099",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.MERCHANT: CACRD07, CACRD13, CACRD16, CAFRD02, CAFRD04, CBCRD03, CBFEE03, CBREF01, CBREF02, CBREF05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 78 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:232-247",
+        "app/cardsvc/cbl/CACRD13.cbl:828-833",
+        "app/cardsvc/cbl/CACRD16.cbl:819-837",
+        "app/cardsvc/cbl/CACRD16.cbl:869-880",
+        "app/cardsvc/cbl/CAFRD02.cbl:206-213",
+        "app/cardsvc/cbl/CAFRD02.cbl:256-272"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0100",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.PGM_ROUTE: CBCRD90, CBREF04, CBREF05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 27 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:166-175",
+        "app/cardsvc/cbl/CBCRD90.cbl:70-82",
+        "app/cardsvc/cbl/CBREF04.cbl:154-174",
+        "app/cardsvc/cbl/CBREF04.cbl:311-319",
+        "app/cardsvc/cbl/CBREF04.cbl:331-344",
+        "app/cardsvc/cbl/CBREF05.cbl:293-305"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0101",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.REWARDS: CBBIL02, CBCRD05B access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 10 ok / 0 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL02.cbl:537-543",
+        "app/cardsvc/cbl/CBCRD05B.cbl:797-809",
+        "app/cardsvc/cbl/CBCRD05B.cbl:829-839",
+        "app/cardsvc/cbl/CBCRD05B.cbl:851-875"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0102",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.ROUTE_AUDIT: CACRD90, CBCRD06B, CBCRD90 access it without a DECLARE TABLE (DCLGEN); host variables come from copybook CVROUT01Y, program, so the precompiler never checked them against the table. Checked here against DDL: 28 ok / 4 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:427-453",
+        "app/cardsvc/cbl/CBCRD06B.cbl:532-556",
+        "app/cardsvc/cbl/CBCRD90.cbl:344-370"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0103",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.STATEMENT: CBBIL05, CBBIL06 access it without a DECLARE TABLE (DCLGEN); host variables come from program, so the precompiler never checked them against the table. Checked here against DDL: 36 ok / 1 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CBBIL05.cbl:302-352",
+        "app/cardsvc/cbl/CBBIL05.cbl:372-397",
+        "app/cardsvc/cbl/CBBIL06.cbl:334-345",
+        "app/cardsvc/cbl/CBBIL06.cbl:415-425"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0104",
+      "owner": "informational"
+    },
+    {
+      "kind": "db2-no-dclgen",
+      "severity": "info",
+      "message": "table CARDSVC.TRANSACTION: CACRD13, CACRD14, CBBIL02, CBCRD04, CBCRD05A, CBCRD05B, CBCRD06A, CBCRD07, CBCRD10, CBFEE01, CBFEE02, CBFEE03, CBREF05 access it without a DECLARE TABLE (DCLGEN); host variables come from program, undefined, so the precompiler never checked them against the table. Checked here against DDL: 140 ok / 11 mismatch / 0 unchecked",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:1252-1257",
+        "app/cardsvc/cbl/CACRD13.cbl:1329-1365",
+        "app/cardsvc/cbl/CACRD13.cbl:273-297",
+        "app/cardsvc/cbl/CACRD13.cbl:758-771",
+        "app/cardsvc/cbl/CACRD13.cbl:851-864",
+        "app/cardsvc/cbl/CACRD14.cbl:1003-1015"
+      ],
+      "request": "No action if the DDL check is clean; otherwise regenerate DCLGEN members from the live catalog and INCLUDE them so the precompiler enforces the layouts",
+      "status": "open",
+      "id": "F0105",
+      "owner": "informational"
+    },
+    {
+      "kind": "descriptions-unwritten",
+      "severity": "info",
+      "message": "4 of 5 business-logic summary(ies) are unwritten \u2014 the report renders them blank, which is not evidence that the artifacts have no business logic",
+      "evidence": [
+        "descriptions.json"
+      ],
+      "request": "Run the description pass of the inventory-analysis skill (it reads each artifact and writes descriptions.json with cited basis), or say descriptions are not wanted",
+      "status": "open",
+      "id": "F0106",
+      "owner": "agent"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD00 contains 9 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:122",
+        "app/cardsvc/cbl/CACRD00.cbl:141",
+        "app/cardsvc/cbl/CACRD00.cbl:146",
+        "app/cardsvc/cbl/CACRD00.cbl:162",
+        "app/cardsvc/cbl/CACRD00.cbl:200"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0107",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD01 contains 11 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl:133",
+        "app/cardsvc/cbl/CACRD01.cbl:148",
+        "app/cardsvc/cbl/CACRD01.cbl:149",
+        "app/cardsvc/cbl/CACRD01.cbl:191",
+        "app/cardsvc/cbl/CACRD01.cbl:436"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0108",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD02 contains 17 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD02.cbl:162",
+        "app/cardsvc/cbl/CACRD02.cbl:180",
+        "app/cardsvc/cbl/CACRD02.cbl:181",
+        "app/cardsvc/cbl/CACRD02.cbl:322",
+        "app/cardsvc/cbl/CACRD02.cbl:385"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0109",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD03 contains 11 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl:163",
+        "app/cardsvc/cbl/CACRD03.cbl:180",
+        "app/cardsvc/cbl/CACRD03.cbl:181",
+        "app/cardsvc/cbl/CACRD03.cbl:217",
+        "app/cardsvc/cbl/CACRD03.cbl:537"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0110",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD04 contains 16 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD04.cbl:148",
+        "app/cardsvc/cbl/CACRD04.cbl:163",
+        "app/cardsvc/cbl/CACRD04.cbl:164",
+        "app/cardsvc/cbl/CACRD04.cbl:170",
+        "app/cardsvc/cbl/CACRD04.cbl:225"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0111",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD05 contains 9 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD05.cbl:81",
+        "app/cardsvc/cbl/CACRD05.cbl:89",
+        "app/cardsvc/cbl/CACRD05.cbl:90",
+        "app/cardsvc/cbl/CACRD05.cbl:161",
+        "app/cardsvc/cbl/CACRD05.cbl:319"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0112",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD06 contains 7 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD06.cbl:132",
+        "app/cardsvc/cbl/CACRD06.cbl:148",
+        "app/cardsvc/cbl/CACRD06.cbl:149",
+        "app/cardsvc/cbl/CACRD06.cbl:426",
+        "app/cardsvc/cbl/CACRD06.cbl:453"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0113",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD07 contains 8 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:186",
+        "app/cardsvc/cbl/CACRD07.cbl:203",
+        "app/cardsvc/cbl/CACRD07.cbl:204",
+        "app/cardsvc/cbl/CACRD07.cbl:435",
+        "app/cardsvc/cbl/CACRD07.cbl:582"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0114",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD08 contains 6 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD08.cbl:130",
+        "app/cardsvc/cbl/CACRD08.cbl:155",
+        "app/cardsvc/cbl/CACRD08.cbl:156",
+        "app/cardsvc/cbl/CACRD08.cbl:484",
+        "app/cardsvc/cbl/CACRD08.cbl:527"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0115",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD09 contains 6 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD09.cbl:95",
+        "app/cardsvc/cbl/CACRD09.cbl:104",
+        "app/cardsvc/cbl/CACRD09.cbl:105",
+        "app/cardsvc/cbl/CACRD09.cbl:467",
+        "app/cardsvc/cbl/CACRD09.cbl:493"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0116",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD10 contains 10 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD10.cbl:165",
+        "app/cardsvc/cbl/CACRD10.cbl:174",
+        "app/cardsvc/cbl/CACRD10.cbl:175",
+        "app/cardsvc/cbl/CACRD10.cbl:210",
+        "app/cardsvc/cbl/CACRD10.cbl:572"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0117",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD11 contains 19 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:258",
+        "app/cardsvc/cbl/CACRD11.cbl:273",
+        "app/cardsvc/cbl/CACRD11.cbl:305",
+        "app/cardsvc/cbl/CACRD11.cbl:410",
+        "app/cardsvc/cbl/CACRD11.cbl:819"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0118",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD12 contains 13 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD12.cbl:229",
+        "app/cardsvc/cbl/CACRD12.cbl:236",
+        "app/cardsvc/cbl/CACRD12.cbl:280",
+        "app/cardsvc/cbl/CACRD12.cbl:711",
+        "app/cardsvc/cbl/CACRD12.cbl:868"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0119",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD13 contains 17 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:349",
+        "app/cardsvc/cbl/CACRD13.cbl:356",
+        "app/cardsvc/cbl/CACRD13.cbl:393",
+        "app/cardsvc/cbl/CACRD13.cbl:903",
+        "app/cardsvc/cbl/CACRD13.cbl:1022"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0120",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD14 contains 15 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD14.cbl:291",
+        "app/cardsvc/cbl/CACRD14.cbl:298",
+        "app/cardsvc/cbl/CACRD14.cbl:334",
+        "app/cardsvc/cbl/CACRD14.cbl:669",
+        "app/cardsvc/cbl/CACRD14.cbl:700"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0121",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD15 contains 12 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl:210",
+        "app/cardsvc/cbl/CACRD15.cbl:217",
+        "app/cardsvc/cbl/CACRD15.cbl:256",
+        "app/cardsvc/cbl/CACRD15.cbl:489",
+        "app/cardsvc/cbl/CACRD15.cbl:627"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0122",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD16 contains 16 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD16.cbl:219",
+        "app/cardsvc/cbl/CACRD16.cbl:226",
+        "app/cardsvc/cbl/CACRD16.cbl:269",
+        "app/cardsvc/cbl/CACRD16.cbl:423",
+        "app/cardsvc/cbl/CACRD16.cbl:445"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0123",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD17 contains 9 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD17.cbl:138",
+        "app/cardsvc/cbl/CACRD17.cbl:145",
+        "app/cardsvc/cbl/CACRD17.cbl:146",
+        "app/cardsvc/cbl/CACRD17.cbl:185",
+        "app/cardsvc/cbl/CACRD17.cbl:250"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0124",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD90 contains 9 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:127",
+        "app/cardsvc/cbl/CACRD90.cbl:164",
+        "app/cardsvc/cbl/CACRD90.cbl:249",
+        "app/cardsvc/cbl/CACRD90.cbl:264",
+        "app/cardsvc/cbl/CACRD90.cbl:291"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0125",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD91 contains 11 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD91.cbl:169",
+        "app/cardsvc/cbl/CACRD91.cbl:178",
+        "app/cardsvc/cbl/CACRD91.cbl:179",
+        "app/cardsvc/cbl/CACRD91.cbl:272",
+        "app/cardsvc/cbl/CACRD91.cbl:314"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0126",
+      "owner": "informational"
+    },
+    {
+      "kind": "out-of-scope-cics",
+      "severity": "info",
+      "message": "program CACRD92 contains 6 EXEC CICS statement(s) \u2014 online flow is not traced by the batch inventory; its resources are listed in connections.json (CICS)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD92.cbl:99",
+        "app/cardsvc/cbl/CACRD92.cbl:104",
+        "app/cardsvc/cbl/CACRD92.cbl:105",
+        "app/cardsvc/cbl/CACRD92.cbl:112",
+        "app/cardsvc/cbl/CACRD92.cbl:209"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0127",
+      "owner": "informational"
+    },
+    {
+      "kind": "profile-multiple-build-paths",
+      "severity": "info",
+      "message": "CARDSVC is built and run under 4 build paths: BP01 = CARD.PROD.FIXLIB > CARD.PROD.LOADLIB > CARD.PROD.COMMON.LOADLIB, PARM HOST(IBMCOB),APOST,SOURCE,XREF,STDSQL(NO); BP02 = CARD.PROD.FIXLIB > CARD.PROD.LOADLIB > CARD.PROD.COMMON.LOADLIB > CARD.PROD.LOADLIB, DB2 DSN910.SDSNLOAD > DSN910.SDSNEXIT > DSN910.RUNLIB.LOAD, PARM HOST(IBMCOB),APOST,SOURCE,XREF,STDSQL(NO); BP03 = CARD.PROD.LOADLIB > CARD.PROD.LOADLIB, DB2 DSN.V12R1.SDSNLOAD, PARM HOST(IBMCOB),APOST,SOURCE,XREF,STDSQL(NO); BP04 = DSN=CARD.PROD.LOADLIB,DISP=SHR \u2014 the module is not one unit of migration, each path is",
+      "evidence": [
+        "app/jcl/build/COBBATCH.proc:53",
+        "app/jcl/cardsvc/CBBIL01J.jcl:26",
+        "app/jcl/cardsvc/CBBIL01J.jcl:27",
+        "app/jcl/cardsvc/CBBIL01J.jcl:37",
+        "app/jcl/cardsvc/CBBIL02J.jcl:44",
+        "app/jcl/cardsvc/CBBIL02J.jcl:45",
+        "app/jcl/cardsvc/CBBIL02J.jcl:55",
+        "app/jcl/cardsvc/CBBIL03J.jcl:22",
+        "app/jcl/cardsvc/CBBIL03J.jcl:23",
+        "app/jcl/cardsvc/CBBIL03J.jcl:33",
+        "app/jcl/cardsvc/CBBIL04J.jcl:26",
+        "app/jcl/cardsvc/CBBIL04J.jcl:27",
+        "app/jcl/cardsvc/CBBIL04J.jcl:46",
+        "app/jcl/cardsvc/CBBIL05J.jcl:21",
+        "app/jcl/cardsvc/CBBIL05J.jcl:25",
+        "app/jcl/cardsvc/CBBIL05J.jcl:26",
+        "app/jcl/cardsvc/CBBIL05J.jcl:37",
+        "app/jcl/cardsvc/CBBIL06J.jcl:22",
+        "app/jcl/cardsvc/CBBIL06J.jcl:23",
+        "app/jcl/cardsvc/CBBIL06J.jcl:34",
+        "app/jcl/cardsvc/CBCRD01J.jcl:34",
+        "app/jcl/cardsvc/CBCRD01J.jcl:35",
+        "app/jcl/cardsvc/CBCRD01J.jcl:36",
+        "app/jcl/cardsvc/CBCRD02J.jcl:36",
+        "app/jcl/cardsvc/CBCRD02J.jcl:37",
+        "app/jcl/cardsvc/CBCRD02J.jcl:38",
+        "app/jcl/cardsvc/CBCRD03J.jcl:66",
+        "app/jcl/cardsvc/CBCRD04J.jcl:42",
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:37",
+        "app/jcl/cardsvc/CBCRD05AJ.jcl:44",
+        "app/jcl/cardsvc/CBCRD05BJ.jcl:37",
+        "app/jcl/cardsvc/CBCRD06J.jcl:103",
+        "app/jcl/cardsvc/CBCRD06J.jcl:110",
+        "app/jcl/cardsvc/CBCRD06J.jcl:140",
+        "app/jcl/cardsvc/CBCRD06J.jcl:52",
+        "app/jcl/cardsvc/CBCRD06J.jcl:53",
+        "app/jcl/cardsvc/CBCRD06J.jcl:54",
+        "app/jcl/cardsvc/CBCRD06J.jcl:63",
+        "app/jcl/cardsvc/CBCRD06J.jcl:79",
+        "app/jcl/cardsvc/CBCRD06J.jcl:80",
+        "app/jcl/cardsvc/CBCRD06J.jcl:81",
+        "app/jcl/cardsvc/CBCRD07J.jcl:44",
+        "app/jcl/cardsvc/CBCRD08J.jcl:35",
+        "app/jcl/cardsvc/CBCRD09J.jcl:114",
+        "app/jcl/cardsvc/CBCRD09J.jcl:115",
+        "app/jcl/cardsvc/CBCRD09J.jcl:116",
+        "app/jcl/cardsvc/CBCRD10J.jcl:37",
+        "app/jcl/cardsvc/CBREF01J.jcl:43",
+        "app/jcl/cardsvc/CBREF01J.jcl:44",
+        "app/jcl/cardsvc/CBREF01J.jcl:54",
+        "app/jcl/cardsvc/CBREF02J.jcl:103",
+        "app/jcl/cardsvc/CBREF02J.jcl:24",
+        "app/jcl/cardsvc/CBREF02J.jcl:25",
+        "app/jcl/cardsvc/CBREF02J.jcl:37",
+        "app/jcl/cardsvc/CBREF02J.jcl:95",
+        "app/jcl/cardsvc/CBREF02J.jcl:96",
+        "app/jcl/cardsvc/CBREF03J.jcl:128",
+        "app/jcl/cardsvc/CBREF03J.jcl:129",
+        "app/jcl/cardsvc/CBREF03J.jcl:137",
+        "app/jcl/cardsvc/CBREF03J.jcl:25",
+        "app/jcl/cardsvc/CBREF03J.jcl:26",
+        "app/jcl/cardsvc/CBREF03J.jcl:42",
+        "app/jcl/cardsvc/CBREF04J.jcl:101",
+        "app/jcl/cardsvc/CBREF04J.jcl:102",
+        "app/jcl/cardsvc/CBREF04J.jcl:109",
+        "app/jcl/cardsvc/CBREF04J.jcl:30",
+        "app/jcl/cardsvc/CBREF04J.jcl:31",
+        "app/jcl/cardsvc/CBREF04J.jcl:43",
+        "app/jcl/cardsvc/CBREF05J.jcl:25",
+        "app/jcl/cardsvc/CBREF05J.jcl:26",
+        "app/jcl/cardsvc/CBREF05J.jcl:37",
+        "app/jcl/proc/CARDDB2L.jcl:14",
+        "app/jcl/proc/CARDDB2L.jcl:15",
+        "app/jcl/proc/CARDDB2L.jcl:16",
+        "app/jcl/proc/CARDDB2L.jcl:17",
+        "app/jcl/proc/CARDDB2L.jcl:18",
+        "app/jcl/proc/CARDDB2L.jcl:19"
+      ],
+      "request": "Confirm that the 4 build paths are intended (different DB2 level, load concatenation or compile options inside one module) and which one the migration targets",
+      "status": "open",
+      "id": "F0128",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD00 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0129",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD01 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0130",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD02 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD02.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0131",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD03 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0132",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD04 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD04.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0133",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD05 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD05.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0134",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD06 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD06.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0135",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD07 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0136",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD08 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD08.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0137",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD09 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD09.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0138",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD10 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD10.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0139",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD11 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0140",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD12 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD12.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0141",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD13 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0142",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD14 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD14.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0143",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD15 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0144",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD16 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD16.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0145",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD17 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD17.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0146",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD90 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0147",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD91 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD91.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0148",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CACRD92 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD92.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0149",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CAFRD01 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CAFRD01.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0150",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CAFRD02 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CAFRD02.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0151",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CAFRD03 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CAFRD03.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0152",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CAFRD04 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CAFRD04.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0153",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CBCRD90 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0154",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CBFEE01 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE01.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0155",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CBFEE02 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE02.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0156",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CBFEE03 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CBFEE03.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0157",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CBSTM01 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CBSTM01.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0158",
+      "owner": "informational"
+    },
+    {
+      "kind": "unreferenced-program",
+      "severity": "info",
+      "message": "program CBSTM02 is not executed by any scanned job step (it may be CALLed by other programs; call-edge analysis is a later phase)",
+      "evidence": [
+        "app/cardsvc/cbl/CBSTM02.cbl"
+      ],
+      "request": null,
+      "status": "open",
+      "id": "F0159",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-open",
+      "severity": "medium",
+      "message": "2 sites (app/cardsvc/cbl/CACRD90.cbl:360, app/cardsvc/cbl/CACRD90.cbl:388): no statement in the scanned code writes RT-FALLBACK-PGM (group MOVE to an ancestor, REDEFINES alias or code in an unscanned copybook?) \u2014 resolve with the dynamic-call-resolution skill",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388",
+        "app/cpy/CVROUT01Y.cpy:30"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "sites": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "end_kind": "no-writer",
+      "closure": {
+        "by": "skill",
+        "how": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor Residual: the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD90.cbl:264-285",
+          "app/cardsvc/cbl/CACRD90.cbl:140-150",
+          "app/cardsvc/cbl/CBREF04.cbl:1-12"
+        ]
+      },
+      "was_asked": "Determine how RT-FALLBACK-PGM receives its value",
+      "id": "F0160",
+      "owner": "agent"
+    },
+    {
+      "kind": "dynamic-call-open",
+      "severity": "medium",
+      "message": "2 sites (app/cardsvc/cbl/CACRD90.cbl:360, app/cardsvc/cbl/CACRD90.cbl:388): no statement in the scanned code writes RT-PGM-NAME (group MOVE to an ancestor, REDEFINES alias or code in an unscanned copybook?) \u2014 resolve with the dynamic-call-resolution skill",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388",
+        "app/cpy/CVROUT01Y.cpy:17"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "sites": [
+        "app/cardsvc/cbl/CACRD90.cbl:360",
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "end_kind": "no-writer",
+      "closure": {
+        "by": "skill",
+        "how": "RT-PGM-NAME and RT-FALLBACK-PGM are written as part of ROUTE-RECORD by the VSAM fallback read (READ/READNEXT ... INTO ROUTE-RECORD); that branch only runs when the DB2 cursor load produced no rows, and only rows with RT-ACTIVE are cached. The PGMROUT cluster is unloaded by CBREF04 from the active, in-date PGM_ROUTE rows in the same CVROUT01Y layout, so the VSAM branch yields the same name set as the DB2 cursor Residual: the live contents of the PGMROUT cluster (CARD.PROD.PGMROUT) are not in the drop; they follow the same PGM_ROUTE evidence request",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD90.cbl:264-285",
+          "app/cardsvc/cbl/CACRD90.cbl:140-150",
+          "app/cardsvc/cbl/CBREF04.cbl:1-12"
+        ]
+      },
+      "was_asked": "Determine how RT-PGM-NAME receives its value",
+      "id": "F0161",
+      "owner": "agent"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-LINK WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:360): 23 candidate(s) excluded (CACRD01, CACRD02, CACRD03, CACRD04, CACRD11, CACRD12, CACRD13, CACRD14, CACRD15, CACRD16, CACRD17, CACRD91, CAFRD01, CAFRD02, CAFRD03, CAFRD04, CBFEE01, CBFEE02, CBFEE03, CBSTM01, CBSTM02, PRBRSK1, CACRD07X)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "closure": {
+        "by": "skill",
+        "how": "3000-DISPATCH only LINKs rows whose CALL_TYPE is 'L'. MENU rows are 'X' (XCTL site) and CACRD91 is only their fallback; FRAU/*, FEEC/*, STMT/* and XMOD/RSKRECAL rows carry CALL_TYPE 'D', which 3000-DISPATCH rejects WHEN OTHER with RQ-RC 0008 'CALL TYPE NOT VALID FOR ONLINE DISPATCH'. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD90.cbl:342-356",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:51",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:79",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:42"
+        ]
+      },
+      "id": "F0162",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-LINK WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:360): target CACRD92 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "closure": {
+        "by": "skill",
+        "how": "FALLBACK_PGM of both 'L' rows; 3100-DO-LINK on PGMIDERR switches to the fallback and re-issues the LINK once",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+          "app/cardsvc/cbl/CACRD90.cbl:363-376"
+        ]
+      },
+      "id": "F0163",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-LINK WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:360): target PRKYC01 (derived, not in inventory)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "closure": {
+        "by": "skill",
+        "how": "XMOD/RISKSVC row, CALL_TYPE 'L' -> 3100-DO-LINK; only CACRD05 sets route XMOD with WS-ROUTE-RISKSVC VALUE 'RISKSVC'",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+          "app/cardsvc/cbl/CACRD90.cbl:347",
+          "app/cardsvc/cbl/CACRD05.cbl:153-155",
+          "app/cpy/CVCONSTY.cpy:23"
+        ]
+      },
+      "id": "F0164",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-LINK WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:360): target PRKYC03 (derived, not in inventory)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:360"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:360",
+      "closure": {
+        "by": "skill",
+        "how": "XMOD/KYCINQ row, CALL_TYPE 'L'; CACRD12 and CACRD15 set route XMOD with WS-ROUTE-KYCINQ VALUE 'KYCINQ'",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:41",
+          "app/cardsvc/cbl/CACRD90.cbl:347",
+          "app/cardsvc/cbl/CACRD12.cbl:703-705",
+          "app/cardsvc/cbl/CACRD15.cbl:616-618",
+          "app/cpy/CVCONSTY.cpy:24"
+        ]
+      },
+      "id": "F0165",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): 14 candidate(s) excluded (PRKYC01, PRKYC03, CACRD92, CAFRD01, CAFRD02, CAFRD03, CAFRD04, CBFEE01, CBFEE02, CBFEE03, CBSTM01, CBSTM02, PRBRSK1, CACRD07X)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "3000-DISPATCH only XCTLs rows whose CALL_TYPE is 'X' (the MENU rows). XMOD/RISKSVC and XMOD/KYCINQ are 'L' (LINK site) and CACRD92 is only their fallback; FRAU/*, FEEC/*, STMT/* and XMOD/RSKRECAL rows carry CALL_TYPE 'D' and are rejected online. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD90.cbl:342-356",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:51",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:79"
+        ]
+      },
+      "id": "F0166",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD01 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT01 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT01 is set by CACRD00 WS-ROUTE-TABLE entry OPT01",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0167",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD02 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT02 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT02 is set by CACRD00 WS-ROUTE-TABLE entry OPT02",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:19",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0168",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD03 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT03 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT03 is set by CACRD00 WS-ROUTE-TABLE entry OPT03",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:20",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0169",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD04 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT04 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT04 is set by CACRD00 WS-ROUTE-TABLE entry OPT04",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:21",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0170",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD11 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT05 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT05 is set by CACRD00 WS-ROUTE-TABLE entry OPT05",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:22",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0171",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD12 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT06 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT06 is set by CACRD00 WS-ROUTE-TABLE entry OPT06",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:23",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0172",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD13 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT07 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT07 is set by CACRD00 WS-ROUTE-TABLE entry OPT07",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:24",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0173",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD14 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT08 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT08 is set by CACRD00 WS-ROUTE-TABLE entry OPT08",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:25",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0174",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD15 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT09 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT09 is set by CACRD00 WS-ROUTE-TABLE entry OPT09",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:26",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0175",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD16 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPT10 row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPT10 is set by CACRD00 WS-ROUTE-TABLE entry OPT10",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:27",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:285"
+        ]
+      },
+      "id": "F0176",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD17 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "MENU/OPTX row, CALL_TYPE 'X' -> 3200-DO-XCTL; route key OPTX is set by CACRD00/CACRD01/CACRD02/CACRD03 MOVE 'OPTX'",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:28",
+          "app/cardsvc/cbl/CACRD90.cbl:349",
+          "app/cardsvc/cbl/CACRD00.cbl:261"
+        ]
+      },
+      "id": "F0177",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CACRD90 CICS-XCTL WS-PGM-NAME (app/cardsvc/cbl/CACRD90.cbl:388): target CACRD91 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD90.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD90.cbl:388",
+      "closure": {
+        "by": "skill",
+        "how": "FALLBACK_PGM of every MENU row; 3200-DO-XCTL on PGMIDERR performs 3300-SWITCH-TO-FALLBACK and re-issues the XCTL once",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+          "app/cardsvc/cbl/CACRD90.cbl:400-405",
+          "app/cardsvc/cbl/CACRD90.cbl:408-420"
+        ]
+      },
+      "id": "F0178",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): 20 candidate(s) excluded (CACRD01, CACRD02, CACRD03, CACRD04, CACRD11, CACRD12, CACRD13, CACRD14, CACRD15, CACRD16, CACRD17, CACRD91, CACRD92, CAFRD01, CAFRD02, CAFRD03, CAFRD04, PRKYC01, PRKYC03, CACRD07X)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "closure": {
+        "by": "skill",
+        "how": "the only scanned CALLs of CBCRD90 are from CBCRD05A (route type FEEC), CBBIL04 (STMT) and CBCRD06B (XMOD/RSKRECAL); CBREF04's header lists CBCRD90 but its code only calls CBCRD91. No batch caller sets route type MENU or FRAU or the XMOD keys RISKSVC/KYCINQ, so those rows are not selected. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only",
+        "evidence": [
+          "app/cardsvc/cbl/CBCRD05A.cbl:499",
+          "app/cardsvc/cbl/CBBIL04.cbl:344",
+          "app/cardsvc/cbl/CBBIL04.cbl:423",
+          "app/cardsvc/cbl/CBCRD06B.cbl:350",
+          "app/cardsvc/cbl/CBREF04.cbl:578",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:51"
+        ]
+      },
+      "id": "F0179",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): target CBFEE01 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "closure": {
+        "by": "skill",
+        "how": "FEEC/ANNU and FEEC/LATE rows; CBCRD05A sets route FEEC with DCL-FEE-TYPE fetched from CARDSVC.FEE_SCHEDULE",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:67",
+          "app/cardsvc/cbl/CBCRD05A.cbl:499-501",
+          "app/cardsvc/cbl/CBCRD05A.cbl:255-262"
+        ]
+      },
+      "id": "F0180",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): target CBFEE02 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "closure": {
+        "by": "skill",
+        "how": "FEEC/OVLM and FEEC/CASH rows, same CBCRD05A caller",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:68",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:69",
+          "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+        ]
+      },
+      "id": "F0181",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): target CBFEE03 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "closure": {
+        "by": "skill",
+        "how": "FEEC/FRGN row, same CBCRD05A caller",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:70",
+          "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+        ]
+      },
+      "id": "F0182",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): target CBSTM01 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "closure": {
+        "by": "skill",
+        "how": "STMT/PAPR row; CBBIL04 builds WS-DELIVERY-KEY 'PAPR'/'ELEC' + spaces and routes STMT",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:79",
+          "app/cardsvc/cbl/CBBIL04.cbl:310",
+          "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+          "app/cardsvc/cbl/CBBIL04.cbl:408"
+        ]
+      },
+      "id": "F0183",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): target CBSTM02 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "closure": {
+        "by": "skill",
+        "how": "STMT/ELEC row (active, EFF 2020-01-01), same CBBIL04 caller",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+          "app/cardsvc/cbl/CBBIL04.cbl:308",
+          "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+          "app/cardsvc/cbl/CBBIL04.cbl:414"
+        ]
+      },
+      "id": "F0184",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:297): target PRBRSK1 (derived, not in inventory)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:297"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:297",
+      "closure": {
+        "by": "skill",
+        "how": "XMOD/RSKRECAL row (MODULE_ID PARTYRSK); CBCRD06B sets route XMOD/RSKRECAL/1 and calls CBCRD90. The source is in PARTYRSK, not in this module's scan",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+          "app/cardsvc/cbl/CBCRD06B.cbl:350-352",
+          "app/cardsvc/cbl/CBCRD06B.cbl:359"
+        ]
+      },
+      "id": "F0185",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:331): 2 candidate(s) excluded (CACRD91, CACRD92)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:331"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:331",
+      "closure": {
+        "by": "skill",
+        "how": "CACRD91/CACRD92 are FALLBACK_PGM only on MENU and XMOD RISKSVC/KYCINQ rows, which no batch caller routes to",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+          "app/cardsvc/cbl/CBCRD90.cbl:311-331"
+        ]
+      },
+      "id": "F0186",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CALL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:331): target CBSTM01 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:331"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:331",
+      "closure": {
+        "by": "skill",
+        "how": "FALLBACK_PGM of STMT/ELEC; 3100-TRY-FALLBACK runs when the CALL of CBSTM02 raises ON EXCEPTION. The FEEC rows and XMOD/RSKRECAL have blank FALLBACK_PGM, so for them the step ends RC 12 'TARGET NOT LOADABLE AND NO FALLBACK'",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+          "app/cardsvc/cbl/CBCRD90.cbl:311-331",
+          "app/cardsvc/cbl/CBBIL04.cbl:414"
+        ]
+      },
+      "id": "F0187",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): 20 candidate(s) excluded (CACRD01, CACRD02, CACRD03, CACRD04, CACRD11, CACRD12, CACRD13, CACRD14, CACRD15, CACRD16, CACRD17, CACRD91, CACRD92, CAFRD01, CAFRD02, CAFRD03, CAFRD04, PRKYC01, PRKYC03, CACRD07X)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "closure": {
+        "by": "skill",
+        "how": "the only scanned CALLs of CBCRD90 are from CBCRD05A (route type FEEC), CBBIL04 (STMT) and CBCRD06B (XMOD/RSKRECAL); CBREF04's header lists CBCRD90 but its code only calls CBCRD91. No batch caller sets route type MENU or FRAU or the XMOD keys RISKSVC/KYCINQ, so those rows are not selected. CACRD07X: seed row ACTIVE_FLG='N', EXP_DATE 2020-05-31 (db2/ddl/40_SEED_PGM_ROUTE.sql:90); both dispatcher cursors filter WHERE ACTIVE_FLG='Y' AND CURRENT DATE BETWEEN EFF_DATE AND EXP_DATE and the VSAM path keeps RT-ACTIVE rows only",
+        "evidence": [
+          "app/cardsvc/cbl/CBCRD05A.cbl:499",
+          "app/cardsvc/cbl/CBBIL04.cbl:344",
+          "app/cardsvc/cbl/CBBIL04.cbl:423",
+          "app/cardsvc/cbl/CBCRD06B.cbl:350",
+          "app/cardsvc/cbl/CBREF04.cbl:578",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:51"
+        ]
+      },
+      "id": "F0188",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): target CBFEE01 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "closure": {
+        "by": "skill",
+        "how": "FEEC/ANNU and FEEC/LATE rows; CBCRD05A sets route FEEC with DCL-FEE-TYPE fetched from CARDSVC.FEE_SCHEDULE",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:66",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:67",
+          "app/cardsvc/cbl/CBCRD05A.cbl:499-501",
+          "app/cardsvc/cbl/CBCRD05A.cbl:255-262"
+        ]
+      },
+      "id": "F0189",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): target CBFEE02 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "closure": {
+        "by": "skill",
+        "how": "FEEC/OVLM and FEEC/CASH rows, same CBCRD05A caller",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:68",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:69",
+          "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+        ]
+      },
+      "id": "F0190",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): target CBFEE03 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "closure": {
+        "by": "skill",
+        "how": "FEEC/FRGN row, same CBCRD05A caller",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:70",
+          "app/cardsvc/cbl/CBCRD05A.cbl:499-501"
+        ]
+      },
+      "id": "F0191",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): target CBSTM01 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "closure": {
+        "by": "skill",
+        "how": "STMT/PAPR row; CBBIL04 builds WS-DELIVERY-KEY 'PAPR'/'ELEC' + spaces and routes STMT",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:79",
+          "app/cardsvc/cbl/CBBIL04.cbl:310",
+          "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+          "app/cardsvc/cbl/CBBIL04.cbl:408"
+        ]
+      },
+      "id": "F0192",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): target CBSTM02 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "closure": {
+        "by": "skill",
+        "how": "STMT/ELEC row (active, EFF 2020-01-01), same CBBIL04 caller",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+          "app/cardsvc/cbl/CBBIL04.cbl:308",
+          "app/cardsvc/cbl/CBBIL04.cbl:344-348",
+          "app/cardsvc/cbl/CBBIL04.cbl:414"
+        ]
+      },
+      "id": "F0193",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:306): target PRBRSK1 (derived, not in inventory)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:306"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:306",
+      "closure": {
+        "by": "skill",
+        "how": "XMOD/RSKRECAL row (MODULE_ID PARTYRSK); CBCRD06B sets route XMOD/RSKRECAL/1 and calls CBCRD90. The source is in PARTYRSK, not in this module's scan",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:42",
+          "app/cardsvc/cbl/CBCRD06B.cbl:350-352",
+          "app/cardsvc/cbl/CBCRD06B.cbl:359"
+        ]
+      },
+      "id": "F0194",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:339): 2 candidate(s) excluded (CACRD91, CACRD92)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:339",
+      "closure": {
+        "by": "skill",
+        "how": "CACRD91/CACRD92 are FALLBACK_PGM only on MENU and XMOD RISKSVC/KYCINQ rows, which no batch caller routes to",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:18",
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:40",
+          "app/cardsvc/cbl/CBCRD90.cbl:311-331"
+        ]
+      },
+      "id": "F0195",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-narrowed",
+      "severity": "info",
+      "message": "CBCRD90 CANCEL WS-PGM-NAME (app/cardsvc/cbl/CBCRD90.cbl:339): target CBSTM01 (derived)",
+      "evidence": [
+        "app/cardsvc/cbl/CBCRD90.cbl:339"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CBCRD90.cbl:339",
+      "closure": {
+        "by": "skill",
+        "how": "FALLBACK_PGM of STMT/ELEC; 3100-TRY-FALLBACK runs when the CALL of CBSTM02 raises ON EXCEPTION. The FEEC rows and XMOD/RSKRECAL have blank FALLBACK_PGM, so for them the step ends RC 12 'TARGET NOT LOADABLE AND NO FALLBACK'",
+        "evidence": [
+          "db2/ddl/40_SEED_PGM_ROUTE.sql:80",
+          "app/cardsvc/cbl/CBCRD90.cbl:311-331",
+          "app/cardsvc/cbl/CBBIL04.cbl:414"
+        ]
+      },
+      "id": "F0196",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD00 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD00.cbl:422) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:422"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD00.cbl:422",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0197",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD00 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD00.cbl:462) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD00.cbl:462"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD00.cbl:462",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0198",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD01 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD01.cbl:496) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl:496"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD01.cbl:496",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0199",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD01 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD01.cbl:537) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD01.cbl:537"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD01.cbl:537",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0200",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD02 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD02.cbl:690) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD02.cbl:690"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD02.cbl:690",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0201",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD02 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD02.cbl:733) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD02.cbl:733"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD02.cbl:733",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0202",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD03 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD03.cbl:589) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl:589"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD03.cbl:589",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0203",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD03 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD03.cbl:635) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD03.cbl:635"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD03.cbl:635",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0204",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD04 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD04.cbl:742) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD04.cbl:742"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD04.cbl:742",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0205",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD04 CICS-XCTL WS-MENU-PGM (app/cardsvc/cbl/CACRD04.cbl:717) resolves to CACRD00",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD04.cbl:717"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD04.cbl:717",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-MENU-PGM -> value-clause WS-MENU-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD04.cbl:29"
+        ]
+      },
+      "id": "F0206",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD04 CICS-XCTL WS-NEXT-PGM (app/cardsvc/cbl/CACRD04.cbl:701) resolves to CACRD05",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD04.cbl:701"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD04.cbl:701",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD04.cbl:28"
+        ]
+      },
+      "id": "F0207",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD05 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD05.cbl:161) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD05.cbl:161"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD05.cbl:161",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0208",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD05 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD05.cbl:319) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD05.cbl:319"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD05.cbl:319",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0209",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD05 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD05.cbl:365) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD05.cbl:365"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD05.cbl:365",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0210",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD05 CICS-XCTL WS-NEXT-PGM (app/cardsvc/cbl/CACRD05.cbl:337) resolves to CACRD06, CACRD09",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD05.cbl:337"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD05.cbl:337",
+      "closure": {
+        "by": "scanner",
+        "how": "9 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM -> move-item WS-NEXT-PGM -> definition WS-DECISION-PGM -> value-clause WS-DECISION-PGM -> move-item WS-NEXT-PGM -> cycle WS-DECISION-PGM -> move-item WS-NEXT-PGM -> cycle WS-DECISION-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD05.cbl:258",
+          "app/cardsvc/cbl/CACRD05.cbl:278",
+          "app/cardsvc/cbl/CACRD05.cbl:303",
+          "app/cardsvc/cbl/CACRD05.cbl:32",
+          "app/cardsvc/cbl/CACRD05.cbl:33"
+        ]
+      },
+      "id": "F0211",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD06 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD06.cbl:453) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD06.cbl:453"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD06.cbl:453",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0212",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD06 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD06.cbl:472) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD06.cbl:472"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD06.cbl:472",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0213",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD06 CICS-XCTL WS-NEXT-PGM (app/cardsvc/cbl/CACRD06.cbl:426) resolves to CACRD07, CACRD09",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD06.cbl:426"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD06.cbl:426",
+      "closure": {
+        "by": "scanner",
+        "how": "7 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM -> move-item WS-NEXT-PGM -> definition WS-DECISION-PGM -> value-clause WS-DECISION-PGM -> move-item WS-NEXT-PGM -> cycle WS-DECISION-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD06.cbl:226",
+          "app/cardsvc/cbl/CACRD06.cbl:39",
+          "app/cardsvc/cbl/CACRD06.cbl:40",
+          "app/cardsvc/cbl/CACRD06.cbl:423"
+        ]
+      },
+      "id": "F0214",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD07 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD07.cbl:582) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:582"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD07.cbl:582",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0215",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD07 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD07.cbl:763) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:763"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD07.cbl:763",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0216",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD07 CICS-XCTL WS-NEXT-PGM (app/cardsvc/cbl/CACRD07.cbl:708) resolves to CACRD08, CACRD09",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD07.cbl:708"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD07.cbl:708",
+      "closure": {
+        "by": "scanner",
+        "how": "5 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM -> move-item WS-NEXT-PGM -> definition WS-DECISION-PGM -> value-clause WS-DECISION-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD07.cbl:46",
+          "app/cardsvc/cbl/CACRD07.cbl:47",
+          "app/cardsvc/cbl/CACRD07.cbl:705"
+        ]
+      },
+      "id": "F0217",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD08 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD08.cbl:527) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD08.cbl:527"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD08.cbl:527",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0218",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD08 CICS-XCTL WS-NEXT-PGM (app/cardsvc/cbl/CACRD08.cbl:484) resolves to CACRD09",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD08.cbl:484"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD08.cbl:484",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD08.cbl:45"
+        ]
+      },
+      "id": "F0219",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD09 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD09.cbl:493) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD09.cbl:493"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD09.cbl:493",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0220",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD09 CICS-XCTL WS-NEXT-PGM (app/cardsvc/cbl/CACRD09.cbl:467) resolves to CACRD10",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD09.cbl:467"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD09.cbl:467",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD09.cbl:39"
+        ]
+      },
+      "id": "F0221",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD10 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD10.cbl:798) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD10.cbl:798"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD10.cbl:798",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0222",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD10 CICS-XCTL WS-NEXT-PGM (app/cardsvc/cbl/CACRD10.cbl:741) resolves to CACRD17",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD10.cbl:741"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD10.cbl:741",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-NEXT-PGM -> value-clause WS-NEXT-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD10.cbl:45"
+        ]
+      },
+      "id": "F0223",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD11 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD11.cbl:1330) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:1330"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD11.cbl:1330",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0224",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD11 CICS-XCTL WS-MENU-PGM (app/cardsvc/cbl/CACRD11.cbl:258) resolves to CACRD00",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD11.cbl:258"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD11.cbl:258",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-MENU-PGM -> value-clause WS-MENU-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD11.cbl:31"
+        ]
+      },
+      "id": "F0225",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD12 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD12.cbl:711) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD12.cbl:711"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD12.cbl:711",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0226",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD12 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD12.cbl:960) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD12.cbl:960"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD12.cbl:960",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0227",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD12 CICS-XCTL WS-MENU-PGM (app/cardsvc/cbl/CACRD12.cbl:236) resolves to CACRD00",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD12.cbl:236"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD12.cbl:236",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-MENU-PGM -> value-clause WS-MENU-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD12.cbl:35"
+        ]
+      },
+      "id": "F0228",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD13 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD13.cbl:1570) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:1570"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD13.cbl:1570",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0229",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD13 CICS-XCTL WS-MENU-PGM (app/cardsvc/cbl/CACRD13.cbl:356) resolves to CACRD00",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD13.cbl:356"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD13.cbl:356",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-MENU-PGM -> value-clause WS-MENU-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD13.cbl:38"
+        ]
+      },
+      "id": "F0230",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD14 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD14.cbl:1398) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD14.cbl:1398"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD14.cbl:1398",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0231",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD14 CICS-XCTL WS-MENU-PGM (app/cardsvc/cbl/CACRD14.cbl:298) resolves to CACRD00",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD14.cbl:298"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD14.cbl:298",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-MENU-PGM -> value-clause WS-MENU-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD14.cbl:31"
+        ]
+      },
+      "id": "F0232",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD15 CICS-LINK WS-DISPATCHER-ONLINE (app/cardsvc/cbl/CACRD15.cbl:627) resolves to CACRD90",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl:627"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD15.cbl:627",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-DISPATCHER-ONLINE -> value-clause WS-DISPATCHER-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:17"
+        ]
+      },
+      "id": "F0233",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD15 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD15.cbl:878) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl:878"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD15.cbl:878",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0234",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD15 CICS-XCTL WS-MENU-PGM (app/cardsvc/cbl/CACRD15.cbl:217) resolves to CACRD00",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD15.cbl:217"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD15.cbl:217",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-MENU-PGM -> value-clause WS-MENU-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD15.cbl:33"
+        ]
+      },
+      "id": "F0235",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD16 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD16.cbl:1087) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD16.cbl:1087"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD16.cbl:1087",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0236",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD16 CICS-XCTL WS-MENU-PGM (app/cardsvc/cbl/CACRD16.cbl:226) resolves to CACRD00",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD16.cbl:226"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD16.cbl:226",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-MENU-PGM -> value-clause WS-MENU-PGM",
+        "evidence": [
+          "app/cardsvc/cbl/CACRD16.cbl:32"
+        ]
+      },
+      "id": "F0237",
+      "owner": "informational"
+    },
+    {
+      "kind": "dynamic-call-resolved",
+      "severity": "info",
+      "message": "CACRD17 CICS-LINK WS-ERROR-PGM-ONLINE (app/cardsvc/cbl/CACRD17.cbl:388) resolves to CACRD91",
+      "evidence": [
+        "app/cardsvc/cbl/CACRD17.cbl:388"
+      ],
+      "request": null,
+      "status": "closed",
+      "site": "app/cardsvc/cbl/CACRD17.cbl:388",
+      "closure": {
+        "by": "scanner",
+        "how": "2 deterministic hop(s): definition WS-ERROR-PGM-ONLINE -> value-clause WS-ERROR-PGM-ONLINE",
+        "evidence": [
+          "app/cpy/CVCONSTY.cpy:19"
+        ]
+      },
+      "id": "F0238",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBBIL01J step SELECT runs launcher IKJEFT01 -> program CBBIL01 (plan CARDBILP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL01J.jcl:25"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBBIL01) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBBIL01J.jcl:25"
+        ]
+      },
+      "id": "F0239",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBBIL02J step ASSEMBLE runs launcher IKJEFT01 -> program CBBIL02 (plan CARDBILP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL02J.jcl:43"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBBIL02) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBBIL02J.jcl:43"
+        ]
+      },
+      "id": "F0240",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBBIL03J step MINPAY runs launcher IKJEFT01 -> program CBBIL03 (plan CARDBILP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL03J.jcl:21"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBBIL03) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBBIL03J.jcl:21"
+        ]
+      },
+      "id": "F0241",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBBIL04J step RENDER runs launcher IKJEFT01 -> program CBBIL04 (plan CARDBILP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL04J.jcl:25"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBBIL04) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBBIL04J.jcl:25"
+        ]
+      },
+      "id": "F0242",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBBIL05J step PERSIST runs launcher IKJEFT01 -> program CBBIL05 (plan CARDBILP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL05J.jcl:24"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBBIL05) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBBIL05J.jcl:24"
+        ]
+      },
+      "id": "F0243",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBBIL06J step RECON runs launcher IKJEFT01 -> program CBBIL06 (plan CARDBILP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL06J.jcl:21"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBBIL06) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBBIL06J.jcl:21"
+        ]
+      },
+      "id": "F0244",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD03J step STEP020 runs launcher IKJEFT01 -> program CBCRD03 (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD03) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0245",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD04J step STEP010 runs launcher IKJEFT01 -> program CBCRD04 (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD04) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0246",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD05A step STEP010 runs launcher IKJEFT01 -> program CBCRD05A (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD05A) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0247",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD05B step STEP010 runs launcher IKJEFT01 -> program CBCRD05B (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD05B) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0248",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD06J step STEP010 runs launcher IKJEFT01 -> program CBCRD06A (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD06A) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0249",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD06J step STEP030 runs launcher IKJEFT01 -> program CBCRD06B (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD06B) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0250",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD06J step STEP040 runs launcher IKJEFT01 -> program CBCRD06C (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD06C) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0251",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD07J step STEP010 runs launcher IKJEFT01 -> program CBCRD07 (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD07) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0252",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD08J step STEP010 runs launcher IKJEFT01 -> program CBCRD08 (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD08) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0253",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBCRD10J step STEP010 runs launcher IKJEFT01 -> program CBCRD10 (plan CARDNITP)",
+      "evidence": [
+        "app/jcl/proc/CARDDB2.jcl:32"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBCRD10) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/proc/CARDDB2.jcl:32"
+        ]
+      },
+      "id": "F0254",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF01J step LOADMRCH runs launcher IKJEFT01 -> program CBREF01 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF01J.jcl:42"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF01) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF01J.jcl:42"
+        ]
+      },
+      "id": "F0255",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF02J step UNLDMRCH runs launcher IKJEFT01 -> program CBREF02 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF02J.jcl:23"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF02) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF02J.jcl:23"
+        ]
+      },
+      "id": "F0256",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF02J step VERFMRCH runs launcher IKJEFT01 -> program CBREF02 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF02J.jcl:93"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF02) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF02J.jcl:93"
+        ]
+      },
+      "id": "F0257",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF03J step UNLDREF runs launcher IKJEFT01 -> program CBREF03 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF03J.jcl:24"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF03) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF03J.jcl:24"
+        ]
+      },
+      "id": "F0258",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF03J step VERFREF runs launcher IKJEFT01 -> program CBREF03 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF03J.jcl:127"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF03) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF03J.jcl:127"
+        ]
+      },
+      "id": "F0259",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF04J step UNLDROUT runs launcher IKJEFT01 -> program CBREF04 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF04J.jcl:29"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF04) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF04J.jcl:29"
+        ]
+      },
+      "id": "F0260",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF04J step VERFROUT runs launcher IKJEFT01 -> program CBREF04 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF04J.jcl:100"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF04) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF04J.jcl:100"
+        ]
+      },
+      "id": "F0261",
+      "owner": "informational"
+    },
+    {
+      "kind": "launcher-resolved",
+      "severity": "info",
+      "message": "job CBREF05J step INTGRPT runs launcher IKJEFT01 -> program CBREF05 (plan CARDREFP)",
+      "evidence": [
+        "app/jcl/cardsvc/CBREF05J.jcl:24"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "RUN PROGRAM(CBREF05) found in the inline SYSTSIN stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBREF05J.jcl:24"
+        ]
+      },
+      "id": "F0262",
+      "owner": "informational"
+    },
+    {
+      "kind": "tso-command",
+      "severity": "info",
+      "message": "job CBBIL05J step MIGRATE runs launcher IKJEFT01: SYSTSIN issues TSO command(s) HMIGRATE; no application program is run",
+      "evidence": [
+        "app/jcl/cardsvc/CBBIL05J.jcl:57"
+      ],
+      "request": null,
+      "status": "closed",
+      "closure": {
+        "by": "scanner",
+        "how": "every SYSTSIN command (HMIGRATE) is in the known TSO/DFSMShsm/RACF command table (mftb/knowledge/ TSO_COMMANDS); no application program can be started by such a stream",
+        "evidence": [
+          "app/jcl/cardsvc/CBBIL05J.jcl:57"
+        ]
+      },
+      "id": "F0263",
+      "owner": "informational"
+    }
+  ]
+}

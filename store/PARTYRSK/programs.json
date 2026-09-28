@@ -1,0 +1,2204 @@
+{
+  "meta": {
+    "module": "PARTYRSK",
+    "generated_at": "2026-09-28T13:34:12Z",
+    "tool": "mftb 0.2.1",
+    "inputs": {
+      "src": [
+        "app/partyrsk/cbl"
+      ],
+      "copybooks": [
+        "app/cpy",
+        "app/partyrsk/cpy"
+      ]
+    }
+  },
+  "audit": {
+    "call_tokens_unaccounted": [],
+    "skipped_files": []
+  },
+  "sources": [
+    {
+      "path": "app/cpy/CVACCT01Y.cpy",
+      "kind": "copybook",
+      "lines": 39,
+      "code_lines": 35
+    },
+    {
+      "path": "app/cpy/CVAUTH01Y.cpy",
+      "kind": "copybook",
+      "lines": 68,
+      "code_lines": 50
+    },
+    {
+      "path": "app/cpy/CVAUTHW1Y.cpy",
+      "kind": "copybook",
+      "lines": 161,
+      "code_lines": 114
+    },
+    {
+      "path": "app/cpy/CVCARD01Y.cpy",
+      "kind": "copybook",
+      "lines": 35,
+      "code_lines": 30
+    },
+    {
+      "path": "app/cpy/CVCONSTY.cpy",
+      "kind": "copybook",
+      "lines": 42,
+      "code_lines": 29
+    },
+    {
+      "path": "app/cpy/CVCTRL01Y.cpy",
+      "kind": "copybook",
+      "lines": 41,
+      "code_lines": 32
+    },
+    {
+      "path": "app/cpy/CVCUST01Y.cpy",
+      "kind": "copybook",
+      "lines": 31,
+      "code_lines": 25
+    },
+    {
+      "path": "app/cpy/CVERRS01Y.cpy",
+      "kind": "copybook",
+      "lines": 45,
+      "code_lines": 37
+    },
+    {
+      "path": "app/partyrsk/cpy/CVEXPO01Y.cpy",
+      "kind": "copybook",
+      "lines": 30,
+      "code_lines": 25
+    },
+    {
+      "path": "app/partyrsk/cpy/CVPARTY1Y.cpy",
+      "kind": "copybook",
+      "lines": 42,
+      "code_lines": 32
+    },
+    {
+      "path": "app/cpy/CVRISK01Y.cpy",
+      "kind": "copybook",
+      "lines": 86,
+      "code_lines": 69
+    },
+    {
+      "path": "app/cpy/CVROUT01Y.cpy",
+      "kind": "copybook",
+      "lines": 64,
+      "code_lines": 53
+    },
+    {
+      "path": "app/partyrsk/cpy/CVSANC01Y.cpy",
+      "kind": "copybook",
+      "lines": 39,
+      "code_lines": 31
+    },
+    {
+      "path": "app/partyrsk/cpy/CVSCOR01Y.cpy",
+      "kind": "copybook",
+      "lines": 41,
+      "code_lines": 33
+    },
+    {
+      "path": "app/cpy/CVSTMT01Y.cpy",
+      "kind": "copybook",
+      "lines": 45,
+      "code_lines": 39
+    },
+    {
+      "path": "app/cpy/CVTRAN01Y.cpy",
+      "kind": "copybook",
+      "lines": 48,
+      "code_lines": 39
+    },
+    {
+      "path": "app/partyrsk/cpy/CVWATC1Y.cpy",
+      "kind": "copybook",
+      "lines": 38,
+      "code_lines": 24
+    },
+    {
+      "path": "app/partyrsk/cbl/CBPRT01.cbl",
+      "kind": "program",
+      "lines": 626,
+      "code_lines": 511
+    },
+    {
+      "path": "app/partyrsk/cbl/CBPRT02A.cbl",
+      "kind": "program",
+      "lines": 790,
+      "code_lines": 641
+    },
+    {
+      "path": "app/partyrsk/cbl/CBPRT02B.cbl",
+      "kind": "program",
+      "lines": 557,
+      "code_lines": 433
+    },
+    {
+      "path": "app/partyrsk/cbl/CBPRT03.cbl",
+      "kind": "program",
+      "lines": 779,
+      "code_lines": 602
+    },
+    {
+      "path": "app/partyrsk/cbl/CBPRT04.cbl",
+      "kind": "program",
+      "lines": 1166,
+      "code_lines": 976
+    },
+    {
+      "path": "app/partyrsk/cbl/PRBRSK1.cbl",
+      "kind": "program",
+      "lines": 716,
+      "code_lines": 550
+    },
+    {
+      "path": "app/partyrsk/cbl/PRBRSK2.cbl",
+      "kind": "program",
+      "lines": 703,
+      "code_lines": 531
+    },
+    {
+      "path": "app/partyrsk/cbl/PRBRSK3.cbl",
+      "kind": "program",
+      "lines": 713,
+      "code_lines": 549
+    },
+    {
+      "path": "app/partyrsk/cbl/PRBRSK4.cbl",
+      "kind": "program",
+      "lines": 735,
+      "code_lines": 576
+    },
+    {
+      "path": "app/partyrsk/cbl/PRBRSK5.cbl",
+      "kind": "program",
+      "lines": 666,
+      "code_lines": 533
+    },
+    {
+      "path": "app/partyrsk/cbl/PRERR01.cbl",
+      "kind": "program",
+      "lines": 289,
+      "code_lines": 206
+    },
+    {
+      "path": "app/partyrsk/cbl/PRKYC01.cbl",
+      "kind": "program",
+      "lines": 645,
+      "code_lines": 463
+    },
+    {
+      "path": "app/partyrsk/cbl/PRKYC02.cbl",
+      "kind": "program",
+      "lines": 834,
+      "code_lines": 628
+    },
+    {
+      "path": "app/partyrsk/cbl/PRKYC03.cbl",
+      "kind": "program",
+      "lines": 448,
+      "code_lines": 336
+    },
+    {
+      "path": "app/partyrsk/cbl/PRKYC04.cbl",
+      "kind": "program",
+      "lines": 780,
+      "code_lines": 601
+    },
+    {
+      "path": "app/partyrsk/cbl/PRRSK02.cbl",
+      "kind": "program",
+      "lines": 716,
+      "code_lines": 529
+    },
+    {
+      "path": "app/partyrsk/cbl/PRRSK03.cbl",
+      "kind": "program",
+      "lines": 981,
+      "code_lines": 742
+    },
+    {
+      "path": "app/partyrsk/cbl/PRRSK04.cbl",
+      "kind": "program",
+      "lines": 638,
+      "code_lines": 475
+    },
+    {
+      "path": "app/partyrsk/cbl/PRRSK05.cbl",
+      "kind": "program",
+      "lines": 567,
+      "code_lines": 436
+    }
+  ],
+  "missing_copybooks": [],
+  "programs": [
+    {
+      "id": "CVACCT01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVACCT01Y.cpy",
+      "lines": 39,
+      "code_lines": 35,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVAUTH01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVAUTH01Y.cpy",
+      "lines": 68,
+      "code_lines": 50,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVAUTHW1Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVAUTHW1Y.cpy",
+      "lines": 161,
+      "code_lines": 114,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCARD01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVCARD01Y.cpy",
+      "lines": 35,
+      "code_lines": 30,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCONSTY",
+      "kind": "copybook",
+      "path": "app/cpy/CVCONSTY.cpy",
+      "lines": 42,
+      "code_lines": 29,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCTRL01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVCTRL01Y.cpy",
+      "lines": 41,
+      "code_lines": 32,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVCUST01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVCUST01Y.cpy",
+      "lines": 31,
+      "code_lines": 25,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVERRS01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVERRS01Y.cpy",
+      "lines": 45,
+      "code_lines": 37,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVEXPO01Y",
+      "kind": "copybook",
+      "path": "app/partyrsk/cpy/CVEXPO01Y.cpy",
+      "lines": 30,
+      "code_lines": 25,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVPARTY1Y",
+      "kind": "copybook",
+      "path": "app/partyrsk/cpy/CVPARTY1Y.cpy",
+      "lines": 42,
+      "code_lines": 32,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVRISK01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVRISK01Y.cpy",
+      "lines": 86,
+      "code_lines": 69,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVROUT01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVROUT01Y.cpy",
+      "lines": 64,
+      "code_lines": 53,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVSANC01Y",
+      "kind": "copybook",
+      "path": "app/partyrsk/cpy/CVSANC01Y.cpy",
+      "lines": 39,
+      "code_lines": 31,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVSCOR01Y",
+      "kind": "copybook",
+      "path": "app/partyrsk/cpy/CVSCOR01Y.cpy",
+      "lines": 41,
+      "code_lines": 33,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVSTMT01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVSTMT01Y.cpy",
+      "lines": 45,
+      "code_lines": 39,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVTRAN01Y",
+      "kind": "copybook",
+      "path": "app/cpy/CVTRAN01Y.cpy",
+      "lines": 48,
+      "code_lines": 39,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CVWATC1Y",
+      "kind": "copybook",
+      "path": "app/partyrsk/cpy/CVWATC1Y.cpy",
+      "lines": 38,
+      "code_lines": 24,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBPRT01",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/CBPRT01.cbl",
+      "lines": 626,
+      "code_lines": 511,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "KYCWORK-FILE",
+          "assign": "KYCWORK",
+          "organization": "SEQUENTIAL",
+          "line": 35
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 156
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 158
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 160
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBPRT02A",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/CBPRT02A.cbl",
+      "lines": 790,
+      "code_lines": 641,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "SANCFEED-FILE",
+          "assign": "SANCFEED",
+          "organization": "SEQUENTIAL",
+          "line": 44
+        },
+        {
+          "select": "SANCREJ-FILE",
+          "assign": "SANCREJ",
+          "organization": "SEQUENTIAL",
+          "line": 48
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 204
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 206
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 208
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBPRT02B",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/CBPRT02B.cbl",
+      "lines": 557,
+      "code_lines": 433,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "WATCHOUT-FILE",
+          "assign": "WATCHOUT",
+          "organization": "SEQUENTIAL",
+          "line": 38
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVWATC1Y",
+          "mechanism": "copy",
+          "line": 156
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 158
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 160
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 162
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBPRT03",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/CBPRT03.cbl",
+      "lines": 779,
+      "code_lines": 602,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "CYCLCTL-FILE",
+          "assign": "CYCLCTL",
+          "organization": "INDEXED",
+          "line": 44
+        },
+        {
+          "select": "RSKEXCP-FILE",
+          "assign": "RSKEXCP",
+          "organization": "SEQUENTIAL",
+          "line": 50
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "PRBRSK1",
+            "line": 504,
+            "system": false
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 159
+        },
+        {
+          "name": "CVCTRL01Y",
+          "mechanism": "copy",
+          "line": 161
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 163
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 165
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 167
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "CBPRT04",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/CBPRT04.cbl",
+      "lines": 1166,
+      "code_lines": 976,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "RISKRPT-FILE",
+          "assign": "RISKRPT",
+          "organization": "SEQUENTIAL",
+          "line": 41
+        }
+      ],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 339
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 341
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 343
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRBRSK1",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRBRSK1.cbl",
+      "lines": 716,
+      "code_lines": 550,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [
+          {
+            "target": "PRBRSK2",
+            "line": 537,
+            "system": false
+          },
+          {
+            "target": "ILBOABN0",
+            "line": 715,
+            "system": true
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVPARTY1Y",
+          "mechanism": "copy",
+          "line": 127
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 129
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 131
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 133
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 149
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRBRSK2",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRBRSK2.cbl",
+      "lines": 703,
+      "code_lines": 531,
+      "uses_sql": true,
+      "files": [
+        {
+          "select": "WATCHNAM-FILE",
+          "assign": "WATCHNAM",
+          "organization": "INDEXED",
+          "line": 31
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "PRBRSK3",
+            "line": 637,
+            "system": false
+          },
+          {
+            "target": "ILBOABN0",
+            "line": 702,
+            "system": true
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVWATC1Y",
+          "mechanism": "copy",
+          "line": 124
+        },
+        {
+          "name": "CVSANC01Y",
+          "mechanism": "copy",
+          "line": 126
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 128
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 130
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 132
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 136
+        },
+        {
+          "name": "CVPARTY1Y",
+          "mechanism": "copy",
+          "line": 138
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRBRSK3",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRBRSK3.cbl",
+      "lines": 713,
+      "code_lines": 549,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [
+          {
+            "target": "PRBRSK4",
+            "line": 657,
+            "system": false
+          },
+          {
+            "target": "ILBOABN0",
+            "line": 712,
+            "system": true
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVEXPO01Y",
+          "mechanism": "copy",
+          "line": 129
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 131
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 133
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 135
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 181
+        },
+        {
+          "name": "CVPARTY1Y",
+          "mechanism": "copy",
+          "line": 183
+        },
+        {
+          "name": "CVSANC01Y",
+          "mechanism": "copy",
+          "line": 185
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRBRSK4",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRBRSK4.cbl",
+      "lines": 735,
+      "code_lines": 576,
+      "uses_sql": false,
+      "files": [
+        {
+          "select": "RSKPARM-FILE",
+          "assign": "RSKPARM",
+          "organization": "INDEXED",
+          "line": 31
+        }
+      ],
+      "calls": {
+        "static": [
+          {
+            "target": "PRBRSK5",
+            "line": 688,
+            "system": false
+          },
+          {
+            "target": "ILBOABN0",
+            "line": 734,
+            "system": true
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVSCOR01Y",
+          "mechanism": "copy",
+          "line": 150
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 152
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 154
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 158
+        },
+        {
+          "name": "CVPARTY1Y",
+          "mechanism": "copy",
+          "line": 160
+        },
+        {
+          "name": "CVEXPO01Y",
+          "mechanism": "copy",
+          "line": 162
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRBRSK5",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRBRSK5.cbl",
+      "lines": 666,
+      "code_lines": 533,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [
+          {
+            "target": "ILBOABN0",
+            "line": 665,
+            "system": true
+          }
+        ],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 131
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 133
+        },
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 135
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 139
+        },
+        {
+          "name": "CVEXPO01Y",
+          "mechanism": "copy",
+          "line": 141
+        },
+        {
+          "name": "CVSCOR01Y",
+          "mechanism": "copy",
+          "line": 143
+        }
+      ],
+      "entry_points": [],
+      "facts": [],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRERR01",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRERR01.cbl",
+      "lines": 289,
+      "code_lines": 206,
+      "uses_sql": false,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": []
+      },
+      "includes": [
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 101
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 106
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 113
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 125
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 133
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 138
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TD",
+          "program": null,
+          "variable": null,
+          "line": 174
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TD",
+          "program": null,
+          "variable": null,
+          "line": 231
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 251
+        },
+        {
+          "kind": "cics",
+          "detail": "WRITEQ TS",
+          "program": null,
+          "variable": null,
+          "line": 260
+        },
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 283
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRKYC01",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRKYC01.cbl",
+      "lines": 645,
+      "code_lines": 463,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-NEXT-PGM",
+            "line": 441
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 613
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 94
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 107
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 108
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 113
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 155
+        },
+        {
+          "kind": "cics",
+          "detail": "HANDLE CONDITION",
+          "program": null,
+          "variable": null,
+          "line": 168
+        },
+        {
+          "kind": "cics",
+          "detail": "HANDLE ABEND",
+          "program": null,
+          "variable": null,
+          "line": 173
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 191
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 196
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 441
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 613
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRKYC02",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRKYC02.cbl",
+      "lines": 834,
+      "code_lines": 628,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-NEXT-PGM",
+            "line": 731
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 825
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 145
+        },
+        {
+          "name": "CVSANC01Y",
+          "mechanism": "copy",
+          "line": 147
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 148
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 149
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 154
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 161
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 195
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 227
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 232
+        },
+        {
+          "kind": "cics",
+          "detail": "STARTBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 425
+        },
+        {
+          "kind": "cics",
+          "detail": "READNEXT FILE",
+          "program": null,
+          "variable": null,
+          "line": 472
+        },
+        {
+          "kind": "cics",
+          "detail": "ENDBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 521
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 731
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 825
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRKYC03",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRKYC03.cbl",
+      "lines": 448,
+      "code_lines": 336,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-NEXT-PGM",
+            "line": 304
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 418
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 64
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 66
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 67
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 72
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "HANDLE CONDITION",
+          "program": null,
+          "variable": null,
+          "line": 78
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 110
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 123
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 128
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 304
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 418
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRKYC04",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRKYC04.cbl",
+      "lines": 780,
+      "code_lines": 601,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-NEXT-PGM",
+            "line": 687
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 761
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 160
+        },
+        {
+          "name": "CVPARTY1Y",
+          "mechanism": "copy",
+          "line": 162
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 163
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 164
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 169
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 176
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 198
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 212
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 217
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 687
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 761
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRRSK02",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRRSK02.cbl",
+      "lines": 716,
+      "code_lines": 529,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-NEXT-PGM",
+            "line": 638
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 710
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 126
+        },
+        {
+          "name": "CVEXPO01Y",
+          "mechanism": "copy",
+          "line": 150
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 151
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 152
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 157
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 164
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 188
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 206
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 211
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 638
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 710
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRRSK03",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRRSK03.cbl",
+      "lines": 981,
+      "code_lines": 742,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-NEXT-PGM",
+            "line": 892
+          },
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 975
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 202
+        },
+        {
+          "name": "CVSCOR01Y",
+          "mechanism": "copy",
+          "line": 204
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 205
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 206
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 211
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 218
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 244
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 258
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 263
+        },
+        {
+          "kind": "cics",
+          "detail": "STARTBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 303
+        },
+        {
+          "kind": "cics",
+          "detail": "READNEXT FILE",
+          "program": null,
+          "variable": null,
+          "line": 332
+        },
+        {
+          "kind": "cics",
+          "detail": "ENDBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 354
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-NEXT-PGM",
+          "line": 892
+        },
+        {
+          "kind": "cics",
+          "detail": "ENDBR FILE",
+          "program": null,
+          "variable": null,
+          "line": 964
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 975
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRRSK04",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRRSK04.cbl",
+      "lines": 638,
+      "code_lines": 475,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 632
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 132
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 134
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 135
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 140
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 147
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 169
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 183
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 188
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 632
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    },
+    {
+      "id": "PRRSK05",
+      "kind": "program",
+      "path": "app/partyrsk/cbl/PRRSK05.cbl",
+      "lines": 567,
+      "code_lines": 436,
+      "uses_sql": true,
+      "files": [],
+      "calls": {
+        "static": [],
+        "dynamic": [],
+        "sql": [],
+        "cancel": [],
+        "entry_refs": [],
+        "cics": [
+          {
+            "command": "LINK",
+            "variable": "WS-ERROR-PGM",
+            "line": 548
+          }
+        ]
+      },
+      "includes": [
+        {
+          "name": "SQLCA",
+          "mechanism": "sql-include",
+          "line": 135
+        },
+        {
+          "name": "CVERRS01Y",
+          "mechanism": "copy",
+          "line": 137
+        },
+        {
+          "name": "CVCONSTY",
+          "mechanism": "copy",
+          "line": 138
+        },
+        {
+          "name": "CVRISK01Y",
+          "mechanism": "copy",
+          "line": 143
+        }
+      ],
+      "entry_points": [],
+      "facts": [
+        {
+          "kind": "cics",
+          "detail": "ABEND ABCODE",
+          "program": null,
+          "variable": null,
+          "line": 150
+        },
+        {
+          "kind": "cics",
+          "detail": "RETURN END",
+          "program": null,
+          "variable": null,
+          "line": 163
+        },
+        {
+          "kind": "cics",
+          "detail": "ASKTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 178
+        },
+        {
+          "kind": "cics",
+          "detail": "FORMATTIME ABSTIME",
+          "program": null,
+          "variable": null,
+          "line": 183
+        },
+        {
+          "kind": "cics",
+          "detail": "LINK PROGRAM",
+          "program": null,
+          "variable": "WS-ERROR-PGM",
+          "line": 548
+        }
+      ],
+      "nested_in": null,
+      "audit": {
+        "call_tokens_unaccounted": []
+      }
+    }
+  ]
+}
